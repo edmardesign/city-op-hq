@@ -49,11 +49,11 @@ export const Route = createFileRoute("/")({
           content:
             "Participe do mercado de delivery e comércio local construindo uma carteira de estabelecimentos sem os riscos de um negócio físico.",
         },
-        { property: "og:title", content: "Fature R$4.500/mês com Delivery e Comércio Local" },
+        { property: "og:title", content: "Ganhe com Negócios Locais sem ser Dono de Nada" },
         {
           property: "og:description",
           content:
-            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
+            "Participe do mercado de delivery e comércio local construindo uma carteira de estabelecimentos sem os riscos de um negócio físico.",
         },
         { property: "og:type", content: "website" },
         { property: "og:url", content: canonical },

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowRight,
   Check,
@@ -39,29 +39,29 @@ export const Route = createFileRoute("/")({
     const canonical = "https://mtztextfature10.lovable.app/";
     return {
       meta: [
-        { title: "BoraZé! Embaixador — Fature R$ 10.000+/mês com um app na sua cidade" },
+        { title: "Executivo BoraZé! — Transforme o comércio local em renda recorrente" },
         {
           name: "description",
           content:
-            "Selecionamos apenas uma pessoa por cidade para operar o BoraZé!. Receita recorrente, exclusividade territorial e garantia blindada. Fature R$ 10.000+/mês com um app na sua cidade.",
+            "Cadastre restaurantes, farmácias e mercados no Bora Zé. Ganhe pela ativação e continue participando das vendas dos estabelecimentos da sua carteira.",
         },
-        { property: "og:title", content: "BoraZé! Embaixador — 1 vaga por cidade" },
+        { property: "og:title", content: "Programa Executivo BoraZé!" },
         {
           property: "og:description",
           content:
-            "Fature R$ 10.000+/mês com um aplicativo na sua cidade — mesmo sem experiência em tecnologia.",
+            "Transforme o comércio local em uma carteira de renda recorrente. Ganhe R$97 por ativação + até 2,5% das vendas.",
         },
         { property: "og:type", content: "website" },
         { property: "og:url", content: canonical },
-        { property: "og:site_name", content: "BoraZé! Embaixador" },
+        { property: "og:site_name", content: "BoraZé! Executivo" },
         { property: "og:locale", content: "pt_BR" },
         { property: "og:image", content: ogImage },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "BoraZé! Embaixador — 1 vaga por cidade" },
+        { name: "twitter:title", content: "Programa Executivo BoraZé!" },
         {
           name: "twitter:description",
           content:
-            "Fature R$ 10.000+/mês com um aplicativo na sua cidade — mesmo sem experiência em tecnologia.",
+            "Transforme o comércio local em uma carteira de renda recorrente. Ganhe R$97 por ativação + até 2,5% das vendas.",
         },
         { name: "twitter:image", content: ogImage },
       ],

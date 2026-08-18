@@ -1037,11 +1037,10 @@ function DualRevenue() {
           <Tag>Duas frentes</Tag>
           <h2 className="mt-5 font-display uppercase leading-[0.9] text-5xl md:text-7xl">
             Duas frentes de receita,<br />
-            <span className="text-neon">uma operação.</span>
+            <span className="text-neon">um único executivo.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-foreground/70 md:text-xl">
-            O BoraZé! junta delivery e mototáxi na mesma plataforma. Dois modelos de
-            receita rodando em paralelo na sua cidade.
+            Como Executivo, você atua no coração da economia local. Conecta o delivery ao comércio e a logística aos mototaxistas, ganhando em cada ponta.
           </p>
         </div>
 
@@ -1079,9 +1078,9 @@ function DualRevenue() {
           style={{ boxShadow: "0 0 60px oklch(0.88 0.31 142 / 0.15)" }}
         >
           <p className="font-display uppercase leading-tight text-2xl md:text-4xl">
-            Duas fontes de receita rodando na{" "}
-            <span className="text-neon">mesma operação</span>, na mesma cidade,
-            com o mesmo app.
+            O Executivo atua no centro da{" "}
+            <span className="text-neon">conexão comercial</span> da sua região,
+            monetizando cada transação.
           </p>
         </div>
       </div>

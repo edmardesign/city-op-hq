@@ -1273,51 +1273,6 @@ function PlatformEconomy() {
   );
 }
 
-function VideoSection() {
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="text-center">
-          <Tag>Vídeo · 3 min</Tag>
-          <h2 className="mx-auto mt-5 max-w-3xl font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-            Assista e entenda <span className="text-neon">como funciona o BoraZé!</span>.
-          </h2>
-        </div>
-
-        <button
-          type="button"
-          className="group relative mt-14 block aspect-video w-full overflow-hidden border-2 border-[var(--neon)]/40 transition-all hover:border-[var(--neon)]"
-          style={{
-            background:
-              "linear-gradient(135deg, oklch(0.13 0.08 300), oklch(0.06 0.02 295))",
-            boxShadow: "0 0 60px oklch(0.88 0.31 142 / 0.18)",
-          }}
-        >
-          <div className="absolute inset-0 grid-bg opacity-30" />
-          <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[var(--violet)]/30 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-[var(--neon)]/10 blur-3xl" />
-
-          <div className="relative grid h-full place-items-center">
-            <div className="flex flex-col items-center gap-6">
-              <div
-                className="grid h-24 w-24 place-items-center rounded-full bg-[var(--neon)] transition-transform group-hover:scale-110 md:h-28 md:w-28"
-                style={{ boxShadow: "0 0 60px oklch(0.88 0.31 142 / 0.6)" }}
-              >
-                <Play className="ml-1 h-10 w-10 fill-black text-black md:h-12 md:w-12" />
-              </div>
-              <span className="font-display text-base uppercase tracking-[0.2em] text-foreground/90 md:text-lg">
-                Assista e entenda como funciona o BoraZé!
-              </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/40">
-                Em breve
-              </span>
-            </div>
-          </div>
-        </button>
-      </div>
-    </section>
-  );
-}
 
 function LandingPage() {
   return (

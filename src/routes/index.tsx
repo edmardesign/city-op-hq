@@ -1532,8 +1532,9 @@ function WhoIsBoraze() {
 
 
 /* ============================================================== */
-/* Page                                                           */
+/* Components                                                     */
 /* ============================================================== */
+
 
 function Authority() {
   const brands = ["UBER", "iFOOD", "99", "AIRBNB", "SPOTIFY"];

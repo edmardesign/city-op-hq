@@ -494,7 +494,7 @@ function Benefits() {
 
 function Comparison() {
   const rows: [string, string, string][] = [
-    ["Investimento inicial", "R$ 50 mil a R$ 500 mil", "12x R$ 416 (módulo mototáxi)"],
+    ["Investimento inicial", "R$ 50 mil a R$ 500 mil", "R$ 497 (Executivo)"],
     ["Aluguel de ponto", "R$ 2 mil a R$ 10 mil/mês", "Não precisa (opera de casa)"],
     ["Funcionários", "3 a 15 CLTs", "1 a 2 (opcional)"],
     ["Estoque", "Sim, capital travado", "Não tem, zero risco de perda"],
@@ -502,7 +502,7 @@ function Comparison() {
     ["Risco operacional", "Alto (imóvel, folha, fornecedor)", "Médio (execução comercial)"],
     ["Suporte e treinamento", "Por sua conta", "Incluído (treinamento + suporte contínuo)"],
     ["Escalabilidade", "Limitada ao ponto físico", "Sem teto físico (base digital cresce)"],
-    ["Receita", "Depende de fluxo diário", "Recorrente (a cada pedido/corrida)"],
+    ["Receita", "Depende de fluxo diário", "Recorrente (participação nas vendas)"],
   ];
   return (
     <section className="relative py-24 md:py-32">

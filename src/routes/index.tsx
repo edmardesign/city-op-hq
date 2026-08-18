@@ -1489,14 +1489,14 @@ function WhoIsBoraze() {
       text: "Uma plataforma de entregas e mototáxi feita para essas cidades — leve, adaptável e operada por quem conhece o território. Restaurantes, farmácias, mercados e mototaxistas locais ganham uma ferramenta profissional. Consumidores ganham conveniência. E o Executivo ajuda a construir essa rede regional.",
     },
     {
-      icon: MapPin,
-      title: "Por que licenciamento territorial",
-      text: "Em vez de operar diretamente em milhares de cidades, escolhemos crescer via Embaixadores locais. Cada cidade tem uma pessoa da região responsável pela implantação e cuidado da operação. É o mesmo modelo que fez iFood, Uber e centenas de plataformas do mundo escalarem: quem controla a interface controla o mercado.",
+      icon: Rocket,
+      title: "Nossa escala e visão",
+      text: "Não queremos apenas estar em algumas cidades. Queremos digitalizar o comércio local de todo o interior do Brasil. O Bora Zé foi desenhado para ser o sistema operacional das conexões locais, conectando quem vende com quem compra de forma eficiente e justa para todos.",
     },
     {
       icon: Compass,
       title: "Fase atual do projeto (transparência)",
-      text: "O BoraZé! está em fase de expansão nacional. Estamos abrindo licenciamento em cidades por ordem de qualificação. Nos primeiros contatos você conversa diretamente com o time fundador e recebe toda a documentação institucional para análise antes de qualquer decisão.",
+      text: "O Bora Zé está em fase de expansão nacional. Estamos abrindo o Programa Executivo para parceiros qualificados. Nos primeiros contatos você recebe toda a documentação institucional para análise antes de qualquer decisão.",
     },
   ];
   return (

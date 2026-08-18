@@ -43,17 +43,17 @@ export const Route = createFileRoute("/")({
     const canonical = "https://mtztextfature10.lovable.app/";
     return {
       meta: [
-        { title: "Executivo BoraZé! — Transforme o comércio local em renda recorrente" },
+        { title: "FATURE R$4.500 POR MÊS COM DELIVERY + COMÉRCIO LOCAL NA SUA CIDADE" },
         {
           name: "description",
           content:
-            "Cadastre restaurantes, farmácias e mercados no Bora Zé. Ganhe pela ativação e continue participando das vendas dos estabelecimentos da sua carteira.",
+            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
         },
-        { property: "og:title", content: "Programa Executivo BoraZé!" },
+        { property: "og:title", content: "Fature R$4.500/mês com Delivery e Comércio Local" },
         {
           property: "og:description",
           content:
-            "Transforme o comércio local em uma carteira de renda recorrente. Ganhe R$97 por ativação + até 2,5% das vendas.",
+            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
         },
         { property: "og:type", content: "website" },
         { property: "og:url", content: canonical },
@@ -61,11 +61,11 @@ export const Route = createFileRoute("/")({
         { property: "og:locale", content: "pt_BR" },
         { property: "og:image", content: ogImage },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "Programa Executivo BoraZé!" },
+        { name: "twitter:title", content: "Fature R$4.500/mês com Delivery e Comércio Local" },
         {
           name: "twitter:description",
           content:
-            "Transforme o comércio local em uma carteira de renda recorrente. Ganhe R$97 por ativação + até 2,5% das vendas.",
+            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
         },
         { name: "twitter:image", content: ogImage },
       ],

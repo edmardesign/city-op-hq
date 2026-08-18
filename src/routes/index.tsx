@@ -1174,22 +1174,23 @@ function PlatformEconomy() {
 
 function LandingPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background font-sans text-foreground selection:bg-[var(--neon)] selection:text-black">
       <SiteNav />
       <Hero />
-      <Authority />
       <Divider />
-      <BigIdea />
-      <Story />
-      <Opportunity />
+      <EconomyNarrative />
+      <PortfolioOpportunity />
+      <ContrastSection />
+      <MechanismRevelation />
       <HowItWorks />
+      <Divider />
       <Benefits />
-      <InterfaceControl />
-      <PlatformEconomy />
+      <Opportunity />
       <Market />
       <Simulator />
-      <DualRevenue />
+      <PortfolioLogic />
       <Comparison />
+      <WhatYouGet />
       <Pricing />
       <Guarantee />
       <FAQ />

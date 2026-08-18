@@ -526,57 +526,6 @@ function Comparison() {
   );
 }
 
-function Profiles() {
-  const cards = [
-    {
-      icon: Rocket,
-      title: "EMPREENDEDOR",
-      text: "Pessoa que busca construir uma nova fonte de receita sem precisar abrir estabelecimento próprio.",
-    },
-    {
-      icon: Handshake,
-      title: "PROFISSIONAL DE VENDAS",
-      text: "Pessoa que já possui habilidade comercial e relacionamento.",
-    },
-    {
-      icon: Users,
-      title: "COMERCIANTE BEM RELACIONADO",
-      text: "Já conhece empresários e o comércio local e pode transformar relacionamento em carteira.",
-    },
-    {
-      icon: Briefcase,
-      title: "QUEM BUSCA RENDA COMPLEMENTAR",
-      text: "Pode desenvolver a atividade sem necessariamente abandonar imediatamente sua ocupação atual.",
-    },
-  ];
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <Tag>Público-alvo</Tag>
-        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          QUEM PODE SER <span className="text-neon">EXECUTIVO BORA ZÉ?</span>
-        </h2>
-        
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {cards.map(({ icon: Icon, title, text }) => (
-            <div
-              key={title}
-              className="group relative overflow-hidden border border-white/10 p-8 transition-all hover:border-[var(--neon)]/60"
-            >
-              <div className="flex h-12 w-12 items-center justify-center border border-[var(--neon)]/40 bg-[var(--neon)]/5">
-                <Icon className="h-6 w-6 text-[var(--neon)]" />
-              </div>
-              <h3 className="mt-6 font-display text-xl uppercase leading-tight tracking-[0.04em]">
-                {title}
-              </h3>
-              <p className="mt-4 text-sm text-foreground/70 md:text-base">{text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function DashboardMockup() {
   return (

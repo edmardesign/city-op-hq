@@ -1746,7 +1746,10 @@ function LandingPage() {
       <InterfaceControl />
       <PlatformEconomy />
       <Profiles />
+      <DashboardMockup />
       <Market />
+      <RulesSection />
+      <CareerEvolution />
       <PortfolioLogic />
       <WhatYouGet />
       <Simulator />

@@ -446,29 +446,6 @@ function Comparison() {
 
 
 
-function CareerEvolution() {
-  return (
-    <section className="relative py-24 md:py-32 bg-white/[0.01]">
-      <div className="mx-auto max-w-4xl px-6 text-center">
-        <Tag>Evolução</Tag>
-        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          QUER IR <span className="text-neon">ALÉM?</span>
-        </h2>
-        <p className="mt-8 text-lg text-foreground/75 mx-auto max-w-2xl">
-          O Executivo constrói sua própria carteira. Executivos que desejarem ampliar sua atuação 
-          poderão futuramente se qualificar para oportunidades como Embaixador Bora Zé, 
-          assumindo uma operação territorial.
-        </p>
-        
-        <div className="mt-12 flex flex-col items-center gap-4">
-          <a href="#cadastro" className="border-2 border-white/20 px-8 py-4 font-display text-sm uppercase tracking-widest hover:border-[var(--neon)] hover:text-[var(--neon)] transition-all">
-            CONHECER O PLANO DE CARREIRA BORA ZÉ
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function fmtBRL(n: number) {
   return "R$ " + Math.round(n).toLocaleString("pt-BR");

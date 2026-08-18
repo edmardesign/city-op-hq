@@ -1296,7 +1296,7 @@ function FAQ() {
         <div className="mt-12 flex justify-center">
           <a
             href="#cadastro"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--neon)] px-8 py-4 font-display uppercase tracking-[0.05em] text-sm md:text-base text-black transition-transform hover:scale-[1.03] shadow-[0_0_40px_-8px_var(--neon)]"
+            className="inline-flex items-center justify-center bg-[var(--neon)] px-8 py-4 font-display uppercase tracking-[0.05em] text-sm md:text-base text-black transition-transform hover:scale-[1.03] shadow-[0_0_40px_-8px_var(--neon)]"
           >
             Ainda tem dúvidas? Fale com nosso time
           </a>

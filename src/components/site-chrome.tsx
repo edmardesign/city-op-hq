@@ -39,7 +39,7 @@ export function SiteFooter() {
         <div className="flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
           <Link to="/termos" className="hover:text-foreground">Termos</Link>
           <Link to="/privacidade" className="hover:text-foreground">Privacidade</Link>
-          <Link to="/" hash="cadastro" className="hover:text-foreground">Contato</Link>
+          <Link to="/" hash="oferta" className="hover:text-foreground">Contato</Link>
         </div>
       </div>
     </footer>

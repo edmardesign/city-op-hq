@@ -1339,7 +1339,13 @@ function Authority() {
 
         {/* Asset cards */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {cards.map((c, i) => (
+          {[
+            { name: "Uber", text: "não possui os carros" },
+            { name: "Airbnb", text: "não possui os imóveis" },
+            { name: "Spotify", text: "não possui os artistas" },
+            { name: "iFood", text: "não possui os restaurantes" },
+            { name: "99", text: "não possui os veículos" },
+          ].map((c, i) => (
             <div
               key={c.name}
               className="group relative overflow-hidden border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all hover:border-[var(--neon)]/60"

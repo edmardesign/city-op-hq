@@ -24,6 +24,10 @@ import {
   FileText,
   Clock,
   Search,
+  Heart,
+  Utensils,
+  BarChart3,
+  Users,
 } from "lucide-react";
 import logo from "@/assets/boraze-logo.png.asset.json";
 import heroEcosystem from "@/assets/hero-ecosystem.jpg";
@@ -303,49 +307,69 @@ function Hero() {
   );
 }
 
-function Story() {
-  const lines = [
-    "Imagine receber uma ligação em 2010.",
-    "Do outro lado da linha alguém diz:",
-    "\u201CEstamos lançando um aplicativo chamado Uber.\u201D",
-    "\u201CQueremos que você seja dono da operação na sua cidade.\u201D",
-    "Você teria aceitado?",
-    "Provavelmente sim.",
-    "E se em vez da Uber fosse o iFood?",
-    "Você também teria aceitado.",
+function BigIdea() {
+  const items = [
+    { label: "Restaurante", icon: Store },
+    { label: "Farmácia", icon: Briefcase },
+    { label: "Mercado", icon: ShoppingBag },
+    { label: "Pet shop", icon: Heart },
+    { label: "Gás", icon: Zap },
+    { label: "Pizzaria", icon: Utensils },
   ];
+  return (
+    <section className="relative py-24 md:py-32 bg-white/[0.02]">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="text-center">
+          <Tag>A Grande Ideia</Tag>
+          <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+            VOCÊ NÃO PRECISA SER DONO DO RESTAURANTE <br />
+            <span className="text-neon">PARA GANHAR QUANDO ELE VENDE.</span>
+          </h2>
+        </div>
+
+        <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+          {items.map((item) => (
+            <div key={item.label} className="group border border-white/10 bg-black/40 p-6 text-center transition-all hover:border-[var(--neon)]/60">
+              <item.icon className="mx-auto h-8 w-8 text-[var(--neon)]" />
+              <div className="mt-4 font-display text-xs uppercase tracking-widest">{item.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 mx-auto max-w-3xl space-y-6 text-center text-lg text-foreground/75 md:text-xl">
+          <p>Esses estabelecimentos já vendem todos os dias.</p>
+          <p>O Executivo Bora Zé não precisa abrir nenhum deles.</p>
+          <p className="font-display uppercase text-[var(--neon)] tracking-tight">Seu papel é conectá-los à plataforma.</p>
+          <p>Quando um estabelecimento da sua carteira vende pelo Bora Zé, você pode participar dessa movimentação de acordo com as regras do programa.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Story() {
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-6">
-        <Tag>A linha do tempo</Tag>
+        <Tag>Oportunidade</Tag>
         <div className="mt-10 space-y-5 text-xl text-foreground/80 md:text-2xl">
-          {lines.map((l, i) => (
-            <p key={i} className={i === 2 || i === 3 ? "text-[var(--neon)] font-medium" : ""}>
-              {l}
-            </p>
-          ))}
+          <p>As grandes redes digitais precisaram de pessoas para construir oferta, demanda e distribuição.</p>
+          <p className="text-[var(--neon)] font-medium">O Executivo Bora Zé participa exatamente dessa fase de expansão da plataforma.</p>
         </div>
 
         <div className="mt-12 border-l-2 border-[var(--neon)] pl-6">
           <p className="text-lg text-foreground/70 md:text-xl">
-            O problema é que essas oportunidades passaram.<br />
-            Hoje essas empresas <span className="text-foreground">movimentam bilhões</span>.<br />
-            E quem entrou cedo <span className="text-[var(--neon)]">construiu patrimônio</span>.
+            A nova economia criou uma nova maneira de participar de mercados sem precisar possuir os ativos que movimentam.
           </p>
         </div>
 
         <h2 className="mt-20 font-display uppercase leading-[0.9] text-5xl md:text-7xl">
-          Agora imagine
+          Construa sua rede
           <br />
-          <span className="text-foreground/40">uma oportunidade semelhante</span>
+          <span className="text-foreground/40">e participe do crescimento</span>
           <br />
-          <span className="text-neon">na sua cidade.</span>
+          <span className="text-neon">na sua região.</span>
         </h2>
-
-        <p className="mt-8 text-lg text-foreground/70 md:text-xl">
-          Não em Nova York. Não em São Paulo.<br />
-          <span className="text-foreground">Exatamente na sua cidade.</span>
-        </p>
       </div>
     </section>
   );
@@ -1281,23 +1305,16 @@ function WhoIsBoraze() {
 
 function Authority() {
   const brands = ["UBER", "iFOOD", "99", "AIRBNB", "SPOTIFY"];
-  const cards = [
-    { name: "Uber", text: "não possui os carros" },
-    { name: "Airbnb", text: "não possui os imóveis" },
-    { name: "Spotify", text: "não possui os artistas" },
-    { name: "iFood", text: "não possui os restaurantes" },
-    { name: "99", text: "não possui os veículos" },
-  ];
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <Tag>Autoridade · Modelo comprovado</Tag>
+        <Tag>Economia de plataforma</Tag>
         <h2 className="mt-5 max-w-4xl font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          O modelo que criou algumas das <span className="text-neon">empresas mais valiosas do mundo</span>.
+          A nova economia criou uma nova maneira de <span className="text-neon">participar de mercados</span>.
         </h2>
         <p className="mt-6 max-w-2xl text-base text-foreground/70 md:text-lg">
-          Plataformas digitais transformaram mercados inteiros conectando oferta e
-          demanda através da tecnologia.
+          Uber conecta motoristas e passageiros. Airbnb conecta imóveis e hóspedes. iFood conecta estabelecimentos e consumidores.
+          O Bora Zé conecta consumidores ao comércio e aos serviços locais. O Executivo ajuda a construir essa rede.
         </p>
 
         {/* Logos in grayscale */}
@@ -1479,6 +1496,7 @@ function LandingPage() {
       <Hero />
       <Authority />
       <Divider />
+      <BigIdea />
       <Story />
       <Opportunity />
       <Benefits />

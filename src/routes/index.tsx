@@ -1156,41 +1156,6 @@ function Guarantee() {
   );
 }
 
-function NextSteps() {
-  const bullets = [
-    { icon: Search, text: "Análise de perfil profissional em até 48h" },
-    { icon: Check, text: "Sem compromisso — é só uma conversa técnica" },
-    { icon: MessageCircle, text: "Atendimento por WhatsApp em horário comercial" },
-    { icon: FileText, text: "Você recebe o plano de expansão 2026 completo" },
-  ];
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6 text-center">
-        <Tag>Próximo passo</Tag>
-        <h2 className="mx-auto mt-5 max-w-4xl font-display uppercase leading-[0.88] text-4xl md:text-7xl">
-          Avaliação de <span className="text-neon">perfil</span> do Executivo
-        </h2>
-        <p className="mx-auto mt-8 max-w-2xl text-lg text-foreground/70">
-          O Programa Executivo busca parceiros com compromisso e visão de longo prazo. Analisamos 
-          sua experiência comercial e conhecimento da região para garantir que você tenha as 
-          melhores condições de sucesso na construção da sua carteira.
-        </p>
-
-        <div className="mx-auto mt-12 grid max-w-3xl gap-3 text-left sm:grid-cols-2">
-          {bullets.map(({ icon: Icon, text }) => (
-            <div
-              key={text}
-              className="flex items-start gap-3 border border-white/10 bg-black/40 px-5 py-4"
-            >
-              <Icon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--neon)]" />
-              <span className="text-sm text-foreground/80 md:text-base">{text}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Future() {
   return (

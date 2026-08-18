@@ -602,92 +602,95 @@ function fmtBRL(n: number) {
 }
 
 function Simulator() {
-  const [estab, setEstab] = useState(30);
-  const [motos, setMotos] = useState(15);
+  const [estab, setEstab] = useState(10);
+  const [ticket, setTicket] = useState(10000);
+  const [year, setYear] = useState(1); // 1, 2, or 3
 
-  const gmvDelivery = estab * 5 * 45 * 30;
-  const comDelivery = gmvDelivery * 0.07;
-  const corridasMoto = motos * 5 * 30;
-  const comMoto = corridasMoto * 1.0;
-  const total = comDelivery + comMoto;
-
-  const blocks = [
-    { label: "GMV Delivery / mês", value: fmtBRL(gmvDelivery), highlight: false },
-    { label: "Sua comissão Delivery (7%)", value: fmtBRL(comDelivery), highlight: true },
-    { label: "Corridas realizadas / mês", value: `${corridasMoto.toLocaleString("pt-BR")} corridas`, highlight: false },
-    { label: "Sua comissão Mototáxi (R$ 1 por corrida)", value: fmtBRL(comMoto), highlight: true },
-  ];
+  const gmv = estab * ticket;
+  const rates = { 1: 0.025, 2: 0.01, 3: 0.005 };
+  const recurrence = gmv * rates[year as 1 | 2 | 3];
+  const activationBonus = estab * 97;
 
   return (
-    <section className="relative py-24 md:py-32">
+    <section id="simulador" className="relative py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <Tag>Simulador</Tag>
         <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Simule o faturamento <span className="text-neon">na sua cidade</span>
+          Simulador da <span className="text-neon">sua carteira</span>
         </h2>
         <p className="mt-6 max-w-3xl text-lg text-foreground/70">
-          Ajuste os controles abaixo e veja quanto você pode faturar mensalmente somando delivery e mototáxi.
-          Base de cálculo: cidade média de 40 mil habitantes.
+          O objetivo é mostrar quanto uma carteira hipotética poderia gerar. 
+          Ajuste os controles e veja o potencial da sua rede.
         </p>
 
-        <div
-          className="mt-12 border-2 border-[var(--neon)]/30 bg-black/50 p-6 md:p-10"
-          style={{ boxShadow: "0 0 60px oklch(0.88 0.31 142 / 0.12)" }}
-        >
-          <div className="grid gap-8 md:grid-cols-2">
-            <SliderRow
-              label="Estabelecimentos ativos"
-              value={estab}
-              suffix="estabelecimentos"
-              min={30}
-              max={100}
-              step={5}
-              onChange={setEstab}
-            />
-            <SliderRow
-              label="Mototaxistas ativos"
-              value={motos}
-              suffix="mototaxistas"
-              min={15}
-              max={50}
-              step={5}
-              onChange={setMotos}
-            />
-          </div>
+        <div className="mt-12 border-2 border-[var(--neon)]/30 bg-black/50 p-6 md:p-10">
+          <div className="grid gap-12 md:grid-cols-2">
+            <div className="space-y-8">
+              <SliderRow
+                label="Quantidade de estabelecimentos"
+                value={estab}
+                suffix=""
+                min={5}
+                max={100}
+                step={5}
+                onChange={setEstab}
+              />
+              <SliderRow
+                label="Venda média mensal por estabelecimento"
+                value={ticket}
+                suffix=""
+                min={2000}
+                max={30000}
+                step={1000}
+                onChange={setTicket}
+                isCurrency
+              />
+            </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {blocks.map((b) => (
-              <div key={b.label} className="border border-white/10 bg-white/[0.02] p-6">
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
-                  {b.label}
-                </div>
-                <div
-                  className={`mt-3 font-display text-3xl uppercase leading-none tracking-tight md:text-4xl ${
-                    b.highlight ? "text-neon" : "text-foreground"
-                  }`}
-                >
-                  {b.value}
-                </div>
+            <div className="flex flex-col gap-4">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Selecione o período</div>
+              <div className="grid grid-cols-3 gap-2">
+                {[1, 2, 3].map((y) => (
+                  <button
+                    key={y}
+                    onClick={() => setYear(y)}
+                    className={`border-2 py-3 font-display text-xs uppercase transition-all ${
+                      year === y ? "border-[var(--neon)] bg-[var(--neon)] text-black" : "border-white/10 text-foreground/60 hover:border-white/20"
+                    }`}
+                  >
+                    {y === 3 ? "3º Ano+" : `${y}º Ano`}
+                    <div className="text-[9px] opacity-60">{y === 1 ? "2,5%" : y === 2 ? "1%" : "0,5%"}</div>
+                  </button>
+                ))}
               </div>
-            ))}
-          </div>
 
-          <div className="mt-8 border-2 border-[var(--neon)] bg-[var(--neon)]/5 px-6 py-8 text-center">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--neon)]">
-              Faturamento potencial mensal
-            </div>
-            <div
-              key={total}
-              className="mt-3 font-display text-5xl uppercase leading-none tracking-tight text-neon transition-all duration-300 md:text-7xl"
-            >
-              {fmtBRL(total)}
+              <div className="mt-4 border border-white/10 bg-white/[0.02] p-6">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Vendas mensais da carteira</div>
+                <div className="mt-2 font-display text-2xl text-foreground">{fmtBRL(gmv)}</div>
+                <div className="mt-1 text-[10px] text-foreground/40">{estab} estab. × {fmtBRL(ticket)}</div>
+              </div>
             </div>
           </div>
 
-          <p className="mt-6 text-xs text-foreground/45">
-            Simulação baseada no modelo de comissão BoraZé! atual: podendo ter variações.
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <div className="border-2 border-white/10 bg-black p-6">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Ganho de Ativação</div>
+              <div className="mt-3 font-display text-3xl text-foreground">{fmtBRL(activationBonus)}</div>
+              <div className="mt-2 text-[10px] text-foreground/40">Pagamento único por ativação (100% elegível)</div>
+            </div>
+            
+            <div className="border-2 border-[var(--neon)] bg-[var(--neon)]/5 p-6">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--neon)]">Recorrência mensal estimada</div>
+              <div className="mt-3 font-display text-4xl text-neon">{fmtBRL(recurrence)}</div>
+              <div className="mt-2 text-[10px] text-neon/60">Baseado no percentual do {year === 3 ? "3º ano em diante" : `${year}º ano`}</div>
+            </div>
+          </div>
+
+          <p className="mt-8 text-[10px] text-foreground/40 leading-relaxed">
+            Simulação meramente ilustrativa. Não representa promessa ou garantia de ganhos. 
+            A remuneração depende das vendas efetivamente realizadas pelos estabelecimentos através da plataforma, 
+            permanência no programa e cumprimento das regras vigentes.
           </p>
-
         </div>
       </div>
     </section>
@@ -702,6 +705,7 @@ function SliderRow({
   max,
   step,
   onChange,
+  isCurrency = false,
 }: {
   label: string;
   value: number;
@@ -710,7 +714,35 @@ function SliderRow({
   max: number;
   step: number;
   onChange: (n: number) => void;
+  isCurrency?: boolean;
 }) {
+  return (
+    <div>
+      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+        {label}
+      </div>
+      <div className="mt-3 flex items-baseline gap-2">
+        <span className="font-display text-4xl uppercase leading-none text-neon md:text-5xl">
+          {isCurrency ? fmtBRL(value) : value}
+        </span>
+        <span className="text-xs uppercase tracking-[0.12em] text-foreground/60">{suffix}</span>
+      </div>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="mt-5 w-full accent-[var(--neon)]"
+      />
+      <div className="mt-1 flex justify-between font-mono text-[10px] text-foreground/40">
+        <span>{isCurrency ? fmtBRL(min) : min}</span>
+        <span>{isCurrency ? fmtBRL(max) : max}</span>
+      </div>
+    </div>
+  );
+}
   return (
     <div>
       <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">

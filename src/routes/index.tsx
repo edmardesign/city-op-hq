@@ -222,11 +222,6 @@ function StatsBar() {
 }
 
 function Hero() {
-  const cards = [
-    { kpi: "R$ 97", label: "por estabelecimento ativado", icon: Zap },
-    { kpi: "2,5%", label: "sobre vendas no primeiro ano", icon: TrendingUp },
-    { kpi: "R$ 497", label: "adesão no pré-lançamento", icon: ShieldCheck },
-  ];
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10" style={{ background: "var(--gradient-hero)" }} />
@@ -237,73 +232,57 @@ function Hero() {
       />
 
       <div className="mx-auto max-w-7xl px-6 py-20 md:py-32">
-        <Tag>Programa Executivo BoraZé!</Tag>
-
-        <h1 className="mt-6 font-display uppercase leading-[0.9] tracking-[-0.01em] text-[10vw] md:text-[5.5rem] lg:text-[6.5rem]">
-          <span>Transforme o </span>
-          <span className="text-neon italic">Comércio Local </span>
-          <span>em uma carteira de </span>
-          <span className="text-foreground/95">Renda Recorrente.</span>
+        <h1 className="mt-6 font-display uppercase leading-[0.9] tracking-[-0.01em] text-[10vw] md:text-[5.5rem] lg:text-[7.5rem] text-center">
+          <span>FATURE </span>
+          <span className="text-neon italic">R$4.500 POR MÊS </span>
+          <span>COM DELIVERY + COMÉRCIO LOCAL NA SUA CIDADE</span>
         </h1>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-          <p className="max-w-xl text-lg text-foreground/75 md:text-xl">
-            Cadastre restaurantes, farmácias, mercados e outros negócios no Bora Zé. 
-            Ganhe pela <span className="text-foreground">ativação</span> e participe das 
-            <span className="text-[var(--neon)]"> vendas dos estabelecimentos</span> da sua carteira.
+        <div className="mt-10 flex flex-col items-center">
+          <p className="max-w-3xl text-center text-lg text-foreground/75 md:text-2xl mb-12">
+            Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.
           </p>
 
-          <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-            <a href="#cadastro">
-              <NeonButton>QUERO SER EXECUTIVO BORA ZÉ</NeonButton>
-            </a>
-            <a href="#oportunidade">
-              <NeonButton variant="outline">VER COMO FUNCIONA</NeonButton>
+          <VSL />
+
+          <div className="mt-12">
+            <a href="#oferta">
+              <NeonButton className="px-12 py-6 text-lg">QUERO COMEÇAR AGORA</NeonButton>
             </a>
           </div>
-        </div>
-
-        {/* Premium highlight cards */}
-        <div className="mt-14 grid gap-4 md:mt-20 md:grid-cols-3">
-          {cards.map(({ kpi, label, icon: Icon }) => (
-            <div
-              key={label}
-              className="group relative overflow-hidden border border-white/10 bg-black/40 p-6 backdrop-blur-xl transition-all hover:border-[var(--neon)]/60 md:p-8"
-              style={{ boxShadow: "0 0 40px oklch(0.45 0.27 305 / 0.08)" }}
-            >
-              <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[var(--neon)]/5 blur-2xl transition-opacity group-hover:bg-[var(--neon)]/15" />
-              <Icon className="h-6 w-6 text-[var(--neon)]" />
-              <div className="mt-6 font-display text-4xl uppercase tracking-tight md:text-5xl">
-                <span className="text-neon">{kpi}</span>
-              </div>
-              <div className="mt-2 font-display text-xs uppercase tracking-[0.18em] text-foreground/70 md:text-sm">
-                {label}
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* Ecosystem image */}
         <div className="relative mt-16 overflow-hidden border border-white/10 md:mt-24">
           <img
             src={heroEcosystem}
-            alt="Ecossistema BoraZé! conectando mototaxistas, farmácias, restaurantes e mercados de uma cidade brasileira"
+            alt="Ecossistema digital conectando o comércio local"
             className="h-auto w-full object-cover"
             width={1600}
             height={900}
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
-          <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-3 md:bottom-8 md:left-8 md:right-8">
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/80 md:text-xs">
-              ◆ Ecossistema BoraZé! em operação
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--neon)] md:text-xs">
-              Mototaxistas · Farmácias · Restaurantes · Mercados
-            </span>
-          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function VSL() {
+  return (
+    <div className="w-full max-w-[400px] mx-auto overflow-hidden border-2 border-[var(--neon)]/40 shadow-[0_0_60px_oklch(0.88_0.31_142_/_0.18)]">
+      <div className="aspect-[9/16] relative bg-black flex items-center justify-center group cursor-pointer">
+        <div className="absolute inset-0 grid-bg opacity-30" />
+        <div className="flex flex-col items-center gap-6 z-10">
+          <div className="grid h-20 w-20 place-items-center rounded-full bg-[var(--neon)] transition-transform group-hover:scale-110 shadow-[0_0_40px_oklch(0.88_0.31_142_/_0.6)]">
+            <Play className="ml-1 h-10 w-10 fill-black text-black" />
+          </div>
+          <span className="font-display text-sm uppercase tracking-[0.2em] text-foreground/90">
+            ASSISTA O VÍDEO
+          </span>
+        </div>
+      </div>
+    </div>
   );
 }
 

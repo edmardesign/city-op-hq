@@ -527,67 +527,6 @@ function Comparison() {
 }
 
 
-function DashboardMockup() {
-  return (
-    <section className="relative py-24 md:py-32 bg-white/[0.02]">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center">
-          <Tag>Tecnologia</Tag>
-          <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-            SUA CARTEIRA <span className="text-neon">NA PALMA DA MÃO.</span>
-          </h2>
-          <p className="mt-6 text-foreground/70">O Executivo terá acesso exclusivamente aos seus próprios estabelecimentos.</p>
-        </div>
-
-        <div className="mt-16 mx-auto max-w-4xl border border-white/10 bg-black/60 p-6 md:p-10 shadow-2xl">
-          <div className="grid gap-6 md:grid-cols-4 mb-10">
-            {[
-              { l: "Minha carteira", v: "24", s: "estabelecimentos" },
-              { l: "Vendas (30 dias)", v: "R$ 142.000", s: "" },
-              { l: "Comissões", v: "R$ 3.550", s: "" },
-              { l: "Status", v: "ATIVO", s: "", highlight: true },
-            ].map((stat) => (
-              <div key={stat.l} className="border border-white/5 bg-white/[0.02] p-4">
-                <div className="text-[10px] uppercase tracking-widest text-foreground/40 mb-2">{stat.l}</div>
-                <div className={`font-display text-xl ${stat.highlight ? "text-neon" : "text-foreground"}`}>{stat.v}</div>
-                {stat.s && <div className="text-[9px] text-foreground/30">{stat.s}</div>}
-              </div>
-            ))}
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-white/10 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40">
-                  <th className="pb-4">Estabelecimento</th>
-                  <th className="pb-4">Ativação</th>
-                  <th className="pb-4">Vendas</th>
-                  <th className="pb-4">Vigência</th>
-                  <th className="pb-4 text-right">Comissão</th>
-                </tr>
-              </thead>
-              <tbody className="text-[11px]">
-                {[
-                  { n: "Restaurante Central", d: "12/05/26", v: "R$ 18.400", p: "2,5%", c: "R$ 460" },
-                  { n: "Farmácia Preço Baixo", d: "15/05/26", v: "R$ 22.100", p: "2,5%", c: "R$ 552" },
-                  { n: "Mercado do Povo", d: "20/05/26", v: "R$ 31.000", p: "2,5%", c: "R$ 775" },
-                ].map((row) => (
-                  <tr key={row.n} className="border-b border-white/5">
-                    <td className="py-4 font-bold">{row.n}</td>
-                    <td className="py-4 text-foreground/60">{row.d}</td>
-                    <td className="py-4 text-foreground/60">{row.v}</td>
-                    <td className="py-4 text-[var(--neon)]">{row.p}</td>
-                    <td className="py-4 text-right font-display text-[var(--neon)]">{row.c}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function RulesSection() {
   return (

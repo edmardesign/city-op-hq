@@ -133,24 +133,84 @@ function Divider() {
 // Nav lives in @/components/site-chrome as <SiteNav />
 
 
+function CountdownBanner() {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, min: 0, seg: 0 });
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const targetDate = new Date("2026-09-15T00:00:00-03:00"); // America/Bahia
+
+    const timer = setInterval(() => {
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        setIsVisible(false);
+        clearInterval(timer);
+        return;
+      }
+
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        min: Math.floor((diff / 1000 / 60) % 60),
+        seg: Math.floor((diff / 1000) % 60),
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="relative z-[60] bg-[var(--neon)] py-2 text-black">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-4 px-6 md:flex-row md:gap-8">
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em]">Oferta de Pré-lançamento</span>
+          <span className="hidden h-3 w-px bg-black/20 md:block" />
+          <span className="text-[11px] font-medium">R$ 497,00 por tempo limitado</span>
+        </div>
+        
+        <div className="flex gap-4 font-display">
+          {[
+            { v: timeLeft.days, l: "Dias" },
+            { v: timeLeft.hours, l: "Horas" },
+            { v: timeLeft.min, l: "Min" },
+            { v: timeLeft.seg, l: "Seg" }
+          ].map((item, i) => (
+            <div key={i} className="flex flex-col items-center min-w-[40px]">
+              <span className="text-lg font-bold leading-none">{String(item.v).padStart(2, '0')}</span>
+              <span className="text-[8px] uppercase tracking-tighter">{item.l}</span>
+            </div>
+          ))}
+        </div>
+
+        <a 
+          href="#cadastro" 
+          className="bg-black px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--neon)] transition-transform hover:scale-105"
+        >
+          Quero entrar no pré-lançamento
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function StatsBar() {
   return (
     <div className="border-b border-white/5 bg-black/40">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-2 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/60">
         <span>
-          <span className="text-[var(--neon)]">R$ 10.000+</span> potencial mensal
+          <span className="text-[var(--neon)]">R$ 97</span> por ativação
         </span>
         <span className="hidden h-3 w-px bg-white/15 md:block" />
         <span>
-          <span className="text-[var(--neon)]">50%</span> da receita da cidade
+          <span className="text-[var(--neon)]">2,5%</span> sobre vendas (1º ano)
         </span>
         <span className="hidden h-3 w-px bg-white/15 md:block" />
         <span>
-          <span className="text-[var(--neon)]">1</span> vaga por município
-        </span>
-        <span className="hidden h-3 w-px bg-white/15 md:block" />
-        <span>
-          <span className="text-[var(--neon)]">100%</span> garantia blindada
+          <span className="text-[var(--neon)]">R$ 497</span> adesão pré-lançamento
         </span>
       </div>
     </div>
@@ -159,9 +219,9 @@ function StatsBar() {
 
 function Hero() {
   const cards = [
-    { kpi: "R$ 10.000+", label: "Potencial mensal", icon: TrendingUp },
-    { kpi: "1 vaga", label: "Exclusiva por município", icon: MapPin },
-    { kpi: "100%", label: "Garantia blindada", icon: ShieldCheck },
+    { kpi: "R$ 97", label: "por estabelecimento ativado", icon: Zap },
+    { kpi: "2,5%", label: "sobre vendas no primeiro ano", icon: TrendingUp },
+    { kpi: "R$ 497", label: "adesão no pré-lançamento", icon: ShieldCheck },
   ];
   return (
     <section id="top" className="relative overflow-hidden">
@@ -173,32 +233,28 @@ function Hero() {
       />
 
       <div className="mx-auto max-w-7xl px-6 py-20 md:py-32">
-        <Tag>Programa Embaixador BoraZé!</Tag>
+        <Tag>Programa Executivo BoraZé!</Tag>
 
         <h1 className="mt-6 font-display uppercase leading-[0.9] tracking-[-0.01em] text-[10vw] md:text-[5.5rem] lg:text-[6.5rem]">
-          <span>Fature </span>
-          <span className="text-neon italic">R$ 10.000+</span>
-          <span> por mês com </span>
-          <span className="text-foreground/95">Delivery + Mototáxi</span>
-          <br />
-          <span className="text-foreground/95">na sua cidade.</span>
-          <br />
-          <span className="text-foreground/40">Uma vaga por município.</span>
+          <span>Transforme o </span>
+          <span className="text-neon italic">Comércio Local </span>
+          <span>em uma carteira de </span>
+          <span className="text-foreground/95">Renda Recorrente.</span>
         </h1>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <p className="max-w-xl text-lg text-foreground/75 md:text-xl">
-            Construa uma <span className="text-foreground">receita recorrente</span> em um
-            mercado que já movimenta <span className="text-[var(--neon)]">milhões de reais</span> todos
-            os anos.
+            Cadastre restaurantes, farmácias, mercados e outros negócios no Bora Zé. 
+            Ganhe pela <span className="text-foreground">ativação</span> e participe das 
+            <span className="text-[var(--neon)]"> vendas dos estabelecimentos</span> da sua carteira.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
             <a href="#cadastro">
-              <NeonButton>Quero minha cidade exclusiva</NeonButton>
+              <NeonButton>QUERO SER EXECUTIVO BORA ZÉ</NeonButton>
             </a>
             <a href="#oportunidade">
-              <NeonButton variant="outline">Como funciona</NeonButton>
+              <NeonButton variant="outline">VER COMO FUNCIONA</NeonButton>
             </a>
           </div>
         </div>
@@ -1417,6 +1473,7 @@ function VideoSection() {
 function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <CountdownBanner />
       <SiteNav />
       <StatsBar />
       <Hero />

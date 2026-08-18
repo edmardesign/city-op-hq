@@ -1039,24 +1039,72 @@ function DualRevenue() {
 }
 
 function Pricing() {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, min: 0, seg: 0 });
+
+  useEffect(() => {
+    const targetDate = new Date("2026-09-15T00:00:00-03:00"); // America/Bahia
+    const timer = setInterval(() => {
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+      if (diff <= 0) {
+        clearInterval(timer);
+        return;
+      }
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        min: Math.floor((diff / 1000 / 60) % 60),
+        seg: Math.floor((diff / 1000) % 60),
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section id="investimento" className="relative py-24 md:py-32">
+    <section id="oferta" className="relative py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6 text-center">
-        <Tag>Investimento</Tag>
-        <div className="mt-10 border-2 border-[var(--neon)] bg-black/40 p-10 max-w-2xl mx-auto">
-          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--neon)] mb-4">Oferta de Pré-lançamento</div>
-          <h2 className="font-display uppercase text-4xl md:text-6xl mb-6">ENTRE PARA O PROGRAMA EXECUTIVO BORA ZÉ.</h2>
+        <Tag>Oferta de Pré-lançamento</Tag>
+        <div className="mt-10 border-2 border-[var(--neon)] bg-black/40 p-10 max-w-3xl mx-auto shadow-[0_0_80px_oklch(0.88_0.31_142_/_0.28)]">
+          <h2 className="font-display uppercase text-4xl md:text-6xl mb-8">PROGRAMA EXECUTIVO BORA ZÉ</h2>
           
-          <div className="flex flex-col items-center gap-2 mb-8">
-            <div className="text-foreground/40 text-sm line-through">R$ 997,00</div>
-            <div className="font-display text-7xl text-neon">R$ 497</div>
-            <div className="text-foreground/60 text-xs uppercase tracking-widest">à vista ou em até 12x</div>
+          <div className="grid md:grid-cols-2 gap-8 text-left mb-10">
+            <div className="space-y-4">
+              <h3 className="font-display text-xl uppercase text-neon">O que você recebe:</h3>
+              <ul className="space-y-2 text-sm text-foreground/70">
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Treinamento completo</li>
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Estrutura de tecnologia</li>
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Ferramentas comerciais</li>
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Suporte e Materiais</li>
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Acesso à comunidade</li>
+              </ul>
+            </div>
+            <div className="flex flex-col items-center justify-center border-l border-white/10 md:pl-8">
+              <div className="text-foreground/40 text-sm line-through">R$ 997,00</div>
+              <div className="font-display text-7xl text-neon">R$ 497</div>
+              <div className="text-foreground/60 text-xs uppercase tracking-widest mt-2">à vista ou em até 12x</div>
+            </div>
           </div>
 
-          <a href="#cadastro">
-            <NeonButton className="w-full">QUERO SER EXECUTIVO BORA ZÉ</NeonButton>
+          <div className="mb-10 py-6 border-y border-white/10">
+            <div className="text-[10px] uppercase tracking-[0.3em] text-foreground/60 mb-4">CONDIÇÃO DE PRÉ-LANÇAMENTO DISPONÍVEL ATÉ:</div>
+            <div className="flex justify-center gap-6 font-display">
+              {[
+                { v: timeLeft.days, l: "Dias" },
+                { v: timeLeft.hours, l: "Horas" },
+                { v: timeLeft.min, l: "Min" },
+                { v: timeLeft.seg, l: "Seg" }
+              ].map((item, i) => (
+                <div key={i} className="flex flex-col items-center">
+                  <span className="text-4xl font-bold text-neon">{String(item.v).padStart(2, '0')}</span>
+                  <span className="text-[10px] uppercase tracking-wider text-foreground/40">{item.l}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <a href="https://pay.checkout-link.com/..." className="block">
+            <NeonButton className="w-full py-6 text-xl">QUERO APROVEITAR A OFERTA</NeonButton>
           </a>
-          <p className="mt-6 text-[10px] text-foreground/40 uppercase tracking-widest">Início oficial: 15 de setembro de 2026</p>
         </div>
       </div>
     </section>

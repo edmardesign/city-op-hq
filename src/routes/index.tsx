@@ -319,7 +319,7 @@ function BigIdea() {
           <p>Esses estabelecimentos já vendem todos os dias.</p>
           <p>O Executivo Bora Zé não precisa abrir nenhum deles.</p>
           <p className="font-display uppercase text-[var(--neon)] tracking-tight">Seu papel é conectá-los à plataforma.</p>
-          <p>Quando um estabelecimento da sua carteira vende pelo Bora Zé, você pode participar dessa movimentação de acordo com as regras do programa.</p>
+          <p>Uma nova forma de participar do crescimento do delivery e do comércio local construindo uma carteira de estabelecimentos e uma receita que pode se tornar recorrente.</p>
         </div>
       </div>
     </section>

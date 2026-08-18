@@ -1,28 +1,46 @@
-# Plano de Reversão e Adaptação: Executivo Bora Zé (Direct Response)
+# Plano de Transformação - Executivo Bora Zé (Direct Response)
 
-Este plano visa reverter a landing page para sua estrutura original de alta performance (Direct Response), realizando apenas as alterações cirúrgicas necessárias para pivotar o produto de "Embaixador" para "Executivo Bora Zé", conforme as novas diretrizes.
+Este plano detalha a revisão completa da landing page para o produto **Executivo Bora Zé**, focando na remoção de elementos legados do modelo "Embaixador" (especialmente o módulo de Mototáxi e exclusividade territorial) e na implementação de uma narrativa de Resposta Direta baseada na construção de carteira de estabelecimentos locais.
 
-## Alterações de UI/UX
+## Alterações de Conteúdo e Narrativa
 
-- **Reversão Estrutural**: Remover seções explicativas excessivas adicionadas recentemente e restaurar a ordem e o ritmo da página original.
-- **Hero Section**: Atualizar a headline para uma promessa de faturamento direto: "FATURE R$4.500 POR MÊS COM DELIVERY + COMÉRCIO LOCAL NA SUA CIDADE". Remover menções a "Bora Zé" ou "Executivo" na headline.
-- **VSL Vertical (9:16)**: Posicionar o vídeo principal imediatamente abaixo da subheadline, com proporção 9:16 centralizada (tanto desktop quanto mobile).
-- **Simulador**: Manter o design e interatividade, mas ajustar a lógica para "Quantidade de Estabelecimentos" e "Vendas Médias", focando no resultado de renda mensal e anual (sem destacar percentuais técnicos).
-- **Contador Regressivo**: Implementar na seção de oferta um contador real para 15/09/2026 (America/Bahia).
-- **Remoção de Formulário**: Eliminar completamente o formulário de qualificação/candidatura. O fluxo será direto para o checkout.
-- **CTAs**: Atualizar todos os botões para ações de compra ("QUERO COMEÇAR AGORA", etc.) e direcionar para a seção de oferta ou checkout.
+### 1. Limpeza Global de Termos Legados
+- Remover todas as referências a: mototáxi, mototaxista, corridas, entregas expressas, comissão por corrida, moto delivery.
+- Remover termos do modelo antigo: exclusividade municipal, dono da cidade, licença territorial, 50% de lucro.
+- Adaptar o FAQ para reforçar a inexistência de exclusividade, focando na liberdade comercial do Executivo.
 
-## Alterações de Conteúdo (Copy)
+### 2. Nova Seção: "Ganhar sem ser dono" (Desejo e Curiosidade)
+- Implementar uma seção visual premium com a headline: "E SE VOCÊ PUDESSE GANHAR COM TUDO ISSO... SEM PRECISAR SER DONO DE NADA DISSO?".
+- Exemplos visuais (Imagem + Frase curta):
+    - **Farmácia**: Ganhar com medicamentos sem abrir farmácia.
+    - **Gás**: Ganhar com botijões sem ter distribuidora.
+    - **Restaurantes**: Ganhar com pedidos sem cozinha ou estoque.
+    - **Pet Shop**: Ganhar com produtos pet sem abrir loja.
+    - **Mercado**: Ganhar com compras sem possuir mercado.
 
-- **Pivot de Produto**: Substituir "Embaixador" por "Executivo Bora Zé" apenas onde a revelação do produto ocorre naturalmente.
-- **Remoção de Exclusividade**: Retirar todas as menções a exclusividade territorial, vagas por município ou "dono da cidade".
-- **Narrativa Original**: Preservar a história sobre a nova economia (Uber, iFood, etc.) e a conexão do comércio local.
-- **Ocultação de Detalhes Técnicos**: Remover o destaque de "R$97 por ativação" ou percentuais de comissionamento (2,5%, 1%, etc.) da comunicação principal, focando no potencial de ganhos.
-- **Seção de Oferta**: Revelar o investimento de R$497 apenas no final da página, listando os benefícios incluídos (treinamento, ferramentas, suporte).
+### 3. Refatoração da Narrativa da "Nova Economia"
+- Conectar a lógica de Uber/Airbnb/iFood com a oportunidade local.
+- Frase de destaque: "A OPORTUNIDADE NÃO ESTÁ EM ABRIR CADA UM DESSES NEGÓCIOS. ESTÁ EM PARTICIPAR DA CONEXÃO ENTRE QUEM VENDE E QUEM COMPRA."
+
+### 4. Ajuste do Mecanismo e Revelação
+- Atrasar a revelação do nome "Bora Zé" até que a curiosidade sobre a participação financeira no comércio local esteja estabelecida.
+- Definir o Executivo como quem "ajuda estabelecimentos a entrarem na plataforma e constrói sua própria carteira".
+- Remover menções técnicas precoces (R$ 97, percentuais, tabelas de comissionamento) antes da oferta final.
+
+### 5. Atualização do Simulador
+- Remover variáveis de mototáxi/corridas.
+- Focar exclusivamente na carteira de estabelecimentos.
 
 ## Detalhes Técnicos
 
-- **Componentes**: Refatorar `Hero`, `VSL`, `Simulator`, `Pricing` e `LandingPage` (assembly).
-- **Remoção**: Deletar componentes como `QualificationForm`, `Profiles`, `RulesSection`, `CareerEvolution` e `StatsBar` (se não existiam na original ou se conflitam com o novo fluxo).
-- **Navegação**: Ajustar `SiteNav` para refletir o novo fluxo de Direct Response.
-- **Timezone**: Garantir que o contador use `new Date("2026-09-15T00:00:00-03:00")` para consistência.
+- **Componentes**: 
+    - Excluir `DualRevenue` (que continha o módulo mototáxi).
+    - Criar `PortfolioOpportunity` (nova seção de desejo).
+    - Atualizar `Market` e `Simulator` para remover referências a mototaxistas.
+- **Ordem das Seções**: `Hero` -> `Authority` -> `EconomyNarrative` -> `PortfolioOpportunity` -> `ConnectionInsight` -> `MechanismRevelation` -> `HowItWorks` -> `Benefits` -> `Market` -> `Simulator` -> `Comparison` -> `Pricing` -> `Guarantee` -> `FAQ`.
+- **Estilo**: Manter o tema "Neon/Cyber/Premium" original, usando tokens semânticos e Tailwind v4.
+
+## Verificação e Auditoria
+- Scan final em todo o projeto por palavras-chave proibidas.
+- Teste de responsividade da nova seção visual.
+- Validação do fluxo de botões para a seção de oferta (`#oferta`).

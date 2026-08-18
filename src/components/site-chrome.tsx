@@ -16,7 +16,7 @@ export function SiteNav() {
         </nav>
         <Link
           to="/"
-          hash="cadastro"
+          hash="oferta"
           className="border-2 border-[var(--neon)] bg-[var(--neon)] px-4 py-2 font-display text-[11px] uppercase tracking-[0.12em] text-black hover:brightness-110"
         >
           QUERO SER EXECUTIVO

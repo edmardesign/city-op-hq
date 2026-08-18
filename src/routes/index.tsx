@@ -1092,11 +1092,22 @@ function DualRevenue() {
 function Pricing() {
   return (
     <section id="investimento" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="flex justify-center">
+      <div className="mx-auto max-w-5xl px-6 text-center">
+        <Tag>Investimento</Tag>
+        <div className="mt-10 border-2 border-[var(--neon)] bg-black/40 p-10 max-w-2xl mx-auto">
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--neon)] mb-4">Oferta de Pré-lançamento</div>
+          <h2 className="font-display uppercase text-4xl md:text-6xl mb-6">ENTRE PARA O PROGRAMA EXECUTIVO BORA ZÉ.</h2>
+          
+          <div className="flex flex-col items-center gap-2 mb-8">
+            <div className="text-foreground/40 text-sm line-through">R$ 997,00</div>
+            <div className="font-display text-7xl text-neon">R$ 497</div>
+            <div className="text-foreground/60 text-xs uppercase tracking-widest">à vista ou em até 12x</div>
+          </div>
+
           <a href="#cadastro">
-            <NeonButton>Quero minha cidade exclusiva</NeonButton>
+            <NeonButton className="w-full">QUERO SER EXECUTIVO BORA ZÉ</NeonButton>
           </a>
+          <p className="mt-6 text-[10px] text-foreground/40 uppercase tracking-widest">Início oficial: 15 de setembro de 2026</p>
         </div>
       </div>
     </section>
@@ -1131,19 +1142,14 @@ function Guarantee() {
               </div>
             </div>
             <div>
-              <Tag>Garantia Blindada</Tag>
+              <Tag>Suporte e Estrutura</Tag>
               <h2 className="mt-4 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-                Assumimos o risco<br />
-                <span className="text-neon">junto com você.</span>
+                Tudo que você precisa<br />
+                <span className="text-neon">para escalar sua carteira.</span>
               </h2>
               <p className="mt-6 max-w-2xl text-base text-foreground/75 md:text-lg">
-                Se você cumprir o plano de implantação, participar dos treinamentos,
-                executar as ações recomendadas e não recuperar o valor investido dentro
-                do prazo contratual,{" "}
-                <span className="text-[var(--neon)]">
-                  recompramos sua licença e devolvemos 100% do valor investido
-                </span>
-                . Simples assim.
+                O Programa Executivo oferece treinamento, painel de controle e suporte 
+                técnico para que você foque no que importa: <span className="text-[var(--neon)]">crescer sua rede de estabelecimentos</span>.
               </p>
             </div>
           </div>
@@ -1221,52 +1227,36 @@ function Future() {
 function FAQ() {
   const items = [
     {
-      q: "Preciso ter experiência com tecnologia ou já ter tido um negócio?",
-      a: "Não. A BoraZé! entrega toda a estrutura pronta: aplicativo, sistema, treinamento e suporte. Você só precisa de vontade de empreender e disposição para liderar sua cidade.",
+      q: "O que faz um Executivo Bora Zé?",
+      a: "O Executivo é um parceiro comercial responsável por encontrar e cadastrar estabelecimentos locais (restaurantes, farmácias, mercados, etc.) na plataforma Bora Zé, construindo sua própria carteira de rendimentos.",
     },
     {
-      q: "Como funciona a exclusividade territorial?",
-      a: "Cada cidade tem apenas um Embaixador oficial BoraZé!, garantido em contrato. Quando uma cidade é ocupada, ela sai da lista para sempre — ninguém mais pode operar a marca ali.",
+      q: "Quanto custa para entrar no programa?",
+      a: "A adesão no período de pré-lançamento é de R$ 497,00 (ou parcelado no cartão). Este valor dá acesso a treinamento, ferramentas, comunidade e suporte.",
     },
     {
-      q: "Quanto posso faturar por mês?",
-      a: "O potencial ultrapassa R$ 10.000/mês em cidades bem trabalhadas, considerando assinaturas de mototaxistas, empresas parceiras e receitas recorrentes da plataforma. O resultado depende da sua execução — mas o modelo é comprovado.",
+      q: "Como funcionam os R$ 97 por estabelecimento?",
+      a: "Para cada novo estabelecimento qualificado e efetivamente ativado (primeiro pedido válido) que você trouxer para a plataforma, você recebe um bônus de ativação de R$ 97,00.",
     },
     {
-      q: "Quanto custa para se tornar Embaixador?",
-      a: "O investimento começa pelo Módulo Moto Táxi: 12x R$ 416 no cartão. Isso inclui licença territorial exclusiva, aplicativo, treinamento, suporte e a Garantia Blindada.",
+      q: "Como funciona a comissão recorrente?",
+      a: "Além do bônus de ativação, você participa das vendas elegíveis dos estabelecimentos da sua carteira: 2,5% no 1º ano, 1% no 2º ano e 0,5% do 3º ano em diante.",
     },
     {
-      q: "O que é a Garantia Blindada?",
-      a: "Se você seguir o plano de implantação e não recuperar o valor investido dentro do prazo contratual, a BoraZé! recompra sua licença e devolve 100% do seu investimento. O risco é nosso.",
+      q: "Existe exclusividade territorial?",
+      a: "Não. O Executivo constrói sua própria carteira e não possui exclusividade municipal, permitindo que múltiplos executivos atuem na mesma região focando em seus próprios relacionamentos comerciais.",
     },
     {
-      q: "Quanto tempo leva para começar a faturar?",
-      a: "Após o treinamento e a captação inicial de mototaxistas e empresas parceiras, a receita recorrente começa a entrar já nos primeiros meses. O ritmo depende do quanto o Embaixador se dedica.",
+      q: "Como funciona a regra de 6 estabelecimentos a cada 90 dias?",
+      a: "Para manter o status de Executivo Ativo e continuar recebendo as comissões da carteira, o parceiro deve realizar pelo menos 6 novas ativações a cada janela de 90 dias.",
     },
     {
-      q: "Preciso contratar funcionários ou ter estrutura física?",
-      a: "Não. O modelo é asset-light, igual Uber e iFood: você não precisa de escritório, frota ou equipe. Toda a operação acontece via aplicativo e sistema BoraZé!.",
+      q: "Posso me tornar Embaixador Bora Zé futuramente?",
+      a: "Sim. Executivos de alta performance poderão se qualificar para oportunidades como Embaixador Bora Zé, assumindo operações territoriais conforme a disponibilidade e critérios do programa.",
     },
     {
-      q: "E se minha cidade for pequena? Vale a pena?",
-      a: "Sim. Cidades menores costumam ter menos concorrência e relacionamento mais próximo, o que acelera a adesão. O modelo funciona em municípios de todos os portes.",
-    },
-    {
-      q: "Que tipo de suporte a BoraZé! oferece?",
-      a: "Você recebe treinamento completo de implantação, materiais de marketing, playbooks de captação, suporte técnico e acompanhamento contínuo do time central para garantir sua operação.",
-    },
-    {
-      q: "Como recebo minha parte da receita?",
-      a: "Você participa de 50% da receita recorrente gerada na sua cidade. Os repasses são feitos mensalmente, de forma transparente, com relatórios completos das operações.",
-    },
-    {
-      q: "Posso vender ou transferir minha licença no futuro?",
-      a: "Sim. A licença é um ativo seu. Você pode transferir para terceiros mediante aprovação da BoraZé!, seguindo as regras contratuais — assim como uma franquia tradicional.",
-    },
-    {
-      q: "Como faço para garantir minha cidade agora?",
-      a: "Basta preencher o formulário de cadastro no final desta página. Nosso time entra em contato para confirmar a disponibilidade da sua cidade e conduzir os próximos passos.",
+      q: "O que acontece depois do dia 15 de setembro?",
+      a: "O programa será oficialmente lançado. As condições de pré-lançamento (preço e bônus) podem ser atualizadas para a oferta oficial de mercado.",
     },
   ];
   const [open, setOpen] = useState<number | null>(0);
@@ -1469,14 +1459,15 @@ function FinalCTA() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-start">
           <div>
-            <Tag>Última chamada</Tag>
+            <Tag>A Oportunidade</Tag>
             <h2 className="mt-5 font-display uppercase leading-[0.85] text-5xl md:text-8xl">
-              Garanta sua<br />
-              <span className="text-neon">cidade agora</span>.
+              OS NEGÓCIOS DA SUA CIDADE<br />
+              <span className="text-neon">JÁ VENDEM TODOS OS DIAS</span>.
             </h2>
             <p className="mt-8 max-w-md text-lg text-foreground/70">
-              Seja o primeiro a assumir o território antes que outra pessoa faça isso por
-              você.
+              Restaurantes, farmácias, mercados e pet shops já movimentam dinheiro diariamente. 
+              O Executivo Bora Zé ajuda esses estabelecimentos a entrarem na plataforma e constrói 
+              sua carteira sobre o trabalho que realizou.
             </p>
           </div>
           <QualificationForm />

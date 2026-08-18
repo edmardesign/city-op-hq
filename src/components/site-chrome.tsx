@@ -10,16 +10,16 @@ export function SiteNav() {
         </Link>
         <nav className="hidden items-center gap-8 font-display uppercase tracking-[0.1em] text-xs text-foreground/70 md:flex">
           <Link to="/" hash="oportunidade" className="hover:text-foreground">Oportunidade</Link>
-          <Link to="/" hash="beneficios" className="hover:text-foreground">Benefícios</Link>
-          <Link to="/" hash="investimento" className="hover:text-foreground">Investimento</Link>
-          <Link to="/" hash="garantia" className="hover:text-foreground">Garantia</Link>
+          <Link to="/" hash="como-funciona" className="hover:text-foreground">Como funciona</Link>
+          <Link to="/" hash="simulador" className="hover:text-foreground">Simulador</Link>
+          <Link to="/" hash="faq" className="hover:text-foreground">FAQ</Link>
         </nav>
         <Link
           to="/"
           hash="cadastro"
           className="border-2 border-[var(--neon)] bg-[var(--neon)] px-4 py-2 font-display text-[11px] uppercase tracking-[0.12em] text-black hover:brightness-110"
         >
-          Quero minha cidade
+          QUERO SER EXECUTIVO
         </Link>
       </div>
     </header>

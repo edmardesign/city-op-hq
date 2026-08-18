@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowRight,
   Check,
@@ -24,6 +24,10 @@ import {
   FileText,
   Clock,
   Search,
+  Heart,
+  Utensils,
+  BarChart3,
+  Users,
 } from "lucide-react";
 import logo from "@/assets/boraze-logo.png.asset.json";
 import heroEcosystem from "@/assets/hero-ecosystem.jpg";
@@ -39,29 +43,29 @@ export const Route = createFileRoute("/")({
     const canonical = "https://mtztextfature10.lovable.app/";
     return {
       meta: [
-        { title: "BoraZé! Embaixador — Fature R$ 10.000+/mês com um app na sua cidade" },
+        { title: "Executivo BoraZé! — Transforme o comércio local em renda recorrente" },
         {
           name: "description",
           content:
-            "Selecionamos apenas uma pessoa por cidade para operar o BoraZé!. Receita recorrente, exclusividade territorial e garantia blindada. Fature R$ 10.000+/mês com um app na sua cidade.",
+            "Cadastre restaurantes, farmácias e mercados no Bora Zé. Ganhe pela ativação e continue participando das vendas dos estabelecimentos da sua carteira.",
         },
-        { property: "og:title", content: "BoraZé! Embaixador — 1 vaga por cidade" },
+        { property: "og:title", content: "Programa Executivo BoraZé!" },
         {
           property: "og:description",
           content:
-            "Fature R$ 10.000+/mês com um aplicativo na sua cidade — mesmo sem experiência em tecnologia.",
+            "Transforme o comércio local em uma carteira de renda recorrente. Ganhe R$97 por ativação + até 2,5% das vendas.",
         },
         { property: "og:type", content: "website" },
         { property: "og:url", content: canonical },
-        { property: "og:site_name", content: "BoraZé! Embaixador" },
+        { property: "og:site_name", content: "BoraZé! Executivo" },
         { property: "og:locale", content: "pt_BR" },
         { property: "og:image", content: ogImage },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "BoraZé! Embaixador — 1 vaga por cidade" },
+        { name: "twitter:title", content: "Programa Executivo BoraZé!" },
         {
           name: "twitter:description",
           content:
-            "Fature R$ 10.000+/mês com um aplicativo na sua cidade — mesmo sem experiência em tecnologia.",
+            "Transforme o comércio local em uma carteira de renda recorrente. Ganhe R$97 por ativação + até 2,5% das vendas.",
         },
         { name: "twitter:image", content: ogImage },
       ],
@@ -133,24 +137,84 @@ function Divider() {
 // Nav lives in @/components/site-chrome as <SiteNav />
 
 
+function CountdownBanner() {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, min: 0, seg: 0 });
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const targetDate = new Date("2026-09-15T00:00:00-03:00"); // America/Bahia
+
+    const timer = setInterval(() => {
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        setIsVisible(false);
+        clearInterval(timer);
+        return;
+      }
+
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        min: Math.floor((diff / 1000 / 60) % 60),
+        seg: Math.floor((diff / 1000) % 60),
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="relative z-[60] bg-[var(--neon)] py-2 text-black">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-4 px-6 md:flex-row md:gap-8">
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em]">Oferta de Pré-lançamento</span>
+          <span className="hidden h-3 w-px bg-black/20 md:block" />
+          <span className="text-[11px] font-medium">R$ 497,00 por tempo limitado</span>
+        </div>
+        
+        <div className="flex gap-4 font-display">
+          {[
+            { v: timeLeft.days, l: "Dias" },
+            { v: timeLeft.hours, l: "Horas" },
+            { v: timeLeft.min, l: "Min" },
+            { v: timeLeft.seg, l: "Seg" }
+          ].map((item, i) => (
+            <div key={i} className="flex flex-col items-center min-w-[40px]">
+              <span className="text-lg font-bold leading-none">{String(item.v).padStart(2, '0')}</span>
+              <span className="text-[8px] uppercase tracking-tighter">{item.l}</span>
+            </div>
+          ))}
+        </div>
+
+        <a 
+          href="#cadastro" 
+          className="bg-black px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--neon)] transition-transform hover:scale-105"
+        >
+          Quero entrar no pré-lançamento
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function StatsBar() {
   return (
     <div className="border-b border-white/5 bg-black/40">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-2 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/60">
         <span>
-          <span className="text-[var(--neon)]">R$ 10.000+</span> potencial mensal
+          <span className="text-[var(--neon)]">R$ 97</span> por ativação
         </span>
         <span className="hidden h-3 w-px bg-white/15 md:block" />
         <span>
-          <span className="text-[var(--neon)]">50%</span> da receita da cidade
+          <span className="text-[var(--neon)]">2,5%</span> sobre vendas (1º ano)
         </span>
         <span className="hidden h-3 w-px bg-white/15 md:block" />
         <span>
-          <span className="text-[var(--neon)]">1</span> vaga por município
-        </span>
-        <span className="hidden h-3 w-px bg-white/15 md:block" />
-        <span>
-          <span className="text-[var(--neon)]">100%</span> garantia blindada
+          <span className="text-[var(--neon)]">R$ 497</span> adesão pré-lançamento
         </span>
       </div>
     </div>
@@ -159,9 +223,9 @@ function StatsBar() {
 
 function Hero() {
   const cards = [
-    { kpi: "R$ 10.000+", label: "Potencial mensal", icon: TrendingUp },
-    { kpi: "1 vaga", label: "Exclusiva por município", icon: MapPin },
-    { kpi: "100%", label: "Garantia blindada", icon: ShieldCheck },
+    { kpi: "R$ 97", label: "por estabelecimento ativado", icon: Zap },
+    { kpi: "2,5%", label: "sobre vendas no primeiro ano", icon: TrendingUp },
+    { kpi: "R$ 497", label: "adesão no pré-lançamento", icon: ShieldCheck },
   ];
   return (
     <section id="top" className="relative overflow-hidden">
@@ -173,32 +237,28 @@ function Hero() {
       />
 
       <div className="mx-auto max-w-7xl px-6 py-20 md:py-32">
-        <Tag>Programa Embaixador BoraZé!</Tag>
+        <Tag>Programa Executivo BoraZé!</Tag>
 
         <h1 className="mt-6 font-display uppercase leading-[0.9] tracking-[-0.01em] text-[10vw] md:text-[5.5rem] lg:text-[6.5rem]">
-          <span>Fature </span>
-          <span className="text-neon italic">R$ 10.000+</span>
-          <span> por mês com </span>
-          <span className="text-foreground/95">Delivery + Mototáxi</span>
-          <br />
-          <span className="text-foreground/95">na sua cidade.</span>
-          <br />
-          <span className="text-foreground/40">Uma vaga por município.</span>
+          <span>Transforme o </span>
+          <span className="text-neon italic">Comércio Local </span>
+          <span>em uma carteira de </span>
+          <span className="text-foreground/95">Renda Recorrente.</span>
         </h1>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <p className="max-w-xl text-lg text-foreground/75 md:text-xl">
-            Construa uma <span className="text-foreground">receita recorrente</span> em um
-            mercado que já movimenta <span className="text-[var(--neon)]">milhões de reais</span> todos
-            os anos.
+            Cadastre restaurantes, farmácias, mercados e outros negócios no Bora Zé. 
+            Ganhe pela <span className="text-foreground">ativação</span> e participe das 
+            <span className="text-[var(--neon)]"> vendas dos estabelecimentos</span> da sua carteira.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
             <a href="#cadastro">
-              <NeonButton>Quero minha cidade exclusiva</NeonButton>
+              <NeonButton>QUERO SER EXECUTIVO BORA ZÉ</NeonButton>
             </a>
             <a href="#oportunidade">
-              <NeonButton variant="outline">Como funciona</NeonButton>
+              <NeonButton variant="outline">VER COMO FUNCIONA</NeonButton>
             </a>
           </div>
         </div>
@@ -247,49 +307,114 @@ function Hero() {
   );
 }
 
-function Story() {
-  const lines = [
-    "Imagine receber uma ligação em 2010.",
-    "Do outro lado da linha alguém diz:",
-    "\u201CEstamos lançando um aplicativo chamado Uber.\u201D",
-    "\u201CQueremos que você seja dono da operação na sua cidade.\u201D",
-    "Você teria aceitado?",
-    "Provavelmente sim.",
-    "E se em vez da Uber fosse o iFood?",
-    "Você também teria aceitado.",
+function BigIdea() {
+  const items = [
+    { label: "Restaurante", icon: Store },
+    { label: "Farmácia", icon: Briefcase },
+    { label: "Mercado", icon: ShoppingBag },
+    { label: "Pet shop", icon: Heart },
+    { label: "Gás", icon: Zap },
+    { label: "Pizzaria", icon: Utensils },
   ];
+  return (
+    <section className="relative py-24 md:py-32 bg-white/[0.02]">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="text-center">
+          <Tag>A Grande Ideia</Tag>
+          <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+            VOCÊ NÃO PRECISA SER DONO DO RESTAURANTE <br />
+            <span className="text-neon">PARA GANHAR QUANDO ELE VENDE.</span>
+          </h2>
+        </div>
+
+        <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+          {items.map((item) => (
+            <div key={item.label} className="group border border-white/10 bg-black/40 p-6 text-center transition-all hover:border-[var(--neon)]/60">
+              <item.icon className="mx-auto h-8 w-8 text-[var(--neon)]" />
+              <div className="mt-4 font-display text-xs uppercase tracking-widest">{item.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 mx-auto max-w-3xl space-y-6 text-center text-lg text-foreground/75 md:text-xl">
+          <p>Esses estabelecimentos já vendem todos os dias.</p>
+          <p>O Executivo Bora Zé não precisa abrir nenhum deles.</p>
+          <p className="font-display uppercase text-[var(--neon)] tracking-tight">Seu papel é conectá-los à plataforma.</p>
+          <p>Quando um estabelecimento da sua carteira vende pelo Bora Zé, você pode participar dessa movimentação de acordo com as regras do programa.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Story() {
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-6">
-        <Tag>A linha do tempo</Tag>
+        <Tag>Oportunidade</Tag>
         <div className="mt-10 space-y-5 text-xl text-foreground/80 md:text-2xl">
-          {lines.map((l, i) => (
-            <p key={i} className={i === 2 || i === 3 ? "text-[var(--neon)] font-medium" : ""}>
-              {l}
-            </p>
-          ))}
+          <p>As grandes redes digitais precisaram de pessoas para construir oferta, demanda e distribuição.</p>
+          <p className="text-[var(--neon)] font-medium">O Executivo Bora Zé participa exatamente dessa fase de expansão da plataforma.</p>
         </div>
 
         <div className="mt-12 border-l-2 border-[var(--neon)] pl-6">
           <p className="text-lg text-foreground/70 md:text-xl">
-            O problema é que essas oportunidades passaram.<br />
-            Hoje essas empresas <span className="text-foreground">movimentam bilhões</span>.<br />
-            E quem entrou cedo <span className="text-[var(--neon)]">construiu patrimônio</span>.
+            A nova economia criou uma nova maneira de participar de mercados sem precisar possuir os ativos que movimentam.
           </p>
         </div>
 
         <h2 className="mt-20 font-display uppercase leading-[0.9] text-5xl md:text-7xl">
-          Agora imagine
+          Construa sua rede
           <br />
-          <span className="text-foreground/40">uma oportunidade semelhante</span>
+          <span className="text-foreground/40">e participe do crescimento</span>
           <br />
-          <span className="text-neon">na sua cidade.</span>
+          <span className="text-neon">na sua região.</span>
         </h2>
+      </div>
+    </section>
+  );
+}
 
-        <p className="mt-8 text-lg text-foreground/70 md:text-xl">
-          Não em Nova York. Não em São Paulo.<br />
-          <span className="text-foreground">Exatamente na sua cidade.</span>
-        </p>
+function HowItWorks() {
+  const steps = [
+    {
+      n: "01",
+      title: "TORNE-SE EXECUTIVO",
+      text: "Entre para o programa, faça seu treinamento e tenha acesso às ferramentas comerciais.",
+    },
+    {
+      n: "02",
+      title: "ENCONTRE NEGÓCIOS LOCAIS",
+      text: "Apresente o Bora Zé para restaurantes, farmácias, mercados, pet shops, gás e outros estabelecimentos.",
+    },
+    {
+      n: "03",
+      title: "ATIVE",
+      text: "Quando o estabelecimento cumprir os critérios e realizar seu primeiro pedido válido: Você recebe R$97.",
+    },
+    {
+      n: "04",
+      title: "CONSTRUA SUA CARTEIRA",
+      text: "Enquanto esses estabelecimentos continuarem realizando vendas elegíveis pelo Bora Zé, você participa delas conforme as regras do programa.",
+    },
+  ];
+  return (
+    <section id="como-funciona" className="relative py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-6">
+        <Tag>Passo a passo</Tag>
+        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+          Como funciona o <span className="text-neon">Programa Executivo</span>.
+        </h2>
+        
+        <div className="mt-16 grid gap-px bg-white/10 md:grid-cols-2 lg:grid-cols-4 border border-white/10">
+          {steps.map((s) => (
+            <div key={s.n} className="bg-background p-8 transition-colors hover:bg-white/[0.02]">
+              <div className="font-display text-4xl text-[var(--neon)]/30">{s.n}</div>
+              <h3 className="mt-6 font-display text-xl uppercase tracking-wider">{s.title}</h3>
+              <p className="mt-4 text-sm text-foreground/70 leading-relaxed">{s.text}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -308,16 +433,15 @@ function Opportunity() {
           </div>
           <div className="space-y-5 text-base text-foreground/75 md:text-lg">
             <p>
-              O BoraZé! está criando uma rede nacional de mobilidade urbana focada em
+              O Bora Zé está criando uma rede nacional de mobilidade urbana focada em
               cidades que os grandes apps ignoram.
             </p>
             <p>
-              Ao invés de abrir filiais próprias, estamos entregando a{" "}
-              <span className="text-foreground">operação local</span> para pessoas
-              comuns que desejam construir um negócio escalável.
+              O Executivo ajuda a construir essa rede, conectando o comércio local a uma 
+              tecnologia robusta e eficiente.
             </p>
             <p className="border-l-2 border-[var(--violet)] pl-4 text-foreground">
-              Você assume a cidade. Nós cuidamos da tecnologia.
+              Você constrói sua carteira. Nós cuidamos da tecnologia.
             </p>
           </div>
         </div>
@@ -370,7 +494,7 @@ function Benefits() {
 
 function Comparison() {
   const rows: [string, string, string][] = [
-    ["Investimento inicial", "R$ 50 mil a R$ 500 mil", "12x R$ 416 (módulo mototáxi)"],
+    ["Investimento inicial", "R$ 50 mil a R$ 500 mil", "R$ 497 (Executivo)"],
     ["Aluguel de ponto", "R$ 2 mil a R$ 10 mil/mês", "Não precisa (opera de casa)"],
     ["Funcionários", "3 a 15 CLTs", "1 a 2 (opcional)"],
     ["Estoque", "Sim, capital travado", "Não tem, zero risco de perda"],
@@ -378,7 +502,7 @@ function Comparison() {
     ["Risco operacional", "Alto (imóvel, folha, fornecedor)", "Médio (execução comercial)"],
     ["Suporte e treinamento", "Por sua conta", "Incluído (treinamento + suporte contínuo)"],
     ["Escalabilidade", "Limitada ao ponto físico", "Sem teto físico (base digital cresce)"],
-    ["Receita", "Depende de fluxo diário", "Recorrente (a cada pedido/corrida)"],
+    ["Receita", "Depende de fluxo diário", "Recorrente (participação nas vendas)"],
   ];
   return (
     <section className="relative py-24 md:py-32">
@@ -427,32 +551,34 @@ function Profiles() {
   const cards = [
     {
       icon: Rocket,
-      title: "Empreendedor local",
-      text: "Você já teve negócio próprio ou está buscando um. Sabe que operação local exige presença e relacionamento. Quer construir algo escalável sem investir centenas de milhares de reais em ponto físico.",
+      title: "EMPREENDEDOR",
+      text: "Pessoa que busca construir uma nova fonte de receita sem precisar abrir estabelecimento próprio.",
     },
     {
       icon: Handshake,
-      title: "Comerciante ou lojista",
-      text: "Você já tem contato com restaurantes, farmácias, mercados ou mototaxistas da sua cidade. Aproveita essa rede para trazer o app pra sua região com muito mais velocidade que qualquer estranho.",
+      title: "PROFISSIONAL DE VENDAS",
+      text: "Pessoa que já possui habilidade comercial e relacionamento.",
+    },
+    {
+      icon: Users,
+      title: "COMERCIANTE BEM RELACIONADO",
+      text: "Já conhece empresários e o comércio local e pode transformar relacionamento em carteira.",
     },
     {
       icon: Briefcase,
-      title: "Em transição de carreira",
-      text: "Cansou do CLT, do comissionamento apertado ou de negócio com custo alto e retorno lento. Quer algo digital, com estrutura pronta, receita recorrente e liberdade geográfica.",
+      title: "QUEM BUSCA RENDA COMPLEMENTAR",
+      text: "Pode desenvolver a atividade sem necessariamente abandonar imediatamente sua ocupação atual.",
     },
   ];
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <Tag>Perfil do Embaixador</Tag>
+        <Tag>Público-alvo</Tag>
         <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Esse modelo é <span className="text-neon">para você?</span>
+          QUEM PODE SER <span className="text-neon">EXECUTIVO BORA ZÉ?</span>
         </h2>
-        <p className="mt-6 max-w-3xl text-lg text-foreground/70">
-          Os Embaixadores BoraZé! não vêm de tecnologia. Vêm de perfis muito específicos que combinam com o modelo.
-          Se você se enquadra em algum destes, o próximo passo é conversar com o time.
-        </p>
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {cards.map(({ icon: Icon, title, text }) => (
             <div
               key={title}
@@ -473,97 +599,226 @@ function Profiles() {
   );
 }
 
+function DashboardMockup() {
+  return (
+    <section className="relative py-24 md:py-32 bg-white/[0.02]">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="text-center">
+          <Tag>Tecnologia</Tag>
+          <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+            SUA CARTEIRA <span className="text-neon">NA PALMA DA MÃO.</span>
+          </h2>
+          <p className="mt-6 text-foreground/70">O Executivo terá acesso exclusivamente aos seus próprios estabelecimentos.</p>
+        </div>
+
+        <div className="mt-16 mx-auto max-w-4xl border border-white/10 bg-black/60 p-6 md:p-10 shadow-2xl">
+          <div className="grid gap-6 md:grid-cols-4 mb-10">
+            {[
+              { l: "Minha carteira", v: "24", s: "estabelecimentos" },
+              { l: "Vendas (30 dias)", v: "R$ 142.000", s: "" },
+              { l: "Comissões", v: "R$ 3.550", s: "" },
+              { l: "Status", v: "ATIVO", s: "", highlight: true },
+            ].map((stat) => (
+              <div key={stat.l} className="border border-white/5 bg-white/[0.02] p-4">
+                <div className="text-[10px] uppercase tracking-widest text-foreground/40 mb-2">{stat.l}</div>
+                <div className={`font-display text-xl ${stat.highlight ? "text-neon" : "text-foreground"}`}>{stat.v}</div>
+                {stat.s && <div className="text-[9px] text-foreground/30">{stat.s}</div>}
+              </div>
+            ))}
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-white/10 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40">
+                  <th className="pb-4">Estabelecimento</th>
+                  <th className="pb-4">Ativação</th>
+                  <th className="pb-4">Vendas</th>
+                  <th className="pb-4">Vigência</th>
+                  <th className="pb-4 text-right">Comissão</th>
+                </tr>
+              </thead>
+              <tbody className="text-[11px]">
+                {[
+                  { n: "Restaurante Central", d: "12/05/26", v: "R$ 18.400", p: "2,5%", c: "R$ 460" },
+                  { n: "Farmácia Preço Baixo", d: "15/05/26", v: "R$ 22.100", p: "2,5%", c: "R$ 552" },
+                  { n: "Mercado do Povo", d: "20/05/26", v: "R$ 31.000", p: "2,5%", c: "R$ 775" },
+                ].map((row) => (
+                  <tr key={row.n} className="border-b border-white/5">
+                    <td className="py-4 font-bold">{row.n}</td>
+                    <td className="py-4 text-foreground/60">{row.d}</td>
+                    <td className="py-4 text-foreground/60">{row.v}</td>
+                    <td className="py-4 text-[var(--neon)]">{row.p}</td>
+                    <td className="py-4 text-right font-display text-[var(--neon)]">{row.c}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RulesSection() {
+  return (
+    <section className="relative py-24 md:py-32">
+      <div className="mx-auto max-w-4xl px-6">
+        <div className="border-2 border-[var(--violet)]/40 p-8 md:p-12 bg-black/40">
+          <Tag>Regras de atividade</Tag>
+          <h2 className="mt-5 font-display uppercase leading-[0.9] text-3xl md:text-5xl">
+            QUEM CONSTRÓI, <span className="text-neon">CONTINUA GANHANDO.</span>
+          </h2>
+          <p className="mt-6 text-lg text-foreground/75 leading-relaxed">
+            O Programa Executivo Bora Zé foi criado para parceiros comerciais ativos. 
+            Para manter seu status ativo:
+          </p>
+          
+          <div className="mt-10 p-6 bg-white/[0.03] border border-white/10">
+            <div className="flex justify-between items-end mb-4">
+              <div className="font-display text-4xl text-neon">6</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/40">novos estabelecimentos / 90 dias</div>
+            </div>
+            
+            <div className="h-2 w-full bg-white/10 overflow-hidden">
+              <div className="h-full bg-[var(--neon)] w-[66%]" />
+            </div>
+            
+            <div className="mt-4 flex justify-between font-mono text-[10px] uppercase tracking-widest">
+              <span>4 / 6 ativações</span>
+              <span className="text-[var(--neon)]">Faltam 2 para sua meta</span>
+            </div>
+          </div>
+          
+          <p className="mt-8 text-sm text-foreground/60">
+            A regra de 6 ativações a cada 90 dias incentiva a expansão contínua da sua carteira e garante 
+            a sustentabilidade do programa para todos os parceiros.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CareerEvolution() {
+  return (
+    <section className="relative py-24 md:py-32 bg-white/[0.01]">
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <Tag>Evolução</Tag>
+        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+          QUER IR <span className="text-neon">ALÉM?</span>
+        </h2>
+        <p className="mt-8 text-lg text-foreground/75 mx-auto max-w-2xl">
+          O Executivo constrói sua própria carteira. Executivos que desejarem ampliar sua atuação 
+          poderão futuramente se qualificar para oportunidades como Embaixador Bora Zé, 
+          assumindo uma operação territorial.
+        </p>
+        
+        <div className="mt-12 flex flex-col items-center gap-4">
+          <a href="#cadastro" className="border-2 border-white/20 px-8 py-4 font-display text-sm uppercase tracking-widest hover:border-[var(--neon)] hover:text-[var(--neon)] transition-all">
+            CONHECER O PLANO DE CARREIRA BORA ZÉ
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function fmtBRL(n: number) {
   return "R$ " + Math.round(n).toLocaleString("pt-BR");
 }
 
 function Simulator() {
-  const [estab, setEstab] = useState(30);
-  const [motos, setMotos] = useState(15);
+  const [estab, setEstab] = useState(10);
+  const [ticket, setTicket] = useState(10000);
+  const [year, setYear] = useState(1); // 1, 2, or 3
 
-  const gmvDelivery = estab * 5 * 45 * 30;
-  const comDelivery = gmvDelivery * 0.07;
-  const corridasMoto = motos * 5 * 30;
-  const comMoto = corridasMoto * 1.0;
-  const total = comDelivery + comMoto;
-
-  const blocks = [
-    { label: "GMV Delivery / mês", value: fmtBRL(gmvDelivery), highlight: false },
-    { label: "Sua comissão Delivery (7%)", value: fmtBRL(comDelivery), highlight: true },
-    { label: "Corridas realizadas / mês", value: `${corridasMoto.toLocaleString("pt-BR")} corridas`, highlight: false },
-    { label: "Sua comissão Mototáxi (R$ 1 por corrida)", value: fmtBRL(comMoto), highlight: true },
-  ];
+  const gmv = estab * ticket;
+  const rates = { 1: 0.025, 2: 0.01, 3: 0.005 };
+  const recurrence = gmv * rates[year as 1 | 2 | 3];
+  const activationBonus = estab * 97;
 
   return (
-    <section className="relative py-24 md:py-32">
+    <section id="simulador" className="relative py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <Tag>Simulador</Tag>
         <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Simule o faturamento <span className="text-neon">na sua cidade</span>
+          Simulador da <span className="text-neon">sua carteira</span>
         </h2>
         <p className="mt-6 max-w-3xl text-lg text-foreground/70">
-          Ajuste os controles abaixo e veja quanto você pode faturar mensalmente somando delivery e mototáxi.
-          Base de cálculo: cidade média de 40 mil habitantes.
+          O objetivo é mostrar quanto uma carteira hipotética poderia gerar. 
+          Ajuste os controles e veja o potencial da sua rede.
         </p>
 
-        <div
-          className="mt-12 border-2 border-[var(--neon)]/30 bg-black/50 p-6 md:p-10"
-          style={{ boxShadow: "0 0 60px oklch(0.88 0.31 142 / 0.12)" }}
-        >
-          <div className="grid gap-8 md:grid-cols-2">
-            <SliderRow
-              label="Estabelecimentos ativos"
-              value={estab}
-              suffix="estabelecimentos"
-              min={30}
-              max={100}
-              step={5}
-              onChange={setEstab}
-            />
-            <SliderRow
-              label="Mototaxistas ativos"
-              value={motos}
-              suffix="mototaxistas"
-              min={15}
-              max={50}
-              step={5}
-              onChange={setMotos}
-            />
-          </div>
+        <div className="mt-12 border-2 border-[var(--neon)]/30 bg-black/50 p-6 md:p-10">
+          <div className="grid gap-12 md:grid-cols-2">
+            <div className="space-y-8">
+              <SliderRow
+                label="Quantidade de estabelecimentos"
+                value={estab}
+                suffix=""
+                min={5}
+                max={100}
+                step={5}
+                onChange={setEstab}
+              />
+              <SliderRow
+                label="Venda média mensal por estabelecimento"
+                value={ticket}
+                suffix=""
+                min={2000}
+                max={30000}
+                step={1000}
+                onChange={setTicket}
+                isCurrency
+              />
+            </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {blocks.map((b) => (
-              <div key={b.label} className="border border-white/10 bg-white/[0.02] p-6">
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
-                  {b.label}
-                </div>
-                <div
-                  className={`mt-3 font-display text-3xl uppercase leading-none tracking-tight md:text-4xl ${
-                    b.highlight ? "text-neon" : "text-foreground"
-                  }`}
-                >
-                  {b.value}
-                </div>
+            <div className="flex flex-col gap-4">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Selecione o período</div>
+              <div className="grid grid-cols-3 gap-2">
+                {[1, 2, 3].map((y) => (
+                  <button
+                    key={y}
+                    onClick={() => setYear(y)}
+                    className={`border-2 py-3 font-display text-xs uppercase transition-all ${
+                      year === y ? "border-[var(--neon)] bg-[var(--neon)] text-black" : "border-white/10 text-foreground/60 hover:border-white/20"
+                    }`}
+                  >
+                    {y === 3 ? "3º Ano+" : `${y}º Ano`}
+                    <div className="text-[9px] opacity-60">{y === 1 ? "2,5%" : y === 2 ? "1%" : "0,5%"}</div>
+                  </button>
+                ))}
               </div>
-            ))}
-          </div>
 
-          <div className="mt-8 border-2 border-[var(--neon)] bg-[var(--neon)]/5 px-6 py-8 text-center">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--neon)]">
-              Faturamento potencial mensal
-            </div>
-            <div
-              key={total}
-              className="mt-3 font-display text-5xl uppercase leading-none tracking-tight text-neon transition-all duration-300 md:text-7xl"
-            >
-              {fmtBRL(total)}
+              <div className="mt-4 border border-white/10 bg-white/[0.02] p-6">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Vendas mensais da carteira</div>
+                <div className="mt-2 font-display text-2xl text-foreground">{fmtBRL(gmv)}</div>
+                <div className="mt-1 text-[10px] text-foreground/40">{estab} estab. × {fmtBRL(ticket)}</div>
+              </div>
             </div>
           </div>
 
-          <p className="mt-6 text-xs text-foreground/45">
-            Simulação baseada no modelo de comissão BoraZé! atual: podendo ter variações.
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <div className="border-2 border-white/10 bg-black p-6">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Ganho de Ativação</div>
+              <div className="mt-3 font-display text-3xl text-foreground">{fmtBRL(activationBonus)}</div>
+              <div className="mt-2 text-[10px] text-foreground/40">Pagamento único por ativação (100% elegível)</div>
+            </div>
+            
+            <div className="border-2 border-[var(--neon)] bg-[var(--neon)]/5 p-6">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--neon)]">Recorrência mensal estimada</div>
+              <div className="mt-3 font-display text-4xl text-neon">{fmtBRL(recurrence)}</div>
+              <div className="mt-2 text-[10px] text-neon/60">Baseado no percentual do {year === 3 ? "3º ano em diante" : `${year}º ano`}</div>
+            </div>
+          </div>
+
+          <p className="mt-8 text-[10px] text-foreground/40 leading-relaxed">
+            Simulação meramente ilustrativa. Não representa promessa ou garantia de ganhos. 
+            A remuneração depende das vendas efetivamente realizadas pelos estabelecimentos através da plataforma, 
+            permanência no programa e cumprimento das regras vigentes.
           </p>
-
         </div>
       </div>
     </section>
@@ -578,6 +833,7 @@ function SliderRow({
   max,
   step,
   onChange,
+  isCurrency = false,
 }: {
   label: string;
   value: number;
@@ -586,6 +842,7 @@ function SliderRow({
   max: number;
   step: number;
   onChange: (n: number) => void;
+  isCurrency?: boolean;
 }) {
   return (
     <div>
@@ -594,7 +851,7 @@ function SliderRow({
       </div>
       <div className="mt-3 flex items-baseline gap-2">
         <span className="font-display text-4xl uppercase leading-none text-neon md:text-5xl">
-          {value}
+          {isCurrency ? fmtBRL(value) : value}
         </span>
         <span className="text-xs uppercase tracking-[0.12em] text-foreground/60">{suffix}</span>
       </div>
@@ -608,8 +865,8 @@ function SliderRow({
         className="mt-5 w-full accent-[var(--neon)]"
       />
       <div className="mt-1 flex justify-between font-mono text-[10px] text-foreground/40">
-        <span>{min}</span>
-        <span>{max}</span>
+        <span>{isCurrency ? fmtBRL(min) : min}</span>
+        <span>{isCurrency ? fmtBRL(max) : max}</span>
       </div>
     </div>
   );
@@ -647,26 +904,85 @@ function Market() {
   );
 }
 
+function PortfolioLogic() {
+  return (
+    <section className="relative py-24 md:py-32 bg-white/[0.01]">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
+            <Tag>Matemática do negócio</Tag>
+            <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+              SEUS PRIMEIROS 5 ESTABELECIMENTOS <span className="text-neon">JÁ MUDAM A CONTA.</span>
+            </h2>
+            <div className="mt-8 space-y-6">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <span className="text-foreground/70">Adesão ao programa</span>
+                <span className="font-display text-xl text-foreground">R$ 497</span>
+              </div>
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <span className="text-foreground/70">5 ativações (5 × R$97)</span>
+                <span className="font-display text-xl text-[var(--neon)]">R$ 485</span>
+              </div>
+              <p className="text-sm text-foreground/60 leading-relaxed">
+                Com apenas 5 estabelecimentos efetivamente ativados, os bônus de ativação representam valor equivalente a aproximadamente 98% da adesão inicial.
+              </p>
+              <p className="font-display uppercase text-[var(--neon)] text-sm tracking-wide">
+                E esses mesmos estabelecimentos ainda passam a compor sua carteira de participação recorrente.
+              </p>
+            </div>
+          </div>
+
+          <div className="border border-[var(--neon)]/30 bg-black/40 p-8 md:p-12">
+            <h3 className="font-display uppercase text-2xl mb-8">VOCÊ NÃO PRECISA COMEÇAR TODO MÊS DO ZERO.</h3>
+            <div className="space-y-4">
+              {[
+                { n: "Restaurante do João", v: "R$ 12.400", p: "2,5%" },
+                { n: "Farmácia Central", v: "R$ 18.700", p: "2,5%" },
+                { n: "Pizzaria Itália", v: "R$ 9.800", p: "2,5%" },
+                { n: "Pet Mais", v: "R$ 7.300", p: "2,5%" },
+                { n: "Mercado Econômico", v: "R$ 21.500", p: "2,5%" },
+              ].map((c) => (
+                <div key={c.n} className="flex items-center justify-between border border-white/5 bg-white/[0.02] p-4">
+                  <div>
+                    <div className="text-xs font-bold text-foreground/90">{c.n}</div>
+                    <div className="text-[10px] text-foreground/40">{c.v} vendidos</div>
+                  </div>
+                  <div className="font-mono text-xs text-[var(--neon)]">{c.p}</div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-center text-[10px] uppercase tracking-[0.2em] text-foreground/40">
+              Sua carteira cresce a cada nova ativação.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function WhatYouGet() {
   const items = [
-    "Direito de operação exclusiva da cidade",
-    "Plataforma pronta",
-    "Aplicativo funcionando",
-    "Treinamento completo",
-    "Materiais de divulgação",
-    "Suporte de implantação",
-    "Participação nas receitas recorrentes",
-    "Exclusividade territorial",
+    "Treinamento online",
+    "Acesso ao Programa Executivo Bora Zé",
+    "Painel individual",
+    "Materiais comerciais",
+    "Scripts de prospecção",
+    "Apresentações profissionais",
+    "Comunidade de Executivos",
+    "Suporte",
+    "Materiais de implantação",
+    "Kit físico (conforme composição)",
   ];
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <Tag>O que você recebe</Tag>
         <h2 className="mt-5 max-w-3xl font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Tudo pronto para você <span className="text-neon">operar amanhã</span>.
+          TUDO QUE VOCÊ PRECISA PARA <span className="text-neon">COMEÇAR</span>.
         </h2>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
           {items.map((s, i) => (
             <div
               key={s}
@@ -679,9 +995,9 @@ function WhatYouGet() {
               }}
             >
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/40">
-                {String(i + 1).padStart(2, "0")} / 08
+                {String(i + 1).padStart(2, "0")} / {items.length}
               </div>
-              <div className="mt-6 font-display uppercase leading-tight text-lg">{s}</div>
+              <div className="mt-6 font-display uppercase leading-tight text-sm tracking-wide">{s}</div>
               <Zap className="absolute right-4 top-4 h-4 w-4 text-[var(--neon)] opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
           ))}
@@ -698,9 +1014,9 @@ function DualRevenue() {
       title: "Delivery",
       subtitle: "Restaurantes, farmácias, mercados, lojas locais",
       items: [
-        "Comissão sobre cada pedido processado",
-        "Mensalidade dos estabelecimentos parceiros",
-        "Taxa de adesão de novos parceiros comerciais",
+        "Recorrência sobre cada pedido processado",
+        "Participação na mensalidade dos estabelecimentos",
+        "Bônus de R$ 97 por ativação de novos parceiros",
       ],
     },
     {
@@ -708,9 +1024,9 @@ function DualRevenue() {
       title: "Mototáxi",
       subtitle: "Corridas urbanas e entregas expressas",
       items: [
-        "Comissão sobre cada corrida realizada",
-        "Comissão sobre entregas expressas (moto delivery)",
-        "Taxa de adesão de novos mototaxistas",
+        "Comissão sobre cada corrida realizada na rede",
+        "Participação nas entregas expressas (moto delivery)",
+        "Bônus por novos mototaxistas qualificados",
       ],
     },
   ];
@@ -721,11 +1037,10 @@ function DualRevenue() {
           <Tag>Duas frentes</Tag>
           <h2 className="mt-5 font-display uppercase leading-[0.9] text-5xl md:text-7xl">
             Duas frentes de receita,<br />
-            <span className="text-neon">uma operação.</span>
+            <span className="text-neon">um único executivo.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-foreground/70 md:text-xl">
-            O BoraZé! junta delivery e mototáxi na mesma plataforma. Dois modelos de
-            receita rodando em paralelo na sua cidade.
+            Como Executivo, você atua no coração da economia local. Conecta o delivery ao comércio e a logística aos mototaxistas, ganhando em cada ponta.
           </p>
         </div>
 
@@ -763,9 +1078,9 @@ function DualRevenue() {
           style={{ boxShadow: "0 0 60px oklch(0.88 0.31 142 / 0.15)" }}
         >
           <p className="font-display uppercase leading-tight text-2xl md:text-4xl">
-            Duas fontes de receita rodando na{" "}
-            <span className="text-neon">mesma operação</span>, na mesma cidade,
-            com o mesmo app.
+            O Executivo atua no centro da{" "}
+            <span className="text-neon">conexão comercial</span> da sua região,
+            monetizando cada transação.
           </p>
         </div>
       </div>
@@ -776,11 +1091,22 @@ function DualRevenue() {
 function Pricing() {
   return (
     <section id="investimento" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="flex justify-center">
+      <div className="mx-auto max-w-5xl px-6 text-center">
+        <Tag>Investimento</Tag>
+        <div className="mt-10 border-2 border-[var(--neon)] bg-black/40 p-10 max-w-2xl mx-auto">
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--neon)] mb-4">Oferta de Pré-lançamento</div>
+          <h2 className="font-display uppercase text-4xl md:text-6xl mb-6">ENTRE PARA O PROGRAMA EXECUTIVO BORA ZÉ.</h2>
+          
+          <div className="flex flex-col items-center gap-2 mb-8">
+            <div className="text-foreground/40 text-sm line-through">R$ 997,00</div>
+            <div className="font-display text-7xl text-neon">R$ 497</div>
+            <div className="text-foreground/60 text-xs uppercase tracking-widest">à vista ou em até 12x</div>
+          </div>
+
           <a href="#cadastro">
-            <NeonButton>Quero minha cidade exclusiva</NeonButton>
+            <NeonButton className="w-full">QUERO SER EXECUTIVO BORA ZÉ</NeonButton>
           </a>
+          <p className="mt-6 text-[10px] text-foreground/40 uppercase tracking-widest">Início oficial: 15 de setembro de 2026</p>
         </div>
       </div>
     </section>
@@ -815,19 +1141,14 @@ function Guarantee() {
               </div>
             </div>
             <div>
-              <Tag>Garantia Blindada</Tag>
+              <Tag>Suporte e Estrutura</Tag>
               <h2 className="mt-4 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-                Assumimos o risco<br />
-                <span className="text-neon">junto com você.</span>
+                Tudo que você precisa<br />
+                <span className="text-neon">para escalar sua carteira.</span>
               </h2>
               <p className="mt-6 max-w-2xl text-base text-foreground/75 md:text-lg">
-                Se você cumprir o plano de implantação, participar dos treinamentos,
-                executar as ações recomendadas e não recuperar o valor investido dentro
-                do prazo contratual,{" "}
-                <span className="text-[var(--neon)]">
-                  recompramos sua licença e devolvemos 100% do valor investido
-                </span>
-                . Simples assim.
+                O Programa Executivo oferece treinamento, painel de controle e suporte 
+                técnico para que você foque no que importa: <span className="text-[var(--neon)]">crescer sua rede de estabelecimentos</span>.
               </p>
             </div>
           </div>
@@ -837,24 +1158,24 @@ function Guarantee() {
   );
 }
 
-function Scarcity() {
+function NextSteps() {
   const bullets = [
-    { icon: Search, text: "Análise personalizada da sua cidade em até 48h" },
-    { icon: Check, text: "Sem compromisso — é só uma conversa" },
+    { icon: Search, text: "Análise de perfil profissional em até 48h" },
+    { icon: Check, text: "Sem compromisso — é só uma conversa técnica" },
     { icon: MessageCircle, text: "Atendimento por WhatsApp em horário comercial" },
-    { icon: FileText, text: "Você recebe a documentação institucional completa" },
+    { icon: FileText, text: "Você recebe o plano de expansão 2026 completo" },
   ];
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6 text-center">
         <Tag>Próximo passo</Tag>
         <h2 className="mx-auto mt-5 max-w-4xl font-display uppercase leading-[0.88] text-4xl md:text-7xl">
-          Análise <span className="text-neon">gratuita</span> do potencial da sua cidade
+          Avaliação de <span className="text-neon">perfil</span> do Executivo
         </h2>
         <p className="mx-auto mt-8 max-w-2xl text-lg text-foreground/70">
-          Cada cidade tem perfil próprio. Nossa equipe analisa o potencial do seu município —
-          número de estabelecimentos possíveis, densidade urbana, demanda estimada — e apresenta o
-          cenário realista antes de qualquer decisão sua.
+          O Programa Executivo busca parceiros com compromisso e visão de longo prazo. Analisamos 
+          sua experiência comercial e conhecimento da região para garantir que você tenha as 
+          melhores condições de sucesso na construção da sua carteira.
         </p>
 
         <div className="mx-auto mt-12 grid max-w-3xl gap-3 text-left sm:grid-cols-2">
@@ -882,17 +1203,17 @@ function Future() {
       />
       <div className="mx-auto max-w-5xl px-6 text-center">
         <h2 className="font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Daqui a alguns anos sua cidade terá uma{" "}
-          <span className="text-neon">plataforma de delivery e mototáxi consolidada.</span>
+          Daqui a alguns anos sua região terá centenas de{" "}
+          <span className="text-neon">estabelecimentos vendendo no Bora Zé.</span>
           <br />
-          <span className="text-foreground/80">A pergunta é: quem vai ser dono dela?</span>
+          <span className="text-foreground/80">A pergunta é: quem vai ser o Executivo deles?</span>
         </h2>
         <p className="mx-auto mt-10 max-w-2xl text-xl text-foreground/75 md:text-2xl">
           A única pergunta é:
         </p>
         <p className="mx-auto mt-4 max-w-3xl font-display uppercase leading-tight text-3xl md:text-5xl">
           Você estará{" "}
-          <span className="text-[var(--neon)]">recebendo os resultados</span>?<br />
+          <span className="text-[var(--neon)]">recebendo sobre cada venda</span>?<br />
           <span className="text-foreground/40">
             Ou assistindo outra pessoa receber?
           </span>
@@ -905,52 +1226,36 @@ function Future() {
 function FAQ() {
   const items = [
     {
-      q: "Preciso ter experiência com tecnologia ou já ter tido um negócio?",
-      a: "Não. A BoraZé! entrega toda a estrutura pronta: aplicativo, sistema, treinamento e suporte. Você só precisa de vontade de empreender e disposição para liderar sua cidade.",
+      q: "O que faz um Executivo Bora Zé?",
+      a: "O Executivo é um parceiro comercial responsável por encontrar e cadastrar estabelecimentos locais (restaurantes, farmácias, mercados, etc.) na plataforma Bora Zé, construindo sua própria carteira de rendimentos.",
     },
     {
-      q: "Como funciona a exclusividade territorial?",
-      a: "Cada cidade tem apenas um Embaixador oficial BoraZé!, garantido em contrato. Quando uma cidade é ocupada, ela sai da lista para sempre — ninguém mais pode operar a marca ali.",
+      q: "Quanto custa para entrar no programa?",
+      a: "A adesão no período de pré-lançamento é de R$ 497,00 (ou parcelado no cartão). Este valor dá acesso a treinamento, ferramentas, comunidade e suporte.",
     },
     {
-      q: "Quanto posso faturar por mês?",
-      a: "O potencial ultrapassa R$ 10.000/mês em cidades bem trabalhadas, considerando assinaturas de mototaxistas, empresas parceiras e receitas recorrentes da plataforma. O resultado depende da sua execução — mas o modelo é comprovado.",
+      q: "Como funcionam os R$ 97 por estabelecimento?",
+      a: "Para cada novo estabelecimento qualificado e efetivamente ativado (primeiro pedido válido) que você trouxer para a plataforma, você recebe um bônus de ativação de R$ 97,00.",
     },
     {
-      q: "Quanto custa para se tornar Embaixador?",
-      a: "O investimento começa pelo Módulo Moto Táxi: 12x R$ 416 no cartão. Isso inclui licença territorial exclusiva, aplicativo, treinamento, suporte e a Garantia Blindada.",
+      q: "Como funciona a comissão recorrente?",
+      a: "Além do bônus de ativação, você participa das vendas elegíveis dos estabelecimentos da sua carteira: 2,5% no 1º ano, 1% no 2º ano e 0,5% do 3º ano em diante.",
     },
     {
-      q: "O que é a Garantia Blindada?",
-      a: "Se você seguir o plano de implantação e não recuperar o valor investido dentro do prazo contratual, a BoraZé! recompra sua licença e devolve 100% do seu investimento. O risco é nosso.",
+      q: "Existe exclusividade territorial?",
+      a: "Não. O Executivo constrói sua própria carteira e não possui exclusividade municipal, permitindo que múltiplos executivos atuem na mesma região focando em seus próprios relacionamentos comerciais.",
     },
     {
-      q: "Quanto tempo leva para começar a faturar?",
-      a: "Após o treinamento e a captação inicial de mototaxistas e empresas parceiras, a receita recorrente começa a entrar já nos primeiros meses. O ritmo depende do quanto o Embaixador se dedica.",
+      q: "Como funciona a regra de 6 estabelecimentos a cada 90 dias?",
+      a: "Para manter o status de Executivo Ativo e continuar recebendo as comissões da carteira, o parceiro deve realizar pelo menos 6 novas ativações a cada janela de 90 dias.",
     },
     {
-      q: "Preciso contratar funcionários ou ter estrutura física?",
-      a: "Não. O modelo é asset-light, igual Uber e iFood: você não precisa de escritório, frota ou equipe. Toda a operação acontece via aplicativo e sistema BoraZé!.",
+      q: "Posso me tornar Embaixador Bora Zé futuramente?",
+      a: "Sim. Executivos de alta performance poderão se qualificar para oportunidades como Embaixador Bora Zé, assumindo operações territoriais conforme a disponibilidade e critérios do programa.",
     },
     {
-      q: "E se minha cidade for pequena? Vale a pena?",
-      a: "Sim. Cidades menores costumam ter menos concorrência e relacionamento mais próximo, o que acelera a adesão. O modelo funciona em municípios de todos os portes.",
-    },
-    {
-      q: "Que tipo de suporte a BoraZé! oferece?",
-      a: "Você recebe treinamento completo de implantação, materiais de marketing, playbooks de captação, suporte técnico e acompanhamento contínuo do time central para garantir sua operação.",
-    },
-    {
-      q: "Como recebo minha parte da receita?",
-      a: "Você participa de 50% da receita recorrente gerada na sua cidade. Os repasses são feitos mensalmente, de forma transparente, com relatórios completos das operações.",
-    },
-    {
-      q: "Posso vender ou transferir minha licença no futuro?",
-      a: "Sim. A licença é um ativo seu. Você pode transferir para terceiros mediante aprovação da BoraZé!, seguindo as regras contratuais — assim como uma franquia tradicional.",
-    },
-    {
-      q: "Como faço para garantir minha cidade agora?",
-      a: "Basta preencher o formulário de cadastro no final desta página. Nosso time entra em contato para confirmar a disponibilidade da sua cidade e conduzir os próximos passos.",
+      q: "O que acontece depois do dia 15 de setembro de 2026?",
+      a: "O programa será oficialmente lançado. As condições de pré-lançamento (preço de adesão e bônus de ativação) podem ser atualizadas para a oferta oficial de mercado.",
     },
   ];
   const [open, setOpen] = useState<number | null>(0);
@@ -991,7 +1296,7 @@ function FAQ() {
         <div className="mt-12 flex justify-center">
           <a
             href="#cadastro"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--neon)] px-8 py-4 font-display uppercase tracking-[0.05em] text-sm md:text-base text-black transition-transform hover:scale-[1.03] shadow-[0_0_40px_-8px_var(--neon)]"
+            className="inline-flex items-center justify-center bg-[var(--neon)] px-8 py-4 font-display uppercase tracking-[0.05em] text-sm md:text-base text-black transition-transform hover:scale-[1.03] shadow-[0_0_40px_-8px_var(--neon)]"
           >
             Ainda tem dúvidas? Fale com nosso time
           </a>
@@ -1012,8 +1317,9 @@ function QualificationForm() {
     email: "",
     state: "",
     city: "",
-    capital: "",
-    entrepreneur: "",
+    salesExperience: "",
+    contacts: "",
+    potential90d: "",
     timeline: "",
   });
   const [sent, setSent] = useState(false);
@@ -1077,10 +1383,10 @@ function QualificationForm() {
     >
 
       <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-[var(--neon)]">
-        Qualificação de Embaixador
+        Programa Executivo
       </div>
       <h3 className="mt-3 font-display uppercase text-3xl md:text-4xl">
-        Quero ser <span className="text-neon">Embaixador</span>
+        Quero ser <span className="text-neon">Executivo Bora Zé</span>
       </h3>
 
       <div className="mt-6 grid gap-3">
@@ -1101,26 +1407,31 @@ function QualificationForm() {
               <option key={uf} value={uf}>{uf}</option>
             ))}
           </select>
-          <input required type="text" value={form.city} onChange={set("city")} placeholder="Cidade de interesse" className={inputCls} />
+          <input required type="text" value={form.city} onChange={set("city")} placeholder="Cidade" className={inputCls} />
         </div>
-        <select required value={form.capital} onChange={set("capital")} className={inputCls}>
-          <option value="">Capital disponível para investir</option>
-          <option>Até R$ 5 mil</option>
-          <option>Entre R$ 5 mil e R$ 10 mil</option>
-          <option>Entre R$ 10 mil e R$ 20 mil</option>
-          <option>Acima de R$ 20 mil</option>
+        <select required value={form.salesExperience} onChange={set("salesExperience")} className={inputCls}>
+          <option value="">Você trabalha ou já trabalhou com vendas?</option>
+          <option>Sim, sou profissional de vendas</option>
+          <option>Sim, já tive experiência informal</option>
+          <option>Não, mas gostaria de aprender</option>
         </select>
-        <select required value={form.entrepreneur} onChange={set("entrepreneur")} className={inputCls}>
-          <option value="">Você já empreende hoje?</option>
-          <option>Sim, tenho negócio próprio</option>
-          <option>Não, seria minha primeira experiência</option>
-          <option>Estou em transição de carreira</option>
+        <select required value={form.contacts} onChange={set("contacts")} className={inputCls}>
+          <option value="">Você conhece comerciantes ou empresários na sua região?</option>
+          <option>Sim, conheço muitos</option>
+          <option>Conheço alguns</option>
+          <option>Ainda não, mas vou prospectar</option>
+        </select>
+        <select required value={form.potential90d} onChange={set("potential90d")} className={inputCls}>
+          <option value="">Quantos estabelecimentos acredita conseguir apresentar em 90 dias?</option>
+          <option>Menos de 6</option>
+          <option>Entre 6 e 15</option>
+          <option>Mais de 15</option>
         </select>
         <select required value={form.timeline} onChange={set("timeline")} className={inputCls}>
           <option value="">Quando pretende começar?</option>
-          <option>Agora, quero começar em 30 dias</option>
-          <option>Nos próximos 60 a 90 dias</option>
-          <option>Apenas explorando por enquanto</option>
+          <option>Imediatamente</option>
+          <option>Nos próximos 30 dias</option>
+          <option>Apenas explorando</option>
         </select>
       </div>
       <button
@@ -1128,11 +1439,11 @@ function QualificationForm() {
         className="mt-6 inline-flex w-full items-center justify-center gap-2 bg-[var(--neon)] py-4 font-display uppercase tracking-[0.08em] text-sm text-black transition-all hover:brightness-110"
         style={{ boxShadow: "0 0 30px oklch(0.88 0.31 142 / 0.4)" }}
       >
-        Quero garantir minha cidade agora
+        QUERO ENTRAR NO PROGRAMA
         <ArrowRight className="h-4 w-4" />
       </button>
       <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
-        Análise gratuita em até 48h
+        Início oficial em 15/09/2026
       </p>
     </form>
   );
@@ -1147,14 +1458,15 @@ function FinalCTA() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-start">
           <div>
-            <Tag>Última chamada</Tag>
+            <Tag>A Oportunidade</Tag>
             <h2 className="mt-5 font-display uppercase leading-[0.85] text-5xl md:text-8xl">
-              Garanta sua<br />
-              <span className="text-neon">cidade agora</span>.
+              OS NEGÓCIOS DA SUA CIDADE<br />
+              <span className="text-neon">JÁ VENDEM TODOS OS DIAS</span>.
             </h2>
             <p className="mt-8 max-w-md text-lg text-foreground/70">
-              Seja o primeiro a assumir o território antes que outra pessoa faça isso por
-              você.
+              Restaurantes, farmácias, mercados e pet shops já movimentam dinheiro diariamente. 
+              O Executivo Bora Zé ajuda esses estabelecimentos a entrarem na plataforma e constrói 
+              sua carteira sobre o trabalho que realizou.
             </p>
           </div>
           <QualificationForm />
@@ -1174,17 +1486,17 @@ function WhoIsBoraze() {
     {
       icon: Puzzle,
       title: "A solução que construímos",
-      text: "Uma plataforma de entregas e mototáxi feita para essas cidades — leve, adaptável e operada por quem conhece o território. Restaurantes, farmácias, mercados e mototaxistas locais ganham uma ferramenta profissional. Consumidores ganham conveniência. E o Embaixador da cidade constrói um negócio recorrente.",
+      text: "Uma plataforma de entregas e mototáxi feita para essas cidades — leve, adaptável e operada por quem conhece o território. Restaurantes, farmácias, mercados e mototaxistas locais ganham uma ferramenta profissional. Consumidores ganham conveniência. E o Executivo ajuda a construir essa rede regional.",
     },
     {
-      icon: MapPin,
-      title: "Por que licenciamento territorial",
-      text: "Em vez de operar diretamente em milhares de cidades, escolhemos crescer via Embaixadores locais. Cada cidade tem uma pessoa da região responsável pela implantação e cuidado da operação. É o mesmo modelo que fez iFood, Uber e centenas de plataformas do mundo escalarem: quem controla a interface controla o mercado.",
+      icon: Rocket,
+      title: "Nossa escala e visão",
+      text: "Não queremos apenas estar em algumas cidades. Queremos digitalizar o comércio local de todo o interior do Brasil. O Bora Zé foi desenhado para ser o sistema operacional das conexões locais, conectando quem vende com quem compra de forma eficiente e justa para todos.",
     },
     {
       icon: Compass,
       title: "Fase atual do projeto (transparência)",
-      text: "O BoraZé! está em fase de expansão nacional. Estamos abrindo licenciamento em cidades por ordem de qualificação. Nos primeiros contatos você conversa diretamente com o time fundador e recebe toda a documentação institucional para análise antes de qualquer decisão.",
+      text: "O Bora Zé está em fase de expansão nacional. Estamos abrindo o Programa Executivo para parceiros qualificados. Nos primeiros contatos você recebe toda a documentação institucional para análise antes de qualquer decisão.",
     },
   ];
   return (
@@ -1220,28 +1532,22 @@ function WhoIsBoraze() {
 
 
 /* ============================================================== */
-/* Page                                                           */
+/* Components                                                     */
 /* ============================================================== */
+
 
 function Authority() {
   const brands = ["UBER", "iFOOD", "99", "AIRBNB", "SPOTIFY"];
-  const cards = [
-    { name: "Uber", text: "não possui os carros" },
-    { name: "Airbnb", text: "não possui os imóveis" },
-    { name: "Spotify", text: "não possui os artistas" },
-    { name: "iFood", text: "não possui os restaurantes" },
-    { name: "99", text: "não possui os veículos" },
-  ];
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <Tag>Autoridade · Modelo comprovado</Tag>
+        <Tag>Economia de plataforma</Tag>
         <h2 className="mt-5 max-w-4xl font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          O modelo que criou algumas das <span className="text-neon">empresas mais valiosas do mundo</span>.
+          A nova economia criou uma nova maneira de <span className="text-neon">participar de mercados</span>.
         </h2>
         <p className="mt-6 max-w-2xl text-base text-foreground/70 md:text-lg">
-          Plataformas digitais transformaram mercados inteiros conectando oferta e
-          demanda através da tecnologia.
+          Uber conecta motoristas e passageiros. Airbnb conecta imóveis e hóspedes. iFood conecta estabelecimentos e consumidores.
+          O Bora Zé conecta consumidores ao comércio e aos serviços locais. O Executivo ajuda a construir essa rede.
         </p>
 
         {/* Logos in grayscale */}
@@ -1266,7 +1572,13 @@ function Authority() {
 
         {/* Asset cards */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {cards.map((c, i) => (
+          {[
+            { name: "Uber", text: "não possui os carros" },
+            { name: "Airbnb", text: "não possui os imóveis" },
+            { name: "Spotify", text: "não possui os artistas" },
+            { name: "iFood", text: "não possui os restaurantes" },
+            { name: "99", text: "não possui os veículos" },
+          ].map((c, i) => (
             <div
               key={c.name}
               className="group relative overflow-hidden border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all hover:border-[var(--neon)]/60"
@@ -1417,26 +1729,33 @@ function VideoSection() {
 function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <CountdownBanner />
       <SiteNav />
       <StatsBar />
       <Hero />
+      <WhoIsBoraze />
       <Authority />
       <Divider />
+      <BigIdea />
       <Story />
       <Opportunity />
+      <HowItWorks />
       <Benefits />
       <InterfaceControl />
       <PlatformEconomy />
       <Profiles />
+      <DashboardMockup />
       <Market />
+      <RulesSection />
+      <CareerEvolution />
+      <PortfolioLogic />
       <WhatYouGet />
       <Simulator />
       <DualRevenue />
       <Comparison />
-      <Scarcity />
+      <NextSteps />
       <Pricing />
       <Guarantee />
-      <WhoIsBoraze />
       <FAQ />
       <Future />
       <VideoSection />

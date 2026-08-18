@@ -324,7 +324,7 @@ function Opportunity() {
           <div>
             <Tag>O modelo</Tag>
             <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-              Uma rede nacional <span className="text-neon">focada em cidades pequenas e médias</span>.
+              Uma rede nacional <span className="text-neon">focada em delivery e comércio local</span>.
             </h2>
           </div>
           <div className="space-y-5 text-base text-foreground/75 md:text-lg">

@@ -1727,11 +1727,8 @@ function VideoSection() {
 function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <CountdownBanner />
       <SiteNav />
-      <StatsBar />
       <Hero />
-      <WhoIsBoraze />
       <Authority />
       <Divider />
       <BigIdea />
@@ -1741,23 +1738,14 @@ function LandingPage() {
       <Benefits />
       <InterfaceControl />
       <PlatformEconomy />
-      <Profiles />
-      <DashboardMockup />
       <Market />
-      <RulesSection />
-      <CareerEvolution />
-      <PortfolioLogic />
-      <WhatYouGet />
       <Simulator />
       <DualRevenue />
       <Comparison />
-      <NextSteps />
       <Pricing />
       <Guarantee />
       <FAQ />
       <Future />
-      <VideoSection />
-      <FinalCTA />
       <SiteFooter />
     </div>
   );

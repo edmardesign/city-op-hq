@@ -1328,8 +1328,9 @@ function QualificationForm() {
     email: "",
     state: "",
     city: "",
-    capital: "",
-    entrepreneur: "",
+    salesExperience: "",
+    contacts: "",
+    potential90d: "",
     timeline: "",
   });
   const [sent, setSent] = useState(false);
@@ -1393,10 +1394,10 @@ function QualificationForm() {
     >
 
       <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-[var(--neon)]">
-        Qualificação de Embaixador
+        Programa Executivo
       </div>
       <h3 className="mt-3 font-display uppercase text-3xl md:text-4xl">
-        Quero ser <span className="text-neon">Embaixador</span>
+        Quero ser <span className="text-neon">Executivo Bora Zé</span>
       </h3>
 
       <div className="mt-6 grid gap-3">
@@ -1417,26 +1418,31 @@ function QualificationForm() {
               <option key={uf} value={uf}>{uf}</option>
             ))}
           </select>
-          <input required type="text" value={form.city} onChange={set("city")} placeholder="Cidade de interesse" className={inputCls} />
+          <input required type="text" value={form.city} onChange={set("city")} placeholder="Cidade" className={inputCls} />
         </div>
-        <select required value={form.capital} onChange={set("capital")} className={inputCls}>
-          <option value="">Capital disponível para investir</option>
-          <option>Até R$ 5 mil</option>
-          <option>Entre R$ 5 mil e R$ 10 mil</option>
-          <option>Entre R$ 10 mil e R$ 20 mil</option>
-          <option>Acima de R$ 20 mil</option>
+        <select required value={form.salesExperience} onChange={set("salesExperience")} className={inputCls}>
+          <option value="">Você trabalha ou já trabalhou com vendas?</option>
+          <option>Sim, sou profissional de vendas</option>
+          <option>Sim, já tive experiência informal</option>
+          <option>Não, mas gostaria de aprender</option>
         </select>
-        <select required value={form.entrepreneur} onChange={set("entrepreneur")} className={inputCls}>
-          <option value="">Você já empreende hoje?</option>
-          <option>Sim, tenho negócio próprio</option>
-          <option>Não, seria minha primeira experiência</option>
-          <option>Estou em transição de carreira</option>
+        <select required value={form.contacts} onChange={set("contacts")} className={inputCls}>
+          <option value="">Você conhece comerciantes ou empresários na sua região?</option>
+          <option>Sim, conheço muitos</option>
+          <option>Conheço alguns</option>
+          <option>Ainda não, mas vou prospectar</option>
+        </select>
+        <select required value={form.potential90d} onChange={set("potential90d")} className={inputCls}>
+          <option value="">Quantos estabelecimentos acredita conseguir apresentar em 90 dias?</option>
+          <option>Menos de 6</option>
+          <option>Entre 6 e 15</option>
+          <option>Mais de 15</option>
         </select>
         <select required value={form.timeline} onChange={set("timeline")} className={inputCls}>
           <option value="">Quando pretende começar?</option>
-          <option>Agora, quero começar em 30 dias</option>
-          <option>Nos próximos 60 a 90 dias</option>
-          <option>Apenas explorando por enquanto</option>
+          <option>Imediatamente</option>
+          <option>Nos próximos 30 dias</option>
+          <option>Apenas explorando</option>
         </select>
       </div>
       <button
@@ -1444,11 +1450,11 @@ function QualificationForm() {
         className="mt-6 inline-flex w-full items-center justify-center gap-2 bg-[var(--neon)] py-4 font-display uppercase tracking-[0.08em] text-sm text-black transition-all hover:brightness-110"
         style={{ boxShadow: "0 0 30px oklch(0.88 0.31 142 / 0.4)" }}
       >
-        Quero garantir minha cidade agora
+        QUERO ENTRAR NO PROGRAMA
         <ArrowRight className="h-4 w-4" />
       </button>
       <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
-        Análise gratuita em até 48h
+        Início oficial em 15/09/2026
       </p>
     </form>
   );

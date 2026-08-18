@@ -1254,8 +1254,8 @@ function FAQ() {
       a: "Sim. Executivos de alta performance poderão se qualificar para oportunidades como Embaixador Bora Zé, assumindo operações territoriais conforme a disponibilidade e critérios do programa.",
     },
     {
-      q: "O que acontece depois do dia 15 de setembro?",
-      a: "O programa será oficialmente lançado. As condições de pré-lançamento (preço e bônus) podem ser atualizadas para a oferta oficial de mercado.",
+      q: "O que acontece depois do dia 15 de setembro de 2026?",
+      a: "O programa será oficialmente lançado. As condições de pré-lançamento (preço de adesão e bônus de ativação) podem ser atualizadas para a oferta oficial de mercado.",
     },
   ];
   const [open, setOpen] = useState<number | null>(0);

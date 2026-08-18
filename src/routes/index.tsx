@@ -329,8 +329,8 @@ function Opportunity() {
           </div>
           <div className="space-y-5 text-base text-foreground/75 md:text-lg">
             <p>
-              O Bora Zé está criando uma rede nacional de mobilidade urbana focada em
-              cidades que os grandes apps ignoram.
+              O Bora Zé está criando uma rede nacional de delivery e mobilidade urbana focada em
+              cidades de todos os tamanhos.
             </p>
             <p>
               O Executivo ajuda a construir essa rede, conectando o comércio local a uma 

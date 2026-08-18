@@ -61,11 +61,11 @@ export const Route = createFileRoute("/")({
         { property: "og:locale", content: "pt_BR" },
         { property: "og:image", content: ogImage },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "Fature R$4.500/mês com Delivery e Comércio Local" },
+        { name: "twitter:title", content: "Ganhe com Negócios Locais sem ser Dono de Nada" },
         {
           name: "twitter:description",
           content:
-            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
+            "Participe do mercado de delivery e comércio local construindo uma carteira de estabelecimentos sem os riscos de um negócio físico.",
         },
         { name: "twitter:image", content: ogImage },
       ],

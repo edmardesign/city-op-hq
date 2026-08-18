@@ -711,23 +711,22 @@ function fmtBRL(n: number) {
 function Simulator() {
   const [estab, setEstab] = useState(10);
   const [ticket, setTicket] = useState(10000);
-  const [year, setYear] = useState(1); // 1, 2, or 3
 
+  // Lógica interna simplificada conforme pedido (sem mostrar percentuais em destaque)
+  // R$97 ativação (oculto) + Recorrência 2.5% (oculto)
   const gmv = estab * ticket;
-  const rates = { 1: 0.025, 2: 0.01, 3: 0.005 };
-  const recurrence = gmv * rates[year as 1 | 2 | 3];
-  const activationBonus = estab * 97;
+  const recurrence = gmv * 0.025;
+  const annual = recurrence * 12;
 
   return (
     <section id="simulador" className="relative py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <Tag>Simulador</Tag>
-        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Simulador da <span className="text-neon">sua carteira</span>
+        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl text-center">
+          QUANTO UMA CARTEIRA <span className="text-neon">PODE GERAR?</span>
         </h2>
-        <p className="mt-6 max-w-3xl text-lg text-foreground/70">
-          O objetivo é mostrar quanto uma carteira hipotética poderia gerar. 
-          Ajuste os controles e veja o potencial da sua rede.
+        <p className="mt-6 max-w-3xl text-lg text-foreground/70 text-center mx-auto">
+          Ajuste os controles e veja o potencial de ganhos que você pode construir na sua região.
         </p>
 
         <div className="mt-12 border-2 border-[var(--neon)]/30 bg-black/50 p-6 md:p-10">
@@ -743,7 +742,7 @@ function Simulator() {
                 onChange={setEstab}
               />
               <SliderRow
-                label="Venda média mensal por estabelecimento"
+                label="Vendas médias dos estabelecimentos"
                 value={ticket}
                 suffix=""
                 min={2000}
@@ -754,49 +753,21 @@ function Simulator() {
               />
             </div>
 
-            <div className="flex flex-col gap-4">
-              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Selecione o período</div>
-              <div className="grid grid-cols-3 gap-2">
-                {[1, 2, 3].map((y) => (
-                  <button
-                    key={y}
-                    onClick={() => setYear(y)}
-                    className={`border-2 py-3 font-display text-xs uppercase transition-all ${
-                      year === y ? "border-[var(--neon)] bg-[var(--neon)] text-black" : "border-white/10 text-foreground/60 hover:border-white/20"
-                    }`}
-                  >
-                    {y === 3 ? "3º Ano+" : `${y}º Ano`}
-                    <div className="text-[9px] opacity-60">{y === 1 ? "2,5%" : y === 2 ? "1%" : "0,5%"}</div>
-                  </button>
-                ))}
+            <div className="flex flex-col justify-center gap-6">
+              <div className="border-2 border-[var(--neon)] bg-[var(--neon)]/5 p-8 text-center">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--neon)]">Sua renda mensal estimada</div>
+                <div className="mt-3 font-display text-5xl text-neon">{fmtBRL(recurrence)}/MÊS</div>
               </div>
-
-              <div className="mt-4 border border-white/10 bg-white/[0.02] p-6">
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Vendas mensais da carteira</div>
-                <div className="mt-2 font-display text-2xl text-foreground">{fmtBRL(gmv)}</div>
-                <div className="mt-1 text-[10px] text-foreground/40">{estab} estab. × {fmtBRL(ticket)}</div>
+              
+              <div className="border-2 border-white/10 bg-black p-8 text-center">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Projeção em 12 meses</div>
+                <div className="mt-3 font-display text-4xl text-foreground">{fmtBRL(annual)}</div>
               </div>
             </div>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            <div className="border-2 border-white/10 bg-black p-6">
-              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Ganho de Ativação</div>
-              <div className="mt-3 font-display text-3xl text-foreground">{fmtBRL(activationBonus)}</div>
-              <div className="mt-2 text-[10px] text-foreground/40">Pagamento único por ativação (100% elegível)</div>
-            </div>
-            
-            <div className="border-2 border-[var(--neon)] bg-[var(--neon)]/5 p-6">
-              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--neon)]">Recorrência mensal estimada</div>
-              <div className="mt-3 font-display text-4xl text-neon">{fmtBRL(recurrence)}</div>
-              <div className="mt-2 text-[10px] text-neon/60">Baseado no percentual do {year === 3 ? "3º ano em diante" : `${year}º ano`}</div>
-            </div>
-          </div>
-
-          <p className="mt-8 text-[10px] text-foreground/40 leading-relaxed">
-            Simulação meramente ilustrativa. Não representa promessa ou garantia de ganhos. 
-            A remuneração depende das vendas efetivamente realizadas pelos estabelecimentos através da plataforma, 
-            permanência no programa e cumprimento das regras vigentes.
+          <p className="mt-8 text-[10px] text-foreground/40 leading-relaxed text-center">
+            Simulação ilustrativa. Resultados variam conforme desempenho, volume de vendas e regras do programa. Não representa garantia de renda.
           </p>
         </div>
       </div>

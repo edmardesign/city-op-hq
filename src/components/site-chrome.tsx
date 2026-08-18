@@ -16,7 +16,7 @@ export function SiteNav() {
         </nav>
         <Link
           to="/"
-          hash="cadastro"
+          hash="oferta"
           className="border-2 border-[var(--neon)] bg-[var(--neon)] px-4 py-2 font-display text-[11px] uppercase tracking-[0.12em] text-black hover:brightness-110"
         >
           QUERO SER EXECUTIVO
@@ -39,7 +39,7 @@ export function SiteFooter() {
         <div className="flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
           <Link to="/termos" className="hover:text-foreground">Termos</Link>
           <Link to="/privacidade" className="hover:text-foreground">Privacidade</Link>
-          <Link to="/" hash="cadastro" className="hover:text-foreground">Contato</Link>
+          <Link to="/" hash="oferta" className="hover:text-foreground">Contato</Link>
         </div>
       </div>
     </footer>

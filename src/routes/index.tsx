@@ -43,17 +43,17 @@ export const Route = createFileRoute("/")({
     const canonical = "https://mtztextfature10.lovable.app/";
     return {
       meta: [
-        { title: "Executivo BoraZé! — Transforme o comércio local em renda recorrente" },
+        { title: "FATURE R$4.500 POR MÊS COM DELIVERY + COMÉRCIO LOCAL NA SUA CIDADE" },
         {
           name: "description",
           content:
-            "Cadastre restaurantes, farmácias e mercados no Bora Zé. Ganhe pela ativação e continue participando das vendas dos estabelecimentos da sua carteira.",
+            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
         },
-        { property: "og:title", content: "Programa Executivo BoraZé!" },
+        { property: "og:title", content: "Fature R$4.500/mês com Delivery e Comércio Local" },
         {
           property: "og:description",
           content:
-            "Transforme o comércio local em uma carteira de renda recorrente. Ganhe R$97 por ativação + até 2,5% das vendas.",
+            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
         },
         { property: "og:type", content: "website" },
         { property: "og:url", content: canonical },
@@ -61,11 +61,11 @@ export const Route = createFileRoute("/")({
         { property: "og:locale", content: "pt_BR" },
         { property: "og:image", content: ogImage },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "Programa Executivo BoraZé!" },
+        { name: "twitter:title", content: "Fature R$4.500/mês com Delivery e Comércio Local" },
         {
           name: "twitter:description",
           content:
-            "Transforme o comércio local em uma carteira de renda recorrente. Ganhe R$97 por ativação + até 2,5% das vendas.",
+            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
         },
         { name: "twitter:image", content: ogImage },
       ],
@@ -137,96 +137,8 @@ function Divider() {
 // Nav lives in @/components/site-chrome as <SiteNav />
 
 
-function CountdownBanner() {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, min: 0, seg: 0 });
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    const targetDate = new Date("2026-09-15T00:00:00-03:00"); // America/Bahia
-
-    const timer = setInterval(() => {
-      const now = new Date();
-      const diff = targetDate.getTime() - now.getTime();
-
-      if (diff <= 0) {
-        setIsVisible(false);
-        clearInterval(timer);
-        return;
-      }
-
-      setTimeLeft({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-        min: Math.floor((diff / 1000 / 60) % 60),
-        seg: Math.floor((diff / 1000) % 60),
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  if (!isVisible) return null;
-
-  return (
-    <div className="relative z-[60] bg-[var(--neon)] py-2 text-black">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-4 px-6 md:flex-row md:gap-8">
-        <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em]">Oferta de Pré-lançamento</span>
-          <span className="hidden h-3 w-px bg-black/20 md:block" />
-          <span className="text-[11px] font-medium">R$ 497,00 por tempo limitado</span>
-        </div>
-        
-        <div className="flex gap-4 font-display">
-          {[
-            { v: timeLeft.days, l: "Dias" },
-            { v: timeLeft.hours, l: "Horas" },
-            { v: timeLeft.min, l: "Min" },
-            { v: timeLeft.seg, l: "Seg" }
-          ].map((item, i) => (
-            <div key={i} className="flex flex-col items-center min-w-[40px]">
-              <span className="text-lg font-bold leading-none">{String(item.v).padStart(2, '0')}</span>
-              <span className="text-[8px] uppercase tracking-tighter">{item.l}</span>
-            </div>
-          ))}
-        </div>
-
-        <a 
-          href="#cadastro" 
-          className="bg-black px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--neon)] transition-transform hover:scale-105"
-        >
-          Quero entrar no pré-lançamento
-        </a>
-      </div>
-    </div>
-  );
-}
-
-function StatsBar() {
-  return (
-    <div className="border-b border-white/5 bg-black/40">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-2 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/60">
-        <span>
-          <span className="text-[var(--neon)]">R$ 97</span> por ativação
-        </span>
-        <span className="hidden h-3 w-px bg-white/15 md:block" />
-        <span>
-          <span className="text-[var(--neon)]">2,5%</span> sobre vendas (1º ano)
-        </span>
-        <span className="hidden h-3 w-px bg-white/15 md:block" />
-        <span>
-          <span className="text-[var(--neon)]">R$ 497</span> adesão pré-lançamento
-        </span>
-      </div>
-    </div>
-  );
-}
 
 function Hero() {
-  const cards = [
-    { kpi: "R$ 97", label: "por estabelecimento ativado", icon: Zap },
-    { kpi: "2,5%", label: "sobre vendas no primeiro ano", icon: TrendingUp },
-    { kpi: "R$ 497", label: "adesão no pré-lançamento", icon: ShieldCheck },
-  ];
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10" style={{ background: "var(--gradient-hero)" }} />
@@ -237,73 +149,57 @@ function Hero() {
       />
 
       <div className="mx-auto max-w-7xl px-6 py-20 md:py-32">
-        <Tag>Programa Executivo BoraZé!</Tag>
-
-        <h1 className="mt-6 font-display uppercase leading-[0.9] tracking-[-0.01em] text-[10vw] md:text-[5.5rem] lg:text-[6.5rem]">
-          <span>Transforme o </span>
-          <span className="text-neon italic">Comércio Local </span>
-          <span>em uma carteira de </span>
-          <span className="text-foreground/95">Renda Recorrente.</span>
+        <h1 className="mt-6 font-display uppercase leading-[0.9] tracking-[-0.01em] text-[10vw] md:text-[5.5rem] lg:text-[7.5rem] text-center">
+          <span>FATURE </span>
+          <span className="text-neon italic">R$4.500 POR MÊS </span>
+          <span>COM DELIVERY + COMÉRCIO LOCAL NA SUA CIDADE</span>
         </h1>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-          <p className="max-w-xl text-lg text-foreground/75 md:text-xl">
-            Cadastre restaurantes, farmácias, mercados e outros negócios no Bora Zé. 
-            Ganhe pela <span className="text-foreground">ativação</span> e participe das 
-            <span className="text-[var(--neon)]"> vendas dos estabelecimentos</span> da sua carteira.
+        <div className="mt-10 flex flex-col items-center">
+          <p className="max-w-3xl text-center text-lg text-foreground/75 md:text-2xl mb-12">
+            Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.
           </p>
 
-          <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-            <a href="#cadastro">
-              <NeonButton>QUERO SER EXECUTIVO BORA ZÉ</NeonButton>
-            </a>
-            <a href="#oportunidade">
-              <NeonButton variant="outline">VER COMO FUNCIONA</NeonButton>
+          <VSL />
+
+          <div className="mt-12">
+            <a href="#oferta">
+              <NeonButton className="px-12 py-6 text-lg">QUERO COMEÇAR AGORA</NeonButton>
             </a>
           </div>
-        </div>
-
-        {/* Premium highlight cards */}
-        <div className="mt-14 grid gap-4 md:mt-20 md:grid-cols-3">
-          {cards.map(({ kpi, label, icon: Icon }) => (
-            <div
-              key={label}
-              className="group relative overflow-hidden border border-white/10 bg-black/40 p-6 backdrop-blur-xl transition-all hover:border-[var(--neon)]/60 md:p-8"
-              style={{ boxShadow: "0 0 40px oklch(0.45 0.27 305 / 0.08)" }}
-            >
-              <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[var(--neon)]/5 blur-2xl transition-opacity group-hover:bg-[var(--neon)]/15" />
-              <Icon className="h-6 w-6 text-[var(--neon)]" />
-              <div className="mt-6 font-display text-4xl uppercase tracking-tight md:text-5xl">
-                <span className="text-neon">{kpi}</span>
-              </div>
-              <div className="mt-2 font-display text-xs uppercase tracking-[0.18em] text-foreground/70 md:text-sm">
-                {label}
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* Ecosystem image */}
         <div className="relative mt-16 overflow-hidden border border-white/10 md:mt-24">
           <img
             src={heroEcosystem}
-            alt="Ecossistema BoraZé! conectando mototaxistas, farmácias, restaurantes e mercados de uma cidade brasileira"
+            alt="Ecossistema digital conectando o comércio local"
             className="h-auto w-full object-cover"
             width={1600}
             height={900}
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
-          <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-3 md:bottom-8 md:left-8 md:right-8">
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/80 md:text-xs">
-              ◆ Ecossistema BoraZé! em operação
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--neon)] md:text-xs">
-              Mototaxistas · Farmácias · Restaurantes · Mercados
-            </span>
-          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function VSL() {
+  return (
+    <div className="w-full max-w-[400px] mx-auto overflow-hidden border-2 border-[var(--neon)]/40 shadow-[0_0_60px_oklch(0.88_0.31_142_/_0.18)]">
+      <div className="aspect-[9/16] relative bg-black flex items-center justify-center group cursor-pointer">
+        <div className="absolute inset-0 grid-bg opacity-30" />
+        <div className="flex flex-col items-center gap-6 z-10">
+          <div className="grid h-20 w-20 place-items-center rounded-full bg-[var(--neon)] transition-transform group-hover:scale-110 shadow-[0_0_40px_oklch(0.88_0.31_142_/_0.6)]">
+            <Play className="ml-1 h-10 w-10 fill-black text-black" />
+          </div>
+          <span className="font-display text-sm uppercase tracking-[0.2em] text-foreground/90">
+            ASSISTA O VÍDEO
+          </span>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -340,7 +236,7 @@ function BigIdea() {
           <p>Esses estabelecimentos já vendem todos os dias.</p>
           <p>O Executivo Bora Zé não precisa abrir nenhum deles.</p>
           <p className="font-display uppercase text-[var(--neon)] tracking-tight">Seu papel é conectá-los à plataforma.</p>
-          <p>Quando um estabelecimento da sua carteira vende pelo Bora Zé, você pode participar dessa movimentação de acordo com as regras do programa.</p>
+          <p>Uma nova forma de participar do crescimento do delivery e do comércio local construindo uma carteira de estabelecimentos e uma receita que pode se tornar recorrente.</p>
         </div>
       </div>
     </section>
@@ -389,13 +285,13 @@ function HowItWorks() {
     },
     {
       n: "03",
-      title: "ATIVE",
-      text: "Quando o estabelecimento cumprir os critérios e realizar seu primeiro pedido válido: Você recebe R$97.",
+      title: "CONSTRUA SUA CARTEIRA",
+      text: "Conecte estabelecimentos à plataforma e construa sua rede regional.",
     },
     {
       n: "04",
-      title: "CONSTRUA SUA CARTEIRA",
-      text: "Enquanto esses estabelecimentos continuarem realizando vendas elegíveis pelo Bora Zé, você participa delas conforme as regras do programa.",
+      title: "RECEITA RECORRENTE",
+      text: "Participe da movimentação financeira do comércio local através de uma carteira digital.",
     },
   ];
   return (
@@ -428,13 +324,13 @@ function Opportunity() {
           <div>
             <Tag>O modelo</Tag>
             <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-              Uma rede nacional <span className="text-neon">focada em cidades pequenas e médias</span>.
+              Uma rede nacional <span className="text-neon">focada em delivery e comércio local</span>.
             </h2>
           </div>
           <div className="space-y-5 text-base text-foreground/75 md:text-lg">
             <p>
-              O Bora Zé está criando uma rede nacional de mobilidade urbana focada em
-              cidades que os grandes apps ignoram.
+              O Bora Zé está criando uma rede nacional de delivery e mobilidade urbana focada em
+              cidades de todos os tamanhos.
             </p>
             <p>
               O Executivo ajuda a construir essa rede, conectando o comércio local a uma 
@@ -547,183 +443,9 @@ function Comparison() {
   );
 }
 
-function Profiles() {
-  const cards = [
-    {
-      icon: Rocket,
-      title: "EMPREENDEDOR",
-      text: "Pessoa que busca construir uma nova fonte de receita sem precisar abrir estabelecimento próprio.",
-    },
-    {
-      icon: Handshake,
-      title: "PROFISSIONAL DE VENDAS",
-      text: "Pessoa que já possui habilidade comercial e relacionamento.",
-    },
-    {
-      icon: Users,
-      title: "COMERCIANTE BEM RELACIONADO",
-      text: "Já conhece empresários e o comércio local e pode transformar relacionamento em carteira.",
-    },
-    {
-      icon: Briefcase,
-      title: "QUEM BUSCA RENDA COMPLEMENTAR",
-      text: "Pode desenvolver a atividade sem necessariamente abandonar imediatamente sua ocupação atual.",
-    },
-  ];
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <Tag>Público-alvo</Tag>
-        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          QUEM PODE SER <span className="text-neon">EXECUTIVO BORA ZÉ?</span>
-        </h2>
-        
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {cards.map(({ icon: Icon, title, text }) => (
-            <div
-              key={title}
-              className="group relative overflow-hidden border border-white/10 p-8 transition-all hover:border-[var(--neon)]/60"
-            >
-              <div className="flex h-12 w-12 items-center justify-center border border-[var(--neon)]/40 bg-[var(--neon)]/5">
-                <Icon className="h-6 w-6 text-[var(--neon)]" />
-              </div>
-              <h3 className="mt-6 font-display text-xl uppercase leading-tight tracking-[0.04em]">
-                {title}
-              </h3>
-              <p className="mt-4 text-sm text-foreground/70 md:text-base">{text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
-function DashboardMockup() {
-  return (
-    <section className="relative py-24 md:py-32 bg-white/[0.02]">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center">
-          <Tag>Tecnologia</Tag>
-          <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-            SUA CARTEIRA <span className="text-neon">NA PALMA DA MÃO.</span>
-          </h2>
-          <p className="mt-6 text-foreground/70">O Executivo terá acesso exclusivamente aos seus próprios estabelecimentos.</p>
-        </div>
 
-        <div className="mt-16 mx-auto max-w-4xl border border-white/10 bg-black/60 p-6 md:p-10 shadow-2xl">
-          <div className="grid gap-6 md:grid-cols-4 mb-10">
-            {[
-              { l: "Minha carteira", v: "24", s: "estabelecimentos" },
-              { l: "Vendas (30 dias)", v: "R$ 142.000", s: "" },
-              { l: "Comissões", v: "R$ 3.550", s: "" },
-              { l: "Status", v: "ATIVO", s: "", highlight: true },
-            ].map((stat) => (
-              <div key={stat.l} className="border border-white/5 bg-white/[0.02] p-4">
-                <div className="text-[10px] uppercase tracking-widest text-foreground/40 mb-2">{stat.l}</div>
-                <div className={`font-display text-xl ${stat.highlight ? "text-neon" : "text-foreground"}`}>{stat.v}</div>
-                {stat.s && <div className="text-[9px] text-foreground/30">{stat.s}</div>}
-              </div>
-            ))}
-          </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-white/10 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40">
-                  <th className="pb-4">Estabelecimento</th>
-                  <th className="pb-4">Ativação</th>
-                  <th className="pb-4">Vendas</th>
-                  <th className="pb-4">Vigência</th>
-                  <th className="pb-4 text-right">Comissão</th>
-                </tr>
-              </thead>
-              <tbody className="text-[11px]">
-                {[
-                  { n: "Restaurante Central", d: "12/05/26", v: "R$ 18.400", p: "2,5%", c: "R$ 460" },
-                  { n: "Farmácia Preço Baixo", d: "15/05/26", v: "R$ 22.100", p: "2,5%", c: "R$ 552" },
-                  { n: "Mercado do Povo", d: "20/05/26", v: "R$ 31.000", p: "2,5%", c: "R$ 775" },
-                ].map((row) => (
-                  <tr key={row.n} className="border-b border-white/5">
-                    <td className="py-4 font-bold">{row.n}</td>
-                    <td className="py-4 text-foreground/60">{row.d}</td>
-                    <td className="py-4 text-foreground/60">{row.v}</td>
-                    <td className="py-4 text-[var(--neon)]">{row.p}</td>
-                    <td className="py-4 text-right font-display text-[var(--neon)]">{row.c}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function RulesSection() {
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-6">
-        <div className="border-2 border-[var(--violet)]/40 p-8 md:p-12 bg-black/40">
-          <Tag>Regras de atividade</Tag>
-          <h2 className="mt-5 font-display uppercase leading-[0.9] text-3xl md:text-5xl">
-            QUEM CONSTRÓI, <span className="text-neon">CONTINUA GANHANDO.</span>
-          </h2>
-          <p className="mt-6 text-lg text-foreground/75 leading-relaxed">
-            O Programa Executivo Bora Zé foi criado para parceiros comerciais ativos. 
-            Para manter seu status ativo:
-          </p>
-          
-          <div className="mt-10 p-6 bg-white/[0.03] border border-white/10">
-            <div className="flex justify-between items-end mb-4">
-              <div className="font-display text-4xl text-neon">6</div>
-              <div className="text-[10px] uppercase tracking-widest text-foreground/40">novos estabelecimentos / 90 dias</div>
-            </div>
-            
-            <div className="h-2 w-full bg-white/10 overflow-hidden">
-              <div className="h-full bg-[var(--neon)] w-[66%]" />
-            </div>
-            
-            <div className="mt-4 flex justify-between font-mono text-[10px] uppercase tracking-widest">
-              <span>4 / 6 ativações</span>
-              <span className="text-[var(--neon)]">Faltam 2 para sua meta</span>
-            </div>
-          </div>
-          
-          <p className="mt-8 text-sm text-foreground/60">
-            A regra de 6 ativações a cada 90 dias incentiva a expansão contínua da sua carteira e garante 
-            a sustentabilidade do programa para todos os parceiros.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CareerEvolution() {
-  return (
-    <section className="relative py-24 md:py-32 bg-white/[0.01]">
-      <div className="mx-auto max-w-4xl px-6 text-center">
-        <Tag>Evolução</Tag>
-        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          QUER IR <span className="text-neon">ALÉM?</span>
-        </h2>
-        <p className="mt-8 text-lg text-foreground/75 mx-auto max-w-2xl">
-          O Executivo constrói sua própria carteira. Executivos que desejarem ampliar sua atuação 
-          poderão futuramente se qualificar para oportunidades como Embaixador Bora Zé, 
-          assumindo uma operação territorial.
-        </p>
-        
-        <div className="mt-12 flex flex-col items-center gap-4">
-          <a href="#cadastro" className="border-2 border-white/20 px-8 py-4 font-display text-sm uppercase tracking-widest hover:border-[var(--neon)] hover:text-[var(--neon)] transition-all">
-            CONHECER O PLANO DE CARREIRA BORA ZÉ
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function fmtBRL(n: number) {
   return "R$ " + Math.round(n).toLocaleString("pt-BR");
@@ -732,23 +454,22 @@ function fmtBRL(n: number) {
 function Simulator() {
   const [estab, setEstab] = useState(10);
   const [ticket, setTicket] = useState(10000);
-  const [year, setYear] = useState(1); // 1, 2, or 3
 
+  // Lógica interna simplificada conforme pedido (sem mostrar percentuais em destaque)
+  // R$97 ativação (oculto) + Recorrência 2.5% (oculto)
   const gmv = estab * ticket;
-  const rates = { 1: 0.025, 2: 0.01, 3: 0.005 };
-  const recurrence = gmv * rates[year as 1 | 2 | 3];
-  const activationBonus = estab * 97;
+  const recurrence = gmv * 0.025;
+  const annual = recurrence * 12;
 
   return (
     <section id="simulador" className="relative py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <Tag>Simulador</Tag>
-        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Simulador da <span className="text-neon">sua carteira</span>
+        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl text-center">
+          QUANTO UMA CARTEIRA <span className="text-neon">PODE GERAR?</span>
         </h2>
-        <p className="mt-6 max-w-3xl text-lg text-foreground/70">
-          O objetivo é mostrar quanto uma carteira hipotética poderia gerar. 
-          Ajuste os controles e veja o potencial da sua rede.
+        <p className="mt-6 max-w-3xl text-lg text-foreground/70 text-center mx-auto">
+          Ajuste os controles e veja o potencial de ganhos que você pode construir na sua região.
         </p>
 
         <div className="mt-12 border-2 border-[var(--neon)]/30 bg-black/50 p-6 md:p-10">
@@ -764,7 +485,7 @@ function Simulator() {
                 onChange={setEstab}
               />
               <SliderRow
-                label="Venda média mensal por estabelecimento"
+                label="Vendas médias dos estabelecimentos"
                 value={ticket}
                 suffix=""
                 min={2000}
@@ -775,49 +496,21 @@ function Simulator() {
               />
             </div>
 
-            <div className="flex flex-col gap-4">
-              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Selecione o período</div>
-              <div className="grid grid-cols-3 gap-2">
-                {[1, 2, 3].map((y) => (
-                  <button
-                    key={y}
-                    onClick={() => setYear(y)}
-                    className={`border-2 py-3 font-display text-xs uppercase transition-all ${
-                      year === y ? "border-[var(--neon)] bg-[var(--neon)] text-black" : "border-white/10 text-foreground/60 hover:border-white/20"
-                    }`}
-                  >
-                    {y === 3 ? "3º Ano+" : `${y}º Ano`}
-                    <div className="text-[9px] opacity-60">{y === 1 ? "2,5%" : y === 2 ? "1%" : "0,5%"}</div>
-                  </button>
-                ))}
+            <div className="flex flex-col justify-center gap-6">
+              <div className="border-2 border-[var(--neon)] bg-[var(--neon)]/5 p-8 text-center">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--neon)]">Sua renda mensal estimada</div>
+                <div className="mt-3 font-display text-5xl text-neon">{fmtBRL(recurrence)}/MÊS</div>
               </div>
-
-              <div className="mt-4 border border-white/10 bg-white/[0.02] p-6">
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Vendas mensais da carteira</div>
-                <div className="mt-2 font-display text-2xl text-foreground">{fmtBRL(gmv)}</div>
-                <div className="mt-1 text-[10px] text-foreground/40">{estab} estab. × {fmtBRL(ticket)}</div>
+              
+              <div className="border-2 border-white/10 bg-black p-8 text-center">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Projeção em 12 meses</div>
+                <div className="mt-3 font-display text-4xl text-foreground">{fmtBRL(annual)}</div>
               </div>
             </div>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            <div className="border-2 border-white/10 bg-black p-6">
-              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">Ganho de Ativação</div>
-              <div className="mt-3 font-display text-3xl text-foreground">{fmtBRL(activationBonus)}</div>
-              <div className="mt-2 text-[10px] text-foreground/40">Pagamento único por ativação (100% elegível)</div>
-            </div>
-            
-            <div className="border-2 border-[var(--neon)] bg-[var(--neon)]/5 p-6">
-              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--neon)]">Recorrência mensal estimada</div>
-              <div className="mt-3 font-display text-4xl text-neon">{fmtBRL(recurrence)}</div>
-              <div className="mt-2 text-[10px] text-neon/60">Baseado no percentual do {year === 3 ? "3º ano em diante" : `${year}º ano`}</div>
-            </div>
-          </div>
-
-          <p className="mt-8 text-[10px] text-foreground/40 leading-relaxed">
-            Simulação meramente ilustrativa. Não representa promessa ou garantia de ganhos. 
-            A remuneração depende das vendas efetivamente realizadas pelos estabelecimentos através da plataforma, 
-            permanência no programa e cumprimento das regras vigentes.
+          <p className="mt-8 text-[10px] text-foreground/40 leading-relaxed text-center">
+            Simulação ilustrativa. Resultados variam conforme desempenho, volume de vendas e regras do programa. Não representa garantia de renda.
           </p>
         </div>
       </div>
@@ -1089,24 +782,72 @@ function DualRevenue() {
 }
 
 function Pricing() {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, min: 0, seg: 0 });
+
+  useEffect(() => {
+    const targetDate = new Date("2026-09-15T00:00:00-03:00"); // America/Bahia
+    const timer = setInterval(() => {
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+      if (diff <= 0) {
+        clearInterval(timer);
+        return;
+      }
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        min: Math.floor((diff / 1000 / 60) % 60),
+        seg: Math.floor((diff / 1000) % 60),
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section id="investimento" className="relative py-24 md:py-32">
+    <section id="oferta" className="relative py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6 text-center">
-        <Tag>Investimento</Tag>
-        <div className="mt-10 border-2 border-[var(--neon)] bg-black/40 p-10 max-w-2xl mx-auto">
-          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--neon)] mb-4">Oferta de Pré-lançamento</div>
-          <h2 className="font-display uppercase text-4xl md:text-6xl mb-6">ENTRE PARA O PROGRAMA EXECUTIVO BORA ZÉ.</h2>
+        <Tag>Oferta de Pré-lançamento</Tag>
+        <div className="mt-10 border-2 border-[var(--neon)] bg-black/40 p-10 max-w-3xl mx-auto shadow-[0_0_80px_oklch(0.88_0.31_142_/_0.28)]">
+          <h2 className="font-display uppercase text-4xl md:text-6xl mb-8">PROGRAMA EXECUTIVO BORA ZÉ</h2>
           
-          <div className="flex flex-col items-center gap-2 mb-8">
-            <div className="text-foreground/40 text-sm line-through">R$ 997,00</div>
-            <div className="font-display text-7xl text-neon">R$ 497</div>
-            <div className="text-foreground/60 text-xs uppercase tracking-widest">à vista ou em até 12x</div>
+          <div className="grid md:grid-cols-2 gap-8 text-left mb-10">
+            <div className="space-y-4">
+              <h3 className="font-display text-xl uppercase text-neon">O que você recebe:</h3>
+              <ul className="space-y-2 text-sm text-foreground/70">
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Treinamento completo</li>
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Estrutura de tecnologia</li>
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Ferramentas comerciais</li>
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Suporte e Materiais</li>
+                <li className="flex items-center gap-2"><Check className="h-4 w-4 text-neon" /> Acesso à comunidade</li>
+              </ul>
+            </div>
+            <div className="flex flex-col items-center justify-center border-l border-white/10 md:pl-8">
+              <div className="text-foreground/40 text-sm line-through">R$ 997,00</div>
+              <div className="font-display text-7xl text-neon">R$ 497</div>
+              <div className="text-foreground/60 text-xs uppercase tracking-widest mt-2">à vista ou em até 12x</div>
+            </div>
           </div>
 
-          <a href="#cadastro">
-            <NeonButton className="w-full">QUERO SER EXECUTIVO BORA ZÉ</NeonButton>
+          <div className="mb-10 py-6 border-y border-white/10">
+            <div className="text-[10px] uppercase tracking-[0.3em] text-foreground/60 mb-4">CONDIÇÃO DE PRÉ-LANÇAMENTO DISPONÍVEL ATÉ:</div>
+            <div className="flex justify-center gap-6 font-display">
+              {[
+                { v: timeLeft.days, l: "Dias" },
+                { v: timeLeft.hours, l: "Horas" },
+                { v: timeLeft.min, l: "Min" },
+                { v: timeLeft.seg, l: "Seg" }
+              ].map((item, i) => (
+                <div key={i} className="flex flex-col items-center">
+                  <span className="text-4xl font-bold text-neon">{String(item.v).padStart(2, '0')}</span>
+                  <span className="text-[10px] uppercase tracking-wider text-foreground/40">{item.l}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <a href="https://pay.checkout-link.com/..." className="block">
+            <NeonButton className="w-full py-6 text-xl">QUERO APROVEITAR A OFERTA</NeonButton>
           </a>
-          <p className="mt-6 text-[10px] text-foreground/40 uppercase tracking-widest">Início oficial: 15 de setembro de 2026</p>
         </div>
       </div>
     </section>
@@ -1158,41 +899,6 @@ function Guarantee() {
   );
 }
 
-function NextSteps() {
-  const bullets = [
-    { icon: Search, text: "Análise de perfil profissional em até 48h" },
-    { icon: Check, text: "Sem compromisso — é só uma conversa técnica" },
-    { icon: MessageCircle, text: "Atendimento por WhatsApp em horário comercial" },
-    { icon: FileText, text: "Você recebe o plano de expansão 2026 completo" },
-  ];
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6 text-center">
-        <Tag>Próximo passo</Tag>
-        <h2 className="mx-auto mt-5 max-w-4xl font-display uppercase leading-[0.88] text-4xl md:text-7xl">
-          Avaliação de <span className="text-neon">perfil</span> do Executivo
-        </h2>
-        <p className="mx-auto mt-8 max-w-2xl text-lg text-foreground/70">
-          O Programa Executivo busca parceiros com compromisso e visão de longo prazo. Analisamos 
-          sua experiência comercial e conhecimento da região para garantir que você tenha as 
-          melhores condições de sucesso na construção da sua carteira.
-        </p>
-
-        <div className="mx-auto mt-12 grid max-w-3xl gap-3 text-left sm:grid-cols-2">
-          {bullets.map(({ icon: Icon, text }) => (
-            <div
-              key={text}
-              className="flex items-start gap-3 border border-white/10 bg-black/40 px-5 py-4"
-            >
-              <Icon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--neon)]" />
-              <span className="text-sm text-foreground/80 md:text-base">{text}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Future() {
   return (
@@ -1295,7 +1001,7 @@ function FAQ() {
 
         <div className="mt-12 flex justify-center">
           <a
-            href="#cadastro"
+            href="#oferta"
             className="inline-flex items-center justify-center bg-[var(--neon)] px-8 py-4 font-display uppercase tracking-[0.05em] text-sm md:text-base text-black transition-transform hover:scale-[1.03] shadow-[0_0_40px_-8px_var(--neon)]"
           >
             Ainda tem dúvidas? Fale com nosso time
@@ -1306,229 +1012,7 @@ function FAQ() {
   );
 }
 
-const BR_STATES = [
-  "AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO",
-];
 
-function QualificationForm() {
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    state: "",
-    city: "",
-    salesExperience: "",
-    contacts: "",
-    potential90d: "",
-    timeline: "",
-  });
-  const [sent, setSent] = useState(false);
-
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    if (k === "phone") {
-      const digits = e.target.value.replace(/\D/g, "").slice(0, 11);
-      let masked = digits;
-      if (digits.length > 0) masked = `(${digits.slice(0, 2)}`;
-      if (digits.length >= 3) masked += `) ${digits.slice(2, 3)}`;
-      if (digits.length >= 4) masked += ` ${digits.slice(3, 7)}`;
-      if (digits.length >= 8) masked += `-${digits.slice(7, 11)}`;
-      setForm((f) => ({ ...f, phone: masked }));
-      return;
-    }
-    setForm((f) => ({ ...f, [k]: e.target.value }));
-  };
-
-  const inputCls =
-    "w-full border border-white/15 bg-white/[0.06] px-4 py-3.5 text-sm placeholder:text-foreground/50 focus:border-[var(--neon)] focus:outline-none";
-
-
-  if (sent) {
-    return (
-      <div className="border-2 border-[var(--neon)] bg-background p-6 md:p-10" style={{ boxShadow: "0 0 40px oklch(0.88 0.31 142 / 0.2)" }}>
-        <div className="py-6 text-center">
-          <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[var(--neon)]/20">
-            <Check className="h-7 w-7 text-[var(--neon)]" />
-          </div>
-          <h3 className="mt-5 font-display uppercase text-2xl">Entre na comunidade do WhatsApp</h3>
-          <p className="mt-3 text-sm text-foreground/70 md:text-base">
-            O próximo passo é entrar no grupo oficial: é lá que enviamos as informações do programa e você fala direto com o nosso time.
-          </p>
-          <a
-            href="https://chat.whatsapp.com/LD9HDlBfxZLDLEMcaXzT80"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center justify-center gap-2 border-2 border-[var(--neon)] bg-[var(--neon)] px-7 py-4 font-display uppercase tracking-wide text-black transition hover:bg-transparent hover:text-[var(--neon)]"
-            style={{ boxShadow: "0 0 30px oklch(0.88 0.31 142 / 0.35)" }}
-          >
-            <MessageCircle className="h-5 w-5" />
-            Entrar na comunidade
-          </a>
-        </div>
-      </div>
-    );
-  }
-
-
-  return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
-      className="border-2 border-[var(--neon)] p-6 md:p-10"
-      style={{
-        background: "linear-gradient(180deg, oklch(0.26 0.008 285), oklch(0.20 0.008 285))",
-        boxShadow: "0 0 80px oklch(0.88 0.31 142 / 0.28), 0 24px 60px oklch(0 0 0 / 0.6)",
-      }}
-    >
-
-      <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-[var(--neon)]">
-        Programa Executivo
-      </div>
-      <h3 className="mt-3 font-display uppercase text-3xl md:text-4xl">
-        Quero ser <span className="text-neon">Executivo Bora Zé</span>
-      </h3>
-
-      <div className="mt-6 grid gap-3">
-        <input required type="text" value={form.name} onChange={set("name")} placeholder="Nome completo" className={inputCls} />
-        <input
-          required
-          type="tel"
-          value={form.phone}
-          onChange={set("phone")}
-          placeholder="WhatsApp com DDD — (##) # ####-####"
-          className={inputCls}
-        />
-        <input required type="email" value={form.email} onChange={set("email")} placeholder="E-mail" className={inputCls} />
-        <div className="grid gap-3 sm:grid-cols-2">
-          <select required value={form.state} onChange={set("state")} className={inputCls}>
-            <option value="">Estado</option>
-            {BR_STATES.map((uf) => (
-              <option key={uf} value={uf}>{uf}</option>
-            ))}
-          </select>
-          <input required type="text" value={form.city} onChange={set("city")} placeholder="Cidade" className={inputCls} />
-        </div>
-        <select required value={form.salesExperience} onChange={set("salesExperience")} className={inputCls}>
-          <option value="">Você trabalha ou já trabalhou com vendas?</option>
-          <option>Sim, sou profissional de vendas</option>
-          <option>Sim, já tive experiência informal</option>
-          <option>Não, mas gostaria de aprender</option>
-        </select>
-        <select required value={form.contacts} onChange={set("contacts")} className={inputCls}>
-          <option value="">Você conhece comerciantes ou empresários na sua região?</option>
-          <option>Sim, conheço muitos</option>
-          <option>Conheço alguns</option>
-          <option>Ainda não, mas vou prospectar</option>
-        </select>
-        <select required value={form.potential90d} onChange={set("potential90d")} className={inputCls}>
-          <option value="">Quantos estabelecimentos acredita conseguir apresentar em 90 dias?</option>
-          <option>Menos de 6</option>
-          <option>Entre 6 e 15</option>
-          <option>Mais de 15</option>
-        </select>
-        <select required value={form.timeline} onChange={set("timeline")} className={inputCls}>
-          <option value="">Quando pretende começar?</option>
-          <option>Imediatamente</option>
-          <option>Nos próximos 30 dias</option>
-          <option>Apenas explorando</option>
-        </select>
-      </div>
-      <button
-        type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 bg-[var(--neon)] py-4 font-display uppercase tracking-[0.08em] text-sm text-black transition-all hover:brightness-110"
-        style={{ boxShadow: "0 0 30px oklch(0.88 0.31 142 / 0.4)" }}
-      >
-        QUERO ENTRAR NO PROGRAMA
-        <ArrowRight className="h-4 w-4" />
-      </button>
-      <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
-        Início oficial em 15/09/2026
-      </p>
-    </form>
-  );
-}
-
-function FinalCTA() {
-  return (
-    <section id="cadastro" className="relative overflow-hidden py-24 md:py-32">
-      <div className="absolute inset-0 -z-10" style={{ background: "var(--gradient-hero)" }} />
-      <div className="absolute inset-0 -z-10 grid-bg opacity-50" />
-
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-start">
-          <div>
-            <Tag>A Oportunidade</Tag>
-            <h2 className="mt-5 font-display uppercase leading-[0.85] text-5xl md:text-8xl">
-              OS NEGÓCIOS DA SUA CIDADE<br />
-              <span className="text-neon">JÁ VENDEM TODOS OS DIAS</span>.
-            </h2>
-            <p className="mt-8 max-w-md text-lg text-foreground/70">
-              Restaurantes, farmácias, mercados e pet shops já movimentam dinheiro diariamente. 
-              O Executivo Bora Zé ajuda esses estabelecimentos a entrarem na plataforma e constrói 
-              sua carteira sobre o trabalho que realizou.
-            </p>
-          </div>
-          <QualificationForm />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function WhoIsBoraze() {
-  const cards = [
-    {
-      icon: Lightbulb,
-      title: "A percepção que originou o projeto",
-      text: "Mais de 5.500 cidades brasileiras são ignoradas pelos grandes aplicativos de entrega e mobilidade. Enquanto iFood, Uber e 99 concentram esforços nas capitais e grandes centros, milhões de brasileiros em cidades pequenas e médias ficam sem acesso à tecnologia que já é padrão em outros mercados.",
-    },
-    {
-      icon: Puzzle,
-      title: "A solução que construímos",
-      text: "Uma plataforma de entregas e mototáxi feita para essas cidades — leve, adaptável e operada por quem conhece o território. Restaurantes, farmácias, mercados e mototaxistas locais ganham uma ferramenta profissional. Consumidores ganham conveniência. E o Executivo ajuda a construir essa rede regional.",
-    },
-    {
-      icon: Rocket,
-      title: "Nossa escala e visão",
-      text: "Não queremos apenas estar em algumas cidades. Queremos digitalizar o comércio local de todo o interior do Brasil. O Bora Zé foi desenhado para ser o sistema operacional das conexões locais, conectando quem vende com quem compra de forma eficiente e justa para todos.",
-    },
-    {
-      icon: Compass,
-      title: "Fase atual do projeto (transparência)",
-      text: "O Bora Zé está em fase de expansão nacional. Estamos abrindo o Programa Executivo para parceiros qualificados. Nos primeiros contatos você recebe toda a documentação institucional para análise antes de qualquer decisão.",
-    },
-  ];
-  return (
-    <section id="quem-e-boraze" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <Tag>Sobre o projeto</Tag>
-        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Quem é o <span className="text-neon">BoraZé!</span>
-        </h2>
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
-          {cards.map(({ icon: Icon, title, text }) => (
-            <div
-              key={title}
-              className="group relative overflow-hidden border border-white/10 bg-black/40 p-8 backdrop-blur-sm transition-all hover:border-[var(--neon)]/60"
-            >
-              <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[var(--neon)]/5 blur-3xl transition-opacity group-hover:bg-[var(--neon)]/15" />
-              <div className="relative">
-                <div className="grid h-12 w-12 place-items-center border border-[var(--neon)]/40 bg-[var(--neon)]/10">
-                  <Icon className="h-5 w-5 text-[var(--neon)]" />
-                </div>
-                <h3 className="mt-6 font-display uppercase tracking-[0.02em] text-xl md:text-2xl">
-                  {title}
-                </h3>
-                <p className="mt-3 text-sm text-foreground/70 md:text-base">{text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 
 /* ============================================================== */
@@ -1680,60 +1164,12 @@ function PlatformEconomy() {
   );
 }
 
-function VideoSection() {
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="text-center">
-          <Tag>Vídeo · 3 min</Tag>
-          <h2 className="mx-auto mt-5 max-w-3xl font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-            Assista e entenda <span className="text-neon">como funciona o BoraZé!</span>.
-          </h2>
-        </div>
-
-        <button
-          type="button"
-          className="group relative mt-14 block aspect-video w-full overflow-hidden border-2 border-[var(--neon)]/40 transition-all hover:border-[var(--neon)]"
-          style={{
-            background:
-              "linear-gradient(135deg, oklch(0.13 0.08 300), oklch(0.06 0.02 295))",
-            boxShadow: "0 0 60px oklch(0.88 0.31 142 / 0.18)",
-          }}
-        >
-          <div className="absolute inset-0 grid-bg opacity-30" />
-          <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[var(--violet)]/30 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-[var(--neon)]/10 blur-3xl" />
-
-          <div className="relative grid h-full place-items-center">
-            <div className="flex flex-col items-center gap-6">
-              <div
-                className="grid h-24 w-24 place-items-center rounded-full bg-[var(--neon)] transition-transform group-hover:scale-110 md:h-28 md:w-28"
-                style={{ boxShadow: "0 0 60px oklch(0.88 0.31 142 / 0.6)" }}
-              >
-                <Play className="ml-1 h-10 w-10 fill-black text-black md:h-12 md:w-12" />
-              </div>
-              <span className="font-display text-base uppercase tracking-[0.2em] text-foreground/90 md:text-lg">
-                Assista e entenda como funciona o BoraZé!
-              </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/40">
-                Em breve
-              </span>
-            </div>
-          </div>
-        </button>
-      </div>
-    </section>
-  );
-}
 
 function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <CountdownBanner />
       <SiteNav />
-      <StatsBar />
       <Hero />
-      <WhoIsBoraze />
       <Authority />
       <Divider />
       <BigIdea />
@@ -1743,23 +1179,14 @@ function LandingPage() {
       <Benefits />
       <InterfaceControl />
       <PlatformEconomy />
-      <Profiles />
-      <DashboardMockup />
       <Market />
-      <RulesSection />
-      <CareerEvolution />
-      <PortfolioLogic />
-      <WhatYouGet />
       <Simulator />
       <DualRevenue />
       <Comparison />
-      <NextSteps />
       <Pricing />
       <Guarantee />
       <FAQ />
       <Future />
-      <VideoSection />
-      <FinalCTA />
       <SiteFooter />
     </div>
   );

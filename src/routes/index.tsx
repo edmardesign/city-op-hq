@@ -368,13 +368,13 @@ function HowItWorks() {
     },
     {
       n: "03",
-      title: "ATIVE",
-      text: "Quando o estabelecimento cumprir os critérios e realizar seu primeiro pedido válido: Você recebe R$97.",
+      title: "CONSTRUA SUA CARTEIRA",
+      text: "Conecte estabelecimentos à plataforma e construa sua rede regional.",
     },
     {
       n: "04",
-      title: "CONSTRUA SUA CARTEIRA",
-      text: "Enquanto esses estabelecimentos continuarem realizando vendas elegíveis pelo Bora Zé, você participa delas conforme as regras do programa.",
+      title: "RECEITA RECORRENTE",
+      text: "Participe da movimentação financeira do comércio local através de uma carteira digital.",
     },
   ];
   return (

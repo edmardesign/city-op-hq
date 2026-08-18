@@ -1014,9 +1014,9 @@ function DualRevenue() {
       title: "Delivery",
       subtitle: "Restaurantes, farmácias, mercados, lojas locais",
       items: [
-        "Comissão sobre cada pedido processado",
-        "Mensalidade dos estabelecimentos parceiros",
-        "Taxa de adesão de novos parceiros comerciais",
+        "Recorrência sobre cada pedido processado",
+        "Participação na mensalidade dos estabelecimentos",
+        "Bônus de R$ 97 por ativação de novos parceiros",
       ],
     },
     {
@@ -1024,9 +1024,9 @@ function DualRevenue() {
       title: "Mototáxi",
       subtitle: "Corridas urbanas e entregas expressas",
       items: [
-        "Comissão sobre cada corrida realizada",
-        "Comissão sobre entregas expressas (moto delivery)",
-        "Taxa de adesão de novos mototaxistas",
+        "Comissão sobre cada corrida realizada na rede",
+        "Participação nas entregas expressas (moto delivery)",
+        "Bônus por novos mototaxistas qualificados",
       ],
     },
   ];

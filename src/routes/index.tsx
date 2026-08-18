@@ -375,6 +375,51 @@ function Story() {
   );
 }
 
+function HowItWorks() {
+  const steps = [
+    {
+      n: "01",
+      title: "TORNE-SE EXECUTIVO",
+      text: "Entre para o programa, faça seu treinamento e tenha acesso às ferramentas comerciais.",
+    },
+    {
+      n: "02",
+      title: "ENCONTRE NEGÓCIOS LOCAIS",
+      text: "Apresente o Bora Zé para restaurantes, farmácias, mercados, pet shops, gás e outros estabelecimentos.",
+    },
+    {
+      n: "03",
+      title: "ATIVE",
+      text: "Quando o estabelecimento cumprir os critérios e realizar seu primeiro pedido válido: Você recebe R$97.",
+    },
+    {
+      n: "04",
+      title: "CONSTRUA SUA CARTEIRA",
+      text: "Enquanto esses estabelecimentos continuarem realizando vendas elegíveis pelo Bora Zé, você participa delas conforme as regras do programa.",
+    },
+  ];
+  return (
+    <section id="como-funciona" className="relative py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-6">
+        <Tag>Passo a passo</Tag>
+        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+          Como funciona o <span className="text-neon">Programa Executivo</span>.
+        </h2>
+        
+        <div className="mt-16 grid gap-px bg-white/10 md:grid-cols-2 lg:grid-cols-4 border border-white/10">
+          {steps.map((s) => (
+            <div key={s.n} className="bg-background p-8 transition-colors hover:bg-white/[0.02]">
+              <div className="font-display text-4xl text-[var(--neon)]/30">{s.n}</div>
+              <h3 className="mt-6 font-display text-xl uppercase tracking-wider">{s.title}</h3>
+              <p className="mt-4 text-sm text-foreground/70 leading-relaxed">{s.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Opportunity() {
   return (
     <section id="oportunidade" className="relative py-24 md:py-32">
@@ -388,16 +433,15 @@ function Opportunity() {
           </div>
           <div className="space-y-5 text-base text-foreground/75 md:text-lg">
             <p>
-              O BoraZé! está criando uma rede nacional de mobilidade urbana focada em
+              O Bora Zé está criando uma rede nacional de mobilidade urbana focada em
               cidades que os grandes apps ignoram.
             </p>
             <p>
-              Ao invés de abrir filiais próprias, estamos entregando a{" "}
-              <span className="text-foreground">operação local</span> para pessoas
-              comuns que desejam construir um negócio escalável.
+              O Executivo ajuda a construir essa rede, conectando o comércio local a uma 
+              tecnologia robusta e eficiente.
             </p>
             <p className="border-l-2 border-[var(--violet)] pl-4 text-foreground">
-              Você assume a cidade. Nós cuidamos da tecnologia.
+              Você constrói sua carteira. Nós cuidamos da tecnologia.
             </p>
           </div>
         </div>
@@ -1505,6 +1549,7 @@ function LandingPage() {
       <BigIdea />
       <Story />
       <Opportunity />
+      <HowItWorks />
       <Benefits />
       <InterfaceControl />
       <PlatformEconomy />

@@ -1203,17 +1203,17 @@ function Future() {
       />
       <div className="mx-auto max-w-5xl px-6 text-center">
         <h2 className="font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Daqui a alguns anos sua cidade terá uma{" "}
-          <span className="text-neon">plataforma de delivery e mototáxi consolidada.</span>
+          Daqui a alguns anos sua região terá centenas de{" "}
+          <span className="text-neon">estabelecimentos vendendo no Bora Zé.</span>
           <br />
-          <span className="text-foreground/80">A pergunta é: quem vai ser dono dela?</span>
+          <span className="text-foreground/80">A pergunta é: quem vai ser o Executivo deles?</span>
         </h2>
         <p className="mx-auto mt-10 max-w-2xl text-xl text-foreground/75 md:text-2xl">
           A única pergunta é:
         </p>
         <p className="mx-auto mt-4 max-w-3xl font-display uppercase leading-tight text-3xl md:text-5xl">
           Você estará{" "}
-          <span className="text-[var(--neon)]">recebendo os resultados</span>?<br />
+          <span className="text-[var(--neon)]">recebendo sobre cada venda</span>?<br />
           <span className="text-foreground/40">
             Ou assistindo outra pessoa receber?
           </span>

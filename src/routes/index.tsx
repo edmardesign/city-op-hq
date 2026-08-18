@@ -528,45 +528,6 @@ function Comparison() {
 
 
 
-function RulesSection() {
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-6">
-        <div className="border-2 border-[var(--violet)]/40 p-8 md:p-12 bg-black/40">
-          <Tag>Regras de atividade</Tag>
-          <h2 className="mt-5 font-display uppercase leading-[0.9] text-3xl md:text-5xl">
-            QUEM CONSTRÓI, <span className="text-neon">CONTINUA GANHANDO.</span>
-          </h2>
-          <p className="mt-6 text-lg text-foreground/75 leading-relaxed">
-            O Programa Executivo Bora Zé foi criado para parceiros comerciais ativos. 
-            Para manter seu status ativo:
-          </p>
-          
-          <div className="mt-10 p-6 bg-white/[0.03] border border-white/10">
-            <div className="flex justify-between items-end mb-4">
-              <div className="font-display text-4xl text-neon">6</div>
-              <div className="text-[10px] uppercase tracking-widest text-foreground/40">novos estabelecimentos / 90 dias</div>
-            </div>
-            
-            <div className="h-2 w-full bg-white/10 overflow-hidden">
-              <div className="h-full bg-[var(--neon)] w-[66%]" />
-            </div>
-            
-            <div className="mt-4 flex justify-between font-mono text-[10px] uppercase tracking-widest">
-              <span>4 / 6 ativações</span>
-              <span className="text-[var(--neon)]">Faltam 2 para sua meta</span>
-            </div>
-          </div>
-          
-          <p className="mt-8 text-sm text-foreground/60">
-            A regra de 6 ativações a cada 90 dias incentiva a expansão contínua da sua carteira e garante 
-            a sustentabilidade do programa para todos os parceiros.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function CareerEvolution() {
   return (

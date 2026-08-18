@@ -1486,7 +1486,7 @@ function WhoIsBoraze() {
     {
       icon: Puzzle,
       title: "A solução que construímos",
-      text: "Uma plataforma de entregas e mototáxi feita para essas cidades — leve, adaptável e operada por quem conhece o território. Restaurantes, farmácias, mercados e mototaxistas locais ganham uma ferramenta profissional. Consumidores ganham conveniência. E o Embaixador da cidade constrói um negócio recorrente.",
+      text: "Uma plataforma de entregas e mototáxi feita para essas cidades — leve, adaptável e operada por quem conhece o território. Restaurantes, farmácias, mercados e mototaxistas locais ganham uma ferramenta profissional. Consumidores ganham conveniência. E o Executivo ajuda a construir essa rede regional.",
     },
     {
       icon: MapPin,

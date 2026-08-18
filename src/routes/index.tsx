@@ -776,26 +776,85 @@ function Market() {
   );
 }
 
+function PortfolioLogic() {
+  return (
+    <section className="relative py-24 md:py-32 bg-white/[0.01]">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
+            <Tag>Matemática do negócio</Tag>
+            <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+              SEUS PRIMEIROS 5 ESTABELECIMENTOS <span className="text-neon">JÁ MUDAM A CONTA.</span>
+            </h2>
+            <div className="mt-8 space-y-6">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <span className="text-foreground/70">Adesão ao programa</span>
+                <span className="font-display text-xl text-foreground">R$ 497</span>
+              </div>
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <span className="text-foreground/70">5 ativações (5 × R$97)</span>
+                <span className="font-display text-xl text-[var(--neon)]">R$ 485</span>
+              </div>
+              <p className="text-sm text-foreground/60 leading-relaxed">
+                Com apenas 5 estabelecimentos efetivamente ativados, os bônus de ativação representam valor equivalente a aproximadamente 98% da adesão inicial.
+              </p>
+              <p className="font-display uppercase text-[var(--neon)] text-sm tracking-wide">
+                E esses mesmos estabelecimentos ainda passam a compor sua carteira de participação recorrente.
+              </p>
+            </div>
+          </div>
+
+          <div className="border border-[var(--neon)]/30 bg-black/40 p-8 md:p-12">
+            <h3 className="font-display uppercase text-2xl mb-8">VOCÊ NÃO PRECISA COMEÇAR TODO MÊS DO ZERO.</h3>
+            <div className="space-y-4">
+              {[
+                { n: "Restaurante do João", v: "R$ 12.400", p: "2,5%" },
+                { n: "Farmácia Central", v: "R$ 18.700", p: "2,5%" },
+                { n: "Pizzaria Itália", v: "R$ 9.800", p: "2,5%" },
+                { n: "Pet Mais", v: "R$ 7.300", p: "2,5%" },
+                { n: "Mercado Econômico", v: "R$ 21.500", p: "2,5%" },
+              ].map((c) => (
+                <div key={c.n} className="flex items-center justify-between border border-white/5 bg-white/[0.02] p-4">
+                  <div>
+                    <div className="text-xs font-bold text-foreground/90">{c.n}</div>
+                    <div className="text-[10px] text-foreground/40">{c.v} vendidos</div>
+                  </div>
+                  <div className="font-mono text-xs text-[var(--neon)]">{c.p}</div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-center text-[10px] uppercase tracking-[0.2em] text-foreground/40">
+              Sua carteira cresce a cada nova ativação.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function WhatYouGet() {
   const items = [
-    "Direito de operação exclusiva da cidade",
-    "Plataforma pronta",
-    "Aplicativo funcionando",
-    "Treinamento completo",
-    "Materiais de divulgação",
-    "Suporte de implantação",
-    "Participação nas receitas recorrentes",
-    "Exclusividade territorial",
+    "Treinamento online",
+    "Acesso ao Programa Executivo Bora Zé",
+    "Painel individual",
+    "Materiais comerciais",
+    "Scripts de prospecção",
+    "Apresentações profissionais",
+    "Comunidade de Executivos",
+    "Suporte",
+    "Materiais de implantação",
+    "Kit físico (conforme composição)",
   ];
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <Tag>O que você recebe</Tag>
         <h2 className="mt-5 max-w-3xl font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Tudo pronto para você <span className="text-neon">operar amanhã</span>.
+          TUDO QUE VOCÊ PRECISA PARA <span className="text-neon">COMEÇAR</span>.
         </h2>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
           {items.map((s, i) => (
             <div
               key={s}
@@ -808,9 +867,9 @@ function WhatYouGet() {
               }}
             >
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/40">
-                {String(i + 1).padStart(2, "0")} / 08
+                {String(i + 1).padStart(2, "0")} / {items.length}
               </div>
-              <div className="mt-6 font-display uppercase leading-tight text-lg">{s}</div>
+              <div className="mt-6 font-display uppercase leading-tight text-sm tracking-wide">{s}</div>
               <Zap className="absolute right-4 top-4 h-4 w-4 text-[var(--neon)] opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
           ))}
@@ -1560,6 +1619,7 @@ function LandingPage() {
       <PlatformEconomy />
       <Profiles />
       <Market />
+      <PortfolioLogic />
       <WhatYouGet />
       <Simulator />
       <DualRevenue />

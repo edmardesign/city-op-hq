@@ -43,17 +43,17 @@ export const Route = createFileRoute("/")({
     const canonical = "https://mtztextfature10.lovable.app/";
     return {
       meta: [
-        { title: "FATURE R$4.500 POR MÊS COM DELIVERY + COMÉRCIO LOCAL NA SUA CIDADE" },
+        { title: "GANHE COM FARMÁCIAS E RESTAURANTES SEM PRECISAR SER DONO DE NADA" },
         {
           name: "description",
           content:
-            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
+            "Participe do mercado de delivery e comércio local construindo uma carteira de estabelecimentos sem os riscos de um negócio físico.",
         },
-        { property: "og:title", content: "Fature R$4.500/mês com Delivery e Comércio Local" },
+        { property: "og:title", content: "Ganhe com Negócios Locais sem ser Dono de Nada" },
         {
           property: "og:description",
           content:
-            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
+            "Participe do mercado de delivery e comércio local construindo uma carteira de estabelecimentos sem os riscos de um negócio físico.",
         },
         { property: "og:type", content: "website" },
         { property: "og:url", content: canonical },
@@ -61,11 +61,11 @@ export const Route = createFileRoute("/")({
         { property: "og:locale", content: "pt_BR" },
         { property: "og:image", content: ogImage },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "Fature R$4.500/mês com Delivery e Comércio Local" },
+        { name: "twitter:title", content: "Ganhe com Negócios Locais sem ser Dono de Nada" },
         {
           name: "twitter:description",
           content:
-            "Construa uma receita recorrente participando de um mercado que já movimenta milhões de reais todos os meses.",
+            "Participe do mercado de delivery e comércio local construindo uma carteira de estabelecimentos sem os riscos de um negócio físico.",
         },
         { name: "twitter:image", content: ogImage },
       ],
@@ -150,9 +150,9 @@ function Hero() {
 
       <div className="mx-auto max-w-7xl px-6 py-20 md:py-32">
         <h1 className="mt-6 font-display uppercase leading-[0.9] tracking-[-0.01em] text-[10vw] md:text-[5.5rem] lg:text-[7.5rem] text-center">
-          <span>FATURE </span>
-          <span className="text-neon italic">R$4.500 POR MÊS </span>
-          <span>COM DELIVERY + COMÉRCIO LOCAL NA SUA CIDADE</span>
+          <span>COMO GANHAR COM </span>
+          <span className="text-neon italic">NEGÓCIOS LOCAIS </span>
+          <span>SEM PRECISAR SER DONO DE NADA</span>
         </h1>
 
         <div className="mt-10 flex flex-col items-center">
@@ -203,69 +203,156 @@ function VSL() {
   );
 }
 
-function BigIdea() {
-  const items = [
-    { label: "Restaurante", icon: Store },
-    { label: "Farmácia", icon: Briefcase },
-    { label: "Mercado", icon: ShoppingBag },
-    { label: "Pet shop", icon: Heart },
-    { label: "Gás", icon: Zap },
-    { label: "Pizzaria", icon: Utensils },
+function EconomyNarrative() {
+  const cases = [
+    { name: "UBER", desc: "Cresceu sem precisar possuir os carros." },
+    { name: "AIRBNB", desc: "Rede de hospedagem sem construir hotéis." },
+    { name: "IFOOD", desc: "Movimenta bilhões sem possuir restaurantes." },
+    { name: "AMAZON", desc: "Vende milhões sem fabricar os produtos." },
   ];
   return (
     <section className="relative py-24 md:py-32 bg-white/[0.02]">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center">
-          <Tag>A Grande Ideia</Tag>
-          <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-            VOCÊ NÃO PRECISA SER DONO DO RESTAURANTE <br />
-            <span className="text-neon">PARA GANHAR QUANDO ELE VENDE.</span>
-          </h2>
-        </div>
-
-        <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-          {items.map((item) => (
-            <div key={item.label} className="group border border-white/10 bg-black/40 p-6 text-center transition-all hover:border-[var(--neon)]/60">
-              <item.icon className="mx-auto h-8 w-8 text-[var(--neon)]" />
-              <div className="mt-4 font-display text-xs uppercase tracking-widest">{item.label}</div>
+        <Tag>Nova Economia</Tag>
+        <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {cases.map((c) => (
+            <div key={c.name} className="border border-white/10 p-8 bg-black/40">
+              <div className="font-display text-2xl text-[var(--neon)] mb-2">{c.name}</div>
+              <p className="text-sm text-foreground/60">{c.desc}</p>
             </div>
           ))}
         </div>
-
-        <div className="mt-16 mx-auto max-w-3xl space-y-6 text-center text-lg text-foreground/75 md:text-xl">
-          <p>Esses estabelecimentos já vendem todos os dias.</p>
-          <p>O Executivo Bora Zé não precisa abrir nenhum deles.</p>
-          <p className="font-display uppercase text-[var(--neon)] tracking-tight">Seu papel é conectá-los à plataforma.</p>
-          <p>Uma nova forma de participar do crescimento do delivery e do comércio local construindo uma carteira de estabelecimentos e uma receita que pode se tornar recorrente.</p>
+        
+        <div className="mt-24 text-center">
+          <h3 className="font-display text-3xl md:text-5xl uppercase leading-tight">
+            AGORA PENSE NA <span className="text-neon italic">SUA CIDADE.</span>
+          </h3>
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {["Almoço", "Medicamento", "Botijão de Gás", "Ração", "Pizza", "Mercado"].map(item => (
+              <div key={item} className="text-xs font-mono uppercase tracking-widest text-foreground/40 border border-white/5 py-4">
+                {item}
+              </div>
+            ))}
+          </div>
+          <p className="mt-16 text-xl md:text-2xl text-foreground/80 max-w-4xl mx-auto leading-relaxed">
+            Essas vendas já estão acontecendo todos os dias. A oportunidade não está necessariamente em abrir cada um desses negócios.
+          </p>
+          <div className="mt-12 py-10 border-y border-white/10">
+            <h4 className="font-display text-4xl md:text-6xl text-neon uppercase italic">
+              ESTÁ EM PARTICIPAR DA CONEXÃO ENTRE QUEM VENDE E QUEM COMPRA.
+            </h4>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function Story() {
+function PortfolioOpportunity() {
+  const categories = [
+    { title: "FARMÁCIA", desc: "Ganhar com vendas de medicamentos sem precisar abrir uma farmácia.", image: "💊" },
+    { title: "GÁS", desc: "Ganhar com botijões vendidos sem precisar ter uma distribuidora de gás.", image: "🔥" },
+    { title: "RESTAURANTES", desc: "Ganhar com pedidos de comida sem precisar ter cozinha, garçons ou estoque.", image: "🍔" },
+    { title: "PET SHOP", desc: "Ganhar com produtos para pets sem precisar abrir uma loja.", image: "🐾" },
+    { title: "MERCADO", desc: "Ganhar com compras de supermercado sem precisar possuir um mercado.", image: "🛒" },
+    { title: "PIZZARIA", desc: "Ganhar com pizzas vendidas sem precisar produzir uma única pizza.", image: "🍕" },
+  ];
+
   return (
     <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-6">
-        <Tag>Oportunidade</Tag>
-        <div className="mt-10 space-y-5 text-xl text-foreground/80 md:text-2xl">
-          <p>As grandes redes digitais precisaram de pessoas para construir oferta, demanda e distribuição.</p>
-          <p className="text-[var(--neon)] font-medium">O Executivo Bora Zé participa exatamente dessa fase de expansão da plataforma.</p>
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center mb-20">
+          <Tag>A Grande Oportunidade</Tag>
+          <h2 className="mt-8 font-display uppercase leading-[0.9] text-5vw md:text-7xl lg:text-8xl">
+            E SE VOCÊ PUDESSE GANHAR COM TUDO ISSO... <br/>
+            <span className="text-neon italic">SEM PRECISAR SER DONO DE NADA DISSO?</span>
+          </h2>
         </div>
 
-        <div className="mt-12 border-l-2 border-[var(--neon)] pl-6">
-          <p className="text-lg text-foreground/70 md:text-xl">
-            A nova economia criou uma nova maneira de participar de mercados sem precisar possuir os ativos que movimentam.
-          </p>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {categories.map((cat) => (
+            <div key={cat.title} className="group relative overflow-hidden border border-white/10 bg-black/40 p-8 transition-all hover:border-[var(--neon)]/60">
+              <div className="text-6xl mb-6 opacity-80 group-hover:scale-110 transition-transform">{cat.image}</div>
+              <h3 className="font-display text-2xl mb-4 text-neon">{cat.title}</h3>
+              <p className="text-foreground/70 leading-relaxed">{cat.desc}</p>
+            </div>
+          ))}
         </div>
 
-        <h2 className="mt-20 font-display uppercase leading-[0.9] text-5xl md:text-7xl">
-          Construa sua rede
-          <br />
-          <span className="text-foreground/40">e participe do crescimento</span>
-          <br />
-          <span className="text-neon">na sua região.</span>
+        <div className="mt-24 text-center space-y-12">
+          <div className="inline-block border-2 border-[var(--neon)] p-8 md:p-12 bg-black">
+             <h3 className="font-display text-3xl md:text-5xl uppercase text-white mb-6">VOCÊ NÃO PRECISA SER DONO DO NEGÓCIO.</h3>
+             <p className="text-neon font-display text-2xl md:text-4xl italic uppercase">PRECISA PARTICIPAR DA REDE QUE MOVIMENTA ESSES NEGÓCIOS.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MechanismRevelation() {
+  return (
+    <section className="relative py-24 md:py-32 bg-[var(--violet)]/5">
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <Tag>A Revelação</Tag>
+        <h2 className="mt-8 font-display text-4xl md:text-6xl uppercase leading-tight mb-12">
+          FOI PARA ISSO QUE CRIAMOS UMA NOVA FORMA DE PARTICIPAR DESSE MERCADO.
         </h2>
+        
+        <div className="mt-16 space-y-8">
+           <h3 className="font-display text-7xl md:text-9xl text-neon italic">EXECUTIVO BORA ZÉ</h3>
+           <div className="max-w-2xl mx-auto space-y-6 text-xl md:text-2xl text-foreground/80 leading-relaxed">
+             <p>
+               O Executivo ajuda restaurantes, farmácias, mercados, pet shops, distribuidoras de gás e outros negócios locais a entrarem na plataforma e, com isso, constrói sua própria carteira de estabelecimentos.
+             </p>
+             <p className="text-neon font-display uppercase tracking-tight">
+               Quanto maior e mais produtiva essa carteira se torna, maior pode ser sua participação nos resultados gerados por ela.
+             </p>
+           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContrastSection() {
+  const contrasts = [
+    {
+      title: "PARA GANHAR COM UMA FARMÁCIA",
+      items: ["Abrir uma farmácia", "Comprar estoque", "Contratar farmacêutico", "Alugar ponto", "Investir centenas de milhares"],
+      isNegative: true
+    },
+    {
+      title: "PARA GANHAR COM DISTRIBUIDORA DE GÁS",
+      items: ["Comprar botijões", "Ter depósito", "Comprar veículos", "Estrutura logística"],
+      isNegative: true
+    },
+    {
+      title: "PARA GANHAR COM RESTAURANTES",
+      items: ["Montar cozinha", "Contratar funcionários", "Comprar equipamentos", "Produzir comida"],
+      isNegative: true
+    }
+  ];
+
+  return (
+    <section className="relative py-24 md:py-32 border-y border-white/5">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 lg:grid-cols-3">
+          {contrasts.map((c) => (
+            <div key={c.title} className="border border-white/10 p-8 bg-black/20">
+              <h4 className="font-display text-lg mb-8 text-white/50">{c.title}</h4>
+              <div className="text-[var(--neon)] font-display text-xl mb-6 italic">VOCÊ NÃO PRECISA:</div>
+              <ul className="space-y-4">
+                {c.items.map(item => (
+                  <li key={item} className="flex items-center gap-3 text-foreground/60 line-through decoration-red-500/50">
+                    <X className="h-4 w-4 text-red-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -329,7 +416,7 @@ function Opportunity() {
           </div>
           <div className="space-y-5 text-base text-foreground/75 md:text-lg">
             <p>
-              O Bora Zé está criando uma rede nacional de delivery e mobilidade urbana focada em
+              O Bora Zé está criando uma rede nacional de delivery e comércio local focada em
               cidades de todos os tamanhos.
             </p>
             <p>
@@ -566,7 +653,7 @@ function SliderRow({
 }
 
 function Market() {
-  const items = ["Mototaxistas", "Restaurantes", "Farmácias", "Mercados", "Lojas", "Entregas", "Corridas", "Clientes"];
+  const items = ["Restaurantes", "Farmácias", "Mercados", "Lojas", "Pet Shops", "Distribuidoras", "Comércio Local", "Clientes"];
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
@@ -700,86 +787,6 @@ function WhatYouGet() {
   );
 }
 
-function DualRevenue() {
-  const columns = [
-    {
-      icon: ShoppingBag,
-      title: "Delivery",
-      subtitle: "Restaurantes, farmácias, mercados, lojas locais",
-      items: [
-        "Recorrência sobre cada pedido processado",
-        "Participação na mensalidade dos estabelecimentos",
-        "Bônus de R$ 97 por ativação de novos parceiros",
-      ],
-    },
-    {
-      icon: Bike,
-      title: "Mototáxi",
-      subtitle: "Corridas urbanas e entregas expressas",
-      items: [
-        "Comissão sobre cada corrida realizada na rede",
-        "Participação nas entregas expressas (moto delivery)",
-        "Bônus por novos mototaxistas qualificados",
-      ],
-    },
-  ];
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center">
-          <Tag>Duas frentes</Tag>
-          <h2 className="mt-5 font-display uppercase leading-[0.9] text-5xl md:text-7xl">
-            Duas frentes de receita,<br />
-            <span className="text-neon">um único executivo.</span>
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-foreground/70 md:text-xl">
-            Como Executivo, você atua no coração da economia local. Conecta o delivery ao comércio e a logística aos mototaxistas, ganhando em cada ponta.
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {columns.map(({ icon: Icon, title, subtitle, items }) => (
-            <div
-              key={title}
-              className="group relative overflow-hidden border border-white/10 bg-black/40 p-8 backdrop-blur-xl transition-all hover:border-[var(--neon)]/60 md:p-10"
-              style={{ boxShadow: "0 0 60px oklch(0.45 0.27 305 / 0.08)" }}
-            >
-              <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[var(--neon)]/5 blur-3xl transition-opacity group-hover:bg-[var(--neon)]/15" />
-              <div className="relative">
-                <div className="grid h-14 w-14 place-items-center border border-[var(--neon)]/40 bg-[var(--neon)]/10">
-                  <Icon className="h-7 w-7 text-[var(--neon)]" />
-                </div>
-                <h3 className="mt-6 font-display uppercase text-4xl md:text-5xl">
-                  {title}
-                </h3>
-                <p className="mt-2 text-sm text-foreground/60 md:text-base">{subtitle}</p>
-                <ul className="mt-8 space-y-4">
-                  {items.map((it) => (
-                    <li key={it} className="flex items-start gap-3">
-                      <Check className="mt-1 h-5 w-5 flex-shrink-0 text-[var(--neon)]" />
-                      <span className="text-base text-foreground/85 md:text-lg">{it}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div
-          className="mx-auto mt-12 max-w-4xl border-2 border-[var(--neon)]/60 bg-black/40 px-8 py-8 text-center"
-          style={{ boxShadow: "0 0 60px oklch(0.88 0.31 142 / 0.15)" }}
-        >
-          <p className="font-display uppercase leading-tight text-2xl md:text-4xl">
-            O Executivo atua no centro da{" "}
-            <span className="text-neon">conexão comercial</span> da sua região,
-            monetizando cada transação.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Pricing() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, min: 0, seg: 0 });
@@ -949,7 +956,7 @@ function FAQ() {
     },
     {
       q: "Existe exclusividade territorial?",
-      a: "Não. O Executivo constrói sua própria carteira e não possui exclusividade municipal, permitindo que múltiplos executivos atuem na mesma região focando em seus próprios relacionamentos comerciais.",
+      a: "O Executivo constrói sua própria carteira de estabelecimentos e não possui amarras geográficas limitantes, permitindo que você foque em seus próprios relacionamentos comerciais.",
     },
     {
       q: "Como funciona a regra de 6 estabelecimentos a cada 90 dias?",
@@ -1020,169 +1027,27 @@ function FAQ() {
 /* ============================================================== */
 
 
-function Authority() {
-  const brands = ["UBER", "iFOOD", "99", "AIRBNB", "SPOTIFY"];
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <Tag>Economia de plataforma</Tag>
-        <h2 className="mt-5 max-w-4xl font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          A nova economia criou uma nova maneira de <span className="text-neon">participar de mercados</span>.
-        </h2>
-        <p className="mt-6 max-w-2xl text-base text-foreground/70 md:text-lg">
-          Uber conecta motoristas e passageiros. Airbnb conecta imóveis e hóspedes. iFood conecta estabelecimentos e consumidores.
-          O Bora Zé conecta consumidores ao comércio e aos serviços locais. O Executivo ajuda a construir essa rede.
-        </p>
-
-        {/* Logos in grayscale */}
-        <div className="mt-12 grid grid-cols-2 gap-px border border-white/10 bg-white/10 sm:grid-cols-3 md:grid-cols-5">
-          {brands.map((b, i) => (
-            <div
-              key={b}
-              className="flex h-24 items-center justify-center bg-background font-display text-xl uppercase tracking-[0.15em] text-foreground/40 transition-all hover:text-foreground md:text-2xl"
-              style={{
-                animation: `fade-in 0.6s ease-out ${i * 0.08}s both`,
-              }}
-            >
-              {b}
-            </div>
-          ))}
-        </div>
-
-        <p className="mx-auto mt-10 max-w-3xl text-center font-display text-xl uppercase leading-snug tracking-tight text-foreground/80 md:text-3xl">
-          Cada uma delas <span className="text-neon">domina seu mercado</span> sem possuir os
-          ativos que movimentam.
-        </p>
-
-        {/* Asset cards */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {[
-            { name: "Uber", text: "não possui os carros" },
-            { name: "Airbnb", text: "não possui os imóveis" },
-            { name: "Spotify", text: "não possui os artistas" },
-            { name: "iFood", text: "não possui os restaurantes" },
-            { name: "99", text: "não possui os veículos" },
-          ].map((c, i) => (
-            <div
-              key={c.name}
-              className="group relative overflow-hidden border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all hover:border-[var(--neon)]/60"
-              style={{ animation: `fade-in 0.5s ease-out ${0.4 + i * 0.08}s both` }}
-            >
-              <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/40">
-                {String(i + 1).padStart(2, "0")}
-              </div>
-              <div className="mt-4 font-display text-2xl uppercase tracking-tight">
-                {c.name}
-              </div>
-              <div className="mt-2 text-sm text-foreground/65">{c.text}</div>
-              <div className="mt-4 h-px w-full bg-gradient-to-r from-[var(--neon)]/60 to-transparent" />
-            </div>
-          ))}
-        </div>
-
-        {/* Highlight block */}
-        <div
-          className="relative mt-14 overflow-hidden border-2 border-[var(--neon)] p-8 md:p-12"
-          style={{ boxShadow: "0 0 40px oklch(0.88 0.31 142 / 0.2)" }}
-        >
-          <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[var(--neon)]/10 blur-3xl" />
-          <p className="relative font-display uppercase leading-[1.05] text-2xl tracking-tight md:text-4xl">
-            Quem controla a plataforma <span className="text-neon">controla a conexão</span> entre
-            quem oferece e quem procura.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function InterfaceControl() {
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <Tag>A nova economia</Tag>
-            <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-              Quem controla a interface <span className="text-neon">controla o mercado</span>.
-            </h2>
-            <div className="mt-8 space-y-3">
-              {["Mototaxistas", "Farmácias", "Restaurantes", "Mercados", "Clientes"].map((x) => (
-                <div key={x} className="flex items-center gap-3 font-display text-sm uppercase tracking-[0.08em] text-foreground/80">
-                  <Network className="h-4 w-4 text-[var(--neon)]" />
-                  {x}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="relative overflow-hidden border border-white/10">
-            <img
-              src={interfaceControl}
-              alt="Aplicativo conectando mototaxistas, farmácias, restaurantes, mercados e clientes"
-              loading="lazy"
-              width={1400}
-              height={1000}
-              className="h-auto w-full object-cover"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-background/40 via-transparent to-transparent" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PlatformEconomy() {
-  return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-          <div className="relative overflow-hidden border border-white/10 lg:order-first">
-            <img
-              src={platformEconomy}
-              alt="Economia de plataformas conectando oferta e demanda globalmente"
-              loading="lazy"
-              width={1600}
-              height={900}
-              className="h-auto w-full object-cover"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-bl from-background/30 via-transparent to-transparent" />
-          </div>
-          <div>
-            <Tag>Economia de plataforma</Tag>
-            <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-              As maiores empresas da nova economia <span className="text-neon">não possuem os ativos</span>.
-            </h2>
-            <p className="mt-8 max-w-md text-lg text-foreground/75">
-              Quem controla a <span className="text-foreground">conexão entre oferta e demanda</span> controla
-              o mercado.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 
 function LandingPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background font-sans text-foreground selection:bg-[var(--neon)] selection:text-black">
       <SiteNav />
       <Hero />
-      <Authority />
       <Divider />
-      <BigIdea />
-      <Story />
-      <Opportunity />
+      <EconomyNarrative />
+      <PortfolioOpportunity />
+      <ContrastSection />
+      <MechanismRevelation />
       <HowItWorks />
+      <Divider />
       <Benefits />
-      <InterfaceControl />
-      <PlatformEconomy />
+      <Opportunity />
       <Market />
       <Simulator />
-      <DualRevenue />
+      <PortfolioLogic />
       <Comparison />
+      <WhatYouGet />
       <Pricing />
       <Guarantee />
       <FAQ />

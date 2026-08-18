@@ -1733,6 +1733,7 @@ function LandingPage() {
       <SiteNav />
       <StatsBar />
       <Hero />
+      <WhoIsBoraze />
       <Authority />
       <Divider />
       <BigIdea />

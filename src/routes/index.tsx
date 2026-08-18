@@ -1755,7 +1755,6 @@ function LandingPage() {
       <NextSteps />
       <Pricing />
       <Guarantee />
-      <WhoIsBoraze />
       <FAQ />
       <Future />
       <VideoSection />

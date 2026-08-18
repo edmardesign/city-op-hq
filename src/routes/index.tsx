@@ -743,33 +743,6 @@ function SliderRow({
     </div>
   );
 }
-  return (
-    <div>
-      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
-        {label}
-      </div>
-      <div className="mt-3 flex items-baseline gap-2">
-        <span className="font-display text-4xl uppercase leading-none text-neon md:text-5xl">
-          {value}
-        </span>
-        <span className="text-xs uppercase tracking-[0.12em] text-foreground/60">{suffix}</span>
-      </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-5 w-full accent-[var(--neon)]"
-      />
-      <div className="mt-1 flex justify-between font-mono text-[10px] text-foreground/40">
-        <span>{min}</span>
-        <span>{max}</span>
-      </div>
-    </div>
-  );
-}
 
 function Market() {
   const items = ["Mototaxistas", "Restaurantes", "Farmácias", "Mercados", "Lojas", "Entregas", "Corridas", "Clientes"];

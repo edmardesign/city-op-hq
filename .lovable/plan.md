@@ -1,53 +1,28 @@
-# Plano de Transformação: EXECUTIVO BORA ZÉ
+# Plano de Reversão e Adaptação: Executivo Bora Zé (Direct Response)
 
-Redesenhar a landing page atual (Embaixador) para o novo produto **EXECUTIVO BORA ZÉ**, focando em expansão comercial e receita recorrente, mantendo o alto padrão visual e tecnológico.
+Este plano visa reverter a landing page para sua estrutura original de alta performance (Direct Response), realizando apenas as alterações cirúrgicas necessárias para pivotar o produto de "Embaixador" para "Executivo Bora Zé", conforme as novas diretrizes.
 
-## 🏗️ UI Architect
+## Alterações de UI/UX
 
-- **Hero & Cabeçalho**:
-  - Inserir **Banner de Pré-lançamento** no topo com contador regressivo real para 15/09/2026 (Timezone America/Bahia).
-  - Atualizar `SiteNav` e `SiteFooter`: remover "Quero minha cidade" por "QUERO SER EXECUTIVO".
-  - Refatorar `Hero`: Headline "TRANSFORME O COMÉRCIO LOCAL EM UMA CARTEIRA DE RENDA RECORRENTE". Adicionar indicadores de R$97 (ativação), 2,5% (vendas) e R$497 (adesão).
-- **Novas Seções**:
-  - **Grande Ideia**: "Você não precisa ser dono do restaurante para ganhar". Cards visuais de Restaurante, Farmácia, Mercado, etc.
-  - **Como Funciona**: 4 passos (Torne-se Executivo -> Encontre Negócios -> Ative -> Construa Carteira).
-  - **Lógica dos Primeiros 5**: Comparativo visual entre R$497 (adesão) e R$485 (5 ativações).
-  - **Visualização de Carteira**: Cards simulando ganhos recorrentes de estabelecimentos reais (Restaurante do João, etc.).
-  - **Painel do Executivo**: Mockup premium mostrando métricas de carteira, comissões e status.
-  - **Regra 6 em 90**: Seção explicativa com barra de progresso visual.
-- **Simulador de Ganhos**:
-  - Criar `PortfolioSimulator`: Sliders para "Qtd Estabelecimentos" (5-100) e "Venda Média" (R$2k-R$30k).
-  - Toggle de período: 1º Ano (2,5%), 2º Ano (1%), 3º Ano+ (0,5%).
-- **Formulário**:
-  - Atualizar `QualificationForm`: Novos campos focados em vendas e potencial de ativação. Remover campos de capital para licença territorial.
+- **Reversão Estrutural**: Remover seções explicativas excessivas adicionadas recentemente e restaurar a ordem e o ritmo da página original.
+- **Hero Section**: Atualizar a headline para uma promessa de faturamento direto: "FATURE R$4.500 POR MÊS COM DELIVERY + COMÉRCIO LOCAL NA SUA CIDADE". Remover menções a "Bora Zé" ou "Executivo" na headline.
+- **VSL Vertical (9:16)**: Posicionar o vídeo principal imediatamente abaixo da subheadline, com proporção 9:16 centralizada (tanto desktop quanto mobile).
+- **Simulador**: Manter o design e interatividade, mas ajustar a lógica para "Quantidade de Estabelecimentos" e "Vendas Médias", focando no resultado de renda mensal e anual (sem destacar percentuais técnicos).
+- **Contador Regressivo**: Implementar na seção de oferta um contador real para 15/09/2026 (America/Bahia).
+- **Remoção de Formulário**: Eliminar completamente o formulário de qualificação/candidatura. O fluxo será direto para o checkout.
+- **CTAs**: Atualizar todos os botões para ações de compra ("QUERO COMEÇAR AGORA", etc.) e direcionar para a seção de oferta ou checkout.
 
-## 🗄️ Supabase Engineer (Lovable Cloud)
+## Alterações de Conteúdo (Copy)
 
-- **Tabela de Leads**:
-  - Tabela `executive_leads` com: nome, whatsapp, email, estado, cidade, experiência comercial, potencial_90d, data_inicio.
-  - RLS: Apenas `service_role` (via server function) ou permissões restritas.
-- **Persistência**:
-  - Integrar formulário com Lovable Cloud para garantir que leads não sejam perdidos.
+- **Pivot de Produto**: Substituir "Embaixador" por "Executivo Bora Zé" apenas onde a revelação do produto ocorre naturalmente.
+- **Remoção de Exclusividade**: Retirar todas as menções a exclusividade territorial, vagas por município ou "dono da cidade".
+- **Narrativa Original**: Preservar a história sobre a nova economia (Uber, iFood, etc.) e a conexão do comércio local.
+- **Ocultação de Detalhes Técnicos**: Remover o destaque de "R$97 por ativação" ou percentuais de comissionamento (2,5%, 1%, etc.) da comunicação principal, focando no potencial de ganhos.
+- **Seção de Oferta**: Revelar o investimento de R$497 apenas no final da página, listando os benefícios incluídos (treinamento, ferramentas, suporte).
 
-## 🔍 Code Auditor
+## Detalhes Técnicos
 
-- **Remoção de Legado**: Varredura completa para remover termos proibidos ("posse da cidade", "exclusividade", "vaga por município", "50% da receita").
-- **Tipagem**: Garantir que novos estados do simulador e formulário sejam estritamente tipados.
-- **Performance**: Contador regressivo deve ser eficiente e não causar re-renders desnecessários.
-
-## 📈 SEO Optimizer
-
-- **Metadados**: Atualizar título e descrição para foco em "Executivo Bora Zé" e "Renda Recorrente com Comércio Local".
-- **JSON-LD**: Atualizar esquema de Produto/Serviço.
-
-## 🚀 Deploy Ops
-
-- **Validação**: Testar contador regressivo em diferentes fusos horários (forçando America/Bahia).
-- **Build**: Garantir que a ocultação automática pós-contagem funcione.
-
----
-### Detalhes Técnicos
-
-- **Contador**: Utilizar `useEffect` com `setInterval` e data absoluta `new Date("2026-09-15T00:00:00-03:00")`.
-- **Estilos**: Manter `oklch` para cores e tokens semânticos `var(--neon)`, `var(--violet)`.
-- **Imagens**: Reutilizar `heroEcosystem`, `interfaceControl` e `platformEconomy` onde a narrativa ainda fizer sentido.
+- **Componentes**: Refatorar `Hero`, `VSL`, `Simulator`, `Pricing` e `LandingPage` (assembly).
+- **Remoção**: Deletar componentes como `QualificationForm`, `Profiles`, `RulesSection`, `CareerEvolution` e `StatsBar` (se não existiam na original ou se conflitam com o novo fluxo).
+- **Navegação**: Ajustar `SiteNav` para refletir o novo fluxo de Direct Response.
+- **Timezone**: Garantir que o contador use `new Date("2026-09-15T00:00:00-03:00")` para consistência.

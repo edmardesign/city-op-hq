@@ -551,32 +551,34 @@ function Profiles() {
   const cards = [
     {
       icon: Rocket,
-      title: "Empreendedor local",
-      text: "Você já teve negócio próprio ou está buscando um. Sabe que operação local exige presença e relacionamento. Quer construir algo escalável sem investir centenas de milhares de reais em ponto físico.",
+      title: "EMPREENDEDOR",
+      text: "Pessoa que busca construir uma nova fonte de receita sem precisar abrir estabelecimento próprio.",
     },
     {
       icon: Handshake,
-      title: "Comerciante ou lojista",
-      text: "Você já tem contato com restaurantes, farmácias, mercados ou mototaxistas da sua cidade. Aproveita essa rede para trazer o app pra sua região com muito mais velocidade que qualquer estranho.",
+      title: "PROFISSIONAL DE VENDAS",
+      text: "Pessoa que já possui habilidade comercial e relacionamento.",
+    },
+    {
+      icon: Users,
+      title: "COMERCIANTE BEM RELACIONADO",
+      text: "Já conhece empresários e o comércio local e pode transformar relacionamento em carteira.",
     },
     {
       icon: Briefcase,
-      title: "Em transição de carreira",
-      text: "Cansou do CLT, do comissionamento apertado ou de negócio com custo alto e retorno lento. Quer algo digital, com estrutura pronta, receita recorrente e liberdade geográfica.",
+      title: "QUEM BUSCA RENDA COMPLEMENTAR",
+      text: "Pode desenvolver a atividade sem necessariamente abandonar imediatamente sua ocupação atual.",
     },
   ];
   return (
     <section className="relative py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <Tag>Perfil do Embaixador</Tag>
+        <Tag>Público-alvo</Tag>
         <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
-          Esse modelo é <span className="text-neon">para você?</span>
+          QUEM PODE SER <span className="text-neon">EXECUTIVO BORA ZÉ?</span>
         </h2>
-        <p className="mt-6 max-w-3xl text-lg text-foreground/70">
-          Os Embaixadores BoraZé! não vêm de tecnologia. Vêm de perfis muito específicos que combinam com o modelo.
-          Se você se enquadra em algum destes, o próximo passo é conversar com o time.
-        </p>
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {cards.map(({ icon: Icon, title, text }) => (
             <div
               key={title}
@@ -591,6 +593,132 @@ function Profiles() {
               <p className="mt-4 text-sm text-foreground/70 md:text-base">{text}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DashboardMockup() {
+  return (
+    <section className="relative py-24 md:py-32 bg-white/[0.02]">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="text-center">
+          <Tag>Tecnologia</Tag>
+          <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+            SUA CARTEIRA <span className="text-neon">NA PALMA DA MÃO.</span>
+          </h2>
+          <p className="mt-6 text-foreground/70">O Executivo terá acesso exclusivamente aos seus próprios estabelecimentos.</p>
+        </div>
+
+        <div className="mt-16 mx-auto max-w-4xl border border-white/10 bg-black/60 p-6 md:p-10 shadow-2xl">
+          <div className="grid gap-6 md:grid-cols-4 mb-10">
+            {[
+              { l: "Minha carteira", v: "24", s: "estabelecimentos" },
+              { l: "Vendas (30 dias)", v: "R$ 142.000", s: "" },
+              { l: "Comissões", v: "R$ 3.550", s: "" },
+              { l: "Status", v: "ATIVO", s: "", highlight: true },
+            ].map((stat) => (
+              <div key={stat.l} className="border border-white/5 bg-white/[0.02] p-4">
+                <div className="text-[10px] uppercase tracking-widest text-foreground/40 mb-2">{stat.l}</div>
+                <div className={`font-display text-xl ${stat.highlight ? "text-neon" : "text-foreground"}`}>{stat.v}</div>
+                {stat.s && <div className="text-[9px] text-foreground/30">{stat.s}</div>}
+              </div>
+            ))}
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-white/10 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40">
+                  <th className="pb-4">Estabelecimento</th>
+                  <th className="pb-4">Ativação</th>
+                  <th className="pb-4">Vendas</th>
+                  <th className="pb-4">Vigência</th>
+                  <th className="pb-4 text-right">Comissão</th>
+                </tr>
+              </thead>
+              <tbody className="text-[11px]">
+                {[
+                  { n: "Restaurante Central", d: "12/05/26", v: "R$ 18.400", p: "2,5%", c: "R$ 460" },
+                  { n: "Farmácia Preço Baixo", d: "15/05/26", v: "R$ 22.100", p: "2,5%", c: "R$ 552" },
+                  { n: "Mercado do Povo", d: "20/05/26", v: "R$ 31.000", p: "2,5%", c: "R$ 775" },
+                ].map((row) => (
+                  <tr key={row.n} className="border-b border-white/5">
+                    <td className="py-4 font-bold">{row.n}</td>
+                    <td className="py-4 text-foreground/60">{row.d}</td>
+                    <td className="py-4 text-foreground/60">{row.v}</td>
+                    <td className="py-4 text-[var(--neon)]">{row.p}</td>
+                    <td className="py-4 text-right font-display text-[var(--neon)]">{row.c}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RulesSection() {
+  return (
+    <section className="relative py-24 md:py-32">
+      <div className="mx-auto max-w-4xl px-6">
+        <div className="border-2 border-[var(--violet)]/40 p-8 md:p-12 bg-black/40">
+          <Tag>Regras de atividade</Tag>
+          <h2 className="mt-5 font-display uppercase leading-[0.9] text-3xl md:text-5xl">
+            QUEM CONSTRÓI, <span className="text-neon">CONTINUA GANHANDO.</span>
+          </h2>
+          <p className="mt-6 text-lg text-foreground/75 leading-relaxed">
+            O Programa Executivo Bora Zé foi criado para parceiros comerciais ativos. 
+            Para manter seu status ativo:
+          </p>
+          
+          <div className="mt-10 p-6 bg-white/[0.03] border border-white/10">
+            <div className="flex justify-between items-end mb-4">
+              <div className="font-display text-4xl text-neon">6</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/40">novos estabelecimentos / 90 dias</div>
+            </div>
+            
+            <div className="h-2 w-full bg-white/10 overflow-hidden">
+              <div className="h-full bg-[var(--neon)] w-[66%]" />
+            </div>
+            
+            <div className="mt-4 flex justify-between font-mono text-[10px] uppercase tracking-widest">
+              <span>4 / 6 ativações</span>
+              <span className="text-[var(--neon)]">Faltam 2 para sua meta</span>
+            </div>
+          </div>
+          
+          <p className="mt-8 text-sm text-foreground/60">
+            A regra de 6 ativações a cada 90 dias incentiva a expansão contínua da sua carteira e garante 
+            a sustentabilidade do programa para todos os parceiros.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CareerEvolution() {
+  return (
+    <section className="relative py-24 md:py-32 bg-white/[0.01]">
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <Tag>Evolução</Tag>
+        <h2 className="mt-5 font-display uppercase leading-[0.9] text-4xl md:text-6xl">
+          QUER IR <span className="text-neon">ALÉM?</span>
+        </h2>
+        <p className="mt-8 text-lg text-foreground/75 mx-auto max-w-2xl">
+          O Executivo constrói sua própria carteira. Executivos que desejarem ampliar sua atuação 
+          poderão futuramente se qualificar para oportunidades como Embaixador Bora Zé, 
+          assumindo uma operação territorial.
+        </p>
+        
+        <div className="mt-12 flex flex-col items-center gap-4">
+          <a href="#cadastro" className="border-2 border-white/20 px-8 py-4 font-display text-sm uppercase tracking-widest hover:border-[var(--neon)] hover:text-[var(--neon)] transition-all">
+            CONHECER O PLANO DE CARREIRA BORA ZÉ
+          </a>
         </div>
       </div>
     </section>

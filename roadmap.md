@@ -1,11 +1,10 @@
-# Redesign Bora Zé
+# Correção das landings Bora Zé
 
-- [x] Criar identidade compartilhada alinhada à marca atual
-- [x] Preservar `/` como campanha Executivo e criar `/executivo`
-- [x] Criar `/embaixador` com qualificação financeira e pré-cadastro
-- [x] Criar `/comercio` com cadastro curto
-- [x] Criar `/mototaxi` com cadastro curto
-- [x] Padronizar WhatsApp oficial e mensagens por origem
-- [x] Preservar UTMs nos redirecionamentos de conversão
-- [x] Manter navegação entre campanhas apenas no rodapé
-- [x] Validar desktop, mobile, formulários e páginas legais
+- [ ] Substituir logo e imagens antigas pelos uploads oficiais
+- [ ] Criar cadastro progressivo compartilhado
+- [ ] Recuperar estratégia comercial do Executivo
+- [ ] Recuperar sequência persuasiva do Embaixador
+- [ ] Reforçar conversão do Comércio
+- [ ] Reforçar conversão do Mototáxi
+- [ ] Validar rotas, formulários, WhatsApp, desktop e mobile
+- [ ] Conferir build, tipos, lint e logs

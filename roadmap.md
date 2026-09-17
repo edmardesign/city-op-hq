@@ -1,10 +1,10 @@
 # Correção das landings Bora Zé
 
-- [ ] Substituir logo e imagens antigas pelos uploads oficiais
-- [ ] Criar cadastro progressivo compartilhado
-- [ ] Recuperar estratégia comercial do Executivo
-- [ ] Recuperar sequência persuasiva do Embaixador
-- [ ] Reforçar conversão do Comércio
-- [ ] Reforçar conversão do Mototáxi
-- [ ] Validar rotas, formulários, WhatsApp, desktop e mobile
-- [ ] Conferir build, tipos, lint e logs
+- [x] Substituir logo e imagens antigas pelos uploads oficiais
+- [x] Criar cadastro progressivo compartilhado
+- [x] Recuperar estratégia comercial do Executivo
+- [x] Recuperar sequência persuasiva do Embaixador
+- [x] Reforçar conversão do Comércio
+- [x] Reforçar conversão do Mototáxi
+- [x] Validar rotas, formulários, WhatsApp, desktop e mobile
+- [x] Conferir build, tipos, lint e logs

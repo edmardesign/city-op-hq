@@ -7,7 +7,7 @@ export const Route = createFileRoute("/executivo")({
     landingHead({
       title: "Executivo Bora Zé — Ganhe com negócios locais",
       description:
-        "Conheça o programa Executivo Bora Zé e desenvolva uma carteira de negócios locais conectados à plataforma.",
+        "Construa sua oportunidade conectando negócios locais a uma plataforma pronta, sem precisar ser dono de uma loja.",
       canonicalPath: "/executivo",
     }),
   component: ExecutivePage,

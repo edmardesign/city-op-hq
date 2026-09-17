@@ -11,17 +11,22 @@ import {
   Store,
   UtensilsCrossed,
 } from "lucide-react";
-import executiveHero from "@/assets/executivo-hero.jpg";
-import ambassadorHero from "@/assets/embaixador-hero.jpg";
-import commerceHero from "@/assets/comercio-hero.jpg";
-import motoHero from "@/assets/mototaxi-hero.jpg";
-import interfaceControl from "@/assets/interface-control.jpg";
+import smartBusiness from "@/assets/executivo-negocio-inteligente.png.asset.json";
+import marketImage from "@/assets/mercado-boraze.webp.asset.json";
+import pharmacyImage from "@/assets/farmacia-boraze.webp.asset.json";
+import deliveryImage from "@/assets/delivery-boraze.webp.asset.json";
+import motoImage from "@/assets/mototaxi-boraze.webp.asset.json";
+import gasImage from "@/assets/gas-agua-boraze.webp.asset.json";
+import appPharmacy from "@/assets/app-farmacia-boraze.png.asset.json";
+import appHome from "@/assets/app-home-boraze.png.asset.json";
+import appDelivery from "@/assets/app-delivery-boraze.png.asset.json";
 import {
   CampaignHero,
   CampaignShell,
   CheckList,
+  ConversionSection,
   FeatureGrid,
-  LeadForm,
+  MediaBand,
   PlatformMark,
   ProcessSteps,
   SectionHeading,
@@ -31,71 +36,69 @@ import {
 const verticals = [
   {
     title: "Delivery",
-    description: "Restaurantes e lanchonetes conectados a clientes locais.",
+    description: "Pedidos de restaurantes e lanchonetes.",
     icon: <UtensilsCrossed />,
   },
   {
     title: "Mercado",
-    description: "Compras do dia a dia disponíveis pelo aplicativo.",
+    description: "Compras que fazem parte da rotina local.",
     icon: <ShoppingBasket />,
   },
   {
     title: "Farmácia",
-    description: "Mais conveniência para produtos elegíveis de saúde.",
+    description: "Conveniência para produtos elegíveis de saúde.",
     icon: <HeartPulse />,
   },
-  {
-    title: "Gás e água",
-    description: "Pedidos locais para itens essenciais da casa.",
-    icon: <Flame />,
-  },
+  { title: "Gás e água", description: "Itens essenciais pedidos todos os dias.", icon: <Flame /> },
   {
     title: "Bebidas",
-    description: "Distribuidoras próximas de quem deseja comprar.",
+    description: "Distribuidoras próximas de quem compra.",
     icon: <PackageOpen />,
   },
-  {
-    title: "Moto-táxi",
-    description: "Mobilidade conectando passageiros e parceiros.",
-    icon: <Bike />,
-  },
+  { title: "Moto-táxi", description: "Passageiros conectados a parceiros locais.", icon: <Bike /> },
 ];
+
+const executiveLead = {
+  type: "executivo" as const,
+  title: "Conheça a oportunidade Executivo Bora Zé",
+  description: "Uma pergunta por vez. Seus dados seguem com você até a conversa no WhatsApp.",
+};
 
 export function ExecutivePage() {
   const [businesses, setBusinesses] = useState(10);
   return (
-    <CampaignShell ctaLabel="Quero ser Executivo">
+    <CampaignShell ctaLabel="Quero conhecer" leadConfig={executiveLead}>
       <CampaignHero
-        eyebrow="Executivo Bora Zé"
+        eyebrow="Uma oportunidade construída por você"
         title={
           <>
             Ganhe com negócios locais <span className="text-primary">sem ser dono de um.</span>
           </>
         }
-        description="O Bora Zé conecta clientes, comércios, serviços e mobilidade em um único aplicativo. Como Executivo, você participa do desenvolvimento desse ecossistema na sua região."
+        description="Restaurantes, mercados, farmácias e outros negócios já movimentam dinheiro todos os dias. Você pode construir sua oportunidade conectando esse mercado a uma plataforma pronta."
         cta="Quero conhecer a oportunidade"
-        image={executiveHero}
-        imageAlt="Empreendedora observando o comércio de uma cidade brasileira com um celular"
-        proof={["Plataforma pronta", "Operação flexível", "Sem estoque próprio"]}
+        image={smartBusiness.url}
+        imageAlt="Executivo apresenta o aplicativo Bora Zé no celular como um negócio inteligente"
+        proof={["Seu próprio crescimento", "Sem estoque", "Plataforma pronta"]}
+        imagePosition="object-top"
       />
-
-      <section className="bg-brand-black py-10 text-brand-white">
+      <section className="bg-brand-black py-9 text-brand-white">
         <PlatformMark />
       </section>
 
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Economia de plataforma"
+            eyebrow="Olhe para sua cidade"
             title={
               <>
-                Você não precisa ser dono dos negócios.{" "}
+                O dinheiro já está circulando.{" "}
                 <span className="text-muted-foreground">
-                  Participa do ecossistema que conecta todos eles.
+                  Sua oportunidade é participar desse movimento.
                 </span>
               </>
             }
-            description="Restaurantes, mercados, farmácias, distribuidoras e profissionais já movimentam sua cidade. O Bora Zé organiza essa oferta em uma única plataforma digital."
+            description="Todos os dias, pessoas compram comida, medicamentos, itens para casa e serviços locais. Você não precisa abrir cada um desses negócios para construir algo em torno dessas transações."
           />
           <div className="mt-12">
             <FeatureGrid items={verticals} columns={6} />
@@ -108,30 +111,31 @@ export function ExecutivePage() {
           <div>
             <SectionHeading
               light
-              eyebrow="O que muda"
-              title="Uma estrutura digital, sem abrir seis negócios diferentes."
+              eyebrow="Um modelo mais inteligente"
+              title="Construa seu negócio sem carregar os custos de seis operações."
+              description="Em vez de investir em estrutura física, estoque e equipes para cada segmento, você desenvolve uma carteira de negócios locais dentro de uma plataforma digital."
             />
             <div className="mt-9">
               <CheckList
                 light
                 items={[
-                  "Sem restaurante próprio",
-                  "Sem mercado próprio",
-                  "Sem farmácia própria",
-                  "Sem distribuidora própria",
-                  "Sem frota própria",
-                  "Sem ponto comercial obrigatório",
+                  "Sem comprar estoque",
+                  "Sem alugar ponto comercial",
+                  "Sem montar cozinha",
+                  "Sem abrir farmácia",
+                  "Sem manter frota",
+                  "Sem desenvolver aplicativo",
                 ]}
               />
             </div>
           </div>
           <img
-            src={interfaceControl}
+            src={appHome.url}
             loading="lazy"
             width={768}
-            height={768}
-            alt="Aplicativo central conectando categorias de comércio, serviços e mobilidade"
-            className="aspect-square w-full rounded-lg object-cover"
+            height={1024}
+            alt="Aplicativo Bora Zé reúne comércio e mobilidade local"
+            className="aspect-[4/5] w-full rounded-2xl object-cover"
           />
         </div>
       </section>
@@ -139,29 +143,29 @@ export function ExecutivePage() {
       <section className="bg-brand-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Seu papel"
-            title="Construa conexões que permanecem na sua carteira."
-            description="O Executivo apresenta a plataforma a negócios elegíveis, apoia a entrada deles no ecossistema e acompanha o desenvolvimento da carteira. Resultados dependem de execução e do desempenho dos estabelecimentos."
+            eyebrow="Sua oportunidade"
+            title="Transforme relacionamento comercial em uma carteira que pode crescer."
+            description="Como Executivo, você apresenta a oportunidade a estabelecimentos elegíveis, apoia suas ativações e desenvolve sua própria carteira. Seu resultado depende da sua execução, das regras do programa e do desempenho dos negócios vinculados."
           />
           <div className="mt-12">
             <ProcessSteps
               steps={[
                 {
-                  title: "Conheça a plataforma",
-                  description:
-                    "Entenda as verticais, o processo comercial e os critérios do programa.",
+                  title: "Domine a oportunidade",
+                  description: "Entenda a plataforma, as verticais e o processo comercial.",
                 },
                 {
                   title: "Encontre negócios",
-                  description: "Converse com estabelecimentos elegíveis da sua região.",
+                  description:
+                    "Converse com estabelecimentos que querem estar mais perto dos clientes.",
                 },
                 {
-                  title: "Ajude na ativação",
-                  description: "Acompanhe a entrada do comércio no aplicativo Bora Zé.",
+                  title: "Construa sua carteira",
+                  description: "Acompanhe a entrada dos negócios elegíveis na plataforma.",
                 },
                 {
-                  title: "Desenvolva a carteira",
-                  description: "Continue ampliando e apoiando sua rede de parceiros.",
+                  title: "Continue crescendo",
+                  description: "Amplie seus relacionamentos e desenvolva sua atuação comercial.",
                 },
               ]}
             />
@@ -172,13 +176,13 @@ export function ExecutivePage() {
       <section className="py-20 md:py-28">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 md:px-8 lg:grid-cols-2 lg:items-center">
           <SectionHeading
-            eyebrow="Simulador de carteira"
-            title="Visualize a escala da sua rede."
-            description="Ajuste o número de estabelecimentos para visualizar como uma carteira pode crescer. Esta é uma referência de escala, não uma projeção de renda."
+            eyebrow="Visualize seu crescimento"
+            title="Uma carteira começa com o primeiro negócio."
+            description="Ajuste a quantidade para enxergar a amplitude de uma rede construída por você. É uma referência de escala, não uma projeção de renda."
           />
-          <div className="rounded-lg border border-border bg-card p-7">
+          <div className="rounded-2xl border border-border bg-card p-7 shadow-xl shadow-brand-black/5">
             <label htmlFor="businesses" className="text-sm font-semibold">
-              Estabelecimentos na carteira
+              Negócios na sua carteira
             </label>
             <p className="mt-3 text-6xl font-bold">{businesses}</p>
             <input
@@ -191,15 +195,13 @@ export function ExecutivePage() {
               onChange={(event) => setBusinesses(Number(event.target.value))}
               className="mt-7 w-full accent-primary"
             />
-            <div className="mt-7 grid grid-cols-2 gap-3">
-              <div className="rounded-md bg-brand-surface p-4">
-                <p className="text-xs text-muted-foreground">Relacionamentos ativos</p>
-                <p className="mt-1 text-2xl font-bold">{businesses}</p>
-              </div>
-              <div className="rounded-md bg-brand-black p-4 text-brand-white">
-                <p className="text-xs text-brand-white/50">Verticais possíveis</p>
-                <p className="mt-1 text-2xl font-bold text-primary">6</p>
-              </div>
+            <div className="mt-7 rounded-xl bg-brand-black p-5 text-brand-white">
+              <p className="text-xs text-brand-white/50">
+                Uma rede construída relacionamento por relacionamento
+              </p>
+              <p className="mt-2 text-xl font-bold text-primary">
+                {businesses} oportunidades locais
+              </p>
             </div>
           </div>
         </div>
@@ -207,65 +209,66 @@ export function ExecutivePage() {
 
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-5 md:px-8">
-          <SectionHeading eyebrow="Dúvidas comuns" title="Antes de conversar com o time." />
+          <SectionHeading eyebrow="Dúvidas comuns" title="Antes de dar o próximo passo." />
           <div className="mt-10">
             <SimpleFaq
               items={[
                 {
-                  q: "O Bora Zé é um aplicativo?",
-                  a: "Sim. É uma plataforma que reúne categorias de comércio, serviços, delivery e mobilidade para conectar negócios e consumidores locais.",
+                  q: "Preciso ter uma loja?",
+                  a: "Não. A oportunidade do Executivo está em desenvolver uma carteira de estabelecimentos dentro do modelo do programa.",
                 },
                 {
-                  q: "Preciso abrir uma loja?",
-                  a: "Não. O trabalho do Executivo é desenvolver sua carteira de estabelecimentos dentro do modelo do programa.",
+                  q: "Preciso desenvolver tecnologia?",
+                  a: "Não. O Bora Zé fornece a plataforma; você concentra sua energia no desenvolvimento comercial da sua carteira.",
                 },
                 {
-                  q: "Existe garantia de renda?",
-                  a: "Não. Resultados variam conforme dedicação, execução, regras vigentes e desempenho dos estabelecimentos vinculados.",
+                  q: "Existe garantia de resultado?",
+                  a: "Não. Resultados dependem de dedicação, execução, regras vigentes e desempenho dos estabelecimentos vinculados.",
                 },
               ]}
             />
           </div>
         </div>
       </section>
-      <LeadForm
-        config={{
-          type: "executivo",
-          title: "Converse com o time Bora Zé.",
-          description:
-            "Preencha seus dados. A conversa continuará no WhatsApp oficial com sua cidade identificada.",
-        }}
+      <ConversionSection
+        title="Sua oportunidade pode começar com uma conversa."
+        description="Responda poucas perguntas e conheça os próximos passos no WhatsApp oficial."
+        cta="Quero conhecer"
       />
     </CampaignShell>
   );
 }
 
+const ambassadorLead = {
+  type: "embaixador" as const,
+  title: "Analise sua cidade",
+  description: "Vamos entender sua cidade e seu momento antes de apresentar os próximos passos.",
+};
+
 export function AmbassadorPage() {
   return (
-    <CampaignShell ctaLabel="Analisar minha cidade">
+    <CampaignShell ctaLabel="Analisar minha cidade" leadConfig={ambassadorLead}>
       <CampaignHero
-        eyebrow="Embaixador Bora Zé"
+        eyebrow="Oportunidade de operação local"
         title={
           <>
-            Sua cidade já movimenta dinheiro.{" "}
-            <span className="text-primary">
-              E se parte desse movimento passasse por uma operação sua?
-            </span>
+            Ganhe com o movimento <span className="text-primary">da sua cidade.</span>
           </>
         }
-        description="O Bora Zé reúne comércio local, delivery, serviços e mobilidade em um único aplicativo. O Embaixador desenvolve a operação na sua cidade e participa do crescimento desse ecossistema."
+        description="Enquanto sua cidade compra, pede e se movimenta todos os dias, existe uma oportunidade acontecendo diante de você: desenvolver uma operação digital que participe desse fluxo."
         cta="Quero analisar minha cidade"
-        image={ambassadorHero}
-        imageAlt="Empreendedor local conversando com comerciante em uma cidade brasileira"
-        proof={["Negócio digital", "Tecnologia pronta", "Avaliação por cidade"]}
+        image={smartBusiness.url}
+        imageAlt="Empreendedor apresenta no celular a oportunidade de operação digital Bora Zé"
+        proof={["Negócio digital", "Operação local", "Análise por cidade"]}
+        imagePosition="object-top"
       />
 
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="A oportunidade local"
-            title="O dinheiro já circula. A plataforma organiza as conexões."
-            description="Pessoas compram, restaurantes e mercados vendem, farmácias atendem e mototaxistas fazem corridas. O Bora Zé conecta essa atividade local em um só aplicativo."
+            eyebrow="A oportunidade já existe"
+            title="O dinheiro circula pela sua cidade todos os dias."
+            description="Pessoas pedem comida, compram no mercado e na farmácia, recebem gás e água, compram bebidas e usam mototáxi. A oportunidade está em organizar essa demanda local através de uma única operação digital."
           />
           <div className="mt-12">
             <FeatureGrid items={verticals} columns={6} />
@@ -273,18 +276,26 @@ export function AmbassadorPage() {
         </div>
       </section>
 
+      <MediaBand
+        image={marketImage.url}
+        alt="Comércio local conectado às categorias do Bora Zé"
+        eyebrow="Negócio local, estrutura digital"
+        title="Tenha uma operação na sua cidade sem precisar abrir uma loja."
+        description="Você desenvolve o mercado local, aproxima estabelecimentos e consumidores e participa do crescimento da operação conforme as condições comerciais apresentadas pela equipe."
+      />
+
       <section className="bg-brand-black py-20 text-brand-white md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
             light
-            eyebrow="Divisão clara"
+            eyebrow="Uma divisão inteligente"
             title={
               <>
                 Você assume a operação local.{" "}
                 <span className="text-primary">O Bora Zé entrega a tecnologia.</span>
               </>
             }
-            description="Uma oportunidade territorial para quem deseja desenvolver a plataforma na própria cidade, conforme disponibilidade, aprovação e condições comerciais."
+            description="Você não começa de uma tela em branco. A estrutura foi pensada para que sua energia esteja no desenvolvimento da cidade, não na criação de software."
           />
           <div className="mt-12">
             <FeatureGrid
@@ -293,12 +304,12 @@ export function AmbassadorPage() {
               items={[
                 {
                   title: "Aplicativo pronto",
-                  description: "Sem precisar desenvolver tecnologia própria.",
+                  description: "Tecnologia preparada para sustentar a operação.",
                   icon: <Smartphone />,
                 },
                 {
-                  title: "Múltiplas verticais",
-                  description: "Comércio, delivery, serviços e mobilidade na mesma operação.",
+                  title: "Modelo multivertical",
+                  description: "Vários mercados dentro da mesma oportunidade.",
                   icon: <Store />,
                 },
                 {
@@ -308,7 +319,7 @@ export function AmbassadorPage() {
                 },
                 {
                   title: "Suporte",
-                  description: "Acompanhamento da equipe dentro das condições do projeto.",
+                  description: "Acompanhamento conforme as condições do projeto.",
                   icon: <MapPin />,
                 },
               ]}
@@ -320,29 +331,29 @@ export function AmbassadorPage() {
       <section className="bg-brand-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Como funciona"
-            title="Da análise da cidade ao desenvolvimento da operação."
+            eyebrow="Do interesse à operação"
+            title="Um caminho claro para avaliar a oportunidade."
+            description="O pré-cadastro não é contratação nem reserva automática. Ele inicia uma análise transparente da sua cidade e do seu perfil."
           />
           <div className="mt-12">
             <ProcessSteps
               steps={[
                 {
-                  title: "Pré-cadastro",
-                  description: "Você informa seu perfil, cidade e disponibilidade inicial.",
+                  title: "Você se apresenta",
+                  description: "Conta onde deseja desenvolver a operação e como falar com você.",
                 },
                 {
-                  title: "Análise da cidade",
-                  description: "A equipe verifica cenário, disponibilidade e aderência do projeto.",
+                  title: "A cidade é analisada",
+                  description: "A equipe verifica disponibilidade e aderência ao projeto.",
                 },
                 {
-                  title: "Apresentação comercial",
+                  title: "Você conhece o modelo",
                   description:
-                    "Condições, responsabilidades e investimento são apresentados com clareza.",
+                    "Condições, responsabilidades e investimento são explicados com clareza.",
                 },
                 {
-                  title: "Implantação",
-                  description:
-                    "Após aprovação e contratação, começa o desenvolvimento da operação local.",
+                  title: "A implantação começa",
+                  description: "Com aprovação e contratação, inicia-se o desenvolvimento local.",
                 },
               ]}
             />
@@ -350,67 +361,87 @@ export function AmbassadorPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <SectionHeading
-            eyebrow="Um aplicativo. Vários mercados."
-            title="Mais formas de desenvolver o ecossistema da sua cidade."
-            description="A presença de várias categorias reduz a dependência de uma única vertical e amplia as possibilidades da operação."
+      <MediaBand
+        reverse
+        image={gasImage.url}
+        alt="Operação local de gás e água conectada pelo Bora Zé"
+        eyebrow="Um aplicativo. Vários mercados."
+        title="Uma operação conectada à rotina inteira da cidade."
+        description="A presença de várias categorias amplia as possibilidades do negócio e reduz a dependência de um único tipo de consumo."
+      />
+      <section className="pb-20 md:pb-28">
+        <div className="mx-auto grid max-w-7xl gap-4 px-5 md:grid-cols-2 md:px-8">
+          <img
+            src={pharmacyImage.url}
+            alt="Farmácia local integrada às categorias Bora Zé"
+            loading="lazy"
+            width={768}
+            height={1365}
+            className="aspect-[4/5] w-full rounded-2xl object-cover"
           />
-          <div className="mt-12">
-            <FeatureGrid items={verticals} columns={6} />
-          </div>
+          <img
+            src={deliveryImage.url}
+            alt="Restaurante local integrado às categorias Bora Zé"
+            loading="lazy"
+            width={768}
+            height={894}
+            className="aspect-[4/5] w-full rounded-2xl object-cover"
+          />
         </div>
       </section>
-      <LeadForm
-        config={{
-          type: "embaixador",
-          title: "Sua cidade pode ser a próxima operação Bora Zé.",
-          description:
-            "A qualificação é transparente e não representa aprovação automática, reserva territorial ou proposta contratual definitiva.",
-        }}
+      <ConversionSection
+        title="Descubra se sua cidade está disponível."
+        description="Comece pela sua cidade. A pergunta sobre investimento aparece somente ao final da análise inicial."
+        cta="Quero analisar minha cidade"
       />
     </CampaignShell>
   );
 }
 
+const commerceLead = {
+  type: "comercio" as const,
+  title: "Coloque seu negócio no Bora Zé",
+  description: "Seu cadastro inicial leva menos de dois minutos e segue para o WhatsApp oficial.",
+};
+
 export function CommercePage() {
   return (
-    <CampaignShell ctaLabel="Cadastrar meu negócio">
+    <CampaignShell ctaLabel="Colocar meu negócio" leadConfig={commerceLead}>
       <CampaignHero
-        eyebrow="Bora Zé para comércio"
+        eyebrow="Mais uma porta de entrada para sua loja"
         title={
           <>
-            Coloque seu negócio <span className="text-primary">no app Bora Zé.</span>
+            Seu próximo pedido pode começar <span className="text-primary">no Bora Zé.</span>
           </>
         }
-        description="Receba pedidos de clientes da sua cidade e leve sua loja para o digital com uma operação simples e feita para o comércio local."
-        cta="Quero cadastrar meu negócio"
-        image={commerceHero}
-        imageAlt="Comerciante brasileira usando celular dentro do seu mercado"
-        proof={["Presença no aplicativo", "Alcance local", "Gestão de pedidos"]}
+        description="Leve seu comércio para onde seus clientes já estão: no celular. Mais pessoas da sua cidade podem encontrar seu negócio e realizar pedidos conforme os serviços disponíveis."
+        cta="Quero colocar meu negócio no Bora Zé"
+        image={marketImage.url}
+        imageAlt="Mercado local disponível nas categorias do aplicativo Bora Zé"
+        proof={["Mais presença local", "Novo canal de pedidos", "Operação simples"]}
+        imagePosition="object-center"
       />
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Como funciona"
-            title="Um novo canal para sua loja, em quatro passos."
+            eyebrow="Seu comércio no celular"
+            title="Transforme o celular dos seus clientes em mais uma porta de entrada."
+            description="O Bora Zé é um aplicativo local onde consumidores encontram estabelecimentos e podem fazer pedidos ou solicitações conforme os serviços disponíveis na cidade."
           />
           <div className="mt-12">
             <ProcessSteps
               steps={[
                 {
                   title: "Sua loja entra no app",
-                  description: "O estabelecimento é cadastrado e configurado na plataforma.",
+                  description: "Seu estabelecimento ganha presença em um canal digital local.",
                 },
                 {
                   title: "Clientes encontram",
-                  description:
-                    "Pessoas da sua cidade visualizam seus produtos ou serviços elegíveis.",
+                  description: "Pessoas da cidade descobrem seus produtos ou serviços elegíveis.",
                 },
                 {
                   title: "Você recebe pedidos",
-                  description: "Os pedidos chegam para sua operação acompanhar e preparar.",
+                  description: "Sua equipe acompanha e prepara as novas solicitações.",
                 },
                 {
                   title: "O pedido chega",
@@ -421,12 +452,19 @@ export function CommercePage() {
           </div>
         </div>
       </section>
+      <MediaBand
+        image={appPharmacy.url}
+        alt="Cliente encontra produtos de farmácia no aplicativo Bora Zé"
+        eyebrow="Mais alcance na sua cidade"
+        title="Crie um novo canal de venda sem deixar de ser um negócio local."
+        description="A presença no aplicativo pode ampliar suas oportunidades de venda, facilitar a descoberta da sua loja e aproximar seu negócio de clientes que preferem pedir pelo celular."
+      />
       <section className="bg-brand-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Seu negócio no Bora Zé"
-            title="Quem pode entrar?"
-            description="A elegibilidade e a disponibilidade das categorias podem variar por cidade."
+            eyebrow="Quem pode entrar"
+            title="Negócios que fazem parte do dia a dia da cidade."
+            description="A elegibilidade e a disponibilidade das categorias podem variar por região."
           />
           <div className="mt-12">
             <FeatureGrid
@@ -434,94 +472,13 @@ export function CommercePage() {
               items={[
                 {
                   title: "Restaurantes e lanchonetes",
-                  description: "Cardápio e pedidos para clientes locais.",
+                  description: "Cardápios e pedidos para clientes locais.",
                 },
-                { title: "Mercados", description: "Produtos do dia a dia em um canal digital." },
+                { title: "Mercados", description: "Produtos da rotina em um canal digital." },
                 { title: "Farmácias", description: "Itens elegíveis com conveniência local." },
                 {
                   title: "Bebidas, gás e água",
-                  description: "Distribuidoras e fornecedores da cidade.",
-                },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-      <section className="bg-brand-black py-20 text-brand-white md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <SectionHeading
-            light
-            eyebrow="Benefícios"
-            title="Mais presença no digital, mantendo seu negócio local."
-          />
-          <div className="mt-10">
-            <CheckList
-              light
-              items={[
-                "Presença no aplicativo",
-                "Novo canal de venda",
-                "Alcance na cidade",
-                "Gestão de pedidos",
-                "Possibilidade de entrega",
-                "Suporte da plataforma",
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-      <LeadForm
-        config={{
-          type: "comercio",
-          title: "Cadastre seu interesse.",
-          description:
-            "Conte qual é o seu negócio. A equipe continuará o atendimento pelo WhatsApp oficial.",
-        }}
-      />
-    </CampaignShell>
-  );
-}
-
-export function MotoTaxiPage() {
-  return (
-    <CampaignShell ctaLabel="Quero me cadastrar">
-      <CampaignHero
-        eyebrow="Mototaxista parceiro Bora Zé"
-        title={
-          <>
-            Receba solicitações de corrida <span className="text-primary">pelo app Bora Zé.</span>
-          </>
-        }
-        description="Cadastre-se como mototaxista parceiro e conecte-se a passageiros da sua cidade através do aplicativo Bora Zé."
-        cta="Quero me cadastrar"
-        image={motoHero}
-        imageAlt="Mototaxista brasileiro usando celular ao lado de sua motocicleta"
-        proof={["Solicitações pelo celular", "Conexão local", "Cadastro sujeito à análise"]}
-      />
-      <section className="py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <SectionHeading
-            eyebrow="O aplicativo conecta"
-            title="Do pedido do passageiro até a corrida."
-            description="O Bora Zé organiza a solicitação no aplicativo e a disponibiliza aos parceiros conforme funcionamento e disponibilidade na cidade."
-          />
-          <div className="mt-12">
-            <ProcessSteps
-              steps={[
-                {
-                  title: "Passageiro solicita",
-                  description: "A pessoa informa pelo aplicativo que precisa de uma corrida.",
-                },
-                {
-                  title: "A solicitação chega",
-                  description: "Mototaxistas disponíveis recebem a oportunidade no celular.",
-                },
-                {
-                  title: "Você aceita",
-                  description: "O parceiro avalia e aceita a solicitação disponível.",
-                },
-                {
-                  title: "Realiza a corrida",
-                  description: "Passageiro e mototaxista se conectam para o deslocamento.",
+                  description: "Distribuidores e fornecedores da cidade.",
                 },
               ]}
             />
@@ -532,28 +489,117 @@ export function MotoTaxiPage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-2 lg:items-center">
           <SectionHeading
             light
-            eyebrow="Parceria local"
-            title="Tecnologia para encontrar passageiros da sua cidade."
-            description="Sem promessas de quantidade de corridas ou ganhos. A disponibilidade depende da operação ativa e da demanda local."
+            eyebrow="Mais oportunidades"
+            title="Mais clientes podem encontrar seu negócio."
+            description="Sem promessa de vendas: um canal adicional amplia as oportunidades para sua loja ser descoberta e receber novos pedidos."
           />
           <CheckList
             light
             items={[
-              "Solicitações no aplicativo",
-              "Cadastro de parceiro",
-              "Conexão com passageiros",
-              "Operação pelo celular",
+              "Presença no aplicativo",
+              "Novo canal de venda",
+              "Alcance local",
+              "Gestão de pedidos",
+              "Possibilidade de entrega",
+              "Suporte da plataforma",
             ]}
           />
         </div>
       </section>
-      <LeadForm
-        config={{
-          type: "mototaxi",
-          title: "Comece seu cadastro de parceiro.",
-          description:
-            "Informe seus dados iniciais. A equipe explicará documentos, critérios e disponibilidade na sua cidade pelo WhatsApp.",
-        }}
+      <ConversionSection
+        title="Pronto para abrir uma nova porta para sua loja?"
+        description="Conte sobre seu negócio, uma pergunta por vez."
+        cta="Quero colocar meu negócio no Bora Zé"
+      />
+    </CampaignShell>
+  );
+}
+
+const motoLead = {
+  type: "mototaxi" as const,
+  title: "Receba oportunidades pelo Bora Zé",
+  description:
+    "Comece com seus dados básicos. Documentos e critérios ficam para a conversa seguinte.",
+};
+
+export function MotoTaxiPage() {
+  return (
+    <CampaignShell ctaLabel="Receber mais chamadas" leadConfig={motoLead}>
+      <CampaignHero
+        eyebrow="Mais um canal para suas corridas"
+        title={
+          <>
+            Receba mais chamadas. <span className="text-primary">Faça mais corridas.</span>
+          </>
+        }
+        description="Entre para o Bora Zé e tenha mais um canal para receber solicitações de passageiros da sua cidade diretamente pelo celular."
+        cta="Quero receber mais chamadas"
+        image={motoImage.url}
+        imageAlt="Mototaxista Bora Zé transporta passageira em uma cidade brasileira"
+        proof={["Chamadas pelo celular", "Mais exposição local", "Cadastro sujeito à análise"]}
+        imagePosition="object-center"
+      />
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <SectionHeading
+            eyebrow="A próxima chamada"
+            title="Mais passageiros procurando corrida. Mais oportunidades chegando até você."
+            description="O Bora Zé é um aplicativo que conecta passageiros aos mototaxistas disponíveis da cidade. Assim, você ganha mais uma forma de aproveitar seu horário de trabalho."
+          />
+          <div className="mt-12">
+            <ProcessSteps
+              steps={[
+                {
+                  title: "Passageiro solicita",
+                  description: "A pessoa pede uma corrida pelo aplicativo.",
+                },
+                {
+                  title: "A chamada chega",
+                  description: "Parceiros disponíveis recebem a oportunidade no celular.",
+                },
+                {
+                  title: "Você aceita",
+                  description: "Você avalia a solicitação disponível e decide aceitar.",
+                },
+                {
+                  title: "Realiza a corrida",
+                  description: "Você encontra o passageiro e faz o deslocamento.",
+                },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+      <MediaBand
+        image={appHome.url}
+        alt="Aplicativo Bora Zé com a categoria de mototáxi"
+        eyebrow="Menos tempo esperando"
+        title="Use o celular para ampliar sua exposição a passageiros."
+        description="Mais solicitações podem criar mais oportunidades de corrida e faturamento. A quantidade depende da demanda, da disponibilidade da operação e do seu próprio trabalho."
+      />
+      <section className="bg-brand-black py-20 text-brand-white md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-2 lg:items-center">
+          <SectionHeading
+            light
+            eyebrow="Uma oportunidade prática"
+            title="Mais um canal para conseguir corridas na sua cidade."
+            description="Sem renda ou demanda garantida. O aplicativo amplia as formas pelas quais passageiros podem encontrar você."
+          />
+          <CheckList
+            light
+            items={[
+              "Receba solicitações pelo celular",
+              "Amplie sua exposição",
+              "Aproveite melhor seu horário",
+              "Conecte-se a passageiros locais",
+            ]}
+          />
+        </div>
+      </section>
+      <ConversionSection
+        title="Sua próxima chamada pode chegar pelo Bora Zé."
+        description="Faça o cadastro inicial sem documentos e continue pelo WhatsApp oficial."
+        cta="Quero receber mais chamadas"
       />
     </CampaignShell>
   );

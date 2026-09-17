@@ -1,9 +1,12 @@
-import { useMemo, useState, type ComponentProps, type FormEvent, type ReactNode } from "react";
-import { ArrowDown, ArrowRight, Check, ChevronDown, Smartphone } from "lucide-react";
-import { z } from "zod";
-import logo from "@/assets/boraze-logo.png.asset.json";
+import type { ReactNode } from "react";
+import { ArrowRight, Check, ChevronDown, Smartphone } from "lucide-react";
+import logo from "@/assets/boraze-logo-2026.png.asset.json";
+import {
+  ProgressiveLeadDialog,
+  OPEN_LEAD_DIALOG_EVENT,
+  type ProgressiveLeadConfig,
+} from "@/components/progressive-lead-dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { SiteFooter, SiteNav } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
 
@@ -41,16 +44,30 @@ export function openWhatsApp(message: string) {
     .map(([key, value]) => `${key}: ${value.slice(0, 120)}`)
     .join("\n");
   const trackedMessage = campaign ? `${message}\n\nOrigem da campanha:\n${campaign}` : message;
-  const url = `https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(trackedMessage)}`;
-  window.location.assign(url);
+  window.location.assign(
+    `https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(trackedMessage)}`,
+  );
 }
 
-export function CampaignShell({ children, ctaLabel }: { children: ReactNode; ctaLabel: string }) {
+export function openLeadDialog() {
+  window.dispatchEvent(new Event(OPEN_LEAD_DIALOG_EVENT));
+}
+
+export function CampaignShell({
+  children,
+  ctaLabel,
+  leadConfig,
+}: {
+  children: ReactNode;
+  ctaLabel: string;
+  leadConfig: ProgressiveLeadConfig;
+}) {
   return (
     <div className="min-h-screen overflow-hidden bg-background text-foreground">
       <SiteNav ctaLabel={ctaLabel} />
       <main>{children}</main>
       <SiteFooter />
+      <ProgressiveLeadDialog config={leadConfig} onComplete={openWhatsApp} />
     </div>
   );
 }
@@ -63,6 +80,7 @@ interface CampaignHeroProps {
   image: string;
   imageAlt: string;
   proof?: string[];
+  imagePosition?: string;
 }
 
 export function CampaignHero({
@@ -73,42 +91,40 @@ export function CampaignHero({
   image,
   imageAlt,
   proof = [],
+  imagePosition,
 }: CampaignHeroProps) {
   return (
-    <section className="relative isolate min-h-[760px] bg-brand-black text-brand-white md:min-h-[820px]">
-      <img
-        src={image}
-        alt={imageAlt}
-        width={1600}
-        height={1104}
-        fetchPriority="high"
-        className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
-      />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-brand-black via-brand-black/85 to-brand-black/10" />
-      <div className="mx-auto flex min-h-[760px] max-w-7xl items-center px-5 pb-16 pt-32 md:min-h-[820px] md:px-8">
-        <div className="max-w-3xl reveal-up">
-          <p className="mb-6 text-xs font-bold uppercase text-primary md:text-sm">{eyebrow}</p>
-          <h1 className="text-5xl font-bold leading-[1.02] sm:text-6xl md:text-7xl lg:text-8xl">
+    <section className="relative isolate bg-brand-black pb-12 pt-28 text-brand-white md:pb-20 md:pt-36">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+        <div className="reveal-up max-w-2xl">
+          <p className="text-xs font-bold uppercase text-primary md:text-sm">{eyebrow}</p>
+          <h1 className="mt-5 text-5xl font-bold leading-[1.02] sm:text-6xl lg:text-7xl">
             {title}
           </h1>
-          <p className="mt-7 max-w-2xl text-base leading-7 text-brand-white/75 md:text-xl md:leading-8">
+          <p className="mt-6 max-w-xl text-base leading-7 text-brand-white/70 md:text-lg md:leading-8">
             {description}
           </p>
-          <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-            <Button
-              asChild
-              size="lg"
-              className="h-14 w-full px-7 text-sm font-bold uppercase sm:w-auto"
-            >
-              <a href="#conversao">
-                {cta}
-                <ArrowDown aria-hidden="true" />
-              </a>
-            </Button>
-            {proof.length > 0 && (
-              <p className="max-w-sm text-xs leading-5 text-brand-white/50">{proof.join(" • ")}</p>
-            )}
-          </div>
+          <Button
+            onClick={openLeadDialog}
+            size="lg"
+            className="mt-8 h-14 w-full rounded-xl px-7 text-sm font-bold sm:w-auto"
+          >
+            {cta}
+            <ArrowRight aria-hidden="true" />
+          </Button>
+          {proof.length > 0 && (
+            <p className="mt-5 text-xs leading-5 text-brand-white/45">{proof.join(" • ")}</p>
+          )}
+        </div>
+        <div className="relative overflow-hidden rounded-2xl bg-brand-charcoal shadow-2xl shadow-primary/10">
+          <img
+            src={image}
+            alt={imageAlt}
+            width={768}
+            height={960}
+            fetchPriority="high"
+            className={cn("aspect-[4/5] h-full w-full object-cover", imagePosition)}
+          />
         </div>
       </div>
     </section>
@@ -179,12 +195,14 @@ export function FeatureGrid({
         <article
           key={item.title}
           className={cn(
-            "rounded-lg border p-6",
+            "rounded-xl border p-5 transition-transform duration-300 hover:-translate-y-1",
             dark ? "border-brand-white/10 bg-brand-white/5" : "border-border bg-card",
           )}
         >
-          {item.icon && <div className="mb-8 text-primary">{item.icon}</div>}
-          <h3 className={cn("text-lg font-bold", dark && "text-brand-white")}>{item.title}</h3>
+          {item.icon && <div className="mb-7 text-primary">{item.icon}</div>}
+          <h3 className={cn("text-base font-bold md:text-lg", dark && "text-brand-white")}>
+            {item.title}
+          </h3>
           <p
             className={cn(
               "mt-2 text-sm leading-6",
@@ -201,7 +219,7 @@ export function FeatureGrid({
 
 export function ProcessSteps({ steps }: { steps: FeatureItem[] }) {
   return (
-    <div className="grid gap-0 overflow-hidden rounded-lg border border-border bg-border md:grid-cols-4">
+    <div className="grid overflow-hidden rounded-xl border border-border bg-border md:grid-cols-4">
       {steps.map((step, index) => (
         <article key={step.title} className="relative bg-background p-7">
           <span className="text-xs font-bold text-primary">0{index + 1}</span>
@@ -219,228 +237,29 @@ export function ProcessSteps({ steps }: { steps: FeatureItem[] }) {
   );
 }
 
-const baseSchema = z.object({
-  name: z.string().trim().min(3, "Informe seu nome completo.").max(100),
-  phone: z.string().trim().min(10, "Informe um telefone válido.").max(20),
-  city: z.string().trim().min(2, "Informe sua cidade.").max(100),
-  state: z.string().trim().length(2, "Use a sigla do estado."),
-});
-
-type FormErrors = Record<string, string>;
-
-function Field({
-  label,
-  name,
-  error,
-  ...props
-}: ComponentProps<typeof Input> & { label: string; name: string; error?: string }) {
-  return (
-    <label className="block text-sm font-semibold" htmlFor={name}>
-      {label}
-      <Input
-        id={name}
-        name={name}
-        className="mt-2 h-12 bg-background"
-        aria-invalid={Boolean(error)}
-        aria-describedby={error ? `${name}-error` : undefined}
-        {...props}
-      />
-      {error && (
-        <span id={`${name}-error`} className="mt-1 block text-xs text-destructive">
-          {error}
-        </span>
-      )}
-    </label>
-  );
-}
-
-export interface LeadFormConfig {
-  type: "embaixador" | "comercio" | "mototaxi" | "executivo";
+export function ConversionSection({
+  title,
+  description,
+  cta,
+}: {
   title: string;
   description: string;
-  qualification?: string;
-}
-
-export function LeadForm({ config }: { config: LeadFormConfig }) {
-  const [errors, setErrors] = useState<FormErrors>({});
-  const schema = useMemo(
-    () =>
-      baseSchema.extend({
-        email:
-          config.type === "embaixador"
-            ? z.string().trim().email("Informe um e-mail válido.").max(255)
-            : z.string().optional(),
-        establishment:
-          config.type === "comercio"
-            ? z.string().trim().min(2, "Informe o estabelecimento.").max(120)
-            : z.string().optional(),
-        category:
-          config.type === "comercio"
-            ? z.string().trim().min(2, "Informe a categoria.").max(80)
-            : z.string().optional(),
-        qualification:
-          config.type === "embaixador"
-            ? z.string().trim().min(1, "Selecione uma opção.")
-            : z.string().optional(),
-      }),
-    [config.type],
-  );
-
-  function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const values = Object.fromEntries(form.entries());
-    const result = schema.safeParse(values);
-    if (!result.success) {
-      setErrors(
-        Object.fromEntries(
-          result.error.issues.map((issue) => [String(issue.path[0]), issue.message]),
-        ),
-      );
-      return;
-    }
-    setErrors({});
-    const data = result.data;
-    const place = `${data.city}/${data.state.toUpperCase()}`;
-    const messages = {
-      embaixador: `Olá! Acabei de fazer meu pré-cadastro para conhecer a oportunidade de Embaixador Bora Zé em ${place}.\n\nNome: ${data.name}\n\nE-mail: ${data.email}\n\nTelefone: ${data.phone}\n\nCidade de interesse: ${place}\n\nDisponibilidade de investimento: ${data.qualification}`,
-      comercio: `Olá! Quero cadastrar meu estabelecimento no Bora Zé.\n\nNome: ${data.name}\n\nEstabelecimento: ${data.establishment}\n\nCategoria: ${data.category}\n\nCidade: ${place}\n\nTelefone: ${data.phone}`,
-      mototaxi: `Olá! Quero me cadastrar como mototaxista parceiro Bora Zé.\n\nNome: ${data.name}\n\nCidade: ${place}\n\nTelefone: ${data.phone}`,
-      executivo: `Olá! Vim pela página de Executivo Bora Zé e quero entender como participar.\n\nNome: ${data.name}\n\nCidade: ${place}\n\nTelefone: ${data.phone}`,
-    };
-    openWhatsApp(messages[config.type]);
-  }
-
+  cta: string;
+}) {
   return (
     <section id="conversao" className="bg-brand-surface py-20 md:py-28">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 md:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-        <SectionHeading
-          eyebrow="Próximo passo"
-          title={config.title}
-          description={config.description}
-        />
-        <form
-          onSubmit={submit}
-          noValidate
-          className="rounded-lg border border-border bg-card p-5 shadow-xl shadow-brand-black/5 md:p-8"
+      <div className="mx-auto flex max-w-4xl flex-col items-start justify-between gap-8 px-5 md:flex-row md:items-end md:px-8">
+        <SectionHeading eyebrow="Próximo passo" title={title} description={description} />
+        <Button
+          onClick={openLeadDialog}
+          size="lg"
+          className="h-14 w-full shrink-0 rounded-xl px-7 font-bold md:w-auto"
         >
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div className="sm:col-span-2">
-              <Field
-                label="Nome completo"
-                name="name"
-                autoComplete="name"
-                maxLength={100}
-                error={errors.name}
-              />
-            </div>
-            <Field
-              label="WhatsApp / telefone"
-              name="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
-              maxLength={20}
-              error={errors.phone}
-            />
-            {config.type === "embaixador" && (
-              <Field
-                label="E-mail"
-                name="email"
-                type="email"
-                autoComplete="email"
-                maxLength={255}
-                error={errors.email}
-              />
-            )}
-            {config.type === "comercio" && (
-              <Field
-                label="Nome do estabelecimento"
-                name="establishment"
-                maxLength={120}
-                error={errors.establishment}
-              />
-            )}
-            {config.type === "comercio" && (
-              <Field
-                label="Categoria"
-                name="category"
-                maxLength={80}
-                placeholder="Ex.: Restaurante"
-                error={errors.category}
-              />
-            )}
-            <Field
-              label={config.type === "embaixador" ? "Cidade de interesse" : "Cidade"}
-              name="city"
-              autoComplete="address-level2"
-              maxLength={100}
-              error={errors.city}
-            />
-            <Field
-              label="Estado (UF)"
-              name="state"
-              autoComplete="address-level1"
-              maxLength={2}
-              placeholder="BA"
-              error={errors.state}
-            />
-          </div>
-          {config.type === "embaixador" && <QualificationSelect error={errors.qualification} />}
-          <Button type="submit" size="lg" className="mt-7 h-14 w-full text-sm font-bold uppercase">
-            {config.type === "embaixador"
-              ? "Quero analisar minha cidade"
-              : config.type === "comercio"
-                ? "Cadastrar meu negócio"
-                : config.type === "mototaxi"
-                  ? "Quero me cadastrar"
-                  : "Falar com o time"}
-            <ArrowRight aria-hidden="true" />
-          </Button>
-          <p className="mt-4 text-center text-xs leading-5 text-muted-foreground">
-            Ao continuar, você será direcionado ao WhatsApp oficial do Bora Zé.
-          </p>
-        </form>
+          {cta}
+          <ArrowRight aria-hidden="true" />
+        </Button>
       </div>
     </section>
-  );
-}
-
-function QualificationSelect({ error }: { error?: string }) {
-  const options = [
-    "Sim, tenho disponibilidade para investir agora.",
-    "Tenho interesse, mas precisaria me organizar.",
-    "Quero entender melhor o modelo antes de decidir.",
-    "Não tenho disponibilidade neste momento.",
-  ];
-  return (
-    <fieldset className="mt-7 border-t border-border pt-7">
-      <legend className="text-base font-bold">
-        Hoje, você teria disponibilidade para investir aproximadamente R$ 10 mil para iniciar uma
-        operação Bora Zé, caso sua cidade seja aprovada?
-      </legend>
-      <p className="mt-2 text-sm leading-6 text-muted-foreground">
-        O projeto pode exigir investimento inicial em torno de R$ 10 mil, conforme cidade,
-        configuração e condições comerciais apresentadas pela equipe.
-      </p>
-      <div className="mt-5 grid gap-3">
-        {options.map((option) => (
-          <label
-            key={option}
-            className="flex cursor-pointer items-start gap-3 rounded-md border border-border p-4 text-sm hover:border-primary"
-          >
-            <input
-              type="radio"
-              name="qualification"
-              value={option}
-              className="mt-1 accent-primary"
-            />
-            {option}
-          </label>
-        ))}
-      </div>
-      {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
-    </fieldset>
   );
 }
 
@@ -453,6 +272,45 @@ export function PlatformMark() {
         Um aplicativo conectado ao comércio e à mobilidade local.
       </div>
     </div>
+  );
+}
+
+export function MediaBand({
+  image,
+  alt,
+  eyebrow,
+  title,
+  description,
+  reverse = false,
+}: {
+  image: string;
+  alt: string;
+  eyebrow: string;
+  title: ReactNode;
+  description: string;
+  reverse?: boolean;
+}) {
+  return (
+    <section className="py-20 md:py-28">
+      <div
+        className={cn(
+          "mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-2 lg:items-center",
+          reverse && "lg:[&>*:first-child]:order-2",
+        )}
+      >
+        <div className="overflow-hidden rounded-2xl bg-muted">
+          <img
+            src={image}
+            alt={alt}
+            loading="lazy"
+            width={768}
+            height={960}
+            className="aspect-[4/5] w-full object-cover"
+          />
+        </div>
+        <SectionHeading eyebrow={eyebrow} title={title} description={description} />
+      </div>
+    </section>
   );
 }
 

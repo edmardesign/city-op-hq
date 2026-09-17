@@ -1,14 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import logo from "@/assets/boraze-logo.png.asset.json";
+import logo from "@/assets/boraze-logo-2026.png.asset.json";
 import { Button } from "@/components/ui/button";
+import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
 
 interface SiteNavProps {
-  ctaHref?: string;
   ctaLabel?: string;
 }
 
-export function SiteNav({ ctaHref = "#conversao", ctaLabel = "Quero começar" }: SiteNavProps) {
+export function SiteNav({ ctaLabel = "Quero começar" }: SiteNavProps) {
   return (
     <header className="absolute inset-x-0 top-0 z-40 border-b border-brand-white/10">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
@@ -19,11 +19,13 @@ export function SiteNav({ ctaHref = "#conversao", ctaLabel = "Quero começar" }:
         >
           <img src={logo.url} alt="Bora Zé" className="h-8 w-auto md:h-9" />
         </Link>
-        <Button asChild size="lg" className="h-11 px-4 text-xs font-bold uppercase md:px-6">
-          <a href={ctaHref}>
-            {ctaLabel}
-            <ArrowUpRight aria-hidden="true" />
-          </a>
+        <Button
+          size="lg"
+          onClick={() => window.dispatchEvent(new Event(OPEN_LEAD_DIALOG_EVENT))}
+          className="h-11 rounded-xl px-4 text-xs font-bold md:px-6"
+        >
+          {ctaLabel}
+          <ArrowUpRight aria-hidden="true" />
         </Button>
       </div>
     </header>

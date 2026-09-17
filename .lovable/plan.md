@@ -1,46 +1,44 @@
-# Plano de Transformação - Executivo Bora Zé (Direct Response)
+# Correção das quatro landings Bora Zé
 
-Este plano detalha a revisão completa da landing page para o produto **Executivo Bora Zé**, focando na remoção de elementos legados do modelo "Embaixador" (especialmente o módulo de Mototáxi e exclusividade territorial) e na implementação de uma narrativa de Resposta Direta baseada na construção de carteira de estabelecimentos locais.
+## Objetivo
+Preservar a base atual e corrigir direção comercial, conversão e apresentação das quatro páginas sem recriá-las do zero.
 
-## Alterações de Conteúdo e Narrativa
+## Implementação
+1. **Sistema visual e imagens**
+   - Substituir a logomarca atual pela nova marca enviada.
+   - Remover todas as imagens antigas renderizadas nas landings e cadastrar os uploads no fluxo de assets do projeto.
+   - Usar a peça “negócio inteligente” em evidência apenas nos topos de Executivo e Embaixador.
+   - Distribuir as imagens de app, comércio e mototáxi somente nas páginas correspondentes, com crop responsivo e sem filtros.
+   - Refinar tipografia, espaços, superfícies, botões e movimentos para uma experiência minimalista, fluida e coerente com a paleta oficial.
 
-### 1. Limpeza Global de Termos Legados
-- Remover todas as referências a: mototáxi, mototaxista, corridas, entregas expressas, comissão por corrida, moto delivery.
-- Remover termos do modelo antigo: exclusividade municipal, dono da cidade, licença territorial, 50% de lucro.
-- Adaptar o FAQ para reforçar a inexistência de exclusividade, focando na liberdade comercial do Executivo.
+2. **Cadastro progressivo compartilhado**
+   - Trocar o formulário longo por modal/drawer mobile-first com uma pergunta por etapa, indicador de progresso, voltar sem perder respostas, validação contextual e transições discretas.
+   - Adaptar a ordem e os campos por campanha.
+   - Preservar UTMs e abrir o WhatsApp oficial `+55 75 8865-3204` com origem e respostas capturadas.
 
-### 2. Nova Seção: "Ganhar sem ser dono" (Desejo e Curiosidade)
-- Implementar uma seção visual premium com a headline: "E SE VOCÊ PUDESSE GANHAR COM TUDO ISSO... SEM PRECISAR SER DONO DE NADA DISSO?".
-- Exemplos visuais (Imagem + Frase curta):
-    - **Farmácia**: Ganhar com medicamentos sem abrir farmácia.
-    - **Gás**: Ganhar com botijões sem ter distribuidora.
-    - **Restaurantes**: Ganhar com pedidos sem cozinha ou estoque.
-    - **Pet Shop**: Ganhar com produtos pet sem abrir loja.
-    - **Mercado**: Ganhar com compras sem possuir mercado.
+3. **Executivo**
+   - Recuperar a venda direta da oportunidade e a conversa em segunda pessoa.
+   - Manter a headline “Ganhe com negócios locais sem ser dono de um.”
+   - Reorganizar a copy existente para reforçar mercado local, construção de carteira, oportunidade própria e escala, usando as verticais como prova — sem promessa de renda.
 
-### 3. Refatoração da Narrativa da "Nova Economia"
-- Conectar a lógica de Uber/Airbnb/iFood com a oportunidade local.
-- Frase de destaque: "A OPORTUNIDADE NÃO ESTÁ EM ABRIR CADA UM DESSES NEGÓCIOS. ESTÁ EM PARTICIPAR DA CONEXÃO ENTRE QUEM VENDE E QUEM COMPRA."
+4. **Embaixador**
+   - Recuperar a sequência persuasiva de oportunidade local: movimento econômico existente → operação digital → plataforma pronta → papel do operador → suporte → múltiplos mercados → qualificação.
+   - Manter o novo argumento do dinheiro que já circula como parte da narrativa, não como substituto dela.
+   - Deixar investimento aproximado de R$ 10 mil somente na etapa final da qualificação progressiva, com as quatro respostas solicitadas.
 
-### 4. Ajuste do Mecanismo e Revelação
-- Atrasar a revelação do nome "Bora Zé" até que a curiosidade sobre a participação financeira no comércio local esteja estabelecida.
-- Definir o Executivo como quem "ajuda estabelecimentos a entrarem na plataforma e constrói sua própria carteira".
-- Remover menções técnicas precoces (R$ 97, percentuais, tabelas de comissionamento) antes da oferta final.
+5. **Comércio e Mototáxi**
+   - Preservar a estrutura curta do Comércio, elevando a persuasão sobre descoberta local, celular como nova porta de entrada e novo canal de pedidos.
+   - Tornar Mototáxi orientada a mais chamadas, melhor aproveitamento do tempo e oportunidades de faturamento, sem garantias.
+   - Aplicar CTAs e ordens de perguntas exatamente por campanha.
 
-### 5. Atualização do Simulador
-- Remover variáveis de mototáxi/corridas.
-- Focar exclusivamente na carteira de estabelecimentos.
+6. **Validação**
+   - Testar `/`, `/executivo`, `/embaixador`, `/comercio` e `/mototaxi` em desktop e 360–430 px.
+   - Testar abrir/avançar/voltar/validar/finalizar todos os cadastros e conferir mensagens do WhatsApp.
+   - Confirmar navegação cruzada somente no rodapé, ausência de imagens antigas visíveis e metadados únicos.
+   - Conferir build, tipos, lint e logs do preview.
 
-## Detalhes Técnicos
-
-- **Componentes**: 
-    - Excluir `DualRevenue` (que continha o módulo mototáxi).
-    - Criar `PortfolioOpportunity` (nova seção de desejo).
-    - Atualizar `Market` e `Simulator` para remover referências a mototaxistas.
-- **Ordem das Seções**: `Hero` -> `Authority` -> `EconomyNarrative` -> `PortfolioOpportunity` -> `ConnectionInsight` -> `MechanismRevelation` -> `HowItWorks` -> `Benefits` -> `Market` -> `Simulator` -> `Comparison` -> `Pricing` -> `Guarantee` -> `FAQ`.
-- **Estilo**: Manter o tema "Neon/Cyber/Premium" original, usando tokens semânticos e Tailwind v4.
-
-## Verificação e Auditoria
-- Scan final em todo o projeto por palavras-chave proibidas.
-- Teste de responsividade da nova seção visual.
-- Validação do fluxo de botões para a seção de oferta (`#oferta`).
+## Detalhes técnicos
+- Manter TanStack Start, componentes e rotas atuais.
+- Concentrar o fluxo progressivo no sistema compartilhado para comportamento consistente.
+- Usar apenas tokens semânticos no código de interface e manter suporte a redução de movimento.
+- Não adicionar banco de dados nem alterar regras de negócio fora do fluxo solicitado.

@@ -33,17 +33,15 @@ export function LegalPage({ title }: { title: string }) {
           <ArrowLeft className="h-3.5 w-3.5" />
           Voltar
         </Link>
-        <h1 className="mt-10 text-5xl font-bold leading-tight md:text-7xl">
-          {title}
-        </h1>
+        <h1 className="mt-10 text-5xl font-bold leading-tight md:text-7xl">{title}</h1>
         <div className="mt-10 space-y-6 text-base text-foreground/75 md:text-lg">
           <p>
-            Esta página está em elaboração. A versão definitiva será publicada em breve,
-            revisada por assessoria jurídica especializada em Direito Digital e LGPD.
+            Esta página está em elaboração. A versão definitiva será publicada em breve, revisada
+            por assessoria jurídica especializada em Direito Digital e LGPD.
           </p>
           <p>
-            Em caso de dúvidas sobre coleta de dados ou uso da plataforma, entre em
-            contato pelo formulário de reserva de cidade ou pelo canal de suporte.
+            Em caso de dúvidas sobre coleta de dados ou uso da plataforma, entre em contato pelo
+            formulário de reserva de cidade ou pelo canal de suporte.
           </p>
         </div>
       </main>

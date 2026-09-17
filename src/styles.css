@@ -69,21 +69,60 @@
 }
 
 @layer base {
-  * { border-color: var(--border); }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
-  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0; }
-  button, a, input, select { letter-spacing: 0; }
-  ::selection { background: var(--brand-green); color: var(--brand-black); }
+  * {
+    border-color: var(--border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0;
+  }
+  button,
+  a,
+  input,
+  select {
+    letter-spacing: 0;
+  }
+  ::selection {
+    background: var(--brand-green);
+    color: var(--brand-black);
+  }
 }
 
 @keyframes reveal-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@utility reveal-up { animation: reveal-up 600ms ease-out both; }
+@utility reveal-up {
+  animation: reveal-up 600ms ease-out both;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

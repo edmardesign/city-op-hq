@@ -1,46 +1,68 @@
 import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
 import logo from "@/assets/boraze-logo.png.asset.json";
+import { Button } from "@/components/ui/button";
 
-export function SiteNav() {
+interface SiteNavProps {
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+export function SiteNav({ ctaHref = "#conversao", ctaLabel = "Quero começar" }: SiteNavProps) {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo.url} alt="BoraZé!" className="h-7 w-auto" />
-        </Link>
-        <nav className="hidden items-center gap-8 font-display uppercase tracking-[0.1em] text-xs text-foreground/70 md:flex">
-          <Link to="/" hash="oportunidade" className="hover:text-foreground">Oportunidade</Link>
-          <Link to="/" hash="como-funciona" className="hover:text-foreground">Como funciona</Link>
-          <Link to="/" hash="simulador" className="hover:text-foreground">Simulador</Link>
-          <Link to="/" hash="faq" className="hover:text-foreground">FAQ</Link>
-        </nav>
+    <header className="absolute inset-x-0 top-0 z-40 border-b border-brand-white/10">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
         <Link
           to="/"
-          hash="oferta"
-          className="border-2 border-[var(--neon)] bg-[var(--neon)] px-4 py-2 font-display text-[11px] uppercase tracking-[0.12em] text-black hover:brightness-110"
+          aria-label="Bora Zé — início"
+          className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
-          QUERO SER EXECUTIVO
+          <img src={logo.url} alt="Bora Zé" className="h-8 w-auto md:h-9" />
         </Link>
+        <Button asChild size="lg" className="h-11 px-4 text-xs font-bold uppercase md:px-6">
+          <a href={ctaHref}>
+            {ctaLabel}
+            <ArrowUpRight aria-hidden="true" />
+          </a>
+        </Button>
       </div>
     </header>
   );
 }
 
 export function SiteFooter() {
+  const links = [
+    { to: "/executivo" as const, label: "Executivo" },
+    { to: "/embaixador" as const, label: "Embaixador" },
+    { to: "/comercio" as const, label: "Comércio" },
+    { to: "/mototaxi" as const, label: "Mototáxi" },
+    { to: "/termos" as const, label: "Termos" },
+    { to: "/privacidade" as const, label: "Privacidade" },
+  ];
+
   return (
-    <footer className="border-t border-white/5 py-10">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
-        <div className="flex items-center gap-3">
-          <img src={logo.url} alt="BoraZé!" className="h-6 w-auto" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
-            © {new Date().getFullYear()} BoraZé!
-          </span>
+    <footer className="border-t border-border bg-brand-black py-10 text-brand-white">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 md:px-8">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+          <img src={logo.url} alt="Bora Zé" className="h-7 w-auto opacity-90" loading="lazy" />
+          <nav
+            aria-label="Outras oportunidades Bora Zé"
+            className="flex flex-wrap gap-x-5 gap-y-3 text-xs text-brand-white/45"
+          >
+            {links.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="transition-colors hover:text-brand-white focus-visible:text-brand-white"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
-        <div className="flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
-          <Link to="/termos" className="hover:text-foreground">Termos</Link>
-          <Link to="/privacidade" className="hover:text-foreground">Privacidade</Link>
-          <Link to="/" hash="oferta" className="hover:text-foreground">Contato</Link>
-        </div>
+        <p className="text-xs text-brand-white/35">
+          © {new Date().getFullYear()} Bora Zé. Todos os direitos reservados.
+        </p>
       </div>
     </footer>
   );

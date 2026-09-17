@@ -6,5 +6,5 @@
 - [x] Recuperar sequência persuasiva do Embaixador
 - [x] Reforçar conversão do Comércio
 - [x] Reforçar conversão do Mototáxi
-- [ ] Validar rotas, formulários, WhatsApp, desktop e mobile
-- [ ] Conferir build, tipos, lint e logs
+- [x] Validar rotas, formulários, WhatsApp, desktop e mobile
+- [x] Conferir build, tipos, lint e logs

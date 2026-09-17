@@ -1,4 +1,4 @@
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useMemo, useState, type ComponentProps, type FormEvent, type ReactNode } from "react";
 import { ArrowDown, ArrowRight, Check, ChevronDown, Smartphone } from "lucide-react";
 import { z } from "zod";
 import logo from "@/assets/boraze-logo.png.asset.json";
@@ -130,7 +130,7 @@ const baseSchema = z.object({
 
 type FormErrors = Record<string, string>;
 
-function Field({ label, name, error, ...props }: React.ComponentProps<typeof Input> & { label: string; name: string; error?: string }) {
+function Field({ label, name, error, ...props }: ComponentProps<typeof Input> & { label: string; name: string; error?: string }) {
   return (
     <label className="block text-sm font-semibold" htmlFor={name}>
       {label}

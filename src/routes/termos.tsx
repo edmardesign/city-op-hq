@@ -1,14 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { SiteNav, SiteFooter } from "@/components/site-chrome";
+import { SiteFooter } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/termos")({
   head: () => ({
     meta: [
-      { title: "Termos de Uso — BoraZé! Embaixador" },
-      { name: "description", content: "Termos de Uso do programa BoraZé! Embaixador." },
-      { property: "og:title", content: "Termos de Uso — BoraZé! Embaixador" },
-      { property: "og:description", content: "Termos de Uso do programa BoraZé! Embaixador." },
+      { title: "Termos de Uso — Bora Zé" },
+      { name: "description", content: "Termos de Uso do ecossistema Bora Zé." },
+      { property: "og:title", content: "Termos de Uso — Bora Zé" },
+      { property: "og:description", content: "Termos de Uso do ecossistema Bora Zé." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
     links: [{ rel: "canonical", href: "https://mtztextfature10.lovable.app/termos" }],
@@ -23,16 +25,15 @@ function TermosPage() {
 export function LegalPage({ title }: { title: string }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteNav />
-      <main className="mx-auto max-w-3xl px-6 py-20 md:py-28">
+      <main className="mx-auto max-w-3xl px-6 py-16 md:py-24">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 border border-white/10 bg-black/40 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/70 hover:border-[var(--neon)]/60 hover:text-foreground"
+          className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-4 py-2 text-xs font-semibold text-muted-foreground hover:border-primary hover:text-foreground"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Voltar
         </Link>
-        <h1 className="mt-10 font-display uppercase leading-[0.9] text-5xl md:text-7xl">
+        <h1 className="mt-10 text-5xl font-bold leading-tight md:text-7xl">
           {title}
         </h1>
         <div className="mt-10 space-y-6 text-base text-foreground/75 md:text-lg">

@@ -11,6 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as MototaxiRouteImport } from './routes/mototaxi'
+import { Route as ExecutivoRouteImport } from './routes/executivo'
+import { Route as EmbaixadorRouteImport } from './routes/embaixador'
+import { Route as ComercioRouteImport } from './routes/comercio'
+import { Route as IndexRouteImport } from './routes/index'
 
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
@@ -22,29 +27,96 @@ const PrivacidadeRoute = PrivacidadeRouteImport.update({
   path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MototaxiRoute = MototaxiRouteImport.update({
+  id: '/mototaxi',
+  path: '/mototaxi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExecutivoRoute = ExecutivoRouteImport.update({
+  id: '/executivo',
+  path: '/executivo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmbaixadorRoute = EmbaixadorRouteImport.update({
+  id: '/embaixador',
+  path: '/embaixador',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComercioRoute = ComercioRouteImport.update({
+  id: '/comercio',
+  path: '/comercio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/comercio': typeof ComercioRoute
+  '/embaixador': typeof EmbaixadorRoute
+  '/executivo': typeof ExecutivoRoute
+  '/mototaxi': typeof MototaxiRoute
   '/privacidade': typeof PrivacidadeRoute
   '/termos': typeof TermosRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/comercio': typeof ComercioRoute
+  '/embaixador': typeof EmbaixadorRoute
+  '/executivo': typeof ExecutivoRoute
+  '/mototaxi': typeof MototaxiRoute
   '/privacidade': typeof PrivacidadeRoute
   '/termos': typeof TermosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/comercio': typeof ComercioRoute
+  '/embaixador': typeof EmbaixadorRoute
+  '/executivo': typeof ExecutivoRoute
+  '/mototaxi': typeof MototaxiRoute
   '/privacidade': typeof PrivacidadeRoute
   '/termos': typeof TermosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/privacidade' | '/termos'
+  fullPaths:
+    | '/'
+    | '/comercio'
+    | '/embaixador'
+    | '/executivo'
+    | '/mototaxi'
+    | '/privacidade'
+    | '/termos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/privacidade' | '/termos'
-  id: '__root__' | '/privacidade' | '/termos'
+  to:
+    | '/'
+    | '/comercio'
+    | '/embaixador'
+    | '/executivo'
+    | '/mototaxi'
+    | '/privacidade'
+    | '/termos'
+  id:
+    | '__root__'
+    | '/'
+    | '/comercio'
+    | '/embaixador'
+    | '/executivo'
+    | '/mototaxi'
+    | '/privacidade'
+    | '/termos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  ComercioRoute: typeof ComercioRoute
+  EmbaixadorRoute: typeof EmbaixadorRoute
+  ExecutivoRoute: typeof ExecutivoRoute
+  MototaxiRoute: typeof MototaxiRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   TermosRoute: typeof TermosRoute
 }
@@ -65,10 +137,50 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mototaxi': {
+      id: '/mototaxi'
+      path: '/mototaxi'
+      fullPath: '/mototaxi'
+      preLoaderRoute: typeof MototaxiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/executivo': {
+      id: '/executivo'
+      path: '/executivo'
+      fullPath: '/executivo'
+      preLoaderRoute: typeof ExecutivoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/embaixador': {
+      id: '/embaixador'
+      path: '/embaixador'
+      fullPath: '/embaixador'
+      preLoaderRoute: typeof EmbaixadorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comercio': {
+      id: '/comercio'
+      path: '/comercio'
+      fullPath: '/comercio'
+      preLoaderRoute: typeof ComercioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  ComercioRoute: ComercioRoute,
+  EmbaixadorRoute: EmbaixadorRoute,
+  ExecutivoRoute: ExecutivoRoute,
+  MototaxiRoute: MototaxiRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   TermosRoute: TermosRoute,
 }

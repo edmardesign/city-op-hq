@@ -153,6 +153,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
               <span className="text-xs font-semibold text-muted-foreground">{stepIndex + 1} de {steps.length}</span>
               <Progress value={((stepIndex + 1) / steps.length) * 100} className="h-1" />
             </div>
+            <p className="text-xs font-bold uppercase text-primary">{config.title}</p>
             <DialogTitle className="text-2xl leading-tight sm:text-3xl">{step.label}</DialogTitle>
             <DialogDescription className="pt-2 text-sm leading-6">
               {step.helper ?? config.description}

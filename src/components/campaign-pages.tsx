@@ -156,6 +156,12 @@ export function AmbassadorPage() {
       </div></section>
 
       <MediaBand reverse image={gasImage.url} alt="Operação local de gás e água conectada pelo Bora Zé" eyebrow="Um aplicativo. Vários mercados." title="Uma operação conectada à rotina inteira da cidade." description="A presença de várias categorias amplia as possibilidades do negócio e reduz a dependência de um único tipo de consumo." />
+      <section className="pb-20 md:pb-28">
+        <div className="mx-auto grid max-w-7xl gap-4 px-5 md:grid-cols-2 md:px-8">
+          <img src={pharmacyImage.url} alt="Farmácia local integrada às categorias Bora Zé" loading="lazy" width={768} height={1365} className="aspect-[4/5] w-full rounded-2xl object-cover" />
+          <img src={deliveryImage.url} alt="Restaurante local integrado às categorias Bora Zé" loading="lazy" width={768} height={894} className="aspect-[4/5] w-full rounded-2xl object-cover" />
+        </div>
+      </section>
       <ConversionSection title="Descubra se sua cidade está disponível." description="Comece pela sua cidade. A pergunta sobre investimento aparece somente ao final da análise inicial." cta="Quero analisar minha cidade" />
     </CampaignShell>
   );

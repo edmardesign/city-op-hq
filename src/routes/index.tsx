@@ -5,9 +5,9 @@ import { landingHead } from "@/components/landing-system";
 export const Route = createFileRoute("/")({
   head: () =>
     landingHead({
-      title: "Executivo Bora Zé — Negócios locais em uma plataforma",
+      title: "Executivo Bora Zé — Ganhe com negócios locais",
       description:
-        "Participe do desenvolvimento do ecossistema Bora Zé conectando negócios locais à plataforma.",
+        "Construa sua oportunidade conectando negócios locais a uma plataforma pronta, sem precisar ser dono de uma loja.",
       canonicalPath: "/",
     }),
   component: ExecutivePage,

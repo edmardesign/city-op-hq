@@ -34,7 +34,14 @@ export function landingHead(meta: LandingMeta) {
 }
 
 export function openWhatsApp(message: string) {
-  const url = `https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(message)}`;
+  const params = new URLSearchParams(window.location.search);
+  const campaign = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]
+    .map((key) => [key, params.get(key)] as const)
+    .filter((entry): entry is readonly [string, string] => Boolean(entry[1]))
+    .map(([key, value]) => `${key}: ${value.slice(0, 120)}`)
+    .join("\n");
+  const trackedMessage = campaign ? `${message}\n\nOrigem da campanha:\n${campaign}` : message;
+  const url = `https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(trackedMessage)}`;
   window.location.assign(url);
 }
 

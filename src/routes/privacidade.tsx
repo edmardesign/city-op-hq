@@ -12,7 +12,7 @@ export const Route = createFileRoute("/privacidade")({
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
-    links: [{ rel: "canonical", href: "https://mtztextfature10.lovable.app/privacidade" }],
+    links: [{ rel: "canonical", href: "https://city-op-hq.lovable.app/privacidade" }],
   }),
   component: () => <LegalPage title="Política de Privacidade" />,
 });

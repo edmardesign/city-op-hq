@@ -45,37 +45,147 @@ const qualificationOptions = [
 
 const baseSteps: Record<LeadType, LeadStep[]> = {
   executivo: [
-    { key: "city", label: "Em qual cidade você quer construir sua oportunidade?", placeholder: "Sua cidade", autoComplete: "address-level2" },
-    { key: "state", label: "Em qual estado?", placeholder: "BA", autoComplete: "address-level1", maxLength: 2 },
-    { key: "name", label: "Como podemos chamar você?", placeholder: "Seu nome completo", autoComplete: "name" },
-    { key: "phone", label: "Qual é o seu WhatsApp?", placeholder: "(75) 99999-9999", type: "tel", inputMode: "tel", autoComplete: "tel" },
+    {
+      key: "city",
+      label: "Em qual cidade você quer construir sua oportunidade?",
+      placeholder: "Sua cidade",
+      autoComplete: "address-level2",
+    },
+    {
+      key: "state",
+      label: "Em qual estado?",
+      placeholder: "BA",
+      autoComplete: "address-level1",
+      maxLength: 2,
+    },
+    {
+      key: "name",
+      label: "Como podemos chamar você?",
+      placeholder: "Seu nome completo",
+      autoComplete: "name",
+    },
+    {
+      key: "phone",
+      label: "Qual é o seu WhatsApp?",
+      placeholder: "(75) 99999-9999",
+      type: "tel",
+      inputMode: "tel",
+      autoComplete: "tel",
+    },
   ],
   embaixador: [
-    { key: "city", label: "Qual cidade você gostaria de desenvolver?", placeholder: "Cidade de interesse", autoComplete: "address-level2" },
-    { key: "state", label: "Em qual estado fica essa cidade?", placeholder: "BA", autoComplete: "address-level1", maxLength: 2 },
-    { key: "name", label: "Como podemos chamar você?", placeholder: "Seu nome completo", autoComplete: "name" },
-    { key: "phone", label: "Qual é o seu WhatsApp?", placeholder: "(75) 99999-9999", type: "tel", inputMode: "tel", autoComplete: "tel" },
-    { key: "email", label: "Qual é o seu melhor e-mail?", placeholder: "voce@email.com", type: "email", inputMode: "email", autoComplete: "email" },
+    {
+      key: "city",
+      label: "Qual cidade você gostaria de desenvolver?",
+      placeholder: "Cidade de interesse",
+      autoComplete: "address-level2",
+    },
+    {
+      key: "state",
+      label: "Em qual estado fica essa cidade?",
+      placeholder: "BA",
+      autoComplete: "address-level1",
+      maxLength: 2,
+    },
+    {
+      key: "name",
+      label: "Como podemos chamar você?",
+      placeholder: "Seu nome completo",
+      autoComplete: "name",
+    },
+    {
+      key: "phone",
+      label: "Qual é o seu WhatsApp?",
+      placeholder: "(75) 99999-9999",
+      type: "tel",
+      inputMode: "tel",
+      autoComplete: "tel",
+    },
+    {
+      key: "email",
+      label: "Qual é o seu melhor e-mail?",
+      placeholder: "voce@email.com",
+      type: "email",
+      inputMode: "email",
+      autoComplete: "email",
+    },
     {
       key: "qualification",
-      label: "Se sua cidade estiver disponível e fizer sentido para você, hoje teria condições de realizar aproximadamente esse investimento?",
-      helper: "Para iniciar uma operação Bora Zé, pode ser necessário um investimento aproximado de R$ 10 mil, dependendo das condições e configuração da operação.",
+      label:
+        "Se sua cidade estiver disponível e fizer sentido para você, hoje teria condições de realizar aproximadamente esse investimento?",
+      helper:
+        "Para iniciar uma operação Bora Zé, pode ser necessário um investimento aproximado de R$ 10 mil, dependendo das condições e configuração da operação.",
       options: qualificationOptions,
     },
   ],
   comercio: [
-    { key: "establishment", label: "Qual é o nome do seu negócio?", placeholder: "Nome do estabelecimento", autoComplete: "organization" },
-    { key: "name", label: "Qual é o seu nome?", placeholder: "Seu nome completo", autoComplete: "name" },
-    { key: "category", label: "Em qual categoria seu negócio atua?", placeholder: "Ex.: Restaurante, mercado ou farmácia" },
-    { key: "city", label: "Em qual cidade fica seu negócio?", placeholder: "Sua cidade", autoComplete: "address-level2" },
-    { key: "state", label: "Em qual estado?", placeholder: "BA", autoComplete: "address-level1", maxLength: 2 },
-    { key: "phone", label: "Qual é o seu WhatsApp?", placeholder: "(75) 99999-9999", type: "tel", inputMode: "tel", autoComplete: "tel" },
+    {
+      key: "establishment",
+      label: "Qual é o nome do seu negócio?",
+      placeholder: "Nome do estabelecimento",
+      autoComplete: "organization",
+    },
+    {
+      key: "name",
+      label: "Qual é o seu nome?",
+      placeholder: "Seu nome completo",
+      autoComplete: "name",
+    },
+    {
+      key: "category",
+      label: "Em qual categoria seu negócio atua?",
+      placeholder: "Ex.: Restaurante, mercado ou farmácia",
+    },
+    {
+      key: "city",
+      label: "Em qual cidade fica seu negócio?",
+      placeholder: "Sua cidade",
+      autoComplete: "address-level2",
+    },
+    {
+      key: "state",
+      label: "Em qual estado?",
+      placeholder: "BA",
+      autoComplete: "address-level1",
+      maxLength: 2,
+    },
+    {
+      key: "phone",
+      label: "Qual é o seu WhatsApp?",
+      placeholder: "(75) 99999-9999",
+      type: "tel",
+      inputMode: "tel",
+      autoComplete: "tel",
+    },
   ],
   mototaxi: [
-    { key: "name", label: "Qual é o seu nome?", placeholder: "Seu nome completo", autoComplete: "name" },
-    { key: "city", label: "Em qual cidade você trabalha?", placeholder: "Sua cidade", autoComplete: "address-level2" },
-    { key: "state", label: "Em qual estado?", placeholder: "BA", autoComplete: "address-level1", maxLength: 2 },
-    { key: "phone", label: "Qual é o seu WhatsApp?", placeholder: "(75) 99999-9999", type: "tel", inputMode: "tel", autoComplete: "tel" },
+    {
+      key: "name",
+      label: "Qual é o seu nome?",
+      placeholder: "Seu nome completo",
+      autoComplete: "name",
+    },
+    {
+      key: "city",
+      label: "Em qual cidade você trabalha?",
+      placeholder: "Sua cidade",
+      autoComplete: "address-level2",
+    },
+    {
+      key: "state",
+      label: "Em qual estado?",
+      placeholder: "BA",
+      autoComplete: "address-level1",
+      maxLength: 2,
+    },
+    {
+      key: "phone",
+      label: "Qual é o seu WhatsApp?",
+      placeholder: "(75) 99999-9999",
+      type: "tel",
+      inputMode: "tel",
+      autoComplete: "tel",
+    },
   ],
 };
 
@@ -85,7 +195,10 @@ function validateStep(step: LeadStep, value: string) {
     return z.string().email("Informe um e-mail válido.").safeParse(trimmed);
   }
   if (step.key === "phone") {
-    return z.string().regex(/\d{10,}/, "Informe um WhatsApp com DDD.").safeParse(trimmed.replace(/\D/g, ""));
+    return z
+      .string()
+      .regex(/\d{10,}/, "Informe um WhatsApp com DDD.")
+      .safeParse(trimmed.replace(/\D/g, ""));
   }
   if (step.key === "state") {
     return z.string().length(2, "Use a sigla do estado com 2 letras.").safeParse(trimmed);
@@ -150,7 +263,9 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
         <div className="p-6 sm:p-10">
           <DialogHeader className="pr-8 text-left">
             <div className="mb-7 flex items-center gap-4">
-              <span className="text-xs font-semibold text-muted-foreground">{stepIndex + 1} de {steps.length}</span>
+              <span className="text-xs font-semibold text-muted-foreground">
+                {stepIndex + 1} de {steps.length}
+              </span>
               <Progress value={((stepIndex + 1) / steps.length) * 100} className="h-1" />
             </div>
             <p className="text-xs font-bold uppercase text-primary">{config.title}</p>
@@ -176,7 +291,9 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
                       key={option}
                       className={cn(
                         "flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-sm transition-all",
-                        values[step.key] === option ? "border-primary bg-primary/10" : "border-border hover:border-primary/60",
+                        values[step.key] === option
+                          ? "border-primary bg-primary/10"
+                          : "border-border hover:border-primary/60",
                       )}
                     >
                       <RadioGroupItem value={option} />
@@ -190,7 +307,8 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
                   name={step.key}
                   value={values[step.key] ?? ""}
                   onChange={(event) => {
-                    const nextValue = step.key === "state" ? event.target.value.toUpperCase() : event.target.value;
+                    const nextValue =
+                      step.key === "state" ? event.target.value.toUpperCase() : event.target.value;
                     setValues((current) => ({ ...current, [step.key]: nextValue }));
                     setError("");
                   }}
@@ -206,7 +324,11 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
               )}
             </div>
             <div className="min-h-7 pt-2">
-              {error && <p id="lead-step-error" className="text-sm text-destructive">{error}</p>}
+              {error && (
+                <p id="lead-step-error" className="text-sm text-destructive">
+                  {error}
+                </p>
+              )}
             </div>
             <div className="mt-4 flex items-center justify-between gap-3">
               <Button
@@ -220,7 +342,11 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
               </Button>
               <Button type="submit" size="lg" className="h-12 min-w-36 rounded-xl px-6 font-bold">
                 {stepIndex === steps.length - 1 ? "Ir para o WhatsApp" : "Continuar"}
-                {stepIndex === steps.length - 1 ? <Check aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+                {stepIndex === steps.length - 1 ? (
+                  <Check aria-hidden="true" />
+                ) : (
+                  <ArrowRight aria-hidden="true" />
+                )}
               </Button>
             </div>
           </form>

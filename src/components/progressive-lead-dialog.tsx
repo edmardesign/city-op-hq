@@ -231,9 +231,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
   const [values, setValues] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [finalStage, setFinalStage] = useState<"form" | "group" | "executivo" | "farewell">(
-    "form",
-  );
+  const [finalStage, setFinalStage] = useState<"form" | "group" | "executivo" | "farewell">("form");
   const submitLead = useServerFn(submitAmbassadorLead);
   const inputRef = useRef<HTMLInputElement>(null);
   const steps = useMemo(() => baseSteps[config.type], [config.type]);
@@ -314,7 +312,9 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
                 <Check aria-hidden="true" />
               </span>
               <p className="mt-7 text-xs font-bold uppercase text-primary">Cadastro enviado</p>
-              <DialogTitle className="mt-3 text-3xl leading-tight">Entre no grupo oficial.</DialogTitle>
+              <DialogTitle className="mt-3 text-3xl leading-tight">
+                Entre no grupo oficial.
+              </DialogTitle>
               <DialogDescription className="mx-auto mt-3 max-w-md leading-6">
                 Recebemos suas informações. Toque no botão abaixo para continuar no grupo de
                 Embaixadores Bora Zé.
@@ -333,7 +333,9 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
               </DialogTitle>
               <div className="mt-8 grid gap-3">
                 <Button asChild size="lg" className="h-14 rounded-xl font-bold">
-                  <a href={EXECUTIVE_PROGRAM_URL}>É CLARO! TÔ DENTRO <ArrowRight aria-hidden="true" /></a>
+                  <a href={EXECUTIVE_PROGRAM_URL}>
+                    É CLARO! TÔ DENTRO <ArrowRight aria-hidden="true" />
+                  </a>
                 </Button>
                 <Button
                   type="button"
@@ -348,118 +350,129 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
             </div>
           ) : finalStage === "farewell" ? (
             <div className="animate-fade-in py-8 text-center">
-              <DialogTitle className="text-3xl leading-tight">Obrigado pelo seu interesse.</DialogTitle>
+              <DialogTitle className="text-3xl leading-tight">
+                Obrigado pelo seu interesse.
+              </DialogTitle>
               <DialogDescription className="mx-auto mt-3 max-w-sm leading-6">
                 Respeitamos seu momento. Quando quiser conhecer uma nova oportunidade Bora Zé,
                 estaremos por aqui.
               </DialogDescription>
-              <Button type="button" variant="outline" className="mt-8" onClick={() => setOpen(false)}>
+              <Button
+                type="button"
+                variant="outline"
+                className="mt-8"
+                onClick={() => setOpen(false)}
+              >
                 Fechar
               </Button>
             </div>
           ) : (
-          <>
-          <DialogHeader className="pr-8 text-left">
-            <div className="mb-7 flex items-center gap-4">
-              <span className="text-xs font-semibold text-muted-foreground">
-                {stepIndex + 1} de {steps.length}
-              </span>
-              <Progress value={((stepIndex + 1) / steps.length) * 100} className="h-1" />
-            </div>
-            <p className="text-xs font-bold uppercase text-primary">{config.title}</p>
-            <DialogTitle className="text-2xl leading-tight sm:text-3xl">{step.label}</DialogTitle>
-            <DialogDescription className="pt-2 text-sm leading-6">
-              {step.helper ?? config.description}
-            </DialogDescription>
-          </DialogHeader>
+            <>
+              <DialogHeader className="pr-8 text-left">
+                <div className="mb-7 flex items-center gap-4">
+                  <span className="text-xs font-semibold text-muted-foreground">
+                    {stepIndex + 1} de {steps.length}
+                  </span>
+                  <Progress value={((stepIndex + 1) / steps.length) * 100} className="h-1" />
+                </div>
+                <p className="text-xs font-bold uppercase text-primary">{config.title}</p>
+                <DialogTitle className="text-2xl leading-tight sm:text-3xl">
+                  {step.label}
+                </DialogTitle>
+                <DialogDescription className="pt-2 text-sm leading-6">
+                  {step.helper ?? config.description}
+                </DialogDescription>
+              </DialogHeader>
 
-          <form onSubmit={continueFlow} className="mt-8">
-            <div key={step.key} className="animate-fade-in">
-              {step.options ? (
-                <RadioGroup
-                  value={values[step.key] ?? ""}
-                  onValueChange={(value) => {
-                    setValues((current) => ({ ...current, [step.key]: value }));
-                    setError("");
-                  }}
-                  className="gap-3"
-                >
-                  {step.options.map((option) => (
-                    <label
-                      key={option}
-                      className={cn(
-                        "flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-sm transition-all",
-                        values[step.key] === option
-                          ? "border-primary bg-primary/10"
-                          : "border-border hover:border-primary/60",
-                      )}
+              <form onSubmit={continueFlow} className="mt-8">
+                <div key={step.key} className="animate-fade-in">
+                  {step.options ? (
+                    <RadioGroup
+                      value={values[step.key] ?? ""}
+                      onValueChange={(value) => {
+                        setValues((current) => ({ ...current, [step.key]: value }));
+                        setError("");
+                      }}
+                      className="gap-3"
                     >
-                      <RadioGroupItem value={option} />
-                      <span>{option}</span>
-                    </label>
-                  ))}
-                </RadioGroup>
-              ) : (
-                <Input
-                  ref={inputRef}
-                  name={step.key}
-                  value={values[step.key] ?? ""}
-                  onChange={(event) => {
-                    const nextValue =
-                      step.key === "state" ? event.target.value.toUpperCase() : event.target.value;
-                    setValues((current) => ({ ...current, [step.key]: nextValue }));
-                    setError("");
-                  }}
-                  type={step.type ?? "text"}
-                  inputMode={step.inputMode}
-                  autoComplete={step.autoComplete}
-                  maxLength={step.maxLength ?? 120}
-                  placeholder={step.placeholder}
-                  aria-invalid={Boolean(error)}
-                  aria-describedby={error ? "lead-step-error" : undefined}
-                  className="h-14 rounded-xl px-4 text-base shadow-none"
-                />
-              )}
-            </div>
-            <div className="min-h-7 pt-2">
-              {error && (
-                <p id="lead-step-error" className="text-sm text-destructive">
-                  {error}
-                </p>
-              )}
-            </div>
-            <div className="mt-4 flex items-center justify-between gap-3">
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={() => setStepIndex((current) => Math.max(0, current - 1))}
-                disabled={stepIndex === 0}
-                className="h-12 px-3"
-              >
-                <ArrowLeft aria-hidden="true" /> Voltar
-              </Button>
-              <Button
-                type="submit"
-                size="lg"
-                disabled={isSubmitting}
-                className="h-12 min-w-36 rounded-xl px-6 font-bold"
-              >
-                {isSubmitting
-                  ? "Enviando..."
-                  : stepIndex === steps.length - 1 && config.type === "embaixador"
-                    ? "Enviar"
-                    : stepIndex === steps.length - 1
-                      ? "Ir para o WhatsApp"
-                      : "Continuar"}
-                {stepIndex === steps.length - 1 ? (
-                  <Check aria-hidden="true" />
-                ) : (
-                  <ArrowRight aria-hidden="true" />
-                )}
-              </Button>
-            </div>
-          </form>
-          </>
+                      {step.options.map((option) => (
+                        <label
+                          key={option}
+                          className={cn(
+                            "flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-sm transition-all",
+                            values[step.key] === option
+                              ? "border-primary bg-primary/10"
+                              : "border-border hover:border-primary/60",
+                          )}
+                        >
+                          <RadioGroupItem value={option} />
+                          <span>{option}</span>
+                        </label>
+                      ))}
+                    </RadioGroup>
+                  ) : (
+                    <Input
+                      ref={inputRef}
+                      name={step.key}
+                      value={values[step.key] ?? ""}
+                      onChange={(event) => {
+                        const nextValue =
+                          step.key === "state"
+                            ? event.target.value.toUpperCase()
+                            : event.target.value;
+                        setValues((current) => ({ ...current, [step.key]: nextValue }));
+                        setError("");
+                      }}
+                      type={step.type ?? "text"}
+                      inputMode={step.inputMode}
+                      autoComplete={step.autoComplete}
+                      maxLength={step.maxLength ?? 120}
+                      placeholder={step.placeholder}
+                      aria-invalid={Boolean(error)}
+                      aria-describedby={error ? "lead-step-error" : undefined}
+                      className="h-14 rounded-xl px-4 text-base shadow-none"
+                    />
+                  )}
+                </div>
+                <div className="min-h-7 pt-2">
+                  {error && (
+                    <p id="lead-step-error" className="text-sm text-destructive">
+                      {error}
+                    </p>
+                  )}
+                </div>
+                <div className="mt-4 flex items-center justify-between gap-3">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={() => setStepIndex((current) => Math.max(0, current - 1))}
+                    disabled={stepIndex === 0}
+                    className="h-12 px-3"
+                  >
+                    <ArrowLeft aria-hidden="true" /> Voltar
+                  </Button>
+                  <Button
+                    type="submit"
+                    size="lg"
+                    disabled={isSubmitting}
+                    className="h-12 min-w-36 rounded-xl px-6 font-bold"
+                  >
+                    {isSubmitting
+                      ? "Enviando..."
+                      : stepIndex === steps.length - 1 && config.type === "embaixador"
+                        ? "Enviar"
+                        : stepIndex === steps.length - 1
+                          ? "Ir para o WhatsApp"
+                          : "Continuar"}
+                    {stepIndex === steps.length - 1 ? (
+                      <Check aria-hidden="true" />
+                    ) : (
+                      <ArrowRight aria-hidden="true" />
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </>
           )}
         </div>
       </DialogContent>

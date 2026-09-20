@@ -11,9 +11,16 @@ const qualificationSchema = z.enum([
 const ambassadorLeadSchema = z.object({
   name: z.string().trim().min(2).max(100),
   email: z.string().trim().email().max(255),
-  phone: z.string().transform((value) => value.replace(/\D/g, "")).pipe(z.string().min(10).max(20)),
+  phone: z
+    .string()
+    .transform((value) => value.replace(/\D/g, ""))
+    .pipe(z.string().min(10).max(20)),
   city: z.string().trim().min(2).max(100),
-  state: z.string().trim().length(2).transform((value) => value.toUpperCase()),
+  state: z
+    .string()
+    .trim()
+    .length(2)
+    .transform((value) => value.toUpperCase()),
   qualification: qualificationSchema,
   website: z.string().max(0),
 });

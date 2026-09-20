@@ -335,7 +335,8 @@ export function CommercePage() {
         eyebrow="O comércio da sua cidade, dentro de um só app."
         title={
           <>
-            Quando seu cliente abrir o Bora Zé, <span className="text-primary">sua loja pode estar lá.</span>
+            Quando seu cliente abrir o Bora Zé,{" "}
+            <span className="text-primary">sua loja pode estar lá.</span>
           </>
         }
         description="O Bora Zé é o aplicativo local que conecta as pessoas aos negócios e serviços da própria cidade. Comida, mercado, farmácia, bebidas, gás e água, mototáxi e muito mais — tudo reunido em um só lugar. E o seu negócio pode fazer parte disso."
@@ -353,7 +354,8 @@ export function CommercePage() {
             description="O cliente pode abrir o Bora Zé para pedir comida, comprar no mercado, procurar uma farmácia, pedir gás, água ou bebidas e chamar um mototáxi. Para o comércio participante, isso cria uma nova porta de entrada digital dentro da própria cidade."
           />
           <p className="mt-8 max-w-3xl text-2xl font-bold leading-tight md:text-4xl">
-            Pense no Bora Zé como uma nova rua comercial. Só que dentro do celular de quem mora na sua cidade.
+            Pense no Bora Zé como uma nova rua comercial. Só que dentro do celular de quem mora na
+            sua cidade.
           </p>
         </div>
       </section>
@@ -411,7 +413,10 @@ export function CommercePage() {
           />
           <div className="mt-10 flex flex-wrap gap-2.5" aria-label="Categorias atendidas">
             {COMMERCE_CATEGORIES.map((category) => (
-              <span key={category} className="rounded-full border border-border bg-card px-4 py-2.5 text-sm font-semibold shadow-sm">
+              <span
+                key={category}
+                className="rounded-full border border-border bg-card px-4 py-2.5 text-sm font-semibold shadow-sm"
+              >
                 {category}
               </span>
             ))}

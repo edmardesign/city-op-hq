@@ -35,7 +35,15 @@ interface CommerceLeadDialogProps {
   description: string;
 }
 
-const steps = ["location", "category", "establishment", "name", "phone", "email", "instagram"] as const;
+const steps = [
+  "location",
+  "category",
+  "establishment",
+  "name",
+  "phone",
+  "email",
+  "instagram",
+] as const;
 
 function getTracking() {
   const params = new URLSearchParams(window.location.search);
@@ -80,7 +88,9 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
         `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${encodeURIComponent(state)}/municipios?orderBy=nome`,
       );
       if (!response.ok) throw new Error("Unable to load cities");
-      const data = z.array(z.object({ id: z.number(), nome: z.string() })).parse(await response.json());
+      const data = z
+        .array(z.object({ id: z.number(), nome: z.string() }))
+        .parse(await response.json());
       setCities(data);
       setCitiesStatus("ready");
     } catch {
@@ -103,8 +113,10 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
     }
     const value = values[step]?.trim() ?? "";
     if (step === "instagram") return "";
-    if (step === "email" && !z.string().email().safeParse(value).success) return "Informe um e-mail válido.";
-    if (step === "phone" && value.replace(/\D/g, "").length < 10) return "Informe um WhatsApp com DDD.";
+    if (step === "email" && !z.string().email().safeParse(value).success)
+      return "Informe um e-mail válido.";
+    if (step === "phone" && value.replace(/\D/g, "").length < 10)
+      return "Informe um WhatsApp com DDD.";
     if (value.length < 2) return "Preencha este campo para continuar.";
     return "";
   }
@@ -165,7 +177,9 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
         <div className="p-6 sm:p-10">
           <DialogHeader className="pr-8 text-left">
             <div className="mb-7 flex items-center gap-4">
-              <span className="text-xs font-semibold text-muted-foreground">{stepIndex + 1} de {steps.length}</span>
+              <span className="text-xs font-semibold text-muted-foreground">
+                {stepIndex + 1} de {steps.length}
+              </span>
               <Progress value={((stepIndex + 1) / steps.length) * 100} className="h-1" />
             </div>
             <p className="text-xs font-bold uppercase text-primary">{title}</p>
@@ -188,43 +202,130 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
               {step === "location" && (
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label className="mb-2 block text-sm font-semibold" htmlFor="commerce-state">Estado</label>
+                    <label className="mb-2 block text-sm font-semibold" htmlFor="commerce-state">
+                      Estado
+                    </label>
                     <Select value={values.state ?? ""} onValueChange={loadCities}>
-                      <SelectTrigger id="commerce-state" className="h-14 rounded-xl px-4 text-base"><SelectValue placeholder="Selecione o estado" /></SelectTrigger>
+                      <SelectTrigger id="commerce-state" className="h-14 rounded-xl px-4 text-base">
+                        <SelectValue placeholder="Selecione o estado" />
+                      </SelectTrigger>
                       <SelectContent>
-                        {BRAZILIAN_STATES.map((state) => <SelectItem key={state.uf} value={state.uf}>{state.name}</SelectItem>)}
+                        {BRAZILIAN_STATES.map((state) => (
+                          <SelectItem key={state.uf} value={state.uf}>
+                            {state.name}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
                   <div>
-                    <label className="mb-2 block text-sm font-semibold" htmlFor="commerce-city">Cidade</label>
-                    <Select value={values.city ?? ""} onValueChange={(city) => { setValues((current) => ({ ...current, city })); setError(""); }} disabled={!values.state || citiesStatus !== "ready"}>
-                      <SelectTrigger id="commerce-city" className="h-14 rounded-xl px-4 text-base"><SelectValue placeholder={citiesStatus === "loading" ? "Carregando..." : "Selecione a cidade"} /></SelectTrigger>
+                    <label className="mb-2 block text-sm font-semibold" htmlFor="commerce-city">
+                      Cidade
+                    </label>
+                    <Select
+                      value={values.city ?? ""}
+                      onValueChange={(city) => {
+                        setValues((current) => ({ ...current, city }));
+                        setError("");
+                      }}
+                      disabled={!values.state || citiesStatus !== "ready"}
+                    >
+                      <SelectTrigger id="commerce-city" className="h-14 rounded-xl px-4 text-base">
+                        <SelectValue
+                          placeholder={
+                            citiesStatus === "loading" ? "Carregando..." : "Selecione a cidade"
+                          }
+                        />
+                      </SelectTrigger>
                       <SelectContent>
-                        {cities.map((city) => <SelectItem key={city.id} value={city.nome}>{city.nome}</SelectItem>)}
+                        {cities.map((city) => (
+                          <SelectItem key={city.id} value={city.nome}>
+                            {city.nome}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
-                  {citiesStatus === "loading" && <p className="flex items-center gap-2 text-sm text-muted-foreground sm:col-span-2" role="status"><LoaderCircle className="size-4 animate-spin" aria-hidden="true" />Carregando municípios...</p>}
+                  {citiesStatus === "loading" && (
+                    <p
+                      className="flex items-center gap-2 text-sm text-muted-foreground sm:col-span-2"
+                      role="status"
+                    >
+                      <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
+                      Carregando municípios...
+                    </p>
+                  )}
                 </div>
               )}
               {step === "category" && (
                 <div className="space-y-4">
-                  <Select value={values.category ?? ""} onValueChange={(category) => { setValues((current) => ({ ...current, category })); setError(""); }}>
-                    <SelectTrigger className="h-14 rounded-xl px-4 text-base"><SelectValue placeholder="Selecione a categoria" /></SelectTrigger>
-                    <SelectContent>{COMMERCE_CATEGORIES.map((category) => <SelectItem key={category} value={category}>{category}</SelectItem>)}</SelectContent>
+                  <Select
+                    value={values.category ?? ""}
+                    onValueChange={(category) => {
+                      setValues((current) => ({ ...current, category }));
+                      setError("");
+                    }}
+                  >
+                    <SelectTrigger className="h-14 rounded-xl px-4 text-base">
+                      <SelectValue placeholder="Selecione a categoria" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {COMMERCE_CATEGORIES.map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
                   </Select>
-                  {values.category === "Outro" && <Input value={values.categoryOther ?? ""} onChange={(event) => { setValues((current) => ({ ...current, categoryOther: event.target.value })); setError(""); }} placeholder="Qual é o tipo do seu negócio?" maxLength={120} className="h-14 rounded-xl px-4 text-base shadow-none" />}
+                  {values.category === "Outro" && (
+                    <Input
+                      value={values.categoryOther ?? ""}
+                      onChange={(event) => {
+                        setValues((current) => ({ ...current, categoryOther: event.target.value }));
+                        setError("");
+                      }}
+                      placeholder="Qual é o tipo do seu negócio?"
+                      maxLength={120}
+                      className="h-14 rounded-xl px-4 text-base shadow-none"
+                    />
+                  )}
                 </div>
               )}
-              {(step === "establishment" || step === "name" || step === "phone" || step === "email" || step === "instagram") && (
+              {(step === "establishment" ||
+                step === "name" ||
+                step === "phone" ||
+                step === "email" ||
+                step === "instagram") && (
                 <Input
                   value={values[step] ?? ""}
-                  onChange={(event) => { setValues((current) => ({ ...current, [step]: event.target.value })); setError(""); }}
+                  onChange={(event) => {
+                    setValues((current) => ({ ...current, [step]: event.target.value }));
+                    setError("");
+                  }}
                   type={step === "email" ? "email" : step === "phone" ? "tel" : "text"}
                   inputMode={step === "email" ? "email" : step === "phone" ? "tel" : "text"}
-                  autoComplete={step === "establishment" ? "organization" : step === "name" ? "name" : step === "phone" ? "tel" : step === "email" ? "email" : "off"}
-                  placeholder={step === "establishment" ? "Nome do estabelecimento" : step === "name" ? "Nome completo" : step === "phone" ? "(75) 99999-9999" : step === "email" ? "voce@email.com" : "@seunegocio"}
+                  autoComplete={
+                    step === "establishment"
+                      ? "organization"
+                      : step === "name"
+                        ? "name"
+                        : step === "phone"
+                          ? "tel"
+                          : step === "email"
+                            ? "email"
+                            : "off"
+                  }
+                  placeholder={
+                    step === "establishment"
+                      ? "Nome do estabelecimento"
+                      : step === "name"
+                        ? "Nome completo"
+                        : step === "phone"
+                          ? "(75) 99999-9999"
+                          : step === "email"
+                            ? "voce@email.com"
+                            : "@seunegocio"
+                  }
                   maxLength={step === "email" ? 255 : 150}
                   aria-invalid={Boolean(error)}
                   aria-describedby={error ? "commerce-lead-error" : undefined}
@@ -232,12 +333,42 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
                 />
               )}
             </div>
-            <div className="min-h-7 pt-2">{error && <p id="commerce-lead-error" className="text-sm text-destructive" role="alert">{error}</p>}</div>
+            <div className="min-h-7 pt-2">
+              {error && (
+                <p id="commerce-lead-error" className="text-sm text-destructive" role="alert">
+                  {error}
+                </p>
+              )}
+            </div>
             <div className="mt-4 flex items-center justify-between gap-3">
-              <Button type="button" variant="ghost" onClick={() => { setStepIndex((current) => Math.max(0, current - 1)); setError(""); }} disabled={stepIndex === 0} className="h-12 px-3"><ArrowLeft aria-hidden="true" /> Voltar</Button>
-              <Button type="submit" size="lg" disabled={isSubmitting || citiesStatus === "loading"} className="h-12 min-w-36 rounded-xl px-6 font-bold">
-                {isSubmitting ? "Enviando..." : stepIndex === steps.length - 1 ? "Enviar cadastro" : "Continuar"}
-                {stepIndex === steps.length - 1 ? <Check aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => {
+                  setStepIndex((current) => Math.max(0, current - 1));
+                  setError("");
+                }}
+                disabled={stepIndex === 0}
+                className="h-12 px-3"
+              >
+                <ArrowLeft aria-hidden="true" /> Voltar
+              </Button>
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isSubmitting || citiesStatus === "loading"}
+                className="h-12 min-w-36 rounded-xl px-6 font-bold"
+              >
+                {isSubmitting
+                  ? "Enviando..."
+                  : stepIndex === steps.length - 1
+                    ? "Enviar cadastro"
+                    : "Continuar"}
+                {stepIndex === steps.length - 1 ? (
+                  <Check aria-hidden="true" />
+                ) : (
+                  <ArrowRight aria-hidden="true" />
+                )}
               </Button>
             </div>
           </form>

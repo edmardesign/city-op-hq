@@ -11,7 +11,11 @@ const optionalTrackingValue = z
 
 const commerceLeadSchema = z
   .object({
-    state: z.string().trim().length(2).transform((value) => value.toUpperCase()),
+    state: z
+      .string()
+      .trim()
+      .length(2)
+      .transform((value) => value.toUpperCase()),
     city: z.string().trim().min(2).max(100),
     category: z.enum(COMMERCE_CATEGORIES),
     categoryOther: z.string().trim().max(120).optional(),
@@ -76,9 +80,9 @@ async function sendCommerceLeadEmail(
   data: z.output<typeof commerceLeadSchema>,
   category: string,
 ): Promise<"sent" | "pending_configuration" | "failed"> {
-  const lovableApiKey = process.env['LOVABLE_API_KEY'];
-  const resendApiKey = process.env['RESEND_API_KEY'];
-  const emailFrom = process.env['COMMERCE_LEADS_EMAIL_FROM'];
+  const lovableApiKey = process.env["LOVABLE_API_KEY"];
+  const resendApiKey = process.env["RESEND_API_KEY"];
+  const emailFrom = process.env["COMMERCE_LEADS_EMAIL_FROM"];
 
   if (!lovableApiKey || !resendApiKey || !emailFrom) return "pending_configuration";
 
@@ -148,7 +152,8 @@ export const submitCommerceLead = createServerFn({ method: "POST" })
         .from("commerce_leads")
         .update({ email_delivery_status: emailStatus })
         .eq("id", lead.id);
-      if (updateError) console.error("Unable to update commerce email status", { code: updateError.code });
+      if (updateError)
+        console.error("Unable to update commerce email status", { code: updateError.code });
     }
 
     return { saved: true, emailStatus, category, city: data.city };

@@ -9,3 +9,4 @@
 - [x] Validar rotas, formulários, WhatsApp, desktop e mobile
 - [x] Conferir build, tipos, lint e logs
 - [x] Completar e validar as seções de referência da página Embaixador
+- [x] Recuperar a narrativa completa e o simulador detalhado do Embaixador

@@ -252,10 +252,10 @@ export function AmbassadorPage() {
         eyebrow="Oportunidade de operação local"
         title={
           <>
-            Ganhe com o movimento <span className="text-primary">da sua cidade.</span>
+            Fature R$ 10.000+ por mês com nosso <span className="text-primary">SUPER APP</span>
           </>
         }
-        description="Enquanto sua cidade compra, pede e se movimenta todos os dias, existe uma oportunidade acontecendo diante de você: desenvolver uma operação digital que participe desse fluxo."
+        description="Existe uma grande oportunidade passando na sua frente AGORA. Não abraçá-la vai fazer você se arrepender pelo resto da sua vida."
         cta="Quero analisar minha cidade"
         image={smartBusiness.url}
         imageAlt="Empreendedor apresenta no celular a oportunidade de operação digital Bora Zé"

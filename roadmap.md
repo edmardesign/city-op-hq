@@ -10,3 +10,8 @@
 - [x] Conferir build, tipos, lint e logs
 - [x] Completar e validar as seções de referência da página Embaixador
 - [x] Recuperar a narrativa completa e o simulador detalhado do Embaixador
+- [ ] Corrigir o carregamento das imagens do Embaixador no celular
+- [ ] Atualizar a pergunta final de investimento do Embaixador
+- [ ] Enviar os dados do prospecto Embaixador por e-mail
+- [ ] Criar saídas distintas para leads qualificados e sem disponibilidade
+- [ ] Validar o novo fluxo completo em computador e celular

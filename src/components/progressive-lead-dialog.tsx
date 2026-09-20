@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { submitAmbassadorLead } from "@/lib/ambassador-leads.functions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -42,6 +44,9 @@ const qualificationOptions = [
   "Preciso entender melhor antes.",
   "Hoje não tenho disponibilidade.",
 ];
+
+const AMBASSADOR_GROUP_URL = "https://chat.whatsapp.com/H9vsgUzdDtLBkGNTB9Dier";
+const EXECUTIVE_PROGRAM_URL = "https://embaixador.site/executivo";
 
 const baseSteps: Record<LeadType, LeadStep[]> = {
   executivo: [
@@ -112,9 +117,7 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
     {
       key: "qualification",
       label:
-        "Se sua cidade estiver disponível e fizer sentido para você, hoje teria condições de realizar aproximadamente esse investimento?",
-      helper:
-        "Para iniciar uma operação Bora Zé, pode ser necessário um investimento aproximado de R$ 10 mil, dependendo das condições e configuração da operação.",
+        "Se sua cidade estiver disponível e fizer sentido para você, hoje tem condições de investir a partir de R$ 9.890,00 para iniciar uma operação Bora Zé!?",
       options: qualificationOptions,
     },
   ],
@@ -227,6 +230,11 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
   const [stepIndex, setStepIndex] = useState(0);
   const [values, setValues] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [finalStage, setFinalStage] = useState<"form" | "group" | "executivo" | "farewell">(
+    "form",
+  );
+  const submitLead = useServerFn(submitAmbassadorLead);
   const inputRef = useRef<HTMLInputElement>(null);
   const steps = useMemo(() => baseSteps[config.type], [config.type]);
   const step = steps[stepIndex];
@@ -241,7 +249,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
     if (open && !step.options) window.setTimeout(() => inputRef.current?.focus(), 120);
   }, [open, step.options, stepIndex]);
 
-  function continueFlow(event: FormEvent<HTMLFormElement>) {
+  async function continueFlow(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const value = values[step.key] ?? "";
     const result = validateStep(step, value);
@@ -254,13 +262,103 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
       setStepIndex((current) => current + 1);
       return;
     }
-    onComplete(buildMessage(config.type, values));
+    if (config.type !== "embaixador") {
+      onComplete(buildMessage(config.type, values));
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await submitLead({
+        data: {
+          name: values.name ?? "",
+          email: values.email ?? "",
+          phone: values.phone ?? "",
+          city: values.city ?? "",
+          state: values.state ?? "",
+          qualification: values.qualification as
+            | "Sim, tenho disponibilidade."
+            | "Tenho interesse e consigo me organizar."
+            | "Preciso entender melhor antes."
+            | "Hoje não tenho disponibilidade.",
+          website: "",
+        },
+      });
+      setFinalStage(result.branch);
+    } catch {
+      setError("Não foi possível enviar agora. Verifique sua conexão e tente novamente.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  function handleOpenChange(nextOpen: boolean) {
+    setOpen(nextOpen);
+    if (!nextOpen) {
+      window.setTimeout(() => {
+        setStepIndex(0);
+        setValues({});
+        setError("");
+        setFinalStage("form");
+      }, 200);
+    }
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="inset-x-0 bottom-0 top-auto max-h-[92dvh] w-full max-w-none translate-x-0 translate-y-0 overflow-y-auto rounded-t-2xl border-x-0 border-b-0 p-0 sm:left-1/2 sm:top-1/2 sm:max-w-xl sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl sm:border">
         <div className="p-6 sm:p-10">
+          {finalStage === "group" ? (
+            <div className="animate-fade-in py-6 text-center">
+              <span className="mx-auto grid size-14 place-items-center rounded-full bg-primary text-primary-foreground">
+                <Check aria-hidden="true" />
+              </span>
+              <p className="mt-7 text-xs font-bold uppercase text-primary">Cadastro enviado</p>
+              <DialogTitle className="mt-3 text-3xl leading-tight">Entre no grupo oficial.</DialogTitle>
+              <DialogDescription className="mx-auto mt-3 max-w-md leading-6">
+                Recebemos suas informações. Toque no botão abaixo para continuar no grupo de
+                Embaixadores Bora Zé.
+              </DialogDescription>
+              <Button asChild size="lg" className="mt-8 h-14 w-full rounded-xl font-bold">
+                <a href={AMBASSADOR_GROUP_URL} target="_blank" rel="noreferrer">
+                  Entrar no grupo do WhatsApp <ExternalLink aria-hidden="true" />
+                </a>
+              </Button>
+            </div>
+          ) : finalStage === "executivo" ? (
+            <div className="animate-fade-in py-6 text-center">
+              <p className="text-xs font-bold uppercase text-primary">Uma oportunidade para você</p>
+              <DialogTitle className="mt-3 text-3xl leading-tight">
+                Que pena que ainda não é o seu momento... eu tenho algo pra você, vamos lá?
+              </DialogTitle>
+              <div className="mt-8 grid gap-3">
+                <Button asChild size="lg" className="h-14 rounded-xl font-bold">
+                  <a href={EXECUTIVE_PROGRAM_URL}>É CLARO! TÔ DENTRO <ArrowRight aria-hidden="true" /></a>
+                </Button>
+                <Button
+                  type="button"
+                  size="lg"
+                  variant="outline"
+                  className="h-14 rounded-xl font-bold"
+                  onClick={() => setFinalStage("farewell")}
+                >
+                  VOU DEIXAR PASSAR
+                </Button>
+              </div>
+            </div>
+          ) : finalStage === "farewell" ? (
+            <div className="animate-fade-in py-8 text-center">
+              <DialogTitle className="text-3xl leading-tight">Obrigado pelo seu interesse.</DialogTitle>
+              <DialogDescription className="mx-auto mt-3 max-w-sm leading-6">
+                Respeitamos seu momento. Quando quiser conhecer uma nova oportunidade Bora Zé,
+                estaremos por aqui.
+              </DialogDescription>
+              <Button type="button" variant="outline" className="mt-8" onClick={() => setOpen(false)}>
+                Fechar
+              </Button>
+            </div>
+          ) : (
+          <>
           <DialogHeader className="pr-8 text-left">
             <div className="mb-7 flex items-center gap-4">
               <span className="text-xs font-semibold text-muted-foreground">
@@ -340,8 +438,19 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
               >
                 <ArrowLeft aria-hidden="true" /> Voltar
               </Button>
-              <Button type="submit" size="lg" className="h-12 min-w-36 rounded-xl px-6 font-bold">
-                {stepIndex === steps.length - 1 ? "Ir para o WhatsApp" : "Continuar"}
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+                className="h-12 min-w-36 rounded-xl px-6 font-bold"
+              >
+                {isSubmitting
+                  ? "Enviando..."
+                  : stepIndex === steps.length - 1 && config.type === "embaixador"
+                    ? "Enviar"
+                    : stepIndex === steps.length - 1
+                      ? "Ir para o WhatsApp"
+                      : "Continuar"}
                 {stepIndex === steps.length - 1 ? (
                   <Check aria-hidden="true" />
                 ) : (
@@ -350,6 +459,8 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
               </Button>
             </div>
           </form>
+          </>
+          )}
         </div>
       </DialogContent>
     </Dialog>

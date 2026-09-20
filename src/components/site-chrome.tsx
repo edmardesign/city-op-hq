@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import logo from "@/assets/boraze-logo-2026.png.asset.json";
+import logo from "@/assets/boraze-logo-2026-mobile.webp.asset.json";
 import { Button } from "@/components/ui/button";
 import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
 

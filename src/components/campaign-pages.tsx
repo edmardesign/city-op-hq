@@ -11,15 +11,15 @@ import {
   Store,
   UtensilsCrossed,
 } from "lucide-react";
-import smartBusiness from "@/assets/executivo-negocio-inteligente.png.asset.json";
+import smartBusiness from "@/assets/executivo-negocio-inteligente-mobile.webp.asset.json";
 import marketImage from "@/assets/mercado-boraze.webp.asset.json";
 import pharmacyImage from "@/assets/farmacia-boraze.webp.asset.json";
 import deliveryImage from "@/assets/delivery-boraze.webp.asset.json";
 import motoImage from "@/assets/mototaxi-boraze.webp.asset.json";
 import gasImage from "@/assets/gas-agua-boraze.webp.asset.json";
-import appPharmacy from "@/assets/app-farmacia-boraze.png.asset.json";
-import appHome from "@/assets/app-home-boraze.png.asset.json";
-import appDelivery from "@/assets/app-delivery-boraze.png.asset.json";
+import appPharmacy from "@/assets/app-farmacia-boraze-mobile.webp.asset.json";
+import appHome from "@/assets/app-home-boraze-mobile.webp.asset.json";
+import appDelivery from "@/assets/app-delivery-boraze-mobile.webp.asset.json";
 import {
   CampaignHero,
   CampaignShell,

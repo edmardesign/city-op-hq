@@ -33,15 +33,20 @@ import {
   SimpleFaq,
 } from "@/components/landing-system";
 import {
+  AboutProject,
+  AmbassadorAdvantages,
   AmbassadorBenefits,
   AmbassadorFaq,
   AmbassadorMetrics,
   AmbassadorProfiles,
   AmbassadorSimulator,
   BusinessComparison,
+  CityAnalysis,
   DecisionSecurity,
-  DigitalEconomyTimeline,
+  ExistingMarket,
   NationalNetwork,
+  PlatformEconomyStory,
+  RevenueStreams,
 } from "@/components/ambassador-sections";
 
 const verticals = [
@@ -278,9 +283,16 @@ export function AmbassadorPage() {
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="A oportunidade já existe"
-            title="O dinheiro circula pela sua cidade todos os dias."
-            description="Pessoas pedem comida, compram no mercado e na farmácia, recebem gás e água, compram bebidas e usam mototáxi. A oportunidade está em organizar essa demanda local através de uma única operação digital."
+            eyebrow="Olhe para sua cidade"
+            title={
+              <>
+                O dinheiro já está circulando.{" "}
+                <span className="text-muted-foreground">
+                  Sua oportunidade é participar desse movimento.
+                </span>
+              </>
+            }
+            description="Todos os dias, pessoas compram comida, medicamentos, itens para casa e serviços locais. Você não precisa abrir cada um desses negócios para construir algo em torno dessas transações."
           />
           <div className="mt-12">
             <FeatureGrid items={verticals} columns={6} />
@@ -288,131 +300,18 @@ export function AmbassadorPage() {
         </div>
       </section>
 
-      <DigitalEconomyTimeline />
-
-      <AmbassadorSimulator />
-
-      <MediaBand
-        image={marketImage.url}
-        alt="Comércio local conectado às categorias do Bora Zé"
-        eyebrow="Negócio local, estrutura digital"
-        title="Tenha uma operação na sua cidade sem precisar abrir uma loja."
-        description="Você desenvolve o mercado local, aproxima estabelecimentos e consumidores e participa do crescimento da operação conforme as condições comerciais apresentadas pela equipe."
-      />
-
-      <section className="bg-brand-black py-20 text-brand-white md:py-28">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <SectionHeading
-            light
-            eyebrow="Uma divisão inteligente"
-            title={
-              <>
-                Você assume a operação local.{" "}
-                <span className="text-primary">O Bora Zé entrega a tecnologia.</span>
-              </>
-            }
-            description="Você não começa de uma tela em branco. A estrutura foi pensada para que sua energia esteja no desenvolvimento da cidade, não na criação de software."
-          />
-          <div className="mt-12">
-            <FeatureGrid
-              dark
-              columns={4}
-              items={[
-                {
-                  title: "Aplicativo pronto",
-                  description: "Tecnologia preparada para sustentar a operação.",
-                  icon: <Smartphone />,
-                },
-                {
-                  title: "Modelo multivertical",
-                  description: "Vários mercados dentro da mesma oportunidade.",
-                  icon: <Store />,
-                },
-                {
-                  title: "Treinamento",
-                  description: "Orientação para implantação e desenvolvimento local.",
-                  icon: <Building2 />,
-                },
-                {
-                  title: "Suporte",
-                  description: "Acompanhamento conforme as condições do projeto.",
-                  icon: <MapPin />,
-                },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      <AmbassadorBenefits />
-
-      <section className="bg-brand-surface py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <SectionHeading
-            eyebrow="Do interesse à operação"
-            title="Um caminho claro para avaliar a oportunidade."
-            description="O pré-cadastro não é contratação nem reserva automática. Ele inicia uma análise transparente da sua cidade e do seu perfil."
-          />
-          <div className="mt-12">
-            <ProcessSteps
-              steps={[
-                {
-                  title: "Você se apresenta",
-                  description: "Conta onde deseja desenvolver a operação e como falar com você.",
-                },
-                {
-                  title: "A cidade é analisada",
-                  description: "A equipe verifica disponibilidade e aderência ao projeto.",
-                },
-                {
-                  title: "Você conhece o modelo",
-                  description:
-                    "Condições, responsabilidades e investimento são explicados com clareza.",
-                },
-                {
-                  title: "A implantação começa",
-                  description: "Com aprovação e contratação, inicia-se o desenvolvimento local.",
-                },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      <AmbassadorProfiles />
-
+      <PlatformEconomyStory />
       <NationalNetwork />
-
-      <MediaBand
-        reverse
-        image={gasImage.url}
-        alt="Operação local de gás e água conectada pelo Bora Zé"
-        eyebrow="Um aplicativo. Vários mercados."
-        title="Uma operação conectada à rotina inteira da cidade."
-        description="A presença de várias categorias amplia as possibilidades do negócio e reduz a dependência de um único tipo de consumo."
-      />
-      <section className="pb-20 md:pb-28">
-        <div className="mx-auto grid max-w-7xl gap-4 px-5 md:grid-cols-2 md:px-8">
-          <img
-            src={pharmacyImage.url}
-            alt="Farmácia local integrada às categorias Bora Zé"
-            loading="lazy"
-            width={768}
-            height={1365}
-            className="aspect-[4/5] w-full rounded-2xl object-cover"
-          />
-          <img
-            src={deliveryImage.url}
-            alt="Restaurante local integrado às categorias Bora Zé"
-            loading="lazy"
-            width={768}
-            height={894}
-            className="aspect-[4/5] w-full rounded-2xl object-cover"
-          />
-        </div>
-      </section>
+      <AmbassadorAdvantages />
+      <AmbassadorProfiles />
+      <ExistingMarket />
+      <AmbassadorBenefits />
+      <AmbassadorSimulator />
+      <RevenueStreams />
       <BusinessComparison />
+      <CityAnalysis />
       <DecisionSecurity />
+      <AboutProject />
       <AmbassadorFaq />
       <ConversionSection
         title="Descubra se sua cidade está disponível."

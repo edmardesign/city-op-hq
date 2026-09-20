@@ -22,7 +22,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
-import { WHATSAPP_DIGITS } from "@/components/landing-system";
+
+const WHATSAPP_DIGITS = "557588653204";
 
 interface CityOption {
   id: number;

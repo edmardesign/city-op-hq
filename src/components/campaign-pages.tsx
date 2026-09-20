@@ -12,7 +12,6 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import smartBusiness from "@/assets/executivo-negocio-inteligente-mobile.webp.asset.json";
-import marketImage from "@/assets/mercado-boraze.webp.asset.json";
 import pharmacyImage from "@/assets/farmacia-boraze.webp.asset.json";
 import deliveryImage from "@/assets/delivery-boraze.webp.asset.json";
 import motoImage from "@/assets/mototaxi-boraze.webp.asset.json";
@@ -48,6 +47,7 @@ import {
   PlatformEconomyStory,
   RevenueStreams,
 } from "@/components/ambassador-sections";
+import { COMMERCE_CATEGORIES } from "@/lib/commerce-categories";
 
 const verticals = [
   {
@@ -325,97 +325,107 @@ export function AmbassadorPage() {
 const commerceLead = {
   type: "comercio" as const,
   title: "Coloque seu negócio no Bora Zé",
-  description: "Seu cadastro inicial leva menos de dois minutos e segue para o WhatsApp oficial.",
+  description: "Preencha uma etapa por vez para cadastrar seu negócio.",
 };
 
 export function CommercePage() {
   return (
-    <CampaignShell ctaLabel="Colocar meu negócio" leadConfig={commerceLead}>
+    <CampaignShell ctaLabel="Quero colocar meu negócio no Bora Zé" leadConfig={commerceLead}>
       <CampaignHero
-        eyebrow="Mais uma porta de entrada para sua loja"
+        eyebrow="O comércio da sua cidade, dentro de um só app."
         title={
           <>
-            Seu próximo pedido pode começar <span className="text-primary">no Bora Zé.</span>
+            Quando seu cliente abrir o Bora Zé, <span className="text-primary">sua loja pode estar lá.</span>
           </>
         }
-        description="Leve seu comércio para onde seus clientes já estão: no celular. Mais pessoas da sua cidade podem encontrar seu negócio e realizar pedidos conforme os serviços disponíveis."
+        description="O Bora Zé é o aplicativo local que conecta as pessoas aos negócios e serviços da própria cidade. Comida, mercado, farmácia, bebidas, gás e água, mototáxi e muito mais — tudo reunido em um só lugar. E o seu negócio pode fazer parte disso."
         cta="Quero colocar meu negócio no Bora Zé"
-        image={marketImage.url}
-        imageAlt="Mercado local disponível nas categorias do aplicativo Bora Zé"
-        proof={["Mais presença local", "Novo canal de pedidos", "Operação simples"]}
+        image={appHome.url}
+        imageAlt="Aplicativo local Bora Zé reúne negócios e serviços da cidade"
+        proof={["Aplicativo local", "Novo canal digital", "Negócios da cidade"]}
         imagePosition="object-center"
       />
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Seu comércio no celular"
-            title="Transforme o celular dos seus clientes em mais uma porta de entrada."
-            description="O Bora Zé é um aplicativo local onde consumidores encontram estabelecimentos e podem fazer pedidos ou solicitações conforme os serviços disponíveis na cidade."
+            eyebrow="Não é só mais um app de delivery"
+            title="É um aplicativo feito para conectar a cidade inteira."
+            description="O cliente pode abrir o Bora Zé para pedir comida, comprar no mercado, procurar uma farmácia, pedir gás, água ou bebidas e chamar um mototáxi. Para o comércio participante, isso cria uma nova porta de entrada digital dentro da própria cidade."
+          />
+          <p className="mt-8 max-w-3xl text-2xl font-bold leading-tight md:text-4xl">
+            Pense no Bora Zé como uma nova rua comercial. Só que dentro do celular de quem mora na sua cidade.
+          </p>
+        </div>
+      </section>
+
+      <MediaBand
+        image={appDelivery.url}
+        alt="Tela do Bora Zé para encontrar comércios e fazer pedidos"
+        eyebrow="Um canal adicional"
+        title="Sua loja mais perto de quem compra na sua cidade"
+        description="Instagram, WhatsApp e ponto físico continuam existindo. O Bora Zé chega como mais um canal para o cliente encontrar e solicitar o que sua loja oferece. Ele entra no Bora Zé procurando aquilo de que precisa — e pode encontrar você."
+      />
+
+      <section className="bg-brand-surface py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <SectionHeading
+            eyebrow="Do aplicativo até o cliente"
+            title="Um caminho simples para novos pedidos e solicitações."
+            description="Seu negócio ganha presença no aplicativo local e recebe as oportunidades disponíveis para sua categoria e região."
           />
           <div className="mt-12">
             <ProcessSteps
               steps={[
                 {
-                  title: "Sua loja entra no app",
-                  description: "Seu estabelecimento ganha presença em um canal digital local.",
+                  title: "Seu negócio entra no Bora Zé",
+                  description: "O estabelecimento passa a fazer parte do aplicativo local.",
                 },
                 {
-                  title: "Clientes encontram",
-                  description: "Pessoas da cidade descobrem seus produtos ou serviços elegíveis.",
+                  title: "O cliente abre o aplicativo",
+                  description: "Ele procura uma categoria, produto ou serviço da cidade.",
                 },
                 {
-                  title: "Você recebe pedidos",
-                  description: "Sua equipe acompanha e prepara as novas solicitações.",
+                  title: "Ele encontra seu negócio",
+                  description: "Sua loja aparece como uma opção local no momento da busca.",
                 },
                 {
-                  title: "O pedido chega",
-                  description: "A entrega segue a modalidade disponível para seu negócio e região.",
+                  title: "O pedido chega até você",
+                  description: "Sua equipe recebe e prepara a solicitação pelo fluxo disponível.",
+                },
+                {
+                  title: "O cliente recebe",
+                  description: "O atendimento é concluído conforme a operação da sua categoria.",
                 },
               ]}
             />
           </div>
         </div>
       </section>
-      <MediaBand
-        image={appPharmacy.url}
-        alt="Cliente encontra produtos de farmácia no aplicativo Bora Zé"
-        eyebrow="Mais alcance na sua cidade"
-        title="Crie um novo canal de venda sem deixar de ser um negócio local."
-        description="A presença no aplicativo pode ampliar suas oportunidades de venda, facilitar a descoberta da sua loja e aproximar seu negócio de clientes que preferem pedir pelo celular."
-      />
-      <section className="bg-brand-surface py-20 md:py-28">
+
+      <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Quem pode entrar"
-            title="Negócios que fazem parte do dia a dia da cidade."
-            description="A elegibilidade e a disponibilidade das categorias podem variar por região."
+            eyebrow="Negócios locais"
+            title="Em qual categoria seu negócio atua?"
+            description="O Bora Zé reúne estabelecimentos que fazem parte da rotina da cidade."
           />
-          <div className="mt-12">
-            <FeatureGrid
-              columns={4}
-              items={[
-                {
-                  title: "Restaurantes e lanchonetes",
-                  description: "Cardápios e pedidos para clientes locais.",
-                },
-                { title: "Mercados", description: "Produtos da rotina em um canal digital." },
-                { title: "Farmácias", description: "Itens elegíveis com conveniência local." },
-                {
-                  title: "Bebidas, gás e água",
-                  description: "Distribuidores e fornecedores da cidade.",
-                },
-              ]}
-            />
+          <div className="mt-10 flex flex-wrap gap-2.5" aria-label="Categorias atendidas">
+            {COMMERCE_CATEGORIES.map((category) => (
+              <span key={category} className="rounded-full border border-border bg-card px-4 py-2.5 text-sm font-semibold shadow-sm">
+                {category}
+              </span>
+            ))}
           </div>
         </div>
       </section>
+
       <section className="bg-brand-black py-20 text-brand-white md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-2 lg:items-center">
           <SectionHeading
             light
-            eyebrow="Mais oportunidades"
-            title="Mais clientes podem encontrar seu negócio."
-            description="Sem promessa de vendas: um canal adicional amplia as oportunidades para sua loja ser descoberta e receber novos pedidos."
+            eyebrow="Presença local no celular"
+            title="Seu ponto continua o mesmo. As formas de chegar até ele aumentam."
+            description="O Bora Zé complementa os canais que seu negócio já usa e aproxima sua oferta de pessoas que estão procurando dentro do aplicativo."
           />
           <CheckList
             light
@@ -431,8 +441,8 @@ export function CommercePage() {
         </div>
       </section>
       <ConversionSection
-        title="Pronto para abrir uma nova porta para sua loja?"
-        description="Conte sobre seu negócio, uma pergunta por vez."
+        title="Coloque seu negócio onde a cidade vai procurar."
+        description="Cadastre seu estabelecimento em etapas rápidas para continuar o atendimento."
         cta="Quero colocar meu negócio no Bora Zé"
       />
     </CampaignShell>

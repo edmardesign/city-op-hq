@@ -6,6 +6,7 @@ import {
   OPEN_LEAD_DIALOG_EVENT,
   type ProgressiveLeadConfig,
 } from "@/components/progressive-lead-dialog";
+import { CommerceLeadDialog } from "@/components/commerce-lead-dialog";
 import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteNav } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
@@ -67,7 +68,11 @@ export function CampaignShell({
       <SiteNav ctaLabel={ctaLabel} />
       <main>{children}</main>
       <SiteFooter />
-      <ProgressiveLeadDialog config={leadConfig} onComplete={openWhatsApp} />
+      {leadConfig.type === "comercio" ? (
+        <CommerceLeadDialog title={leadConfig.title} description={leadConfig.description} />
+      ) : (
+        <ProgressiveLeadDialog config={leadConfig} onComplete={openWhatsApp} />
+      )}
     </div>
   );
 }
@@ -219,7 +224,12 @@ export function FeatureGrid({
 
 export function ProcessSteps({ steps }: { steps: FeatureItem[] }) {
   return (
-    <div className="grid overflow-hidden rounded-xl border border-border bg-border md:grid-cols-4">
+    <div
+      className={cn(
+        "grid overflow-hidden rounded-xl border border-border bg-border",
+        steps.length === 5 ? "sm:grid-cols-2 lg:grid-cols-5" : "md:grid-cols-4",
+      )}
+    >
       {steps.map((step, index) => (
         <article key={step.title} className="relative bg-background p-7">
           <span className="text-xs font-bold text-primary">0{index + 1}</span>
@@ -228,7 +238,10 @@ export function ProcessSteps({ steps }: { steps: FeatureItem[] }) {
           {index < steps.length - 1 && (
             <ArrowRight
               aria-hidden="true"
-              className="absolute right-5 top-7 hidden text-muted-foreground md:block"
+              className={cn(
+                "absolute right-5 top-7 hidden text-muted-foreground",
+                steps.length === 5 ? "lg:block" : "md:block",
+              )}
             />
           )}
         </article>

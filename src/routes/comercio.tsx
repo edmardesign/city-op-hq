@@ -5,9 +5,9 @@ import { landingHead } from "@/components/landing-system";
 export const Route = createFileRoute("/comercio")({
   head: () =>
     landingHead({
-      title: "Bora Zé para Comércio — Mais clientes no celular",
+      title: "Bora Zé para Comércio — Seu negócio no app local",
       description:
-        "Crie um novo canal de vendas para mais clientes da sua cidade encontrarem e pedirem no seu negócio.",
+        "Cadastre seu comércio no Bora Zé, o aplicativo local que reúne pedidos, compras e serviços da sua cidade em um só lugar.",
       canonicalPath: "/comercio",
     }),
   component: CommercePage,

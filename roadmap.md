@@ -15,3 +15,9 @@
 - [ ] Enviar os dados do prospecto Embaixador por e-mail
 - [x] Criar saídas distintas para leads qualificados e sem disponibilidade
 - [x] Validar o novo fluxo completo em computador e celular
+- [ ] Reestruturar exclusivamente a página Comércio e sua copy
+- [ ] Refazer exclusivamente o cadastro progressivo de Comércio
+- [ ] Salvar leads de Comércio com UTMs no banco
+- [ ] Preparar e-mail transacional de Comércio com falha controlada
+- [ ] Redirecionar Comércio ao WhatsApp com mensagem curta
+- [ ] Validar /comercio e confirmar os outros três fluxos intactos

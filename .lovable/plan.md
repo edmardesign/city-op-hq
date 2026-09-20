@@ -1,22 +1,23 @@
-# Revisão completa da rota Comércio
+# Revisão da página Mototáxi e Entregadores
 
-## Resultado
-
-Reestruturar somente `/comercio` para explicar rapidamente o aplicativo local Bora Zé, mostrar as categorias atendidas e conduzir o comerciante a um cadastro progressivo próprio. Executivo, Embaixador e Mototáxi continuarão com conteúdo e comportamento atuais.
+## Objetivo
+Atualizar somente `/mototaxi` e o cadastro `type="mototaxi"` para apresentar as oportunidades de corridas e entregas, preservando integralmente Embaixador, Executivo e Comércio.
 
 ## Implementação
+- Reescrever o topo e as seções da página com a copy solicitada, incluindo as duas modalidades, o fluxo em seis passos, a explicação de canal adicional e o fechamento com CTA único.
+- Criar um cadastro progressivo isolado para profissionais, com seis etapas: localização conjunta, modalidade, nome, WhatsApp, e-mail e Instagram opcional.
+- Reutilizar a lista de UFs e a consulta oficial de municípios já usada em Comércio, mantendo cidade bloqueada até a seleção do estado.
+- Criar uma função exclusiva para validar e salvar o cadastro antes de qualquer continuação externa.
+- Criar a tabela protegida `driver_delivery_leads`, com dados pessoais, modalidade, UTMs e estado de entrega do e-mail.
+- Tentar o e-mail no servidor após salvar, usando o mesmo padrão seguro preparado para Comércio; indisponibilidade do envio não perderá o cadastro.
+- Abrir o WhatsApp somente com modalidade e cidade, sem dados pessoais ou UTMs.
+- Atualizar os metadados de `/mototaxi` para contemplar mototaxistas e entregadores sem prometer renda.
 
-1. Atualizar hero, seções explicativas, cinco passos, categorias e chamada final com a copy solicitada e o CTA único “Quero colocar meu negócio no Bora Zé”.
-2. Criar uma lista compartilhada de categorias de Comércio, usada tanto na página quanto no cadastro, mantendo “Outro” por último.
-3. Isolar o cadastro de Comércio em um fluxo de sete etapas: localização conjunta, categoria, estabelecimento, responsável, WhatsApp, e-mail e Instagram opcional.
-4. Na localização, usar todas as UFs e carregar os municípios da UF selecionada pela API oficial do IBGE, com estados de carregamento, erro e cidade desabilitada antes da UF.
-5. Criar uma função segura exclusiva para Comércio, com validação no navegador e no servidor, captura das UTMs, gravação durável antes da tentativa de e-mail e retorno controlado quando o e-mail estiver indisponível.
-6. Criar a tabela `commerce_leads` com validações, índices, permissões apenas de serviço e RLS habilitado.
-7. Após salvar, abrir o WhatsApp oficial com somente categoria e cidade, sem dados pessoais ou UTMs.
-8. Atualizar os metadados próprios de `/comercio` e validar computador, celular, banco, formulário e regressão dos outros três tipos.
+## Validação
+- Conferir textos, seis etapas, validações, município dependente da UF e botão final em computador e celular.
+- Fazer um cadastro temporário completo, confirmar a gravação e a mensagem limpa do WhatsApp, depois remover o teste.
+- Verificar que Embaixador, Executivo e Comércio continuam usando seus fluxos atuais.
+- Validar tipos, qualidade do código e preview sem publicar.
 
-## Detalhes técnicos
-
-- A integração de e-mail usará o sistema transacional seguro do projeto, sem segredos no navegador.
-- Como ainda não há domínio remetente configurado, o lead será salvo normalmente e marcado como e-mail pendente/falho; o cadastro não será perdido nem bloqueado.
-- A mudança no componente compartilhado será condicionada a `type="comercio"`; os demais tipos manterão passos, validações e destinos existentes.
+## Dependência externa
+O cadastro funcionará e será salvo imediatamente. O envio de e-mail ficará com falha controlada até existir um remetente autenticado; usaremos a infraestrutura de e-mail já escolhida para o projeto, sem expor credenciais.

@@ -59,6 +59,69 @@ export type Database = {
         }
         Relationships: []
       }
+      commerce_leads: {
+        Row: {
+          category: string
+          city: string
+          created_at: string
+          deleted_at: string | null
+          email: string
+          email_delivery_status: string
+          establishment: string
+          id: string
+          instagram: string | null
+          phone: string
+          responsible_name: string
+          state: string
+          updated_at: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          category: string
+          city: string
+          created_at?: string
+          deleted_at?: string | null
+          email: string
+          email_delivery_status?: string
+          establishment: string
+          id?: string
+          instagram?: string | null
+          phone: string
+          responsible_name: string
+          state: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          category?: string
+          city?: string
+          created_at?: string
+          deleted_at?: string | null
+          email?: string
+          email_delivery_status?: string
+          establishment?: string
+          id?: string
+          instagram?: string | null
+          phone?: string
+          responsible_name?: string
+          state?: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

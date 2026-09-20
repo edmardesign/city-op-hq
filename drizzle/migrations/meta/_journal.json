@@ -8,6 +8,13 @@
       "when": 1789924012205,
       "tag": "0000_create_ambassador_prospects",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789928314474,
+      "tag": "0001_create_commerce_leads",
+      "breakpoints": true
     }
   ]
 }

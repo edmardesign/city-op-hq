@@ -32,6 +32,17 @@ import {
   SectionHeading,
   SimpleFaq,
 } from "@/components/landing-system";
+import {
+  AmbassadorBenefits,
+  AmbassadorFaq,
+  AmbassadorMetrics,
+  AmbassadorProfiles,
+  AmbassadorSimulator,
+  BusinessComparison,
+  DecisionSecurity,
+  DigitalEconomyTimeline,
+  NationalNetwork,
+} from "@/components/ambassador-sections";
 
 const verticals = [
   {
@@ -262,6 +273,7 @@ export function AmbassadorPage() {
         proof={["Negócio digital", "Operação local", "Análise por cidade"]}
         imagePosition="object-top"
       />
+      <AmbassadorMetrics />
 
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
@@ -275,6 +287,10 @@ export function AmbassadorPage() {
           </div>
         </div>
       </section>
+
+      <DigitalEconomyTimeline />
+
+      <AmbassadorSimulator />
 
       <MediaBand
         image={marketImage.url}
@@ -328,6 +344,8 @@ export function AmbassadorPage() {
         </div>
       </section>
 
+      <AmbassadorBenefits />
+
       <section className="bg-brand-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
@@ -361,6 +379,10 @@ export function AmbassadorPage() {
         </div>
       </section>
 
+      <AmbassadorProfiles />
+
+      <NationalNetwork />
+
       <MediaBand
         reverse
         image={gasImage.url}
@@ -389,6 +411,9 @@ export function AmbassadorPage() {
           />
         </div>
       </section>
+      <BusinessComparison />
+      <DecisionSecurity />
+      <AmbassadorFaq />
       <ConversionSection
         title="Descubra se sua cidade está disponível."
         description="Comece pela sua cidade. A pergunta sobre investimento aparece somente ao final da análise inicial."

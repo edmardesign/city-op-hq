@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { ArrowRight, Check, ChevronDown, Smartphone } from "lucide-react";
-import logo from "@/assets/boraze-logo-2026.png.asset.json";
+import logo from "@/assets/boraze-logo-2026-mobile.webp.asset.json";
 import {
   ProgressiveLeadDialog,
   OPEN_LEAD_DIALOG_EVENT,
@@ -116,7 +116,7 @@ export function CampaignHero({
             <p className="mt-5 text-xs leading-5 text-brand-white/45">{proof.join(" • ")}</p>
           )}
         </div>
-        <div className="relative overflow-hidden rounded-2xl bg-brand-charcoal shadow-2xl shadow-primary/10">
+        <div className="relative min-h-[300px] overflow-hidden rounded-2xl bg-brand-charcoal shadow-2xl shadow-primary/10">
           <img
             src={image}
             alt={imageAlt}

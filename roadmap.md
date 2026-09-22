@@ -25,3 +25,5 @@
 - [x] Criar cadastro progressivo isolado para mototaxistas e entregadores
 - [x] Salvar leads profissionais com UTMs e falha controlada de e-mail
 - [x] Validar /mototaxi em computador e celular sem alterar os demais fluxos
+- [x] Simplificar o cadastro de Mototáxi como o cadastro de Parceiros
+- [x] Tornar a página de Parceiros a página inicial do site

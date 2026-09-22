@@ -4,6 +4,12 @@ import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { submitCommerceLead } from "@/lib/commerce-leads.functions";
 import { BRAZILIAN_STATES, COMMERCE_CATEGORIES } from "@/lib/commerce-categories";
+import {
+  formatPhone,
+  getStateFromPhone,
+  isValidPhone,
+  normalizePhoneDigits,
+} from "@/lib/brazil-phone";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -34,7 +40,7 @@ interface CommerceLeadDialogProps {
   description: string;
 }
 
-const steps = ["location", "category", "establishment", "name", "phone"] as const;
+const steps = ["phone", "location", "category", "establishment", "name"] as const;
 
 function getTracking() {
   const params = new URLSearchParams(window.location.search);
@@ -70,8 +76,8 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
     return () => window.removeEventListener(OPEN_LEAD_DIALOG_EVENT, openDialog);
   }, []);
 
-  async function loadCities(state: string) {
-    setValues((current) => ({ ...current, state, city: "" }));
+  async function loadCities(state: string, keepCity = false) {
+    setValues((current) => ({ ...current, state, city: keepCity ? (current.city ?? "") : "" }));
     setCities([]);
     setCitiesStatus("loading");
     setError("");
@@ -92,8 +98,11 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
   }
 
   function validateCurrentStep() {
+    if (step === "phone") {
+      return isValidPhone(values.phone ?? "") ? "" : "Informe seu WhatsApp com DDD.";
+    }
     if (step === "location") {
-      if (!values.state || !values.city) return "Escolha o estado e a cidade.";
+      if (!values.state || !values.city) return "Confirme o estado e escolha a cidade.";
       return "";
     }
     if (step === "category") {
@@ -104,8 +113,6 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
       return "";
     }
     const value = values[step]?.trim() ?? "";
-    if (step === "phone" && value.replace(/\D/g, "").length !== 9)
-      return "Informe os 9 números do WhatsApp.";
     if (value.length < 2) return "Preencha este campo para continuar.";
     return "";
   }
@@ -118,6 +125,14 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
       return;
     }
     setError("");
+
+    if (step === "phone") {
+      const detectedState = getStateFromPhone(values.phone ?? "");
+      if (detectedState && detectedState !== values.state) void loadCities(detectedState);
+      setStepIndex((current) => current + 1);
+      return;
+    }
+
     if (stepIndex < steps.length - 1) {
       setStepIndex((current) => current + 1);
       return;
@@ -133,7 +148,7 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
           categoryOther: values.categoryOther,
           establishment: values.establishment ?? "",
           responsibleName: values.name ?? "",
-          phone: `11${values.phone ?? ""}`,
+          phone: normalizePhoneDigits(values.phone ?? ""),
           ...getTracking(),
         },
       });
@@ -172,11 +187,11 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
             </div>
             <p className="text-xs font-bold uppercase text-primary">{title}</p>
             <DialogTitle className="text-2xl leading-tight sm:text-3xl">
-              {step === "location" && "Onde fica o seu negócio?"}
+              {step === "phone" && "Qual é o WhatsApp para atendimento?"}
+              {step === "location" && "Em qual cidade fica o seu negócio?"}
               {step === "category" && "Em qual categoria seu negócio atua?"}
               {step === "establishment" && "Qual é o nome do estabelecimento?"}
               {step === "name" && "Quem é o responsável pelo negócio?"}
-              {step === "phone" && "Qual é o WhatsApp para atendimento?"}
             </DialogTitle>
             <DialogDescription className="pt-2 text-sm leading-6">{description}</DialogDescription>
           </DialogHeader>
@@ -203,13 +218,32 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
           ) : (
             <form onSubmit={continueFlow} className="mt-8">
               <div key={step} className="animate-fade-in">
+                {step === "phone" && (
+                  <Input
+                    value={formatPhone(values.phone ?? "")}
+                    onChange={(event) => {
+                      setValues((current) => ({
+                        ...current,
+                        phone: normalizePhoneDigits(event.target.value),
+                      }));
+                      setError("");
+                    }}
+                    type="tel"
+                    inputMode="numeric"
+                    autoComplete="tel"
+                    placeholder="(75) 99999-9999"
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={error ? "commerce-lead-error" : undefined}
+                    className="h-14 rounded-xl px-4 text-base shadow-none"
+                  />
+                )}
                 {step === "location" && (
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
                       <label className="mb-2 block text-sm font-semibold" htmlFor="commerce-state">
                         Estado
                       </label>
-                      <Select value={values.state ?? ""} onValueChange={loadCities}>
+                      <Select value={values.state ?? ""} onValueChange={(uf) => loadCities(uf)}>
                         <SelectTrigger
                           id="commerce-state"
                           className="h-14 rounded-xl px-4 text-base"
@@ -313,44 +347,15 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
                     }}
                     type="text"
                     inputMode="text"
-                    autoComplete={
-                      step === "establishment" ? "organization" : step === "name" ? "name" : "name"
-                    }
+                    autoComplete={step === "establishment" ? "organization" : "name"}
                     placeholder={
-                      step === "establishment"
-                        ? "Nome do estabelecimento"
-                        : step === "name"
-                          ? "Nome completo"
-                          : "Nome completo"
+                      step === "establishment" ? "Nome do estabelecimento" : "Nome completo"
                     }
                     maxLength={150}
                     aria-invalid={Boolean(error)}
                     aria-describedby={error ? "commerce-lead-error" : undefined}
                     className="h-14 rounded-xl px-4 text-base shadow-none"
                   />
-                )}
-                {step === "phone" && (
-                  <div className="flex items-center overflow-hidden rounded-xl border border-input bg-background focus-within:ring-2 focus-within:ring-ring">
-                    <span className="border-r border-input px-4 text-base font-semibold text-muted-foreground">
-                      (11)
-                    </span>
-                    <Input
-                      value={values.phone ?? ""}
-                      onChange={(event) => {
-                        const phone = event.target.value.replace(/\D/g, "").slice(0, 9);
-                        setValues((current) => ({ ...current, phone }));
-                        setError("");
-                      }}
-                      type="tel"
-                      inputMode="numeric"
-                      autoComplete="tel-national"
-                      placeholder="99999-9999"
-                      maxLength={9}
-                      aria-invalid={Boolean(error)}
-                      aria-describedby={error ? "commerce-lead-error" : undefined}
-                      className="h-14 rounded-none border-0 px-4 text-base shadow-none focus-visible:ring-0"
-                    />
-                  </div>
                 )}
               </div>
               <div className="min-h-7 pt-2">

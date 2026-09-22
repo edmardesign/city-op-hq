@@ -3,6 +3,8 @@ import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { submitAmbassadorLead } from "@/lib/ambassador-leads.functions";
+import { getStateFromPhone, isValidPhone } from "@/lib/brazil-phone";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -51,17 +53,25 @@ const EXECUTIVE_PROGRAM_URL = "https://embaixador.site/executivo";
 const baseSteps: Record<LeadType, LeadStep[]> = {
   executivo: [
     {
+      key: "phone",
+      label: "Qual é o seu WhatsApp?",
+      placeholder: "(75) 99999-9999",
+      type: "tel",
+      inputMode: "tel",
+      autoComplete: "tel",
+    },
+    {
+      key: "state",
+      label: "Confirme o seu estado",
+      placeholder: "BA",
+      autoComplete: "address-level1",
+      maxLength: 2,
+    },
+    {
       key: "city",
       label: "Em qual cidade você quer construir sua oportunidade?",
       placeholder: "Sua cidade",
       autoComplete: "address-level2",
-    },
-    {
-      key: "state",
-      label: "Em qual estado?",
-      placeholder: "BA",
-      autoComplete: "address-level1",
-      maxLength: 2,
     },
     {
       key: "name",
@@ -69,6 +79,8 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
       placeholder: "Seu nome completo",
       autoComplete: "name",
     },
+  ],
+  embaixador: [
     {
       key: "phone",
       label: "Qual é o seu WhatsApp?",
@@ -77,8 +89,13 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
       inputMode: "tel",
       autoComplete: "tel",
     },
-  ],
-  embaixador: [
+    {
+      key: "state",
+      label: "Confirme o estado da cidade de interesse",
+      placeholder: "BA",
+      autoComplete: "address-level1",
+      maxLength: 2,
+    },
     {
       key: "city",
       label: "Qual cidade você gostaria de desenvolver?",
@@ -86,25 +103,10 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
       autoComplete: "address-level2",
     },
     {
-      key: "state",
-      label: "Em qual estado fica essa cidade?",
-      placeholder: "BA",
-      autoComplete: "address-level1",
-      maxLength: 2,
-    },
-    {
       key: "name",
       label: "Como podemos chamar você?",
       placeholder: "Seu nome completo",
       autoComplete: "name",
-    },
-    {
-      key: "phone",
-      label: "Qual é o seu WhatsApp?",
-      placeholder: "(75) 99999-9999",
-      type: "tel",
-      inputMode: "tel",
-      autoComplete: "tel",
     },
     {
       key: "email",
@@ -121,6 +123,7 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
       options: qualificationOptions,
     },
   ],
+
   comercio: [
     {
       key: "establishment",
@@ -200,9 +203,10 @@ function validateStep(step: LeadStep, value: string) {
   if (step.key === "phone") {
     return z
       .string()
-      .regex(/\d{10,}/, "Informe um WhatsApp com DDD.")
-      .safeParse(trimmed.replace(/\D/g, ""));
+      .refine((value) => isValidPhone(value), "Informe um WhatsApp válido com DDD.")
+      .safeParse(trimmed);
   }
+
   if (step.key === "state") {
     return z.string().length(2, "Use a sigla do estado com 2 letras.").safeParse(trimmed);
   }
@@ -256,6 +260,12 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
       return;
     }
     setError("");
+    if (step.key === "phone") {
+      // Infer the state from the area code so the next step comes pre-filled.
+      const detectedState = getStateFromPhone(value);
+      if (detectedState) setValues((current) => ({ ...current, state: detectedState }));
+    }
+
     if (stepIndex < steps.length - 1) {
       setStepIndex((current) => current + 1);
       return;

@@ -20,7 +20,8 @@ const driverDeliveryLeadSchema = z.object({
   phone: z
     .string()
     .transform((value) => value.replace(/\D/g, ""))
-    .pipe(z.string().length(11).startsWith("11")),
+    .pipe(z.string().min(10).max(11)),
+
   utmSource: optionalValue,
   utmMedium: optionalValue,
   utmCampaign: optionalValue,

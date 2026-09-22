@@ -5,9 +5,9 @@ import { landingHead } from "@/components/landing-system";
 export const Route = createFileRoute("/mototaxi")({
   head: () =>
     landingHead({
-      title: "Mototaxista Bora Zé — Receba mais chamadas",
+      title: "Bora Zé para Mototaxistas e Entregadores",
       description:
-        "Tenha mais um canal para receber solicitações de passageiros da sua cidade diretamente pelo celular.",
+        "Cadastre-se para receber oportunidades de corridas e entregas pelo aplicativo local Bora Zé, conforme a operação disponível na sua cidade.",
       canonicalPath: "/mototaxi",
     }),
   component: MotoTaxiPage,

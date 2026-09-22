@@ -7,6 +7,7 @@ import {
   type ProgressiveLeadConfig,
 } from "@/components/progressive-lead-dialog";
 import { CommerceLeadDialog } from "@/components/commerce-lead-dialog";
+import { DriverDeliveryLeadDialog } from "@/components/driver-delivery-lead-dialog";
 import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteNav } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
@@ -70,6 +71,8 @@ export function CampaignShell({
       <SiteFooter />
       {leadConfig.type === "comercio" ? (
         <CommerceLeadDialog title={leadConfig.title} description={leadConfig.description} />
+      ) : leadConfig.type === "mototaxi" ? (
+        <DriverDeliveryLeadDialog title={leadConfig.title} description={leadConfig.description} />
       ) : (
         <ProgressiveLeadDialog config={leadConfig} onComplete={openWhatsApp} />
       )}
@@ -227,7 +230,11 @@ export function ProcessSteps({ steps }: { steps: FeatureItem[] }) {
     <div
       className={cn(
         "grid overflow-hidden rounded-xl border border-border bg-border",
-        steps.length === 5 ? "sm:grid-cols-2 lg:grid-cols-5" : "md:grid-cols-4",
+        steps.length === 5
+          ? "sm:grid-cols-2 lg:grid-cols-5"
+          : steps.length === 6
+            ? "sm:grid-cols-2 lg:grid-cols-3"
+            : "md:grid-cols-4",
       )}
     >
       {steps.map((step, index) => (
@@ -240,7 +247,7 @@ export function ProcessSteps({ steps }: { steps: FeatureItem[] }) {
               aria-hidden="true"
               className={cn(
                 "absolute right-5 top-7 hidden text-muted-foreground",
-                steps.length === 5 ? "lg:block" : "md:block",
+                steps.length === 5 ? "lg:block" : steps.length === 6 ? "sm:block" : "md:block",
               )}
             />
           )}

@@ -456,54 +456,43 @@ export function CommercePage() {
 
 const motoLead = {
   type: "mototaxi" as const,
-  title: "Receba oportunidades pelo Bora Zé",
-  description:
-    "Comece com seus dados básicos. Documentos e critérios ficam para a conversa seguinte.",
+  title: "Trabalhe com o Bora Zé",
+  description: "Faça seu cadastro inicial. Nenhum documento é necessário nesta etapa.",
 };
 
 export function MotoTaxiPage() {
   return (
-    <CampaignShell ctaLabel="Receber mais chamadas" leadConfig={motoLead}>
+    <CampaignShell ctaLabel="Quero trabalhar com o Bora Zé" leadConfig={motoLead}>
       <CampaignHero
-        eyebrow="Mais um canal para suas corridas"
+        eyebrow="Para mototaxistas e entregadores"
         title={
           <>
-            Receba mais chamadas. <span className="text-primary">Faça mais corridas.</span>
+            Receba mais chamadas. Faça mais entregas.
+            <span className="mt-4 block text-2xl text-primary sm:text-3xl lg:text-4xl">
+              Tenha mais oportunidades pelo Bora Zé.
+            </span>
           </>
         }
-        description="Entre para o Bora Zé e tenha mais um canal para receber solicitações de passageiros da sua cidade diretamente pelo celular."
-        cta="Quero receber mais chamadas"
+        description="O Bora Zé conecta passageiros, comércios e entregadores da sua cidade em um só aplicativo. Você pode usar o celular para receber solicitações de corrida, oportunidades de entrega ou atuar nas duas frentes, conforme a operação disponível na sua cidade."
+        cta="Quero trabalhar com o Bora Zé"
         image={motoImage.url}
-        imageAlt="Mototaxista Bora Zé transporta passageira em uma cidade brasileira"
-        proof={["Chamadas pelo celular", "Mais exposição local", "Cadastro sujeito à análise"]}
+        imageAlt="Profissional Bora Zé disponível para corridas e entregas"
+        proof={["Chamadas pelo celular", "Corridas e entregas", "Operação local"]}
         imagePosition="object-center"
       />
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="A próxima chamada"
-            title="Mais passageiros procurando corrida. Mais oportunidades chegando até você."
-            description="O Bora Zé é um aplicativo que conecta passageiros aos mototaxistas disponíveis da cidade. Assim, você ganha mais uma forma de aproveitar seu horário de trabalho."
+            eyebrow="Duas oportunidades"
+            title="Duas formas de trabalhar com o Bora Zé"
+            description="O passageiro pede um mototáxi pelo aplicativo. O cliente compra em um comércio parceiro, e os pedidos que precisam de entrega podem gerar oportunidades para profissionais disponíveis."
           />
           <div className="mt-12">
-            <ProcessSteps
-              steps={[
-                {
-                  title: "Passageiro solicita",
-                  description: "A pessoa pede uma corrida pelo aplicativo.",
-                },
-                {
-                  title: "A chamada chega",
-                  description: "Parceiros disponíveis recebem a oportunidade no celular.",
-                },
-                {
-                  title: "Você aceita",
-                  description: "Você avalia a solicitação disponível e decide aceitar.",
-                },
-                {
-                  title: "Realiza a corrida",
-                  description: "Você encontra o passageiro e faz o deslocamento.",
-                },
+            <FeatureGrid
+              items={[
+                { title: "Mototáxi", description: "Receba chamadas de passageiros da sua cidade. Fique disponível no aplicativo e receba solicitações de corrida conforme a demanda e a operação local.", icon: <Bike /> },
+                { title: "Entregador", description: "Faça entregas para os negócios parceiros. Receba oportunidades geradas por pedidos em restaurantes, mercados, farmácias, bebidas, gás e água e outras categorias.", icon: <PackageOpen /> },
+                { title: "Quero atuar nas duas", description: "Escolha corridas e entregas no cadastro. A atuação nas duas modalidades depende das regras e da disponibilidade da operação local.", icon: <Smartphone /> },
               ]}
             />
           </div>
@@ -511,34 +500,35 @@ export function MotoTaxiPage() {
       </section>
       <MediaBand
         image={appHome.url}
-        alt="Aplicativo Bora Zé com a categoria de mototáxi"
-        eyebrow="Menos tempo esperando"
-        title="Use o celular para ampliar sua exposição a passageiros."
-        description="Mais solicitações podem criar mais oportunidades de corrida e faturamento. A quantidade depende da demanda, da disponibilidade da operação e do seu próprio trabalho."
+        alt="Aplicativo Bora Zé conectando passageiros, comércios e profissionais locais"
+        eyebrow="Canal adicional"
+        title="Mais movimento. Menos tempo esperando oportunidade aparecer."
+        description="O Bora Zé cria mais um canal para corridas e entregas na sua rotina. A quantidade de solicitações varia conforme demanda, horários, cidade e disponibilidade da operação."
       />
-      <section className="bg-brand-black py-20 text-brand-white md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-2 lg:items-center">
+      <section className="bg-brand-black py-20 text-brand-white md:py-28">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
             light
-            eyebrow="Uma oportunidade prática"
-            title="Mais um canal para conseguir corridas na sua cidade."
-            description="Sem renda ou demanda garantida. O aplicativo amplia as formas pelas quais passageiros podem encontrar você."
+            eyebrow="Como funciona"
+            title="Do cadastro à próxima solicitação"
+            description="Você escolhe se quer atuar como Mototáxi, Entregador ou, quando permitido pela operação local, nas duas modalidades."
           />
-          <CheckList
-            light
-            items={[
-              "Receba solicitações pelo celular",
-              "Amplie sua exposição",
-              "Aproveite melhor seu horário",
-              "Conecte-se a passageiros locais",
-            ]}
-          />
+          <div className="mt-12 text-foreground">
+            <ProcessSteps steps={[
+              { title: "Faça seu cadastro", description: "Informe seus dados básicos para começar." },
+              { title: "Escolha como quer atuar", description: "Mototáxi, Entregador ou as duas modalidades." },
+              { title: "Fique disponível", description: "Ative sua disponibilidade conforme a operação local." },
+              { title: "Receba oportunidades", description: "As solicitações chegam diretamente no celular." },
+              { title: "Aceite e realize", description: "Faça a corrida ou a entrega que você aceitou." },
+              { title: "Continue disponível", description: "Fique pronto para novas solicitações." },
+            ]} />
+          </div>
         </div>
       </section>
       <ConversionSection
-        title="Sua próxima chamada pode chegar pelo Bora Zé."
-        description="Faça o cadastro inicial sem documentos e continue pelo WhatsApp oficial."
-        cta="Quero receber mais chamadas"
+        title="Sua próxima corrida ou entrega pode começar no Bora Zé."
+        description="Cadastre-se para conhecer as modalidades disponíveis na operação da sua cidade."
+        cta="Quero trabalhar com o Bora Zé"
       />
     </CampaignShell>
   );

@@ -23,10 +23,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
-import { openWhatsAppMessage } from "@/lib/whatsapp";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
-const steps = ["location", "role", "name", "phone", "email", "instagram"] as const;
+const steps = ["location", "role", "name", "phone"] as const;
 type Step = (typeof steps)[number];
 type Role = "mototaxi" | "entregador" | "ambos";
 
@@ -56,13 +56,13 @@ function getTracking() {
   };
 }
 
-function openCleanWhatsApp(role: Role, city: string) {
+function getCleanWhatsAppUrl(role: Role, city: string) {
   const messages: Record<Role, string> = {
     mototaxi: `Olá, sou mototaxista em ${city}.`,
     entregador: `Olá, quero fazer entregas em ${city}.`,
     ambos: `Olá, quero atuar como mototaxista e entregador em ${city}.`,
   };
-  openWhatsAppMessage(messages[role]);
+  return getWhatsAppUrl(messages[role]);
 }
 
 export function DriverDeliveryLeadDialog({ title, description }: Props) {
@@ -73,6 +73,7 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
   const [citiesStatus, setCitiesStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [whatsAppUrl, setWhatsAppUrl] = useState("");
   const submitLead = useServerFn(submitDriverDeliveryLead);
   const step: Step = steps[stepIndex] ?? "location";
 
@@ -108,11 +109,8 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
       return values.state && values.city ? "" : "Escolha o estado e a cidade.";
     if (step === "role") return values.role ? "" : "Escolha como você quer trabalhar.";
     const value = values[step]?.trim() ?? "";
-    if (step === "instagram") return "";
-    if (step === "email" && !z.string().email().safeParse(value).success)
-      return "Informe um e-mail válido.";
-    if (step === "phone" && value.replace(/\D/g, "").length < 10)
-      return "Informe um WhatsApp com DDD.";
+    if (step === "phone" && value.replace(/\D/g, "").length !== 9)
+      return "Informe os 9 números do WhatsApp.";
     return value.length >= 2 ? "" : "Preencha este campo para continuar.";
   }
 
@@ -137,13 +135,11 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
           city: values.city ?? "",
           role: values.role as Role,
           name: values.name ?? "",
-          phone: values.phone ?? "",
-          email: values.email ?? "",
-          instagram: values.instagram,
+          phone: `11${values.phone ?? ""}`,
           ...getTracking(),
         },
       });
-      openCleanWhatsApp(result.role, result.city);
+      setWhatsAppUrl(getCleanWhatsAppUrl(result.role, result.city));
     } catch {
       setError("Não foi possível concluir agora. Verifique sua conexão e tente novamente.");
     } finally {
@@ -160,6 +156,7 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
         setCities([]);
         setCitiesStatus("idle");
         setError("");
+        setWhatsAppUrl("");
       }, 200);
   }
 
@@ -168,8 +165,6 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
     role: "Como você quer trabalhar no Bora Zé?",
     name: "Qual é o seu nome completo?",
     phone: "Qual é o seu WhatsApp?",
-    email: "Qual é o seu melhor e-mail?",
-    instagram: "Qual é o seu Instagram?",
   };
 
   return (
@@ -185,10 +180,28 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
             </div>
             <p className="text-xs font-bold uppercase text-primary">{title}</p>
             <DialogTitle className="text-2xl leading-tight sm:text-3xl">{titles[step]}</DialogTitle>
-            <DialogDescription className="pt-2 text-sm leading-6">
-              {step === "instagram" ? "Opcional. Você pode deixar em branco." : description}
-            </DialogDescription>
+            <DialogDescription className="pt-2 text-sm leading-6">{description}</DialogDescription>
           </DialogHeader>
+          {whatsAppUrl ? (
+            <div className="mt-8 animate-fade-in" role="status">
+              <div className="grid size-12 place-items-center rounded-full bg-primary text-primary-foreground">
+                <Check aria-hidden="true" />
+              </div>
+              <p className="mt-5 text-xl font-bold">Obrigado!</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Seu cadastro foi enviado. Fale agora com um atendente para continuar.
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="mt-7 h-auto min-h-14 w-full rounded-xl px-5 py-3 text-center text-sm font-bold whitespace-normal"
+              >
+                <a href={whatsAppUrl} target="_blank" rel="noopener noreferrer">
+                  FALAR COM ATENDENTE
+                </a>
+              </Button>
+            </div>
+          ) : (
           <form onSubmit={continueFlow} className="mt-8">
             <div key={step} className="animate-fade-in">
               {step === "location" && (
@@ -274,41 +287,45 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
                   ))}
                 </RadioGroup>
               )}
-              {(step === "name" ||
-                step === "phone" ||
-                step === "email" ||
-                step === "instagram") && (
+              {step === "name" && (
                 <Input
-                  value={values[step] ?? ""}
+                  value={values.name ?? ""}
                   onChange={(event) => {
-                    setValues((current) => ({ ...current, [step]: event.target.value }));
+                    setValues((current) => ({ ...current, name: event.target.value }));
                     setError("");
                   }}
-                  type={step === "email" ? "email" : step === "phone" ? "tel" : "text"}
-                  inputMode={step === "email" ? "email" : step === "phone" ? "tel" : "text"}
-                  autoComplete={
-                    step === "name"
-                      ? "name"
-                      : step === "phone"
-                        ? "tel"
-                        : step === "email"
-                          ? "email"
-                          : "off"
-                  }
-                  placeholder={
-                    step === "name"
-                      ? "Nome completo"
-                      : step === "phone"
-                        ? "(75) 99999-9999"
-                        : step === "email"
-                          ? "voce@email.com"
-                          : "@seuperfil"
-                  }
-                  maxLength={step === "email" ? 255 : 120}
+                  type="text"
+                  inputMode="text"
+                  autoComplete="name"
+                  placeholder="Nome completo"
+                  maxLength={120}
                   aria-invalid={Boolean(error)}
                   aria-describedby={error ? "driver-lead-error" : undefined}
                   className="h-14 rounded-xl px-4 text-base shadow-none"
                 />
+              )}
+              {step === "phone" && (
+                <div className="flex items-center overflow-hidden rounded-xl border border-input bg-background focus-within:ring-2 focus-within:ring-ring">
+                  <span className="border-r border-input px-4 text-base font-semibold text-muted-foreground">
+                    (11)
+                  </span>
+                  <Input
+                    value={values.phone ?? ""}
+                    onChange={(event) => {
+                      const phone = event.target.value.replace(/\D/g, "").slice(0, 9);
+                      setValues((current) => ({ ...current, phone }));
+                      setError("");
+                    }}
+                    type="tel"
+                    inputMode="numeric"
+                    autoComplete="tel-national"
+                    placeholder="99999-9999"
+                    maxLength={9}
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={error ? "driver-lead-error" : undefined}
+                    className="h-14 rounded-none border-0 px-4 text-base shadow-none focus-visible:ring-0"
+                  />
+                </div>
               )}
             </div>
             <div className="min-h-7 pt-2">
@@ -350,6 +367,7 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
               </Button>
             </div>
           </form>
+          )}
         </div>
       </DialogContent>
     </Dialog>

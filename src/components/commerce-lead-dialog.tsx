@@ -186,9 +186,9 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
               <div className="grid size-12 place-items-center rounded-full bg-primary text-primary-foreground">
                 <Check aria-hidden="true" />
               </div>
-              <p className="mt-5 text-xl font-bold">Cadastro enviado com sucesso.</p>
+              <p className="mt-5 text-xl font-bold">Obrigado!</p>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                Continue o atendimento em uma nova aba do WhatsApp.
+                Seu cadastro foi enviado. Fale agora com um atendente para continuar.
               </p>
               <Button
                 asChild
@@ -196,7 +196,7 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
                 className="mt-7 h-auto min-h-14 w-full rounded-xl px-5 py-3 text-center text-sm font-bold whitespace-normal"
               >
                 <a href={whatsAppUrl} target="_blank" rel="noopener noreferrer">
-                  QUERO CADASTRAR MEU NEGÓCIO GRÁTIS
+                  FALAR COM ATENDENTE
                 </a>
               </Button>
             </div>

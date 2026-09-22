@@ -21,3 +21,7 @@
 - [x] Preparar e-mail transacional de Comércio com falha controlada
 - [x] Redirecionar Comércio ao WhatsApp com mensagem curta
 - [x] Validar /comercio e confirmar os outros três fluxos intactos
+- [x] Reestruturar exclusivamente /mototaxi para corridas e entregas
+- [x] Criar cadastro progressivo isolado para mototaxistas e entregadores
+- [x] Salvar leads profissionais com UTMs e falha controlada de e-mail
+- [x] Validar /mototaxi em computador e celular sem alterar os demais fluxos

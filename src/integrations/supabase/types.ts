@@ -122,6 +122,66 @@ export type Database = {
         }
         Relationships: []
       }
+      driver_delivery_leads: {
+        Row: {
+          city: string
+          created_at: string
+          deleted_at: string | null
+          email: string
+          email_delivery_status: string
+          id: string
+          instagram: string | null
+          name: string
+          phone: string
+          role: string
+          state: string
+          updated_at: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          deleted_at?: string | null
+          email: string
+          email_delivery_status?: string
+          id?: string
+          instagram?: string | null
+          name: string
+          phone: string
+          role: string
+          state: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          deleted_at?: string | null
+          email?: string
+          email_delivery_status?: string
+          id?: string
+          instagram?: string | null
+          name?: string
+          phone?: string
+          role?: string
+          state?: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

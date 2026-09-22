@@ -340,7 +340,7 @@ export function CommercePage() {
             Mais clientes. Mais pedidos. <span className="text-primary">Mais vendas.</span>
           </>
         }
-        description="Coloque sua loja no app da sua cidade e receba pedidos de novos clientes."
+        description="Coloque sua loja no Super App da sua cidade e receba pedidos de novos clientes. Cadastre-se grátis e comece a vender."
         cta={commerceCta}
         image={appHome.url}
         imageAlt="Aplicativo local Bora Zé reúne negócios e serviços da cidade"
@@ -457,56 +457,55 @@ export function CommercePage() {
 
 const motoLead = {
   type: "mototaxi" as const,
-  title: "Trabalhe com o Bora Zé",
+  title: "Cadastre-se no BoraZé!",
   description: "Faça seu cadastro inicial. Nenhum documento é necessário nesta etapa.",
 };
 
 export function MotoTaxiPage() {
   return (
-    <CampaignShell ctaLabel="Quero trabalhar com o Bora Zé" leadConfig={motoLead}>
+    <CampaignShell ctaLabel="Quero me cadastrar" leadConfig={motoLead}>
       <CampaignHero
         eyebrow="Para mototaxistas e entregadores"
         title={
           <>
-            Receba mais chamadas. Faça mais entregas.
+            Mais chamadas. Mais entregas.
             <span className="mt-4 block text-2xl text-primary sm:text-3xl lg:text-4xl">
-              Tenha mais oportunidades pelo Bora Zé.
+              Mais dinheiro no bolso.
             </span>
           </>
         }
-        description="O Bora Zé conecta passageiros, comércios e entregadores da sua cidade em um só aplicativo. Você pode usar o celular para receber solicitações de corrida, oportunidades de entrega ou atuar nas duas frentes, conforme a operação disponível na sua cidade."
-        cta="Quero trabalhar com o Bora Zé"
+        description="Conecte-se a passageiros e comércios da sua cidade com o BoraZé!, o Super App que conecta você a mais clientes."
+        cta="Quero me cadastrar"
         image={motoImage.url}
-        imageAlt="Profissional Bora Zé disponível para corridas e entregas"
-        proof={["Chamadas pelo celular", "Corridas e entregas", "Operação local"]}
+        imageAlt="Profissional BoraZé! disponível para corridas e entregas"
+        proof={["Mototáxi", "Entregas", "Ou os dois"]}
         imagePosition="object-center"
       />
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Duas oportunidades"
-            title="Duas formas de trabalhar com o Bora Zé"
-            description="O passageiro pede um mototáxi pelo aplicativo. O cliente compra em um comércio parceiro, e os pedidos que precisam de entrega podem gerar oportunidades para profissionais disponíveis."
+            eyebrow="Sua moto pode render mais"
+            title="Sua moto. Duas formas de ganhar."
           />
           <div className="mt-12">
             <FeatureGrid
               items={[
                 {
-                  title: "Mototáxi",
+                  title: "Leve passageiros",
                   description:
-                    "Receba chamadas de passageiros da sua cidade. Fique disponível no aplicativo e receba solicitações de corrida conforme a demanda e a operação local.",
+                    "Receba chamadas de quem precisa de mototáxi na sua cidade.",
                   icon: <Bike />,
                 },
                 {
-                  title: "Entregador",
+                  title: "Faça entregas",
                   description:
-                    "Faça entregas para os negócios parceiros. Receba oportunidades geradas por pedidos em restaurantes, mercados, farmácias, bebidas, gás e água e outras categorias.",
+                    "Entregue pedidos de restaurantes, mercados, farmácias e outros comércios parceiros.",
                   icon: <PackageOpen />,
                 },
                 {
-                  title: "Quero atuar nas duas",
+                  title: "Quer fazer os dois?",
                   description:
-                    "Escolha corridas e entregas no cadastro. A atuação nas duas modalidades depende das regras e da disponibilidade da operação local.",
+                    "Selecione as duas opções no cadastro e amplie suas possibilidades.",
                   icon: <Smartphone />,
                 },
               ]}
@@ -516,55 +515,45 @@ export function MotoTaxiPage() {
       </section>
       <MediaBand
         image={appHome.url}
-        alt="Aplicativo Bora Zé conectando passageiros, comércios e profissionais locais"
-        eyebrow="Canal adicional"
-        title="Mais movimento. Menos tempo esperando oportunidade aparecer."
-        description="O Bora Zé cria mais um canal para corridas e entregas na sua rotina. A quantidade de solicitações varia conforme demanda, horários, cidade e disponibilidade da operação."
+        alt="Super App BoraZé! conectando passageiros, comércios e profissionais locais"
+        eyebrow="Conecte-se a novos clientes"
+        title="Não dependa só de quem já conhece você."
+        description="Tem gente precisando de uma corrida. Tem comércio precisando de entrega. O BoraZé! conecta você a essa demanda."
       />
       <section className="bg-brand-black py-20 text-brand-white md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
             light
             eyebrow="Como funciona"
-            title="Do cadastro à próxima solicitação"
-            description="Você escolhe se quer atuar como Mototáxi, Entregador ou, quando permitido pela operação local, nas duas modalidades."
+            title="Começar é simples."
           />
-          <div className="mt-12 text-foreground">
+          <div className="mt-12 text-foreground [&>div]:md:grid-cols-3">
             <ProcessSteps
               steps={[
                 {
-                  title: "Faça seu cadastro",
-                  description: "Informe seus dados básicos para começar.",
+                  title: "Cadastre-se",
+                  description: "Informe seus dados, sua cidade e como quer trabalhar.",
                 },
                 {
-                  title: "Escolha como quer atuar",
-                  description: "Mototáxi, Entregador ou as duas modalidades.",
+                  title: "Confira a disponibilidade",
+                  description: "Saiba como funciona a entrada de profissionais na sua cidade.",
                 },
                 {
-                  title: "Fique disponível",
-                  description: "Ative sua disponibilidade conforme a operação local.",
-                },
-                {
-                  title: "Receba oportunidades",
-                  description: "As solicitações chegam diretamente no celular.",
-                },
-                {
-                  title: "Aceite e realize",
-                  description: "Faça a corrida ou a entrega que você aceitou.",
-                },
-                {
-                  title: "Continue disponível",
-                  description: "Fique pronto para novas solicitações.",
+                  title: "Receba solicitações",
+                  description: "Com o cadastro liberado, fique disponível para receber chamadas e pedidos de entrega.",
                 },
               ]}
             />
           </div>
+          <p className="mt-6 text-sm text-brand-white/70">
+            As modalidades e solicitações dependem da operação e da demanda na sua cidade.
+          </p>
         </div>
       </section>
       <ConversionSection
-        title="Sua próxima corrida ou entrega pode começar no Bora Zé."
-        description="Cadastre-se para conhecer as modalidades disponíveis na operação da sua cidade."
-        cta="Quero trabalhar com o Bora Zé"
+        title="Bora fazer sua moto render mais?"
+        description="Cadastre-se para trabalhar com corridas, entregas ou as duas modalidades na sua cidade."
+        cta="Quero me cadastrar"
       />
     </CampaignShell>
   );

@@ -58,7 +58,7 @@ function getTracking() {
 
 function openCommerceWhatsApp(category: string, city: string) {
   const message = `Olá, meu negócio é da categoria ${category.toLocaleLowerCase("pt-BR")} em ${city}.`;
-  window.location.assign(`https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(message)}`);
+  openWhatsAppMessage(message);
 }
 
 export function CommerceLeadDialog({ title, description }: CommerceLeadDialogProps) {

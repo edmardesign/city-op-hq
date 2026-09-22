@@ -11,8 +11,7 @@ import { DriverDeliveryLeadDialog } from "@/components/driver-delivery-lead-dial
 import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteNav } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
-
-export const WHATSAPP_DIGITS = "557588653204";
+import { openWhatsAppMessage } from "@/lib/whatsapp";
 
 export interface LandingMeta {
   title: string;
@@ -46,9 +45,7 @@ export function openWhatsApp(message: string) {
     .map(([key, value]) => `${key}: ${value.slice(0, 120)}`)
     .join("\n");
   const trackedMessage = campaign ? `${message}\n\nOrigem da campanha:\n${campaign}` : message;
-  window.location.assign(
-    `https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(trackedMessage)}`,
-  );
+  openWhatsAppMessage(trackedMessage);
 }
 
 export function openLeadDialog() {

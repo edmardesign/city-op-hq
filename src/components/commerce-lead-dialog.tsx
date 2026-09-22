@@ -22,8 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
-
-const WHATSAPP_DIGITS = "557588653204";
+import { openWhatsAppMessage } from "@/lib/whatsapp";
 
 interface CityOption {
   id: number;
@@ -58,7 +57,7 @@ function getTracking() {
 
 function openCommerceWhatsApp(category: string, city: string) {
   const message = `Olá, meu negócio é da categoria ${category.toLocaleLowerCase("pt-BR")} em ${city}.`;
-  window.location.assign(`https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(message)}`);
+  openWhatsAppMessage(message);
 }
 
 export function CommerceLeadDialog({ title, description }: CommerceLeadDialogProps) {

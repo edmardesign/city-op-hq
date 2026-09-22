@@ -23,9 +23,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
+import { openWhatsAppMessage } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
-const WHATSAPP_DIGITS = "557588653204";
 const steps = ["location", "role", "name", "phone", "email", "instagram"] as const;
 type Step = (typeof steps)[number];
 type Role = "mototaxi" | "entregador" | "ambos";
@@ -62,9 +62,7 @@ function openCleanWhatsApp(role: Role, city: string) {
     entregador: `Olá, quero fazer entregas em ${city}.`,
     ambos: `Olá, quero atuar como mototaxista e entregador em ${city}.`,
   };
-  window.location.assign(
-    `https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(messages[role])}`,
-  );
+  openWhatsAppMessage(messages[role]);
 }
 
 export function DriverDeliveryLeadDialog({ title, description }: Props) {

@@ -34,10 +34,10 @@ export function SiteNav({ ctaLabel = "Quero começar" }: SiteNavProps) {
 
 export function SiteFooter() {
   const links = [
+    { to: "/comercio" as const, label: "Parceiros" },
+    { to: "/mototaxi" as const, label: "Mototáxi" },
     { to: "/executivo" as const, label: "Executivo" },
     { to: "/embaixador" as const, label: "Embaixador" },
-    { to: "/comercio" as const, label: "Comércio" },
-    { to: "/mototaxi" as const, label: "Mototáxi" },
     { to: "/termos" as const, label: "Termos" },
     { to: "/privacidade" as const, label: "Privacidade" },
   ];

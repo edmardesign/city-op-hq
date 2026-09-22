@@ -24,4 +24,4 @@
 - [x] Reestruturar exclusivamente /mototaxi para corridas e entregas
 - [x] Criar cadastro progressivo isolado para mototaxistas e entregadores
 - [x] Salvar leads profissionais com UTMs e falha controlada de e-mail
-- [ ] Validar /mototaxi em computador e celular sem alterar os demais fluxos
+- [x] Validar /mototaxi em computador e celular sem alterar os demais fluxos

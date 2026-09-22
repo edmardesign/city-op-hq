@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
-import { openWhatsAppMessage } from "@/lib/whatsapp";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 interface CityOption {
   id: number;
@@ -40,8 +40,6 @@ const steps = [
   "establishment",
   "name",
   "phone",
-  "email",
-  "instagram",
 ] as const;
 
 function getTracking() {
@@ -55,9 +53,9 @@ function getTracking() {
   };
 }
 
-function openCommerceWhatsApp(category: string, city: string) {
+function getCommerceWhatsAppUrl(category: string, city: string) {
   const message = `Olá, meu negócio é da categoria ${category.toLocaleLowerCase("pt-BR")} em ${city}.`;
-  openWhatsAppMessage(message);
+  return getWhatsAppUrl(message);
 }
 
 export function CommerceLeadDialog({ title, description }: CommerceLeadDialogProps) {
@@ -68,6 +66,7 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
   const [citiesStatus, setCitiesStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [whatsAppUrl, setWhatsAppUrl] = useState("");
   const submitLead = useServerFn(submitCommerceLead);
   const step = steps[stepIndex];
 
@@ -111,11 +110,8 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
       return "";
     }
     const value = values[step]?.trim() ?? "";
-    if (step === "instagram") return "";
-    if (step === "email" && !z.string().email().safeParse(value).success)
-      return "Informe um e-mail válido.";
-    if (step === "phone" && value.replace(/\D/g, "").length < 10)
-      return "Informe um WhatsApp com DDD.";
+    if (step === "phone" && value.replace(/\D/g, "").length !== 9)
+      return "Informe os 9 números do WhatsApp.";
     if (value.length < 2) return "Preencha este campo para continuar.";
     return "";
   }
@@ -143,13 +139,11 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
           categoryOther: values.categoryOther,
           establishment: values.establishment ?? "",
           responsibleName: values.name ?? "",
-          phone: values.phone ?? "",
-          email: values.email ?? "",
-          instagram: values.instagram,
+          phone: `11${values.phone ?? ""}`,
           ...getTracking(),
         },
       });
-      openCommerceWhatsApp(result.category, result.city);
+      setWhatsAppUrl(getCommerceWhatsAppUrl(result.category, result.city));
     } catch {
       setError("Não foi possível concluir agora. Verifique sua conexão e tente novamente.");
     } finally {
@@ -166,6 +160,7 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
         setCities([]);
         setCitiesStatus("idle");
         setError("");
+        setWhatsAppUrl("");
       }, 200);
     }
   }
@@ -188,14 +183,28 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
               {step === "establishment" && "Qual é o nome do estabelecimento?"}
               {step === "name" && "Quem é o responsável pelo negócio?"}
               {step === "phone" && "Qual é o WhatsApp para atendimento?"}
-              {step === "email" && "Qual é o seu melhor e-mail?"}
-              {step === "instagram" && "Qual é o Instagram do negócio?"}
             </DialogTitle>
             <DialogDescription className="pt-2 text-sm leading-6">
-              {step === "instagram" ? "Opcional. Você pode deixar em branco." : description}
+              {description}
             </DialogDescription>
           </DialogHeader>
 
+          {whatsAppUrl ? (
+            <div className="mt-8 animate-fade-in" role="status">
+              <div className="grid size-12 place-items-center rounded-full bg-primary text-primary-foreground">
+                <Check aria-hidden="true" />
+              </div>
+              <p className="mt-5 text-xl font-bold">Cadastro enviado com sucesso.</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Continue o atendimento em uma nova aba do WhatsApp.
+              </p>
+              <Button asChild size="lg" className="mt-7 h-auto min-h-14 w-full rounded-xl px-5 py-3 text-center text-sm font-bold whitespace-normal">
+                <a href={whatsAppUrl} target="_blank" rel="noopener noreferrer">
+                  QUERO CADASTRAR MEU NEGÓCIO GRÁTIS
+                </a>
+              </Button>
+            </div>
+          ) : (
           <form onSubmit={continueFlow} className="mt-8">
             <div key={step} className="animate-fade-in">
               {step === "location" && (
@@ -290,46 +299,57 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
                   )}
                 </div>
               )}
-              {(step === "establishment" ||
-                step === "name" ||
-                step === "phone" ||
-                step === "email" ||
-                step === "instagram") && (
+              {(step === "establishment" || step === "name") && (
                 <Input
                   value={values[step] ?? ""}
                   onChange={(event) => {
                     setValues((current) => ({ ...current, [step]: event.target.value }));
                     setError("");
                   }}
-                  type={step === "email" ? "email" : step === "phone" ? "tel" : "text"}
-                  inputMode={step === "email" ? "email" : step === "phone" ? "tel" : "text"}
+                  type="text"
+                  inputMode="text"
                   autoComplete={
                     step === "establishment"
                       ? "organization"
                       : step === "name"
                         ? "name"
-                        : step === "phone"
-                          ? "tel"
-                          : step === "email"
-                            ? "email"
-                            : "off"
+                        : "name"
                   }
                   placeholder={
                     step === "establishment"
                       ? "Nome do estabelecimento"
                       : step === "name"
                         ? "Nome completo"
-                        : step === "phone"
-                          ? "(75) 99999-9999"
-                          : step === "email"
-                            ? "voce@email.com"
-                            : "@seunegocio"
+                        : "Nome completo"
                   }
-                  maxLength={step === "email" ? 255 : 150}
+                  maxLength={150}
                   aria-invalid={Boolean(error)}
                   aria-describedby={error ? "commerce-lead-error" : undefined}
                   className="h-14 rounded-xl px-4 text-base shadow-none"
                 />
+              )}
+              {step === "phone" && (
+                <div className="flex items-center overflow-hidden rounded-xl border border-input bg-background focus-within:ring-2 focus-within:ring-ring">
+                  <span className="border-r border-input px-4 text-base font-semibold text-muted-foreground">
+                    (11)
+                  </span>
+                  <Input
+                    value={values.phone ?? ""}
+                    onChange={(event) => {
+                      const phone = event.target.value.replace(/\D/g, "").slice(0, 9);
+                      setValues((current) => ({ ...current, phone }));
+                      setError("");
+                    }}
+                    type="tel"
+                    inputMode="numeric"
+                    autoComplete="tel-national"
+                    placeholder="99999-9999"
+                    maxLength={9}
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={error ? "commerce-lead-error" : undefined}
+                    className="h-14 rounded-none border-0 px-4 text-base shadow-none focus-visible:ring-0"
+                  />
+                </div>
               )}
             </div>
             <div className="min-h-7 pt-2">
@@ -371,6 +391,7 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
               </Button>
             </div>
           </form>
+          )}
         </div>
       </DialogContent>
     </Dialog>

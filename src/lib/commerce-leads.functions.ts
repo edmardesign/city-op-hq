@@ -24,20 +24,7 @@ const commerceLeadSchema = z
     phone: z
       .string()
       .transform((value) => value.replace(/\D/g, ""))
-      .pipe(z.string().min(10).max(20)),
-    email: z.string().trim().email().max(255),
-    instagram: z
-      .string()
-      .optional()
-      .transform((value) => {
-        const cleaned = (value ?? "")
-          .trim()
-          .replace(/^https?:\/\/(www\.)?instagram\.com\//i, "")
-          .replace(/\/+$/, "")
-          .replace(/^@+/, "")
-          .slice(0, 120);
-        return cleaned || null;
-      }),
+      .pipe(z.string().length(11).startsWith("11")),
     utmSource: optionalTrackingValue,
     utmMedium: optionalTrackingValue,
     utmCampaign: optionalTrackingValue,
@@ -76,8 +63,6 @@ function buildEmailText(data: z.output<typeof commerceLeadSchema>, category: str
     `Nome do estabelecimento: ${data.establishment}`,
     `Responsável: ${data.responsibleName}`,
     `WhatsApp: ${data.phone}`,
-    `E-mail: ${data.email}`,
-    `Instagram: ${data.instagram ?? "Não informado"}`,
     tracking ? `Origem/UTMs:\n${tracking}` : "Origem/UTMs: Não informadas",
   ].join("\n");
 }
@@ -136,8 +121,8 @@ export const submitCommerceLead = createServerFn({ method: "POST" })
         establishment: data.establishment,
         responsible_name: data.responsibleName,
         phone: data.phone,
-        email: data.email,
-        instagram: data.instagram,
+        email: "",
+        instagram: null,
         utm_source: data.utmSource,
         utm_medium: data.utmMedium,
         utm_campaign: data.utmCampaign,

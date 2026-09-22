@@ -324,23 +324,24 @@ export function AmbassadorPage() {
 
 const commerceLead = {
   type: "comercio" as const,
-  title: "Coloque seu negócio no Bora Zé",
+  title: "Cadastre seu negócio no Bora Zé",
   description: "Preencha uma etapa por vez para cadastrar seu negócio.",
 };
 
+const commerceCta = "QUERO CADASTRAR MEU NEGÓCIO GRÁTIS";
+
 export function CommercePage() {
   return (
-    <CampaignShell ctaLabel="Quero colocar meu negócio no Bora Zé" leadConfig={commerceLead}>
+    <CampaignShell ctaLabel={commerceCta} leadConfig={commerceLead}>
       <CampaignHero
-        eyebrow="O comércio da sua cidade, dentro de um só app."
+        eyebrow="Seu negócio no BoraZé!"
         title={
           <>
-            Quando seu cliente abrir o Bora Zé,{" "}
-            <span className="text-primary">sua loja pode estar lá.</span>
+            Mais clientes. Mais pedidos. <span className="text-primary">Mais vendas.</span>
           </>
         }
-        description="O Bora Zé é o aplicativo local que conecta as pessoas aos negócios e serviços da própria cidade. Comida, mercado, farmácia, bebidas, gás e água, mototáxi e muito mais — tudo reunido em um só lugar. E o seu negócio pode fazer parte disso."
-        cta="Quero colocar meu negócio no Bora Zé"
+        description="Coloque sua loja no app da sua cidade e receba pedidos de novos clientes."
+        cta={commerceCta}
         image={appHome.url}
         imageAlt="Aplicativo local Bora Zé reúne negócios e serviços da cidade"
         proof={["Aplicativo local", "Novo canal digital", "Negócios da cidade"]}
@@ -448,7 +449,7 @@ export function CommercePage() {
       <ConversionSection
         title="Coloque seu negócio onde a cidade vai procurar."
         description="Cadastre seu estabelecimento em etapas rápidas para continuar o atendimento."
-        cta="Quero colocar meu negócio no Bora Zé"
+        cta={commerceCta}
       />
     </CampaignShell>
   );

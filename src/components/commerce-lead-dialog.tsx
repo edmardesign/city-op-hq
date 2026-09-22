@@ -34,13 +34,7 @@ interface CommerceLeadDialogProps {
   description: string;
 }
 
-const steps = [
-  "location",
-  "category",
-  "establishment",
-  "name",
-  "phone",
-] as const;
+const steps = ["location", "category", "establishment", "name", "phone"] as const;
 
 function getTracking() {
   const params = new URLSearchParams(window.location.search);
@@ -184,9 +178,7 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
               {step === "name" && "Quem é o responsável pelo negócio?"}
               {step === "phone" && "Qual é o WhatsApp para atendimento?"}
             </DialogTitle>
-            <DialogDescription className="pt-2 text-sm leading-6">
-              {description}
-            </DialogDescription>
+            <DialogDescription className="pt-2 text-sm leading-6">{description}</DialogDescription>
           </DialogHeader>
 
           {whatsAppUrl ? (
@@ -198,199 +190,208 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 Continue o atendimento em uma nova aba do WhatsApp.
               </p>
-              <Button asChild size="lg" className="mt-7 h-auto min-h-14 w-full rounded-xl px-5 py-3 text-center text-sm font-bold whitespace-normal">
+              <Button
+                asChild
+                size="lg"
+                className="mt-7 h-auto min-h-14 w-full rounded-xl px-5 py-3 text-center text-sm font-bold whitespace-normal"
+              >
                 <a href={whatsAppUrl} target="_blank" rel="noopener noreferrer">
                   QUERO CADASTRAR MEU NEGÓCIO GRÁTIS
                 </a>
               </Button>
             </div>
           ) : (
-          <form onSubmit={continueFlow} className="mt-8">
-            <div key={step} className="animate-fade-in">
-              {step === "location" && (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold" htmlFor="commerce-state">
-                      Estado
-                    </label>
-                    <Select value={values.state ?? ""} onValueChange={loadCities}>
-                      <SelectTrigger id="commerce-state" className="h-14 rounded-xl px-4 text-base">
-                        <SelectValue placeholder="Selecione o estado" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {BRAZILIAN_STATES.map((state) => (
-                          <SelectItem key={state.uf} value={state.uf}>
-                            {state.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+            <form onSubmit={continueFlow} className="mt-8">
+              <div key={step} className="animate-fade-in">
+                {step === "location" && (
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold" htmlFor="commerce-state">
+                        Estado
+                      </label>
+                      <Select value={values.state ?? ""} onValueChange={loadCities}>
+                        <SelectTrigger
+                          id="commerce-state"
+                          className="h-14 rounded-xl px-4 text-base"
+                        >
+                          <SelectValue placeholder="Selecione o estado" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {BRAZILIAN_STATES.map((state) => (
+                            <SelectItem key={state.uf} value={state.uf}>
+                              {state.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold" htmlFor="commerce-city">
+                        Cidade
+                      </label>
+                      <Select
+                        value={values.city ?? ""}
+                        onValueChange={(city) => {
+                          setValues((current) => ({ ...current, city }));
+                          setError("");
+                        }}
+                        disabled={!values.state || citiesStatus !== "ready"}
+                      >
+                        <SelectTrigger
+                          id="commerce-city"
+                          className="h-14 rounded-xl px-4 text-base"
+                        >
+                          <SelectValue
+                            placeholder={
+                              citiesStatus === "loading" ? "Carregando..." : "Selecione a cidade"
+                            }
+                          />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {cities.map((city) => (
+                            <SelectItem key={city.id} value={city.nome}>
+                              {city.nome}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {citiesStatus === "loading" && (
+                      <p
+                        className="flex items-center gap-2 text-sm text-muted-foreground sm:col-span-2"
+                        role="status"
+                      >
+                        <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
+                        Carregando municípios...
+                      </p>
+                    )}
                   </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold" htmlFor="commerce-city">
-                      Cidade
-                    </label>
+                )}
+                {step === "category" && (
+                  <div className="space-y-4">
                     <Select
-                      value={values.city ?? ""}
-                      onValueChange={(city) => {
-                        setValues((current) => ({ ...current, city }));
+                      value={values.category ?? ""}
+                      onValueChange={(category) => {
+                        setValues((current) => ({ ...current, category }));
                         setError("");
                       }}
-                      disabled={!values.state || citiesStatus !== "ready"}
                     >
-                      <SelectTrigger id="commerce-city" className="h-14 rounded-xl px-4 text-base">
-                        <SelectValue
-                          placeholder={
-                            citiesStatus === "loading" ? "Carregando..." : "Selecione a cidade"
-                          }
-                        />
+                      <SelectTrigger className="h-14 rounded-xl px-4 text-base">
+                        <SelectValue placeholder="Selecione a categoria" />
                       </SelectTrigger>
                       <SelectContent>
-                        {cities.map((city) => (
-                          <SelectItem key={city.id} value={city.nome}>
-                            {city.nome}
+                        {COMMERCE_CATEGORIES.map((category) => (
+                          <SelectItem key={category} value={category}>
+                            {category}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
+                    {values.category === "Outro" && (
+                      <Input
+                        value={values.categoryOther ?? ""}
+                        onChange={(event) => {
+                          setValues((current) => ({
+                            ...current,
+                            categoryOther: event.target.value,
+                          }));
+                          setError("");
+                        }}
+                        placeholder="Qual é o tipo do seu negócio?"
+                        maxLength={120}
+                        className="h-14 rounded-xl px-4 text-base shadow-none"
+                      />
+                    )}
                   </div>
-                  {citiesStatus === "loading" && (
-                    <p
-                      className="flex items-center gap-2 text-sm text-muted-foreground sm:col-span-2"
-                      role="status"
-                    >
-                      <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
-                      Carregando municípios...
-                    </p>
-                  )}
-                </div>
-              )}
-              {step === "category" && (
-                <div className="space-y-4">
-                  <Select
-                    value={values.category ?? ""}
-                    onValueChange={(category) => {
-                      setValues((current) => ({ ...current, category }));
-                      setError("");
-                    }}
-                  >
-                    <SelectTrigger className="h-14 rounded-xl px-4 text-base">
-                      <SelectValue placeholder="Selecione a categoria" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {COMMERCE_CATEGORIES.map((category) => (
-                        <SelectItem key={category} value={category}>
-                          {category}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {values.category === "Outro" && (
-                    <Input
-                      value={values.categoryOther ?? ""}
-                      onChange={(event) => {
-                        setValues((current) => ({ ...current, categoryOther: event.target.value }));
-                        setError("");
-                      }}
-                      placeholder="Qual é o tipo do seu negócio?"
-                      maxLength={120}
-                      className="h-14 rounded-xl px-4 text-base shadow-none"
-                    />
-                  )}
-                </div>
-              )}
-              {(step === "establishment" || step === "name") && (
-                <Input
-                  value={values[step] ?? ""}
-                  onChange={(event) => {
-                    setValues((current) => ({ ...current, [step]: event.target.value }));
-                    setError("");
-                  }}
-                  type="text"
-                  inputMode="text"
-                  autoComplete={
-                    step === "establishment"
-                      ? "organization"
-                      : step === "name"
-                        ? "name"
-                        : "name"
-                  }
-                  placeholder={
-                    step === "establishment"
-                      ? "Nome do estabelecimento"
-                      : step === "name"
-                        ? "Nome completo"
-                        : "Nome completo"
-                  }
-                  maxLength={150}
-                  aria-invalid={Boolean(error)}
-                  aria-describedby={error ? "commerce-lead-error" : undefined}
-                  className="h-14 rounded-xl px-4 text-base shadow-none"
-                />
-              )}
-              {step === "phone" && (
-                <div className="flex items-center overflow-hidden rounded-xl border border-input bg-background focus-within:ring-2 focus-within:ring-ring">
-                  <span className="border-r border-input px-4 text-base font-semibold text-muted-foreground">
-                    (11)
-                  </span>
+                )}
+                {(step === "establishment" || step === "name") && (
                   <Input
-                    value={values.phone ?? ""}
+                    value={values[step] ?? ""}
                     onChange={(event) => {
-                      const phone = event.target.value.replace(/\D/g, "").slice(0, 9);
-                      setValues((current) => ({ ...current, phone }));
+                      setValues((current) => ({ ...current, [step]: event.target.value }));
                       setError("");
                     }}
-                    type="tel"
-                    inputMode="numeric"
-                    autoComplete="tel-national"
-                    placeholder="99999-9999"
-                    maxLength={9}
+                    type="text"
+                    inputMode="text"
+                    autoComplete={
+                      step === "establishment" ? "organization" : step === "name" ? "name" : "name"
+                    }
+                    placeholder={
+                      step === "establishment"
+                        ? "Nome do estabelecimento"
+                        : step === "name"
+                          ? "Nome completo"
+                          : "Nome completo"
+                    }
+                    maxLength={150}
                     aria-invalid={Boolean(error)}
                     aria-describedby={error ? "commerce-lead-error" : undefined}
-                    className="h-14 rounded-none border-0 px-4 text-base shadow-none focus-visible:ring-0"
+                    className="h-14 rounded-xl px-4 text-base shadow-none"
                   />
-                </div>
-              )}
-            </div>
-            <div className="min-h-7 pt-2">
-              {error && (
-                <p id="commerce-lead-error" className="text-sm text-destructive" role="alert">
-                  {error}
-                </p>
-              )}
-            </div>
-            <div className="mt-4 flex items-center justify-between gap-3">
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={() => {
-                  setStepIndex((current) => Math.max(0, current - 1));
-                  setError("");
-                }}
-                disabled={stepIndex === 0}
-                className="h-12 px-3"
-              >
-                <ArrowLeft aria-hidden="true" /> Voltar
-              </Button>
-              <Button
-                type="submit"
-                size="lg"
-                disabled={isSubmitting || citiesStatus === "loading"}
-                className="h-12 min-w-36 rounded-xl px-6 font-bold"
-              >
-                {isSubmitting
-                  ? "Enviando..."
-                  : stepIndex === steps.length - 1
-                    ? "Enviar cadastro"
-                    : "Continuar"}
-                {stepIndex === steps.length - 1 ? (
-                  <Check aria-hidden="true" />
-                ) : (
-                  <ArrowRight aria-hidden="true" />
                 )}
-              </Button>
-            </div>
-          </form>
+                {step === "phone" && (
+                  <div className="flex items-center overflow-hidden rounded-xl border border-input bg-background focus-within:ring-2 focus-within:ring-ring">
+                    <span className="border-r border-input px-4 text-base font-semibold text-muted-foreground">
+                      (11)
+                    </span>
+                    <Input
+                      value={values.phone ?? ""}
+                      onChange={(event) => {
+                        const phone = event.target.value.replace(/\D/g, "").slice(0, 9);
+                        setValues((current) => ({ ...current, phone }));
+                        setError("");
+                      }}
+                      type="tel"
+                      inputMode="numeric"
+                      autoComplete="tel-national"
+                      placeholder="99999-9999"
+                      maxLength={9}
+                      aria-invalid={Boolean(error)}
+                      aria-describedby={error ? "commerce-lead-error" : undefined}
+                      className="h-14 rounded-none border-0 px-4 text-base shadow-none focus-visible:ring-0"
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="min-h-7 pt-2">
+                {error && (
+                  <p id="commerce-lead-error" className="text-sm text-destructive" role="alert">
+                    {error}
+                  </p>
+                )}
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => {
+                    setStepIndex((current) => Math.max(0, current - 1));
+                    setError("");
+                  }}
+                  disabled={stepIndex === 0}
+                  className="h-12 px-3"
+                >
+                  <ArrowLeft aria-hidden="true" /> Voltar
+                </Button>
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={isSubmitting || citiesStatus === "loading"}
+                  className="h-12 min-w-36 rounded-xl px-6 font-bold"
+                >
+                  {isSubmitting
+                    ? "Enviando..."
+                    : stepIndex === steps.length - 1
+                      ? "Enviar cadastro"
+                      : "Continuar"}
+                  {stepIndex === steps.length - 1 ? (
+                    <Check aria-hidden="true" />
+                  ) : (
+                    <ArrowRight aria-hidden="true" />
+                  )}
+                </Button>
+              </div>
+            </form>
           )}
         </div>
       </DialogContent>

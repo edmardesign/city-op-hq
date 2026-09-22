@@ -51,17 +51,25 @@ const EXECUTIVE_PROGRAM_URL = "https://embaixador.site/executivo";
 const baseSteps: Record<LeadType, LeadStep[]> = {
   executivo: [
     {
+      key: "phone",
+      label: "Qual é o seu WhatsApp?",
+      placeholder: "(75) 99999-9999",
+      type: "tel",
+      inputMode: "tel",
+      autoComplete: "tel",
+    },
+    {
+      key: "state",
+      label: "Confirme o seu estado",
+      placeholder: "BA",
+      autoComplete: "address-level1",
+      maxLength: 2,
+    },
+    {
       key: "city",
       label: "Em qual cidade você quer construir sua oportunidade?",
       placeholder: "Sua cidade",
       autoComplete: "address-level2",
-    },
-    {
-      key: "state",
-      label: "Em qual estado?",
-      placeholder: "BA",
-      autoComplete: "address-level1",
-      maxLength: 2,
     },
     {
       key: "name",
@@ -69,6 +77,8 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
       placeholder: "Seu nome completo",
       autoComplete: "name",
     },
+  ],
+  embaixador: [
     {
       key: "phone",
       label: "Qual é o seu WhatsApp?",
@@ -77,8 +87,13 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
       inputMode: "tel",
       autoComplete: "tel",
     },
-  ],
-  embaixador: [
+    {
+      key: "state",
+      label: "Confirme o estado da cidade de interesse",
+      placeholder: "BA",
+      autoComplete: "address-level1",
+      maxLength: 2,
+    },
     {
       key: "city",
       label: "Qual cidade você gostaria de desenvolver?",
@@ -86,25 +101,10 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
       autoComplete: "address-level2",
     },
     {
-      key: "state",
-      label: "Em qual estado fica essa cidade?",
-      placeholder: "BA",
-      autoComplete: "address-level1",
-      maxLength: 2,
-    },
-    {
       key: "name",
       label: "Como podemos chamar você?",
       placeholder: "Seu nome completo",
       autoComplete: "name",
-    },
-    {
-      key: "phone",
-      label: "Qual é o seu WhatsApp?",
-      placeholder: "(75) 99999-9999",
-      type: "tel",
-      inputMode: "tel",
-      autoComplete: "tel",
     },
     {
       key: "email",
@@ -121,6 +121,7 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
       options: qualificationOptions,
     },
   ],
+
   comercio: [
     {
       key: "establishment",

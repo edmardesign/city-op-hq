@@ -13,7 +13,6 @@ import { SiteFooter, SiteNav } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
 import { openWhatsAppMessage } from "@/lib/whatsapp";
 
-
 export interface LandingMeta {
   title: string;
   description: string;

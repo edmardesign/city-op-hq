@@ -260,6 +260,12 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
       return;
     }
     setError("");
+    if (step.key === "phone") {
+      // Infer the state from the area code so the next step comes pre-filled.
+      const detectedState = getStateFromPhone(value);
+      if (detectedState) setValues((current) => ({ ...current, state: detectedState }));
+    }
+
     if (stepIndex < steps.length - 1) {
       setStepIndex((current) => current + 1);
       return;

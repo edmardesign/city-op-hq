@@ -1,14 +1,26 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const optionalValue = z.string().trim().max(120).optional().transform((value) => value || null);
+const optionalValue = z
+  .string()
+  .trim()
+  .max(120)
+  .optional()
+  .transform((value) => value || null);
 
 const driverDeliveryLeadSchema = z.object({
-  state: z.string().trim().length(2).transform((value) => value.toUpperCase()),
+  state: z
+    .string()
+    .trim()
+    .length(2)
+    .transform((value) => value.toUpperCase()),
   city: z.string().trim().min(2).max(100),
   role: z.enum(["mototaxi", "entregador", "ambos"]),
   name: z.string().trim().min(2).max(120),
-  phone: z.string().transform((value) => value.replace(/\D/g, "")).pipe(z.string().min(10).max(20)),
+  phone: z
+    .string()
+    .transform((value) => value.replace(/\D/g, ""))
+    .pipe(z.string().min(10).max(20)),
   email: z.string().trim().email().max(255),
   instagram: optionalValue,
   utmSource: optionalValue,
@@ -53,7 +65,9 @@ function buildEmailText(data: z.output<typeof driverDeliveryLeadSchema>) {
   ].join("\n");
 }
 
-async function sendLeadEmail(data: z.output<typeof driverDeliveryLeadSchema>): Promise<"sent" | "pending_configuration" | "failed"> {
+async function sendLeadEmail(
+  data: z.output<typeof driverDeliveryLeadSchema>,
+): Promise<"sent" | "pending_configuration" | "failed"> {
   const lovableApiKey = process.env["LOVABLE_API_KEY"];
   const resendApiKey = process.env["RESEND_API_KEY"];
   const emailFrom = process.env["COMMERCE_LEADS_EMAIL_FROM"];
@@ -121,7 +135,8 @@ export const submitDriverDeliveryLead = createServerFn({ method: "POST" })
         .from("driver_delivery_leads")
         .update({ email_delivery_status: emailStatus })
         .eq("id", lead.id);
-      if (updateError) console.error("Unable to update lead email status", { code: updateError.code });
+      if (updateError)
+        console.error("Unable to update lead email status", { code: updateError.code });
     }
 
     return { saved: true, emailStatus, role: data.role, city: data.city };

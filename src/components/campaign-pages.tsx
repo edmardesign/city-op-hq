@@ -490,9 +490,24 @@ export function MotoTaxiPage() {
           <div className="mt-12">
             <FeatureGrid
               items={[
-                { title: "Mototáxi", description: "Receba chamadas de passageiros da sua cidade. Fique disponível no aplicativo e receba solicitações de corrida conforme a demanda e a operação local.", icon: <Bike /> },
-                { title: "Entregador", description: "Faça entregas para os negócios parceiros. Receba oportunidades geradas por pedidos em restaurantes, mercados, farmácias, bebidas, gás e água e outras categorias.", icon: <PackageOpen /> },
-                { title: "Quero atuar nas duas", description: "Escolha corridas e entregas no cadastro. A atuação nas duas modalidades depende das regras e da disponibilidade da operação local.", icon: <Smartphone /> },
+                {
+                  title: "Mototáxi",
+                  description:
+                    "Receba chamadas de passageiros da sua cidade. Fique disponível no aplicativo e receba solicitações de corrida conforme a demanda e a operação local.",
+                  icon: <Bike />,
+                },
+                {
+                  title: "Entregador",
+                  description:
+                    "Faça entregas para os negócios parceiros. Receba oportunidades geradas por pedidos em restaurantes, mercados, farmácias, bebidas, gás e água e outras categorias.",
+                  icon: <PackageOpen />,
+                },
+                {
+                  title: "Quero atuar nas duas",
+                  description:
+                    "Escolha corridas e entregas no cadastro. A atuação nas duas modalidades depende das regras e da disponibilidade da operação local.",
+                  icon: <Smartphone />,
+                },
               ]}
             />
           </div>
@@ -514,14 +529,34 @@ export function MotoTaxiPage() {
             description="Você escolhe se quer atuar como Mototáxi, Entregador ou, quando permitido pela operação local, nas duas modalidades."
           />
           <div className="mt-12 text-foreground">
-            <ProcessSteps steps={[
-              { title: "Faça seu cadastro", description: "Informe seus dados básicos para começar." },
-              { title: "Escolha como quer atuar", description: "Mototáxi, Entregador ou as duas modalidades." },
-              { title: "Fique disponível", description: "Ative sua disponibilidade conforme a operação local." },
-              { title: "Receba oportunidades", description: "As solicitações chegam diretamente no celular." },
-              { title: "Aceite e realize", description: "Faça a corrida ou a entrega que você aceitou." },
-              { title: "Continue disponível", description: "Fique pronto para novas solicitações." },
-            ]} />
+            <ProcessSteps
+              steps={[
+                {
+                  title: "Faça seu cadastro",
+                  description: "Informe seus dados básicos para começar.",
+                },
+                {
+                  title: "Escolha como quer atuar",
+                  description: "Mototáxi, Entregador ou as duas modalidades.",
+                },
+                {
+                  title: "Fique disponível",
+                  description: "Ative sua disponibilidade conforme a operação local.",
+                },
+                {
+                  title: "Receba oportunidades",
+                  description: "As solicitações chegam diretamente no celular.",
+                },
+                {
+                  title: "Aceite e realize",
+                  description: "Faça a corrida ou a entrega que você aceitou.",
+                },
+                {
+                  title: "Continue disponível",
+                  description: "Fique pronto para novas solicitações.",
+                },
+              ]}
+            />
           </div>
         </div>
       </section>

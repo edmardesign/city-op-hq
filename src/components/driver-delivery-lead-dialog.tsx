@@ -4,6 +4,12 @@ import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { submitDriverDeliveryLead } from "@/lib/driver-delivery-leads.functions";
 import { BRAZILIAN_STATES } from "@/lib/commerce-categories";
+import {
+  formatPhone,
+  getStateFromPhone,
+  isValidPhone,
+  normalizePhoneDigits,
+} from "@/lib/brazil-phone";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -26,7 +32,7 @@ import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
-const steps = ["location", "role", "name", "phone"] as const;
+const steps = ["phone", "location", "role", "name"] as const;
 type Step = (typeof steps)[number];
 type Role = "mototaxi" | "entregador" | "ambos";
 
@@ -75,7 +81,7 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [whatsAppUrl, setWhatsAppUrl] = useState("");
   const submitLead = useServerFn(submitDriverDeliveryLead);
-  const step: Step = steps[stepIndex] ?? "location";
+  const step: Step = steps[stepIndex] ?? "phone";
 
   useEffect(() => {
     const openDialog = () => setOpen(true);
@@ -105,12 +111,12 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
   }
 
   function validateStep() {
+    if (step === "phone")
+      return isValidPhone(values.phone ?? "") ? "" : "Informe seu WhatsApp com DDD.";
     if (step === "location")
-      return values.state && values.city ? "" : "Escolha o estado e a cidade.";
+      return values.state && values.city ? "" : "Confirme o estado e escolha a cidade.";
     if (step === "role") return values.role ? "" : "Escolha como você quer trabalhar.";
     const value = values[step]?.trim() ?? "";
-    if (step === "phone" && value.replace(/\D/g, "").length !== 9)
-      return "Informe os 9 números do WhatsApp.";
     return value.length >= 2 ? "" : "Preencha este campo para continuar.";
   }
 
@@ -122,6 +128,14 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
       return;
     }
     setError("");
+
+    if (step === "phone") {
+      const detectedState = getStateFromPhone(values.phone ?? "");
+      if (detectedState && detectedState !== values.state) void loadCities(detectedState);
+      setStepIndex((current) => current + 1);
+      return;
+    }
+
     if (stepIndex < steps.length - 1) {
       setStepIndex((current) => current + 1);
       return;
@@ -135,7 +149,7 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
           city: values.city ?? "",
           role: values.role as Role,
           name: values.name ?? "",
-          phone: `11${values.phone ?? ""}`,
+          phone: normalizePhoneDigits(values.phone ?? ""),
           ...getTracking(),
         },
       });
@@ -161,10 +175,10 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
   }
 
   const titles: Record<Step, string> = {
+    phone: "Qual é o seu WhatsApp?",
     location: "Em qual cidade você quer trabalhar?",
     role: "Como você quer trabalhar no Bora Zé?",
     name: "Qual é o seu nome completo?",
-    phone: "Qual é o seu WhatsApp?",
   };
 
   return (
@@ -204,6 +218,25 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
           ) : (
             <form onSubmit={continueFlow} className="mt-8">
               <div key={step} className="animate-fade-in">
+                {step === "phone" && (
+                  <Input
+                    value={formatPhone(values.phone ?? "")}
+                    onChange={(event) => {
+                      setValues((current) => ({
+                        ...current,
+                        phone: normalizePhoneDigits(event.target.value),
+                      }));
+                      setError("");
+                    }}
+                    type="tel"
+                    inputMode="numeric"
+                    autoComplete="tel"
+                    placeholder="(75) 99999-9999"
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={error ? "driver-lead-error" : undefined}
+                    className="h-14 rounded-xl px-4 text-base shadow-none"
+                  />
+                )}
                 {step === "location" && (
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
@@ -303,29 +336,6 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
                     aria-describedby={error ? "driver-lead-error" : undefined}
                     className="h-14 rounded-xl px-4 text-base shadow-none"
                   />
-                )}
-                {step === "phone" && (
-                  <div className="flex items-center overflow-hidden rounded-xl border border-input bg-background focus-within:ring-2 focus-within:ring-ring">
-                    <span className="border-r border-input px-4 text-base font-semibold text-muted-foreground">
-                      (11)
-                    </span>
-                    <Input
-                      value={values.phone ?? ""}
-                      onChange={(event) => {
-                        const phone = event.target.value.replace(/\D/g, "").slice(0, 9);
-                        setValues((current) => ({ ...current, phone }));
-                        setError("");
-                      }}
-                      type="tel"
-                      inputMode="numeric"
-                      autoComplete="tel-national"
-                      placeholder="99999-9999"
-                      maxLength={9}
-                      aria-invalid={Boolean(error)}
-                      aria-describedby={error ? "driver-lead-error" : undefined}
-                      className="h-14 rounded-none border-0 px-4 text-base shadow-none focus-visible:ring-0"
-                    />
-                  </div>
                 )}
               </div>
               <div className="min-h-7 pt-2">

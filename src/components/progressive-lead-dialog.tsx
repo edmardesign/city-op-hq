@@ -3,6 +3,8 @@ import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { submitAmbassadorLead } from "@/lib/ambassador-leads.functions";
+import { getStateFromPhone, isValidPhone } from "@/lib/brazil-phone";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -201,9 +203,10 @@ function validateStep(step: LeadStep, value: string) {
   if (step.key === "phone") {
     return z
       .string()
-      .regex(/\d{10,}/, "Informe um WhatsApp com DDD.")
-      .safeParse(trimmed.replace(/\D/g, ""));
+      .refine((value) => isValidPhone(value), "Informe um WhatsApp válido com DDD.")
+      .safeParse(trimmed);
   }
+
   if (step.key === "state") {
     return z.string().length(2, "Use a sigla do estado com 2 letras.").safeParse(trimmed);
   }

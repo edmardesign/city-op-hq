@@ -11,6 +11,7 @@ import { DriverDeliveryLeadDialog } from "@/components/driver-delivery-lead-dial
 import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteNav } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
+import { openWhatsAppMessage } from "@/lib/whatsapp";
 
 
 export interface LandingMeta {

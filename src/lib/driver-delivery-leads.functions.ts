@@ -22,7 +22,18 @@ const driverDeliveryLeadSchema = z.object({
     .transform((value) => value.replace(/\D/g, ""))
     .pipe(z.string().min(10).max(20)),
   email: z.string().trim().email().max(255),
-  instagram: optionalValue,
+  instagram: z
+    .string()
+    .optional()
+    .transform((value) => {
+      const cleaned = (value ?? "")
+        .trim()
+        .replace(/^https?:\/\/(www\.)?instagram\.com\//i, "")
+        .replace(/\/+$/, "")
+        .replace(/^@+/, "")
+        .slice(0, 120);
+      return cleaned || null;
+    }),
   utmSource: optionalValue,
   utmMedium: optionalValue,
   utmCampaign: optionalValue,

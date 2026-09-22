@@ -28,10 +28,16 @@ const commerceLeadSchema = z
     email: z.string().trim().email().max(255),
     instagram: z
       .string()
-      .trim()
-      .max(120)
       .optional()
-      .transform((value) => value || null),
+      .transform((value) => {
+        const cleaned = (value ?? "")
+          .trim()
+          .replace(/^https?:\/\/(www\.)?instagram\.com\//i, "")
+          .replace(/\/+$/, "")
+          .replace(/^@+/, "")
+          .slice(0, 120);
+        return cleaned || null;
+      }),
     utmSource: optionalTrackingValue,
     utmMedium: optionalTrackingValue,
     utmCampaign: optionalTrackingValue,

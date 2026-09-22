@@ -46,9 +46,7 @@ export function openWhatsApp(message: string) {
     .map(([key, value]) => `${key}: ${value.slice(0, 120)}`)
     .join("\n");
   const trackedMessage = campaign ? `${message}\n\nOrigem da campanha:\n${campaign}` : message;
-  window.location.assign(
-    `https://wa.me/${WHATSAPP_DIGITS}?text=${encodeURIComponent(trackedMessage)}`,
-  );
+  openWhatsAppMessage(trackedMessage);
 }
 
 export function openLeadDialog() {

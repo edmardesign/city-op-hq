@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteNav } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
 
-export const WHATSAPP_DIGITS = "557588653204";
 
 export interface LandingMeta {
   title: string;

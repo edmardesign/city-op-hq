@@ -26,7 +26,6 @@ import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
 import { openWhatsAppMessage } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
-const WHATSAPP_DIGITS = "557588653204";
 const steps = ["location", "role", "name", "phone", "email", "instagram"] as const;
 type Step = (typeof steps)[number];
 type Role = "mototaxi" | "entregador" | "ambos";

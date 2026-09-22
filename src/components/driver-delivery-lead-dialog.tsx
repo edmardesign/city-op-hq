@@ -202,171 +202,171 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
               </Button>
             </div>
           ) : (
-          <form onSubmit={continueFlow} className="mt-8">
-            <div key={step} className="animate-fade-in">
-              {step === "location" && (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold" htmlFor="driver-state">
-                      Estado
-                    </label>
-                    <Select value={values.state ?? ""} onValueChange={loadCities}>
-                      <SelectTrigger id="driver-state" className="h-14 rounded-xl px-4 text-base">
-                        <SelectValue placeholder="Selecione o estado" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {BRAZILIAN_STATES.map((state) => (
-                          <SelectItem key={state.uf} value={state.uf}>
-                            {state.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+            <form onSubmit={continueFlow} className="mt-8">
+              <div key={step} className="animate-fade-in">
+                {step === "location" && (
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold" htmlFor="driver-state">
+                        Estado
+                      </label>
+                      <Select value={values.state ?? ""} onValueChange={loadCities}>
+                        <SelectTrigger id="driver-state" className="h-14 rounded-xl px-4 text-base">
+                          <SelectValue placeholder="Selecione o estado" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {BRAZILIAN_STATES.map((state) => (
+                            <SelectItem key={state.uf} value={state.uf}>
+                              {state.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold" htmlFor="driver-city">
+                        Cidade
+                      </label>
+                      <Select
+                        value={values.city ?? ""}
+                        onValueChange={(city) => {
+                          setValues((current) => ({ ...current, city }));
+                          setError("");
+                        }}
+                        disabled={!values.state || citiesStatus !== "ready"}
+                      >
+                        <SelectTrigger id="driver-city" className="h-14 rounded-xl px-4 text-base">
+                          <SelectValue
+                            placeholder={
+                              citiesStatus === "loading" ? "Carregando..." : "Selecione a cidade"
+                            }
+                          />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {cities.map((city) => (
+                            <SelectItem key={city.id} value={city.nome}>
+                              {city.nome}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {citiesStatus === "loading" && (
+                      <p
+                        className="flex items-center gap-2 text-sm text-muted-foreground sm:col-span-2"
+                        role="status"
+                      >
+                        <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
+                        Carregando municípios...
+                      </p>
+                    )}
                   </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold" htmlFor="driver-city">
-                      Cidade
-                    </label>
-                    <Select
-                      value={values.city ?? ""}
-                      onValueChange={(city) => {
-                        setValues((current) => ({ ...current, city }));
-                        setError("");
-                      }}
-                      disabled={!values.state || citiesStatus !== "ready"}
-                    >
-                      <SelectTrigger id="driver-city" className="h-14 rounded-xl px-4 text-base">
-                        <SelectValue
-                          placeholder={
-                            citiesStatus === "loading" ? "Carregando..." : "Selecione a cidade"
-                          }
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {cities.map((city) => (
-                          <SelectItem key={city.id} value={city.nome}>
-                            {city.nome}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  {citiesStatus === "loading" && (
-                    <p
-                      className="flex items-center gap-2 text-sm text-muted-foreground sm:col-span-2"
-                      role="status"
-                    >
-                      <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
-                      Carregando municípios...
-                    </p>
-                  )}
-                </div>
-              )}
-              {step === "role" && (
-                <RadioGroup
-                  value={values.role ?? ""}
-                  onValueChange={(role) => {
-                    setValues((current) => ({ ...current, role }));
-                    setError("");
-                  }}
-                  className="gap-3"
-                >
-                  {roleOptions.map((option) => (
-                    <label
-                      key={option.value}
-                      className={cn(
-                        "flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-sm transition-all",
-                        values.role === option.value
-                          ? "border-primary bg-primary/10"
-                          : "border-border hover:border-primary/60",
-                      )}
-                    >
-                      <RadioGroupItem value={option.value} />
-                      <span>{option.label}</span>
-                    </label>
-                  ))}
-                </RadioGroup>
-              )}
-              {step === "name" && (
-                <Input
-                  value={values.name ?? ""}
-                  onChange={(event) => {
-                    setValues((current) => ({ ...current, name: event.target.value }));
-                    setError("");
-                  }}
-                  type="text"
-                  inputMode="text"
-                  autoComplete="name"
-                  placeholder="Nome completo"
-                  maxLength={120}
-                  aria-invalid={Boolean(error)}
-                  aria-describedby={error ? "driver-lead-error" : undefined}
-                  className="h-14 rounded-xl px-4 text-base shadow-none"
-                />
-              )}
-              {step === "phone" && (
-                <div className="flex items-center overflow-hidden rounded-xl border border-input bg-background focus-within:ring-2 focus-within:ring-ring">
-                  <span className="border-r border-input px-4 text-base font-semibold text-muted-foreground">
-                    (11)
-                  </span>
-                  <Input
-                    value={values.phone ?? ""}
-                    onChange={(event) => {
-                      const phone = event.target.value.replace(/\D/g, "").slice(0, 9);
-                      setValues((current) => ({ ...current, phone }));
+                )}
+                {step === "role" && (
+                  <RadioGroup
+                    value={values.role ?? ""}
+                    onValueChange={(role) => {
+                      setValues((current) => ({ ...current, role }));
                       setError("");
                     }}
-                    type="tel"
-                    inputMode="numeric"
-                    autoComplete="tel-national"
-                    placeholder="99999-9999"
-                    maxLength={9}
+                    className="gap-3"
+                  >
+                    {roleOptions.map((option) => (
+                      <label
+                        key={option.value}
+                        className={cn(
+                          "flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-sm transition-all",
+                          values.role === option.value
+                            ? "border-primary bg-primary/10"
+                            : "border-border hover:border-primary/60",
+                        )}
+                      >
+                        <RadioGroupItem value={option.value} />
+                        <span>{option.label}</span>
+                      </label>
+                    ))}
+                  </RadioGroup>
+                )}
+                {step === "name" && (
+                  <Input
+                    value={values.name ?? ""}
+                    onChange={(event) => {
+                      setValues((current) => ({ ...current, name: event.target.value }));
+                      setError("");
+                    }}
+                    type="text"
+                    inputMode="text"
+                    autoComplete="name"
+                    placeholder="Nome completo"
+                    maxLength={120}
                     aria-invalid={Boolean(error)}
                     aria-describedby={error ? "driver-lead-error" : undefined}
-                    className="h-14 rounded-none border-0 px-4 text-base shadow-none focus-visible:ring-0"
+                    className="h-14 rounded-xl px-4 text-base shadow-none"
                   />
-                </div>
-              )}
-            </div>
-            <div className="min-h-7 pt-2">
-              {error && (
-                <p id="driver-lead-error" className="text-sm text-destructive" role="alert">
-                  {error}
-                </p>
-              )}
-            </div>
-            <div className="mt-4 flex items-center justify-between gap-3">
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={() => {
-                  setStepIndex((current) => Math.max(0, current - 1));
-                  setError("");
-                }}
-                disabled={stepIndex === 0}
-                className="h-12 px-3"
-              >
-                <ArrowLeft aria-hidden="true" /> Voltar
-              </Button>
-              <Button
-                type="submit"
-                size="lg"
-                disabled={isSubmitting || citiesStatus === "loading"}
-                className="h-12 min-w-36 rounded-xl px-6 font-bold"
-              >
-                {isSubmitting
-                  ? "Enviando..."
-                  : stepIndex === steps.length - 1
-                    ? "Enviar cadastro"
-                    : "Continuar"}
-                {stepIndex === steps.length - 1 ? (
-                  <Check aria-hidden="true" />
-                ) : (
-                  <ArrowRight aria-hidden="true" />
                 )}
-              </Button>
-            </div>
-          </form>
+                {step === "phone" && (
+                  <div className="flex items-center overflow-hidden rounded-xl border border-input bg-background focus-within:ring-2 focus-within:ring-ring">
+                    <span className="border-r border-input px-4 text-base font-semibold text-muted-foreground">
+                      (11)
+                    </span>
+                    <Input
+                      value={values.phone ?? ""}
+                      onChange={(event) => {
+                        const phone = event.target.value.replace(/\D/g, "").slice(0, 9);
+                        setValues((current) => ({ ...current, phone }));
+                        setError("");
+                      }}
+                      type="tel"
+                      inputMode="numeric"
+                      autoComplete="tel-national"
+                      placeholder="99999-9999"
+                      maxLength={9}
+                      aria-invalid={Boolean(error)}
+                      aria-describedby={error ? "driver-lead-error" : undefined}
+                      className="h-14 rounded-none border-0 px-4 text-base shadow-none focus-visible:ring-0"
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="min-h-7 pt-2">
+                {error && (
+                  <p id="driver-lead-error" className="text-sm text-destructive" role="alert">
+                    {error}
+                  </p>
+                )}
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => {
+                    setStepIndex((current) => Math.max(0, current - 1));
+                    setError("");
+                  }}
+                  disabled={stepIndex === 0}
+                  className="h-12 px-3"
+                >
+                  <ArrowLeft aria-hidden="true" /> Voltar
+                </Button>
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={isSubmitting || citiesStatus === "loading"}
+                  className="h-12 min-w-36 rounded-xl px-6 font-bold"
+                >
+                  {isSubmitting
+                    ? "Enviando..."
+                    : stepIndex === steps.length - 1
+                      ? "Enviar cadastro"
+                      : "Continuar"}
+                  {stepIndex === steps.length - 1 ? (
+                    <Check aria-hidden="true" />
+                  ) : (
+                    <ArrowRight aria-hidden="true" />
+                  )}
+                </Button>
+              </div>
+            </form>
           )}
         </div>
       </DialogContent>

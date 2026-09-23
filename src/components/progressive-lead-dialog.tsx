@@ -338,14 +338,19 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
             </div>
           ) : finalStage === "executivo" ? (
             <div className="animate-fade-in py-6 text-center">
-              <p className="text-xs font-bold uppercase text-primary">Uma oportunidade para você</p>
-              <DialogTitle className="mt-3 text-3xl leading-tight">
-                Comece como Executivo BoraZé! com um investimento menor.
+              <p className="text-xs font-bold uppercase text-primary">SEM OS R$ 10 MIL? EXISTE OUTRO CAMINHO.</p>
+              <DialogTitle className="mt-3 text-2xl leading-tight sm:text-3xl">
+                Comece como Executivo BoraZé! por R$ 497.
               </DialogTitle>
-              <div className="mt-8 grid gap-3">
-                <Button asChild size="lg" className="h-14 rounded-xl font-bold">
+              <DialogDescription className="mx-auto mt-3 max-w-md text-sm leading-6">
+                Entre na comunidade e receba treinamento para captar negócios online ou na sua
+                região. Receba R$ 97 por estabelecimento ativado e comissões recorrentes, conforme
+                as regras do programa.
+              </DialogDescription>
+              <div className="mt-6 grid gap-3 sm:mt-8">
+                <Button asChild size="lg" className="h-auto min-h-14 rounded-xl px-4 py-3 font-bold">
                   <a href={EXECUTIVE_PROGRAM_URL}>
-                    É CLARO! TÔ DENTRO <ArrowRight aria-hidden="true" />
+                    QUERO CONHECER A OPORTUNIDADE <ArrowRight aria-hidden="true" />
                   </a>
                 </Button>
                 <Button
@@ -355,7 +360,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
                   className="h-14 rounded-xl font-bold"
                   onClick={() => setFinalStage("farewell")}
                 >
-                  VOU DEIXAR PASSAR
+                  AGORA NÃO
                 </Button>
               </div>
             </div>

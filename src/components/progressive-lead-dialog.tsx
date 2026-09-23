@@ -119,8 +119,8 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
     {
       key: "qualification",
       label:
-        "Você pode investir a partir de R$ 9.890,00 para iniciar sua operação?",
-      helper: "Considere que sua cidade esteja disponível e a oportunidade faça sentido para você.",
+        "Você tem esse capital disponível hoje?",
+      helper: "Considerando que sua cidade esteja disponível e a oportunidade faça sentido para você, o investimento inicial necessário é de aproximadamente R$ 10.000,00.",
       options: qualificationOptions,
     },
   ],
@@ -387,12 +387,19 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
                   <Progress value={((stepIndex + 1) / steps.length) * 100} className="h-1" />
                 </div>
                 <p className="text-xs font-bold uppercase text-primary">{config.title}</p>
+                {step.key === "qualification" && (
+                  <DialogDescription className="pt-2 pb-2 text-sm leading-6">
+                    {step.helper}
+                  </DialogDescription>
+                )}
                 <DialogTitle className="text-xl leading-tight sm:text-3xl">
                   {step.label}
                 </DialogTitle>
-                <DialogDescription className="pt-2 text-sm leading-6">
-                  {step.helper ?? config.description}
-                </DialogDescription>
+                {step.key !== "qualification" && (
+                  <DialogDescription className="pt-2 text-sm leading-6">
+                    {step.helper ?? config.description}
+                  </DialogDescription>
+                )}
               </DialogHeader>
 
               <form onSubmit={continueFlow} className="mt-4 sm:mt-8">

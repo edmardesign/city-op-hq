@@ -1,3 +1,4 @@
+import { LeadDialogContent } from "@/components/lead-dialog-content";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
@@ -8,7 +9,6 @@ import { getStateFromPhone, isValidPhone } from "@/lib/brazil-phone";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -314,8 +314,8 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="inset-x-0 bottom-0 top-auto max-h-[92dvh] w-full max-w-none translate-x-0 translate-y-0 overflow-y-auto rounded-t-2xl border-x-0 border-b-0 p-0 sm:left-1/2 sm:top-1/2 sm:max-w-xl sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl sm:border">
-        <div className="p-6 sm:p-10">
+      <LeadDialogContent className="inset-x-0 bottom-0 top-auto max-h-[92dvh] w-full max-w-none translate-x-0 translate-y-0 overflow-y-auto rounded-t-2xl border-x-0 border-b-0 p-0 sm:left-1/2 sm:top-1/2 sm:max-w-xl sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl sm:border">
+        <div className="lead-dialog-body p-4 sm:p-10">
           {finalStage === "group" ? (
             <div className="animate-fade-in py-6 text-center">
               <span className="mx-auto grid size-14 place-items-center rounded-full bg-primary text-primary-foreground">
@@ -370,7 +370,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
               <Button
                 type="button"
                 variant="outline"
-                className="mt-8"
+                className="mt-4 sm:mt-8"
                 onClick={() => setOpen(false)}
               >
                 Fechar
@@ -379,14 +379,14 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
           ) : (
             <>
               <DialogHeader className="pr-8 text-left">
-                <div className="mb-7 flex items-center gap-4">
-                  <span className="text-xs font-semibold text-muted-foreground">
+                <div className="mb-4 flex items-center gap-3 sm:mb-7 sm:gap-4">
+                  <span className="shrink-0 whitespace-nowrap text-xs font-semibold text-muted-foreground">
                     {stepIndex + 1} de {steps.length}
                   </span>
                   <Progress value={((stepIndex + 1) / steps.length) * 100} className="h-1" />
                 </div>
                 <p className="text-xs font-bold uppercase text-primary">{config.title}</p>
-                <DialogTitle className="text-2xl leading-tight sm:text-3xl">
+                <DialogTitle className="text-xl leading-tight sm:text-3xl">
                   {step.label}
                 </DialogTitle>
                 <DialogDescription className="pt-2 text-sm leading-6">
@@ -394,7 +394,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
                 </DialogDescription>
               </DialogHeader>
 
-              <form onSubmit={continueFlow} className="mt-8">
+              <form onSubmit={continueFlow} className="mt-4 sm:mt-8">
                 <div key={step.key} className="animate-fade-in">
                   {step.options ? (
                     <RadioGroup
@@ -485,7 +485,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
             </>
           )}
         </div>
-      </DialogContent>
+      </LeadDialogContent>
     </Dialog>
   );
 }

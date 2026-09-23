@@ -148,3 +148,35 @@ a[href*="utm_source=lovable-badge"],
 a[href*="utm_campaign=badge-wording-disabled"] {
   display: none !important;
 }
+
+/* Mobile lead forms follow the visual viewport, including Safari's keyboard. */
+@media (max-width: 639px) {
+  .lead-dialog {
+    bottom: var(--lead-viewport-bottom, 0px);
+    max-height: calc(var(--lead-viewport-height, 100dvh) - 16px);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scroll-padding-block: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lead-dialog-body {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+
+  .lead-dialog input,
+  .lead-dialog [role="combobox"] {
+    min-height: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .lead-dialog > button:last-child {
+    min-width: 32px;
+    min-height: 32px;
+    display: grid;
+    place-items: center;
+    top: 8px;
+    right: 8px;
+  }
+}

@@ -267,7 +267,7 @@ const ambassadorLead = {
 
 export function AmbassadorPage() {
   return (
-    <CampaignShell ctaLabel="Analisar minha cidade" leadConfig={ambassadorLead}>
+    <CampaignShell ctaLabel="Analisar minha cidade" leadConfig={ambassadorLead} hideNavCta>
       <CampaignHero
         eyebrow="Oportunidade de operação local"
         title={
@@ -276,7 +276,6 @@ export function AmbassadorPage() {
           </>
         }
         description="Existe uma grande oportunidade passando na sua frente AGORA. Não abraçá-la vai fazer você se arrepender pelo resto da sua vida."
-        cta="Quero analisar minha cidade"
         image={smartBusiness.url}
         imageAlt="Empreendedor apresenta no celular a oportunidade de operação digital Bora Zé"
         proof={["Negócio digital", "Operação local", "Análise por cidade"]}

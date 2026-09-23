@@ -52,7 +52,6 @@ const qualificationOptions = [
   "Hoje não tenho disponibilidade.",
 ];
 
-const AMBASSADOR_GROUP_URL = "https://chat.whatsapp.com/H9vsgUzdDtLBkGNTB9Dier";
 const EXECUTIVE_PROGRAM_URL = "https://embaixador.site/executivo";
 
 const baseSteps: Record<LeadType, LeadStep[]> = {
@@ -203,15 +202,8 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
 
 const AMBASSADOR_CONTACT_NUMBER = "5511972497891";
 
-function getAmbassadorContactUrl(values: Record<string, string>) {
-  const message = [
-    "Olá! Acabei de concluir meu cadastro para Embaixador BoraZé! e gostaria de iniciar o atendimento e agendar uma ligação para conhecer os próximos passos.",
-    "",
-    `Nome: ${values.name}`,
-    `E-mail: ${values.email}`,
-    `Cidade: ${values.city}/${values.state}`,
-    `WhatsApp: ${formatPhone(values.phone ?? "")}`,
-  ].join("\\n");
+function getAmbassadorContactUrl() {
+  const message = "Quero saber mais sobre programa Embaixador";
   return `https://wa.me/${AMBASSADOR_CONTACT_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
@@ -350,7 +342,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
                 sobre a oportunidade de Embaixador.
               </DialogDescription>
               <Button asChild size="lg" className="mt-8 h-auto min-h-14 w-full rounded-xl px-4 py-3 font-bold">
-                <a href={getAmbassadorContactUrl(values)} target="_blank" rel="noreferrer">
+                <a href={getAmbassadorContactUrl()} target="_blank" rel="noreferrer">
                   INICIAR ATENDIMENTO NO WHATSAPP <ExternalLink aria-hidden="true" />
                 </a>
               </Button>

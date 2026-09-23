@@ -309,7 +309,7 @@ export function AmbassadorPage() {
       <AmbassadorProfiles />
       <ExistingMarket />
       <AmbassadorBenefits />
-      <AmbassadorSimulator />
+      <AmbassadorSimulator showPremises={false} />
       <RevenueStreams />
       <BusinessComparison />
       <CityAnalysis />

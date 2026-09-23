@@ -4,7 +4,12 @@ import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { submitAmbassadorLead } from "@/lib/ambassador-leads.functions";
-import { getStateFromPhone, isValidPhone } from "@/lib/brazil-phone";
+import {
+  formatPhone,
+  getStateFromPhone,
+  isValidPhone,
+  normalizePhoneDigits,
+} from "@/lib/brazil-phone";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -57,7 +62,7 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
       label: "Qual é o seu WhatsApp?",
       placeholder: "(75) 99999-9999",
       type: "tel",
-      inputMode: "tel",
+      inputMode: "numeric",
       autoComplete: "tel",
     },
     {
@@ -196,6 +201,20 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
   ],
 };
 
+const AMBASSADOR_CONTACT_NUMBER = "5511972497891";
+
+function getAmbassadorContactUrl(values: Record<string, string>) {
+  const message = [
+    "Olá! Acabei de concluir meu cadastro para Embaixador BoraZé! e gostaria de iniciar o atendimento e agendar uma ligação para conhecer os próximos passos.",
+    "",
+    `Nome: ${values.name}`,
+    `E-mail: ${values.email}`,
+    `Cidade: ${values.city}/${values.state}`,
+    `WhatsApp: ${formatPhone(values.phone ?? "")}`,
+  ].join("\\n");
+  return `https://wa.me/${AMBASSADOR_CONTACT_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
 function validateStep(step: LeadStep, value: string) {
   const trimmed = value.trim();
   if (step.key === "email") {
@@ -324,15 +343,15 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
               </span>
               <p className="mt-7 text-xs font-bold uppercase text-primary">Cadastro enviado</p>
               <DialogTitle className="mt-3 text-3xl leading-tight">
-                Entre no grupo oficial.
+                Vamos conversar sobre sua cidade?
               </DialogTitle>
               <DialogDescription className="mx-auto mt-3 max-w-md leading-6">
-                Recebemos suas informações. Toque no botão abaixo para continuar no grupo de
-                Embaixadores Bora Zé.
+                Fale com nossa equipe pelo WhatsApp para iniciar o atendimento e agendar uma ligação
+                sobre a oportunidade de Embaixador.
               </DialogDescription>
-              <Button asChild size="lg" className="mt-8 h-14 w-full rounded-xl font-bold">
-                <a href={AMBASSADOR_GROUP_URL} target="_blank" rel="noreferrer">
-                  Entrar no grupo do WhatsApp <ExternalLink aria-hidden="true" />
+              <Button asChild size="lg" className="mt-8 h-auto min-h-14 w-full rounded-xl px-4 py-3 font-bold">
+                <a href={getAmbassadorContactUrl(values)} target="_blank" rel="noreferrer">
+                  INICIAR ATENDIMENTO NO WHATSAPP <ExternalLink aria-hidden="true" />
                 </a>
               </Button>
             </div>
@@ -436,12 +455,18 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
                     <Input
                       ref={inputRef}
                       name={step.key}
-                      value={values[step.key] ?? ""}
+                      value={
+                        step.key === "phone"
+                          ? formatPhone(values[step.key] ?? "")
+                          : (values[step.key] ?? "")
+                      }
                       onChange={(event) => {
                         const nextValue =
                           step.key === "state"
                             ? event.target.value.toUpperCase()
-                            : event.target.value;
+                            : step.key === "phone"
+                              ? normalizePhoneDigits(event.target.value)
+                              : event.target.value;
                         setValues((current) => ({ ...current, [step.key]: nextValue }));
                         setError("");
                       }}

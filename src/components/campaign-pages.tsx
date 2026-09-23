@@ -79,7 +79,7 @@ const executiveLead = {
   description: "Três perguntas rápidas para entrar na comunidade gratuita do lançamento.",
 };
 
-const EXECUTIVE_CTA = "QUERO ENTRAR NA COMUNIDADE";
+const EXECUTIVE_CTA = "QUERO PARTICIPAR";
 
 export function ExecutivePage() {
   return (
@@ -231,10 +231,6 @@ export function ExecutivePage() {
                 </p>
               </div>
             </div>
-            <p className="mt-6 text-xs leading-5 text-muted-foreground">
-              Sem simulações de ganhos: as condições comerciais e os valores são apresentados na
-              abertura oficial.
-            </p>
           </div>
         </div>
       </section>

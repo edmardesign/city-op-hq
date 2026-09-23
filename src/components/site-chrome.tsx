@@ -6,9 +6,11 @@ import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
 
 interface SiteNavProps {
   ctaLabel?: string;
+  /** Some campaigns concentrate the single call to action at the end of the page. */
+  hideCta?: boolean;
 }
 
-export function SiteNav({ ctaLabel = "Quero começar" }: SiteNavProps) {
+export function SiteNav({ ctaLabel = "Quero começar", hideCta = false }: SiteNavProps) {
   return (
     <header className="absolute inset-x-0 top-0 z-40 border-b border-brand-white/10">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
@@ -19,14 +21,16 @@ export function SiteNav({ ctaLabel = "Quero começar" }: SiteNavProps) {
         >
           <img src={logo.url} alt="Bora Zé" className="h-8 w-auto md:h-9" />
         </Link>
-        <Button
-          size="lg"
-          onClick={() => window.dispatchEvent(new Event(OPEN_LEAD_DIALOG_EVENT))}
-          className="h-11 rounded-xl px-4 text-xs font-bold md:px-6"
-        >
-          {ctaLabel}
-          <ArrowUpRight aria-hidden="true" />
-        </Button>
+        {!hideCta && (
+          <Button
+            size="lg"
+            onClick={() => window.dispatchEvent(new Event(OPEN_LEAD_DIALOG_EVENT))}
+            className="h-11 rounded-xl px-4 text-xs font-bold md:px-6"
+          >
+            {ctaLabel}
+            <ArrowUpRight aria-hidden="true" />
+          </Button>
+        )}
       </div>
     </header>
   );

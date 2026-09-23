@@ -1,10 +1,8 @@
-import { useState } from "react";
 import {
   Bike,
   Building2,
   Flame,
   HeartPulse,
-  MapPin,
   PackageOpen,
   ShoppingBasket,
   Smartphone,
@@ -47,6 +45,7 @@ import {
   PlatformEconomyStory,
   RevenueStreams,
 } from "@/components/ambassador-sections";
+import { LaunchCountdownSection } from "@/components/launch-countdown";
 import { COMMERCE_CATEGORIES } from "@/lib/commerce-categories";
 
 const verticals = [

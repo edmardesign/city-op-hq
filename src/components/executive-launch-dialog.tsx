@@ -102,6 +102,7 @@ export function ExecutiveLaunchDialog({ title, description }: ExecutiveLaunchDia
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const submissionLock = useRef(false);
   const submitLead = useServerFn(submitExecutiveLaunchLead);
   const step = steps[stepIndex]!;
   const isLastStep = stepIndex === steps.length - 1;
@@ -119,7 +120,7 @@ export function ExecutiveLaunchDialog({ title, description }: ExecutiveLaunchDia
   async function continueFlow(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     // Guard against a double submit while the registration is still in flight.
-    if (isSubmitting) return;
+    if (submissionLock.current) return;
 
     const result = validateStep(step.key, values[step.key]);
     if (!result.success) {
@@ -133,6 +134,7 @@ export function ExecutiveLaunchDialog({ title, description }: ExecutiveLaunchDia
       return;
     }
 
+    submissionLock.current = true;
     setIsSubmitting(true);
     try {
       await submitLead({
@@ -150,11 +152,13 @@ export function ExecutiveLaunchDialog({ title, description }: ExecutiveLaunchDia
       // Keep every answer so the person can simply try again.
       setError("Não foi possível enviar agora. Verifique sua conexão e tente novamente.");
     } finally {
+      submissionLock.current = false;
       setIsSubmitting(false);
     }
   }
 
   function handleOpenChange(nextOpen: boolean) {
+    if (submissionLock.current) return;
     setOpen(nextOpen);
     if (!nextOpen && isDone) {
       window.setTimeout(() => {
@@ -183,7 +187,7 @@ export function ExecutiveLaunchDialog({ title, description }: ExecutiveLaunchDia
                 Toque no botão abaixo para abrir a comunidade gratuita no WhatsApp e confirmar sua
                 entrada por lá.
               </DialogDescription>
-              <Button asChild size="lg" className="mt-8 h-14 w-full rounded-xl font-bold">
+              <Button asChild size="lg" className="mt-8 h-auto min-h-14 w-full whitespace-normal rounded-xl px-4 py-4 text-sm font-bold">
                 <a href={EXECUTIVE_COMMUNITY_URL} target="_blank" rel="noreferrer">
                   ENTRAR NA COMUNIDADE DO WHATSAPP <ExternalLink aria-hidden="true" />
                 </a>

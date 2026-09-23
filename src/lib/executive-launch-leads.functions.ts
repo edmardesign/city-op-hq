@@ -75,6 +75,7 @@ async function sendExecutiveLeadEmail(data: ExecutiveLaunchLead): Promise<EmailD
   try {
     const response = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
       method: "POST",
+      signal: AbortSignal.timeout(10000),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${lovableApiKey}`,
@@ -89,8 +90,7 @@ async function sendExecutiveLeadEmail(data: ExecutiveLaunchLead): Promise<EmailD
     });
 
     if (!response.ok) {
-      const errorBody = await response.text();
-      console.error(`Executive launch lead email failed [${response.status}]: ${errorBody}`);
+      console.error("Executive launch lead email failed", { status: response.status });
       return "failed";
     }
     return "sent";

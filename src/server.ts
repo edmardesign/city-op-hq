@@ -40,6 +40,10 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+      if (url.hostname === "embaixador.boraze.app.br" && url.pathname === "/" && (request.method === "GET" || request.method === "HEAD")) {
+        return new Response(null, { status: 302, headers: { location: `/executivo${url.search}` } });
+      }
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);

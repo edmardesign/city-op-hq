@@ -17,6 +17,8 @@ CREATE TABLE public.executive_launch_leads (
     CHECK (email_delivery_status IN ('pending_configuration', 'sent', 'failed'))
 );
 
+REVOKE ALL ON public.executive_launch_leads FROM anon, authenticated;
+
 GRANT ALL ON public.executive_launch_leads TO service_role;
 
 ALTER TABLE public.executive_launch_leads ENABLE ROW LEVEL SECURITY;

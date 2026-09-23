@@ -335,7 +335,7 @@ const commerceCta = "QUERO CADASTRAR MEU NEGÓCIO GRÁTIS";
 
 export function CommercePage() {
   return (
-    <CampaignShell ctaLabel={commerceCta} leadConfig={commerceLead}>
+    <CampaignShell ctaLabel={commerceCta} leadConfig={commerceLead} hideNavCta>
       <CampaignHero
         eyebrow="Seu negócio no BoraZé!"
         title={

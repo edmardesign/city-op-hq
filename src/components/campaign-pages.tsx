@@ -88,14 +88,13 @@ export function ExecutivePage() {
         eyebrow="Lançamento • 20 de outubro"
         title={
           <>
-            Ganhe dinheiro conectando negócios ao{" "}
-            <span className="text-primary">BoraZé!</span>
+            Sua cidade movimenta dinheiro. Ganhe com o <span className="text-primary">BoraZé!</span>
           </>
         }
-        description="Trabalhe de onde estiver, cadastrando comércios no Super App. Aprenda a conquistar clientes pela internet ou atue presencialmente na sua cidade."
+        description="Apresente o Super App a restaurantes, mercados, farmácias e outros negócios. Com treinamento para captar clientes online, você pode atuar de onde estiver ou na sua região."
         image={smartBusiness.url}
         imageAlt="Executivo BoraZé apresentando o Super App no celular"
-        proof={["Atuação online ou presencial", "Sem estoque", "Com treinamento"]}
+        proof={["Online ou presencial", "Sem estoque ou loja", "Com treinamento"]}
         imagePosition="object-top"
       />
       <section className="bg-brand-black py-9 text-brand-white">
@@ -105,42 +104,42 @@ export function ExecutivePage() {
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="O que você faz"
+            eyebrow="Oportunidade em cada categoria"
             title={
               <>
-                Ajude negócios a vender mais.{" "}
-                <span className="text-muted-foreground">Ganhe por fazer essa conexão.</span>
+                Do hambúrguer ao gás de cozinha:{" "}
+                <span className="text-muted-foreground">conecte os negócios ao Super App.</span>
               </>
             }
-            description="Como Executivo BoraZé!, você apresenta o Super App a comércios da sua região ou de qualquer cidade atendida, conduz o cadastro e acompanha a ativação. Os ganhos acontecem por ativações elegíveis e por comissões recorrentes, conforme as regras do programa — os valores e percentuais são apresentados no lançamento."
+            description="Imagine ganhar com vendas de hambúrguer, cerveja, ração, gás, compras em mercados, pedidos em farmácias e corridas de mototáxi — sem ser dono desses negócios e sem precisar ter uma moto. Você conecta os estabelecimentos ao Super App BoraZé! e participa dos resultados conforme as regras do programa."
           />
           <div className="mt-12">
             <FeatureGrid
               items={[
                 {
-                  title: "Apresente o Super App",
+                  title: "Conecte os negócios",
                   description:
-                    "Mostre ao comerciante como o BoraZé! reúne pedidos, compras e serviços da cidade.",
+                    "Apresente o BoraZé! a restaurantes, mercados, farmácias e outros comércios.",
                   icon: <Smartphone />,
                 },
                 {
-                  title: "Conduza o cadastro",
+                  title: "Ajude na ativação",
                   description:
-                    "Ajude o negócio a entrar no aplicativo com as informações corretas, do início ao fim.",
+                    "Conduza o cadastro e acompanhe o estabelecimento até começar a operar.",
                   icon: <Store />,
                 },
                 {
-                  title: "Acompanhe a ativação",
+                  title: "Participe dos resultados",
                   description:
-                    "Fique perto do estabelecimento até ele estar ativo e recebendo solicitações.",
+                    "Receba por ativações elegíveis e comissões recorrentes, conforme as regras do programa.",
                   icon: <Building2 />,
                 },
               ]}
             />
           </div>
           <p className="mt-8 max-w-3xl text-sm leading-6 text-muted-foreground">
-            Não existe promessa de ganho fixo. O resultado depende da sua atuação, das regras
-            vigentes do programa e do desempenho dos negócios que você cadastrar.
+            Os ganhos variam conforme sua atuação, as regras do programa e a movimentação dos
+            estabelecimentos cadastrados. Não há promessa de renda fixa.
           </p>
         </div>
       </section>
@@ -150,20 +149,20 @@ export function ExecutivePage() {
           <div>
             <SectionHeading
               light
-              eyebrow="Como você trabalha"
-              title="Sem estoque. Sem ponto comercial. Com treinamento para começar."
-              description="Você não compra mercadoria, não abre loja e não desenvolve tecnologia. Sua atuação é comercial: encontrar negócios, apresentar o Super App e conduzir o cadastro."
+              eyebrow="Um negócio pelo celular"
+              title="Sem aluguel. Sem funcionários. Sem horário fixo."
+              description="Você pode trabalhar de casa, na sua cidade ou pela internet. O BoraZé! oferece treinamento para captar negócios online e materiais para apresentar o Super App."
             />
             <div className="mt-9">
               <CheckList
                 light
                 items={[
                   "Sem comprar estoque",
-                  "Sem alugar ponto comercial",
-                  "Sem contratar equipe",
-                  "Sem desenvolver aplicativo",
-                  "Com treinamento do programa",
-                  "Com material para apresentar a proposta",
+                  "Sem aluguel ou equipe própria",
+                  "Sem horário fixo",
+                  "Trabalhe de casa ou presencialmente",
+                  "Treinamento para captação online",
+                  "Materiais para apresentar o BoraZé!",
                 ]}
               />
             </div>
@@ -183,27 +182,21 @@ export function ExecutivePage() {
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
             eyebrow="De onde você quiser"
-            title="Sua cidade não precisa ser o limite."
-            description="Você pode estar em Itaperuna, no interior do Rio de Janeiro, e cadastrar um restaurante de Santa Rosa, no interior do Rio Grande do Sul, conduzindo tudo pela internet. Se preferir o contato olho no olho, também é possível atuar presencialmente na sua cidade e na sua região. O cadastro vale apenas para regiões e categorias atendidas pelo Super App."
+            title="Você pode trabalhar de onde estiver."
+            description="Use o treinamento para prospectar pela internet em outras cidades ou visite negócios da sua região. Você escolhe como atuar."
           />
           <div className="mt-12">
             <ProcessSteps
               steps={[
                 {
-                  title: "Escolha seu jeito",
-                  description: "Atuação online, presencial ou as duas, conforme sua rotina.",
+                  title: "Atuação online",
+                  description:
+                    "De Itaperuna, no Rio de Janeiro, prospecte um restaurante em Santa Rosa, no Rio Grande do Sul.",
                 },
                 {
-                  title: "Encontre negócios",
-                  description: "Use o treinamento para localizar comércios interessados.",
-                },
-                {
-                  title: "Apresente a proposta",
-                  description: "Explique como o Super App coloca a loja na frente dos clientes.",
-                },
-                {
-                  title: "Cadastre e acompanhe",
-                  description: "Conduza o cadastro e acompanhe a ativação do estabelecimento.",
+                  title: "Atuação presencial",
+                  description:
+                    "Visite negócios da sua cidade e região para apresentar o Super App.",
                 },
               ]}
             />
@@ -215,30 +208,26 @@ export function ExecutivePage() {
         <div className="mx-auto grid max-w-6xl gap-12 px-5 md:px-8 lg:grid-cols-2 lg:items-center">
           <SectionHeading
             eyebrow="Comunidade e treinamento"
-            title="Você aprende junto com outros Executivos."
-            description="O programa oferece uma comunidade de Executivos BoraZé! com treinamento para encontrar negócios pela internet, apresentar a proposta e conduzir o cadastro do começo ao fim."
+            title="Aprenda a captar clientes e cadastrar negócios."
+            description="Na comunidade, você acompanha o lançamento e recebe informações sobre o treinamento de prospecção online e atuação presencial."
           />
           <div className="rounded-2xl border border-border bg-card p-7 shadow-xl shadow-brand-black/5">
-            <h3 className="text-xl font-bold">Duas coisas diferentes</h3>
+            <h3 className="text-xl font-bold">Entre na comunidade do lançamento</h3>
             <div className="mt-6 space-y-6">
               <div>
-                <p className="text-xs font-bold uppercase text-primary">
-                  Comunidade gratuita do lançamento
-                </p>
+                <p className="text-xs font-bold uppercase text-primary">Acesso gratuito</p>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  É aberta e sem custo. Serve para você conhecer o programa, acompanhar os
-                  conteúdos e receber o aviso de abertura no dia 20 de outubro. Entrar nela não é
-                  uma compra e não garante vaga.
+                  Entre sem custo para acompanhar os conteúdos e receber o aviso de abertura em 20
+                  de outubro.
                 </p>
               </div>
               <div className="border-t border-border pt-6">
                 <p className="text-xs font-bold uppercase text-primary">
-                  Treinamento do programa adquirido
+                  Treinamento Executivo BoraZé!
                 </p>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  É o conteúdo completo de quem entra no Executivo BoraZé! depois do lançamento:
-                  método de prospecção online, abordagem presencial, apresentação da proposta e
-                  condução do cadastro, com acompanhamento da comunidade de Executivos.
+                  O treinamento completo será apresentado no lançamento e ensinará a prospectar,
+                  apresentar o Super App e conduzir cadastros.
                 </p>
               </div>
             </div>
@@ -259,18 +248,6 @@ export function ExecutivePage() {
                 {
                   q: "Preciso ter experiência em vendas?",
                   a: "Não é exigida experiência anterior. O programa oferece treinamento para apresentar o Super App e conduzir o cadastro dos negócios.",
-                },
-                {
-                  q: "Consigo trabalhar de casa?",
-                  a: "Sim. É possível conduzir a prospecção e o cadastro pela internet, de onde você estiver.",
-                },
-                {
-                  q: "Preciso fazer visitas presenciais?",
-                  a: "Não é obrigatório. Visitar comércios da sua cidade ou região é uma opção, não uma exigência.",
-                },
-                {
-                  q: "Entrar na comunidade gratuita é o mesmo que comprar o programa?",
-                  a: "Não. A comunidade é gratuita e serve para conhecer o programa e receber o aviso de abertura. A entrada no programa acontece somente após o lançamento.",
                 },
                 {
                   q: "Quanto eu vou ganhar?",

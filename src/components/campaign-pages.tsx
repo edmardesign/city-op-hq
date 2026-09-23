@@ -76,26 +76,27 @@ const verticals = [
 
 const executiveLead = {
   type: "executivo" as const,
-  title: "Conheça a oportunidade Executivo Bora Zé",
-  description: "Uma pergunta por vez. Seus dados seguem com você até a conversa no WhatsApp.",
+  title: "Comunidade Executivo BoraZé!",
+  description: "Três perguntas rápidas para entrar na comunidade gratuita do lançamento.",
 };
 
+const EXECUTIVE_CTA = "QUERO ENTRAR NA COMUNIDADE";
+
 export function ExecutivePage() {
-  const [businesses, setBusinesses] = useState(10);
   return (
-    <CampaignShell ctaLabel="Quero conhecer" leadConfig={executiveLead}>
+    <CampaignShell ctaLabel={EXECUTIVE_CTA} leadConfig={executiveLead} hideNavCta>
       <CampaignHero
-        eyebrow="Uma oportunidade construída por você"
+        eyebrow="Lançamento • 20 de outubro"
         title={
           <>
-            Ganhe com negócios locais <span className="text-primary">sem ser dono de um.</span>
+            Ganhe dinheiro conectando negócios ao{" "}
+            <span className="text-primary">BoraZé!</span>
           </>
         }
-        description="Restaurantes, mercados, farmácias e outros negócios já movimentam dinheiro todos os dias. Você pode construir sua oportunidade conectando esse mercado a uma plataforma pronta."
-        cta="Quero conhecer a oportunidade"
+        description="Trabalhe de onde estiver, cadastrando comércios no Super App. Aprenda a conquistar clientes pela internet ou atue presencialmente na sua cidade."
         image={smartBusiness.url}
-        imageAlt="Executivo apresenta o aplicativo Bora Zé no celular como um negócio inteligente"
-        proof={["Seu próprio crescimento", "Sem estoque", "Plataforma pronta"]}
+        imageAlt="Executivo BoraZé apresentando o Super App no celular"
+        proof={["Atuação online ou presencial", "Sem estoque", "Com treinamento"]}
         imagePosition="object-top"
       />
       <section className="bg-brand-black py-9 text-brand-white">
@@ -105,20 +106,43 @@ export function ExecutivePage() {
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Olhe para sua cidade"
+            eyebrow="O que você faz"
             title={
               <>
-                O dinheiro já está circulando.{" "}
-                <span className="text-muted-foreground">
-                  Sua oportunidade é participar desse movimento.
-                </span>
+                Ajude negócios a vender mais.{" "}
+                <span className="text-muted-foreground">Ganhe por fazer essa conexão.</span>
               </>
             }
-            description="Todos os dias, pessoas compram comida, medicamentos, itens para casa e serviços locais. Você não precisa abrir cada um desses negócios para construir algo em torno dessas transações."
+            description="Como Executivo BoraZé!, você apresenta o Super App a comércios da sua região ou de qualquer cidade atendida, conduz o cadastro e acompanha a ativação. Os ganhos acontecem por ativações elegíveis e por comissões recorrentes, conforme as regras do programa — os valores e percentuais são apresentados no lançamento."
           />
           <div className="mt-12">
-            <FeatureGrid items={verticals} columns={6} />
+            <FeatureGrid
+              items={[
+                {
+                  title: "Apresente o Super App",
+                  description:
+                    "Mostre ao comerciante como o BoraZé! reúne pedidos, compras e serviços da cidade.",
+                  icon: <Smartphone />,
+                },
+                {
+                  title: "Conduza o cadastro",
+                  description:
+                    "Ajude o negócio a entrar no aplicativo com as informações corretas, do início ao fim.",
+                  icon: <Store />,
+                },
+                {
+                  title: "Acompanhe a ativação",
+                  description:
+                    "Fique perto do estabelecimento até ele estar ativo e recebendo solicitações.",
+                  icon: <Building2 />,
+                },
+              ]}
+            />
           </div>
+          <p className="mt-8 max-w-3xl text-sm leading-6 text-muted-foreground">
+            Não existe promessa de ganho fixo. O resultado depende da sua atuação, das regras
+            vigentes do programa e do desempenho dos negócios que você cadastrar.
+          </p>
         </div>
       </section>
 
@@ -127,9 +151,9 @@ export function ExecutivePage() {
           <div>
             <SectionHeading
               light
-              eyebrow="Um modelo mais inteligente"
-              title="Construa seu negócio sem carregar os custos de seis operações."
-              description="Em vez de investir em estrutura física, estoque e equipes para cada segmento, você desenvolve uma carteira de negócios locais dentro de uma plataforma digital."
+              eyebrow="Como você trabalha"
+              title="Sem estoque. Sem ponto comercial. Com treinamento para começar."
+              description="Você não compra mercadoria, não abre loja e não desenvolve tecnologia. Sua atuação é comercial: encontrar negócios, apresentar o Super App e conduzir o cadastro."
             />
             <div className="mt-9">
               <CheckList
@@ -137,10 +161,10 @@ export function ExecutivePage() {
                 items={[
                   "Sem comprar estoque",
                   "Sem alugar ponto comercial",
-                  "Sem montar cozinha",
-                  "Sem abrir farmácia",
-                  "Sem manter frota",
+                  "Sem contratar equipe",
                   "Sem desenvolver aplicativo",
+                  "Com treinamento do programa",
+                  "Com material para apresentar a proposta",
                 ]}
               />
             </div>
@@ -150,7 +174,7 @@ export function ExecutivePage() {
             loading="lazy"
             width={768}
             height={1024}
-            alt="Aplicativo Bora Zé reúne comércio e mobilidade local"
+            alt="Super App BoraZé reunindo comércio e mobilidade local"
             className="aspect-[4/5] w-full rounded-2xl object-cover"
           />
         </div>
@@ -159,29 +183,28 @@ export function ExecutivePage() {
       <section className="bg-brand-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Sua oportunidade"
-            title="Transforme relacionamento comercial em uma carteira que pode crescer."
-            description="Como Executivo, você apresenta a oportunidade a estabelecimentos elegíveis, apoia suas ativações e desenvolve sua própria carteira. Seu resultado depende da sua execução, das regras do programa e do desempenho dos negócios vinculados."
+            eyebrow="De onde você quiser"
+            title="Sua cidade não precisa ser o limite."
+            description="Você pode estar em Itaperuna, no interior do Rio de Janeiro, e cadastrar um restaurante de Santa Rosa, no interior do Rio Grande do Sul, conduzindo tudo pela internet. Se preferir o contato olho no olho, também é possível atuar presencialmente na sua cidade e na sua região. O cadastro vale apenas para regiões e categorias atendidas pelo Super App."
           />
           <div className="mt-12">
             <ProcessSteps
               steps={[
                 {
-                  title: "Domine a oportunidade",
-                  description: "Entenda a plataforma, as verticais e o processo comercial.",
+                  title: "Escolha seu jeito",
+                  description: "Atuação online, presencial ou as duas, conforme sua rotina.",
                 },
                 {
                   title: "Encontre negócios",
-                  description:
-                    "Converse com estabelecimentos que querem estar mais perto dos clientes.",
+                  description: "Use o treinamento para localizar comércios interessados.",
                 },
                 {
-                  title: "Construa sua carteira",
-                  description: "Acompanhe a entrada dos negócios elegíveis na plataforma.",
+                  title: "Apresente a proposta",
+                  description: "Explique como o Super App coloca a loja na frente dos clientes.",
                 },
                 {
-                  title: "Continue crescendo",
-                  description: "Amplie seus relacionamentos e desenvolva sua atuação comercial.",
+                  title: "Cadastre e acompanhe",
+                  description: "Conduza o cadastro e acompanhe a ativação do estabelecimento.",
                 },
               ]}
             />
@@ -192,65 +215,74 @@ export function ExecutivePage() {
       <section className="py-20 md:py-28">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 md:px-8 lg:grid-cols-2 lg:items-center">
           <SectionHeading
-            eyebrow="Visualize seu crescimento"
-            title="Uma carteira começa com o primeiro negócio."
-            description="Ajuste a quantidade para enxergar a amplitude de uma rede construída por você. É uma referência de escala, não uma projeção de renda."
+            eyebrow="Comunidade e treinamento"
+            title="Você aprende junto com outros Executivos."
+            description="O programa oferece uma comunidade de Executivos BoraZé! com treinamento para encontrar negócios pela internet, apresentar a proposta e conduzir o cadastro do começo ao fim."
           />
           <div className="rounded-2xl border border-border bg-card p-7 shadow-xl shadow-brand-black/5">
-            <label htmlFor="businesses" className="text-sm font-semibold">
-              Negócios na sua carteira
-            </label>
-            <p className="mt-3 text-6xl font-bold">{businesses}</p>
-            <input
-              id="businesses"
-              type="range"
-              min="5"
-              max="100"
-              step="5"
-              value={businesses}
-              onChange={(event) => setBusinesses(Number(event.target.value))}
-              className="mt-7 w-full accent-primary"
-            />
-            <div className="mt-7 rounded-xl bg-brand-black p-5 text-brand-white">
-              <p className="text-xs text-brand-white/50">
-                Uma rede construída relacionamento por relacionamento
-              </p>
-              <p className="mt-2 text-xl font-bold text-primary">
-                {businesses} oportunidades locais
-              </p>
+            <h3 className="text-xl font-bold">Duas coisas diferentes</h3>
+            <div className="mt-6 space-y-6">
+              <div>
+                <p className="text-xs font-bold uppercase text-primary">
+                  Comunidade gratuita do lançamento
+                </p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  É aberta e sem custo. Serve para você conhecer o programa, acompanhar os
+                  conteúdos e receber o aviso de abertura no dia 20 de outubro. Entrar nela não é
+                  uma compra e não garante vaga.
+                </p>
+              </div>
+              <div className="border-t border-border pt-6">
+                <p className="text-xs font-bold uppercase text-primary">
+                  Treinamento do programa adquirido
+                </p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  É o conteúdo completo de quem entra no Executivo BoraZé! depois do lançamento:
+                  método de prospecção online, abordagem presencial, apresentação da proposta e
+                  condução do cadastro, com acompanhamento da comunidade de Executivos.
+                </p>
+              </div>
             </div>
+            <p className="mt-6 text-xs leading-5 text-muted-foreground">
+              Sem simulações de ganhos: as condições comerciais e os valores são apresentados na
+              abertura oficial.
+            </p>
           </div>
         </div>
       </section>
 
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-5 md:px-8">
-          <SectionHeading eyebrow="Dúvidas comuns" title="Antes de dar o próximo passo." />
+          <SectionHeading eyebrow="Dúvidas comuns" title="Antes de entrar na comunidade." />
           <div className="mt-10">
             <SimpleFaq
               items={[
                 {
-                  q: "Preciso ter uma loja?",
-                  a: "Não. A oportunidade do Executivo está em desenvolver uma carteira de estabelecimentos dentro do modelo do programa.",
+                  q: "Preciso ter experiência em vendas?",
+                  a: "Não é exigida experiência anterior. O programa oferece treinamento para apresentar o Super App e conduzir o cadastro dos negócios.",
                 },
                 {
-                  q: "Preciso desenvolver tecnologia?",
-                  a: "Não. O Bora Zé fornece a plataforma; você concentra sua energia no desenvolvimento comercial da sua carteira.",
+                  q: "Consigo trabalhar de casa?",
+                  a: "Sim. É possível conduzir a prospecção e o cadastro pela internet, de onde você estiver.",
                 },
                 {
-                  q: "Existe garantia de resultado?",
-                  a: "Não. Resultados dependem de dedicação, execução, regras vigentes e desempenho dos estabelecimentos vinculados.",
+                  q: "Preciso fazer visitas presenciais?",
+                  a: "Não é obrigatório. Visitar comércios da sua cidade ou região é uma opção, não uma exigência.",
+                },
+                {
+                  q: "Entrar na comunidade gratuita é o mesmo que comprar o programa?",
+                  a: "Não. A comunidade é gratuita e serve para conhecer o programa e receber o aviso de abertura. A entrada no programa acontece somente após o lançamento.",
+                },
+                {
+                  q: "Quanto eu vou ganhar?",
+                  a: "Os ganhos são variáveis e dependem da sua atuação, das regras vigentes do programa e do desempenho dos negócios cadastrados. Não há promessa de resultado.",
                 },
               ]}
             />
           </div>
         </div>
       </section>
-      <ConversionSection
-        title="Sua oportunidade pode começar com uma conversa."
-        description="Responda poucas perguntas e conheça os próximos passos no WhatsApp oficial."
-        cta="Quero conhecer"
-      />
+      <LaunchCountdownSection cta={EXECUTIVE_CTA} />
     </CampaignShell>
   );
 }

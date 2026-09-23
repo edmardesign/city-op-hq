@@ -142,3 +142,9 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Hide Lovable editor badge injected by hosting. */
+a[href*="utm_source=lovable-badge"],
+a[href*="utm_campaign=badge-wording-disabled"] {
+  display: none !important;
+}

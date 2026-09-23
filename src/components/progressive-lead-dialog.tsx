@@ -119,7 +119,8 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
     {
       key: "qualification",
       label:
-        "Se sua cidade estiver disponível, você tem condições de investir a partir de R$ 9.890,00 para iniciar a operação?",
+        "Você pode investir a partir de R$ 9.890,00 para iniciar sua operação?",
+      helper: "Considere que sua cidade esteja disponível e a oportunidade faça sentido para você.",
       options: qualificationOptions,
     },
   ],

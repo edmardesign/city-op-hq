@@ -40,7 +40,6 @@ export function SiteFooter() {
   const links = [
     { to: "/comercio" as const, label: "Parceiros" },
     { to: "/mototaxi" as const, label: "Mototáxi" },
-    { to: "/executivo" as const, label: "Executivo" },
     { to: "/embaixador" as const, label: "Embaixador" },
     { to: "/termos" as const, label: "Termos" },
     { to: "/privacidade" as const, label: "Privacidade" },

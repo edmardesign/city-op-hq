@@ -211,7 +211,7 @@ export function AmbassadorBenefits() {
   );
 }
 
-export function AmbassadorSimulator() {
+export function AmbassadorSimulator({ showPremises = true }: { showPremises?: boolean } = {}) {
   const [businesses, setBusinesses] = useState(30);
   const [drivers, setDrivers] = useState(15);
   const deliveryGmv = businesses * 5 * 45 * 30;
@@ -227,9 +227,11 @@ export function AmbassadorSimulator() {
           <div className="space-y-8 rounded-xl border border-brand-white/10 bg-brand-white/5 p-6 md:p-8">
             <RangeControl id="ambassador-businesses" label="Estabelecimentos ativos" value={businesses} min={30} max={100} onChange={setBusinesses} suffix="estabelecimentos" />
             <RangeControl id="ambassador-drivers" label="Mototaxistas ativos" value={drivers} min={15} max={50} onChange={setDrivers} suffix="mototaxistas" />
-            <div className="rounded-lg border border-brand-white/10 p-4 text-xs leading-5 text-brand-white/45">
-              Premissas: 5 pedidos por dia por estabelecimento, ticket médio de R$ 45, comissão de 7% no delivery, 5 corridas por dia por mototaxista e R$ 1 por corrida.
-            </div>
+            {showPremises && (
+              <div className="rounded-lg border border-brand-white/10 p-4 text-xs leading-5 text-brand-white/45">
+                Premissas: 5 pedidos por dia por estabelecimento, ticket médio de R$ 45, comissão de 7% no delivery, 5 corridas por dia por mototaxista e R$ 1 por corrida.
+              </div>
+            )}
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             <Metric label="GMV Delivery / mês" value={currency.format(deliveryGmv)} />

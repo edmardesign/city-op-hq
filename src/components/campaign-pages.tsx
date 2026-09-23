@@ -433,8 +433,8 @@ export function CommercePage() {
           <SectionHeading
             light
             eyebrow="Presença local no celular"
-            title="Seu ponto continua o mesmo. As formas de chegar até ele aumentam."
-            description="O Bora Zé complementa os canais que seu negócio já usa e aproxima sua oferta de pessoas que estão procurando dentro do aplicativo."
+            title="CUSTO ZERO! Aumente o fluxo das vendas sem investir um mísero real."
+            description="Com o Bora Zé, o risco é zero: você só paga quando vende. Não cobramos mensalidade nem taxa de cadastro. A cobrança acontece sobre os pedidos realizados, conforme a condição da sua categoria. Simples assim, preto no branco."
           />
           <CheckList
             light
@@ -447,6 +447,50 @@ export function CommercePage() {
               "Suporte da plataforma",
             ]}
           />
+        </div>
+      </section>
+
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-4xl px-5 md:px-8">
+          <SectionHeading
+            eyebrow="Perguntas frequentes"
+            title="O que você precisa saber antes de cadastrar sua loja."
+            description="As principais dúvidas de quem quer colocar o negócio no Bora Zé."
+          />
+          <div className="mt-10">
+            <SimpleFaq
+              items={[
+                {
+                  q: "Quanto custa para cadastrar meu negócio no Bora Zé?",
+                  a: "O cadastro não tem taxa de adesão e não há mensalidade. A cobrança da plataforma acontece conforme os pedidos realizados e a condição comercial da sua categoria.",
+                },
+                {
+                  q: "Preciso ter CNPJ para entrar?",
+                  a: "Não. O Bora Zé não exige CNPJ como condição para iniciar o cadastro. A equipe orienta quais dados e documentos são necessários para concluir a ativação.",
+                },
+                {
+                  q: "Quanto o Bora Zé cobra por venda?",
+                  a: "A condição varia conforme a categoria do estabelecimento. Restaurantes e lojistas em geral têm regra de 7% sobre os pedidos; gás e água, 4%. Mercados possuem regra própria. Farmácias e bebidas devem ter a condição confirmada no cadastro antes da contratação.",
+                },
+                {
+                  q: "Como funciona a entrega dos pedidos?",
+                  a: "Sua loja pode trabalhar com entrega própria, com entregador Bora Zé ou com as duas modalidades, conforme a cobertura e a disponibilidade da operação na sua cidade.",
+                },
+                {
+                  q: "Em quanto tempo minha loja pode aparecer no aplicativo?",
+                  a: "Com a cidade em operação, cadastro completo, materiais conferidos e contrato assinado, a ativação pode ocorrer em até 48 horas.",
+                },
+                {
+                  q: "Como recebo os pagamentos das vendas?",
+                  a: "As formas de pagamento, taxas de cartão ou Pix e os prazos de repasse ficam descritos no contrato. A equipe apresenta essas condições antes da assinatura.",
+                },
+                {
+                  q: "O Bora Zé ajuda a divulgar minha loja?",
+                  a: "Sim. O Bora Zé divulga parceiros nas redes sociais e realiza ações promocionais. A participação depende das campanhas disponíveis e das regras vigentes em cada momento.",
+                },
+              ]}
+            />
+          </div>
         </div>
       </section>
       <ConversionSection

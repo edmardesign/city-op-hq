@@ -340,7 +340,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
             <div className="animate-fade-in py-6 text-center">
               <p className="text-xs font-bold uppercase text-primary">Uma oportunidade para você</p>
               <DialogTitle className="mt-3 text-3xl leading-tight">
-                Que pena que ainda não é o seu momento... eu tenho algo pra você, vamos lá?
+                Comece como Executivo BoraZé! com um investimento menor.
               </DialogTitle>
               <div className="mt-8 grid gap-3">
                 <Button asChild size="lg" className="h-14 rounded-xl font-bold">

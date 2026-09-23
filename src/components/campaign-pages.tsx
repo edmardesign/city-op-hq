@@ -85,13 +85,12 @@ export function ExecutivePage() {
   return (
     <CampaignShell ctaLabel={EXECUTIVE_CTA} leadConfig={executiveLead} hideNavCta>
       <CampaignHero
-        eyebrow="Lançamento • 20 de outubro"
         title={
           <>
-            Sua cidade movimenta dinheiro. Ganhe com o <span className="text-primary">BoraZé!</span>
+            Fature R$ 5.000,00+ por mês com nosso <span className="text-primary">SUPER APP</span>
           </>
         }
-        description="Apresente o Super App a restaurantes, mercados, farmácias e outros negócios. Com treinamento para captar clientes online, você pode atuar de onde estiver ou na sua região."
+        description="Ganhe lucros recorrentes conectando o comércio local ao BoraZé!"
         image={smartBusiness.url}
         imageAlt="Executivo BoraZé apresentando o Super App no celular"
         proof={["Online ou presencial", "Sem estoque ou loja", "Com treinamento"]}

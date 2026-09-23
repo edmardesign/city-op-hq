@@ -40,7 +40,7 @@ interface LeadStep {
   placeholder?: string;
   type?: "text" | "tel" | "email";
   autoComplete?: string;
-  inputMode?: "text" | "tel" | "email";
+  inputMode?: "text" | "tel" | "email" | "numeric";
   maxLength?: number;
   options?: string[];
 }

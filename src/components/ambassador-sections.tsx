@@ -1,6 +1,5 @@
 import { useState, type ReactNode } from "react";
 import {
-  ArrowRight,
   BadgeCheck,
   Building2,
   Check,
@@ -17,8 +16,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { openLeadDialog, SectionHeading, SimpleFaq } from "@/components/landing-system";
+import { SectionHeading, SimpleFaq } from "@/components/landing-system";
 import { cn } from "@/lib/utils";
 
 const currency = new Intl.NumberFormat("pt-BR", {
@@ -286,11 +284,11 @@ export function BusinessComparison() {
 
 export function CityAnalysis() {
   const points = ["Avaliação do potencial do município", "Conversa inicial sem compromisso", "Atendimento pelo WhatsApp oficial", "Apresentação das condições e responsabilidades"];
-  return <section className="bg-brand-surface py-20 md:py-28"><div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-2"><SectionHeading eyebrow="Próximo passo" title="Análise do potencial da sua cidade." description="Cada município tem uma realidade. Antes de qualquer decisão, a equipe avalia disponibilidade, mercado e aderência para apresentar um cenário responsável." /><div className="grid gap-3">{points.map((point) => <div key={point} className="flex items-center gap-4 rounded-xl border border-border bg-background p-5"><Check className="size-5 shrink-0 text-primary" /><span className="text-sm font-semibold">{point}</span></div>)}<Button onClick={openLeadDialog} size="lg" className="mt-2 h-14 rounded-xl font-bold">Quero analisar minha cidade <ArrowRight /></Button></div></div></section>;
+  return <section className="bg-brand-surface py-20 md:py-28"><div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-2"><SectionHeading eyebrow="Próximo passo" title="Análise do potencial da sua cidade." description="Cada município tem uma realidade. Antes de qualquer decisão, a equipe avalia disponibilidade, mercado e aderência para apresentar um cenário responsável." /><div className="grid gap-3">{points.map((point) => <div key={point} className="flex items-center gap-4 rounded-xl border border-border bg-background p-5"><Check className="size-5 shrink-0 text-primary" /><span className="text-sm font-semibold">{point}</span></div>)}</div></div></section>;
 }
 
 export function DecisionSecurity() {
-  return <section className="bg-primary py-16 text-primary-foreground md:py-20"><div className="mx-auto flex max-w-5xl flex-col gap-8 px-5 md:flex-row md:items-center md:justify-between md:px-8"><div className="flex max-w-2xl items-start gap-5"><ShieldCheck className="size-12 shrink-0" aria-hidden="true" /><div><p className="text-xs font-bold uppercase">Decisão consciente</p><h2 className="mt-2 text-3xl font-bold md:text-4xl">Entenda todas as condições antes de decidir.</h2><p className="mt-3 text-sm leading-6 opacity-70">Disponibilidade territorial, investimento, responsabilidades, suporte e eventuais garantias são apresentados formalmente. O pré-cadastro não gera reserva nem contratação automática.</p></div></div><Button onClick={openLeadDialog} size="lg" variant="secondary" className="h-14 shrink-0 rounded-xl px-7 font-bold">Analisar minha cidade <ArrowRight /></Button></div></section>;
+  return <section className="bg-primary py-16 text-primary-foreground md:py-20"><div className="mx-auto flex max-w-5xl flex-col gap-8 px-5 md:flex-row md:items-center md:justify-between md:px-8"><div className="flex max-w-2xl items-start gap-5"><ShieldCheck className="size-12 shrink-0" aria-hidden="true" /><div><p className="text-xs font-bold uppercase">Decisão consciente</p><h2 className="mt-2 text-3xl font-bold md:text-4xl">Entenda todas as condições antes de decidir.</h2><p className="mt-3 text-sm leading-6 opacity-70">Disponibilidade territorial, investimento, responsabilidades, suporte e eventuais garantias são apresentados formalmente. O pré-cadastro não gera reserva nem contratação automática.</p></div></div></div></section>;
 }
 
 export function AboutProject() {

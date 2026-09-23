@@ -90,9 +90,6 @@ export function LaunchCountdownSection({ cta }: { cta: string }) {
           <div className="mt-8 h-[168px] sm:h-[196px]" aria-hidden="true" />
         )}
 
-        <p className="mx-auto mt-8 max-w-2xl text-base leading-7 text-brand-white/70 md:text-lg">
-          Entre na comunidade gratuita para conhecer o programa e receber o aviso de abertura.
-        </p>
         <Button
           onClick={openLeadDialog}
           size="lg"

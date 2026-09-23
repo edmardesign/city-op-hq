@@ -182,6 +182,60 @@ export type Database = {
         }
         Relationships: []
       }
+      executive_launch_leads: {
+        Row: {
+          campaign: string
+          consent: boolean
+          created_at: string
+          deleted_at: string | null
+          email: string
+          email_delivery_status: string
+          id: string
+          name: string
+          phone: string
+          updated_at: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          campaign?: string
+          consent?: boolean
+          created_at?: string
+          deleted_at?: string | null
+          email: string
+          email_delivery_status?: string
+          id?: string
+          name: string
+          phone: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          campaign?: string
+          consent?: boolean
+          created_at?: string
+          deleted_at?: string | null
+          email?: string
+          email_delivery_status?: string
+          id?: string
+          name?: string
+          phone?: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -8,6 +8,7 @@ import {
 } from "@/components/progressive-lead-dialog";
 import { CommerceLeadDialog } from "@/components/commerce-lead-dialog";
 import { DriverDeliveryLeadDialog } from "@/components/driver-delivery-lead-dialog";
+import { ExecutiveLaunchDialog } from "@/components/executive-launch-dialog";
 import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteNav } from "@/components/site-chrome";
 import { cn } from "@/lib/utils";
@@ -56,20 +57,24 @@ export function CampaignShell({
   children,
   ctaLabel,
   leadConfig,
+  hideNavCta = false,
 }: {
   children: ReactNode;
   ctaLabel: string;
   leadConfig: ProgressiveLeadConfig;
+  hideNavCta?: boolean;
 }) {
   return (
     <div className="min-h-screen overflow-hidden bg-background text-foreground">
-      <SiteNav ctaLabel={ctaLabel} />
+      <SiteNav ctaLabel={ctaLabel} hideCta={hideNavCta} />
       <main>{children}</main>
       <SiteFooter />
       {leadConfig.type === "comercio" ? (
         <CommerceLeadDialog title={leadConfig.title} description={leadConfig.description} />
       ) : leadConfig.type === "mototaxi" ? (
         <DriverDeliveryLeadDialog title={leadConfig.title} description={leadConfig.description} />
+      ) : leadConfig.type === "executivo" ? (
+        <ExecutiveLaunchDialog title={leadConfig.title} description={leadConfig.description} />
       ) : (
         <ProgressiveLeadDialog config={leadConfig} onComplete={openWhatsApp} />
       )}
@@ -81,7 +86,8 @@ interface CampaignHeroProps {
   eyebrow: string;
   title: ReactNode;
   description: string;
-  cta: string;
+  /** Omit to keep the page with a single call to action further down. */
+  cta?: string;
   image: string;
   imageAlt: string;
   proof?: string[];
@@ -109,14 +115,16 @@ export function CampaignHero({
           <p className="mt-6 max-w-xl text-base leading-7 text-brand-white/70 md:text-lg md:leading-8">
             {description}
           </p>
-          <Button
-            onClick={openLeadDialog}
-            size="lg"
-            className="mt-8 h-14 w-full rounded-xl px-7 text-sm font-bold sm:w-auto"
-          >
-            {cta}
-            <ArrowRight aria-hidden="true" />
-          </Button>
+          {cta && (
+            <Button
+              onClick={openLeadDialog}
+              size="lg"
+              className="mt-8 h-14 w-full rounded-xl px-7 text-sm font-bold sm:w-auto"
+            >
+              {cta}
+              <ArrowRight aria-hidden="true" />
+            </Button>
+          )}
           {proof.length > 0 && (
             <p className="mt-5 text-xs leading-5 text-brand-white/45">{proof.join(" • ")}</p>
           )}

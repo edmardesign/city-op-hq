@@ -27,3 +27,8 @@
 - [x] Validar /mototaxi em computador e celular sem alterar os demais fluxos
 - [x] Simplificar o cadastro de Mototáxi como o cadastro de Parceiros
 - [x] Tornar a página de Parceiros a página inicial do site
+- [ ] Reescrever a página Executivo com a campanha de lançamento 2026
+- [ ] Deixar um único CTA no final, abaixo do contador de lançamento
+- [ ] Criar cadastro do Executivo com nome, WhatsApp e e-mail
+- [ ] Salvar os cadastros do Executivo no banco com notificação por e-mail
+- [ ] Validar página, cadastro, contador e as demais páginas sem regressão

@@ -207,6 +207,18 @@ function getAmbassadorContactUrl() {
   return `https://wa.me/${AMBASSADOR_CONTACT_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
+function readTracking() {
+  const params = new URLSearchParams(window.location.search);
+  const take = (key: string) => params.get(key)?.slice(0, 120) || undefined;
+  return {
+    utmSource: take("utm_source"),
+    utmMedium: take("utm_medium"),
+    utmCampaign: take("utm_campaign"),
+    utmContent: take("utm_content"),
+    utmTerm: take("utm_term"),
+  };
+}
+
 function validateStep(step: LeadStep, value: string) {
   const trimmed = value.trim();
   if (step.key === "email") {
@@ -302,6 +314,7 @@ export function ProgressiveLeadDialog({ config, onComplete }: ProgressiveLeadDia
             | "Preciso entender melhor antes."
             | "Hoje não tenho disponibilidade.",
           website: "",
+          ...readTracking(),
         },
       });
       setFinalStage(result.branch);

@@ -40,7 +40,7 @@ interface CommerceLeadDialogProps {
   description: string;
 }
 
-const steps = ["phone", "location", "category", "establishment", "name"] as const;
+const steps = ["location", "category", "establishment", "name", "phone", "email", "instagram"] as const;
 
 function getTracking() {
   const params = new URLSearchParams(window.location.search);
@@ -101,6 +101,10 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
     if (step === "phone") {
       return isValidPhone(values.phone ?? "") ? "" : "Informe seu WhatsApp com DDD.";
     }
+    if (step === "email") {
+      return z.string().email().safeParse(values.email ?? "").success ? "" : "Informe um e-mail válido.";
+    }
+    if (step === "instagram") return "";
     if (step === "location") {
       if (!values.state || !values.city) return "Confirme o estado e escolha a cidade.";
       return "";
@@ -126,13 +130,6 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
     }
     setError("");
 
-    if (step === "phone") {
-      const detectedState = getStateFromPhone(values.phone ?? "");
-      if (detectedState && detectedState !== values.state) void loadCities(detectedState);
-      setStepIndex((current) => current + 1);
-      return;
-    }
-
     if (stepIndex < steps.length - 1) {
       setStepIndex((current) => current + 1);
       return;
@@ -149,6 +146,8 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
           establishment: values.establishment ?? "",
           responsibleName: values.name ?? "",
           phone: normalizePhoneDigits(values.phone ?? ""),
+          email: values.email?.trim() ?? "",
+          instagram: values.instagram?.trim() || undefined,
           ...getTracking(),
         },
       });
@@ -187,11 +186,13 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
             </div>
             <p className="text-xs font-bold uppercase text-primary">{title}</p>
             <DialogTitle className="text-xl leading-tight sm:text-3xl">
-              {step === "phone" && "Qual é o WhatsApp para atendimento?"}
               {step === "location" && "Em qual cidade fica o seu negócio?"}
+              {step === "phone" && "Qual é o WhatsApp para atendimento?"}
               {step === "category" && "Em qual categoria seu negócio atua?"}
               {step === "establishment" && "Qual é o nome do estabelecimento?"}
               {step === "name" && "Quem é o responsável pelo negócio?"}
+              {step === "email" && "Qual é o seu melhor e-mail?"}
+              {step === "instagram" && "Qual é o Instagram do negócio? (opcional)"}
             </DialogTitle>
             <DialogDescription className="pt-2 text-sm leading-6">{description}</DialogDescription>
           </DialogHeader>
@@ -338,18 +339,32 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
                     )}
                   </div>
                 )}
-                {(step === "establishment" || step === "name") && (
+                {(step === "establishment" || step === "name" || step === "email" || step === "instagram") && (
                   <Input
                     value={values[step] ?? ""}
                     onChange={(event) => {
                       setValues((current) => ({ ...current, [step]: event.target.value }));
                       setError("");
                     }}
-                    type="text"
-                    inputMode="text"
-                    autoComplete={step === "establishment" ? "organization" : "name"}
+                    type={step === "email" ? "email" : "text"}
+                    inputMode={step === "email" ? "email" : "text"}
+                    autoComplete={
+                      step === "establishment"
+                        ? "organization"
+                        : step === "name"
+                          ? "name"
+                          : step === "email"
+                            ? "email"
+                            : "off"
+                    }
                     placeholder={
-                      step === "establishment" ? "Nome do estabelecimento" : "Nome completo"
+                      step === "establishment"
+                        ? "Nome do estabelecimento"
+                        : step === "name"
+                          ? "Nome completo"
+                          : step === "email"
+                            ? "voce@email.com"
+                            : "@seunegocio"
                     }
                     maxLength={150}
                     aria-invalid={Boolean(error)}

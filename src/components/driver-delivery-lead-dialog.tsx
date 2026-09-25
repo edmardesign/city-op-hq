@@ -7,7 +7,6 @@ import { submitDriverDeliveryLead } from "@/lib/driver-delivery-leads.functions"
 import { BRAZILIAN_STATES } from "@/lib/commerce-categories";
 import {
   formatPhone,
-  getStateFromPhone,
   isValidPhone,
   normalizePhoneDigits,
 } from "@/lib/brazil-phone";

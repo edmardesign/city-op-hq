@@ -7,7 +7,6 @@ import { submitCommerceLead } from "@/lib/commerce-leads.functions";
 import { BRAZILIAN_STATES, COMMERCE_CATEGORIES } from "@/lib/commerce-categories";
 import {
   formatPhone,
-  getStateFromPhone,
   isValidPhone,
   normalizePhoneDigits,
 } from "@/lib/brazil-phone";

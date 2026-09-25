@@ -32,7 +32,7 @@ import { OPEN_LEAD_DIALOG_EVENT } from "@/components/progressive-lead-dialog";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
-const steps = ["phone", "location", "role", "name"] as const;
+const steps = ["location", "role", "name", "phone", "email", "instagram"] as const;
 type Step = (typeof steps)[number];
 type Role = "mototaxi" | "entregador" | "ambos";
 
@@ -113,6 +113,9 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
   function validateStep() {
     if (step === "phone")
       return isValidPhone(values.phone ?? "") ? "" : "Informe seu WhatsApp com DDD.";
+    if (step === "email")
+      return z.string().email().safeParse(values.email ?? "").success ? "" : "Informe um e-mail válido.";
+    if (step === "instagram") return "";
     if (step === "location")
       return values.state && values.city ? "" : "Confirme o estado e escolha a cidade.";
     if (step === "role") return values.role ? "" : "Escolha como você quer trabalhar.";
@@ -129,13 +132,6 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
     }
     setError("");
 
-    if (step === "phone") {
-      const detectedState = getStateFromPhone(values.phone ?? "");
-      if (detectedState && detectedState !== values.state) void loadCities(detectedState);
-      setStepIndex((current) => current + 1);
-      return;
-    }
-
     if (stepIndex < steps.length - 1) {
       setStepIndex((current) => current + 1);
       return;
@@ -150,6 +146,8 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
           role: values.role as Role,
           name: values.name ?? "",
           phone: normalizePhoneDigits(values.phone ?? ""),
+          email: values.email?.trim() ?? "",
+          instagram: values.instagram?.trim() || undefined,
           ...getTracking(),
         },
       });
@@ -175,10 +173,12 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
   }
 
   const titles: Record<Step, string> = {
-    phone: "Qual é o seu WhatsApp?",
     location: "Em qual cidade você quer trabalhar?",
     role: "Como você quer trabalhar no Bora Zé?",
     name: "Qual é o seu nome completo?",
+    phone: "Qual é o seu WhatsApp?",
+    email: "Qual é o seu melhor e-mail?",
+    instagram: "Qual é o seu Instagram? (opcional)",
   };
 
   return (
@@ -320,17 +320,23 @@ export function DriverDeliveryLeadDialog({ title, description }: Props) {
                     ))}
                   </RadioGroup>
                 )}
-                {step === "name" && (
+                {(step === "name" || step === "email" || step === "instagram") && (
                   <Input
                     value={values.name ?? ""}
                     onChange={(event) => {
                       setValues((current) => ({ ...current, name: event.target.value }));
                       setError("");
                     }}
-                    type="text"
-                    inputMode="text"
-                    autoComplete="name"
-                    placeholder="Nome completo"
+                    type={step === "email" ? "email" : "text"}
+                    inputMode={step === "email" ? "email" : "text"}
+                    autoComplete={step === "name" ? "name" : step === "email" ? "email" : "off"}
+                    placeholder={
+                      step === "name"
+                        ? "Nome completo"
+                        : step === "email"
+                          ? "voce@email.com"
+                          : "@seuinstagram"
+                    }
                     maxLength={120}
                     aria-invalid={Boolean(error)}
                     aria-describedby={error ? "driver-lead-error" : undefined}

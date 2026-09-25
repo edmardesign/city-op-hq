@@ -21,6 +21,8 @@ const driverDeliveryLeadSchema = z.object({
     .string()
     .transform((value) => value.replace(/\D/g, ""))
     .pipe(z.string().min(10).max(11)),
+  email: z.string().trim().toLowerCase().email().max(255),
+  instagram: z.string().trim().max(120).optional().transform((value) => value || null),
 
   utmSource: optionalValue,
   utmMedium: optionalValue,
@@ -58,6 +60,8 @@ function buildEmailText(data: z.output<typeof driverDeliveryLeadSchema>) {
     `Atuação: ${roleLabels[data.role]}`,
     `Nome: ${data.name}`,
     `WhatsApp: ${data.phone}`,
+    `E-mail: ${data.email}`,
+    `Instagram: ${data.instagram ?? "Não informado"}`,
     tracking ? `Origem/UTMs:\n${tracking}` : "Origem/UTMs: Não informadas",
   ].join("\n");
 }
@@ -110,8 +114,8 @@ export const submitDriverDeliveryLead = createServerFn({ method: "POST" })
         role: data.role,
         name: data.name,
         phone: data.phone,
-        email: "",
-        instagram: null,
+        email: data.email,
+        instagram: data.instagram,
         utm_source: data.utmSource,
         utm_medium: data.utmMedium,
         utm_campaign: data.utmCampaign,

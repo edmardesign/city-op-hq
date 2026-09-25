@@ -1,0 +1,6 @@
+ALTER TABLE public.ambassador_prospects
+  ADD COLUMN IF NOT EXISTS utm_source TEXT,
+  ADD COLUMN IF NOT EXISTS utm_medium TEXT,
+  ADD COLUMN IF NOT EXISTS utm_campaign TEXT,
+  ADD COLUMN IF NOT EXISTS utm_content TEXT,
+  ADD COLUMN IF NOT EXISTS utm_term TEXT;

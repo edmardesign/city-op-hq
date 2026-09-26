@@ -157,10 +157,10 @@ export function EventPage() {
               Fature R$ 5.000,00+ por mês com nosso <span className="text-primary">SUPER APP</span>
             </>
           }
-          description="Conheça o BoraZé!, entenda como funciona a economia da plataforma e descubra as oportunidades de Embaixador e Executivo."
+          description="Você vai descobrir como construir uma renda recorrente participando da movimentação de um Super App criado para o interior."
           cta="QUERO CONHECER ESSA OPORTUNIDADE"
           image={smartBusiness.url}
-          imageAlt="Executivo BoraZé apresentando o Super App no celular"
+          imageAlt="Apresentação da oportunidade BoraZé no celular"
           proof={["Evento online", "2 noites ao vivo", "Ingresso R$ 47"]}
           imagePosition="object-top"
         />
@@ -228,7 +228,7 @@ export function EventPage() {
                     "Mototaxistas já fazem corridas",
                     "Serviços locais já movimentam dinheiro",
                     "O BoraZé organiza esse ecossistema",
-                    "Embaixadores e Executivos podem participar da expansão",
+                    "Existe uma forma de participar economicamente dessa expansão",
                   ]}
                 />
               </div>
@@ -248,22 +248,22 @@ export function EventPage() {
         <section className="bg-brand-surface py-20 md:py-28">
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <SectionHeading
-              eyebrow="DUAS OPORTUNIDADES."
-              title="Duas formas de ganhar com a expansão."
-              description="No evento você conhecerá detalhadamente os dois modelos e poderá avaliar qual deles combina mais com o seu perfil."
+              eyebrow="EXISTE MAIS DE UMA FORMA DE PARTICIPAR."
+              title="Você vai descobrir como transformar movimentação local em renda recorrente."
+              description="No evento vamos revelar os modelos, a lógica por trás da recorrência e como uma pessoa comum pode participar da expansão sem precisar criar um aplicativo do zero."
             />
             <div className="mt-12">
               <ProcessSteps
                 steps={[
                   {
-                    title: "Embaixador BoraZé!",
+                    title: "Participe da movimentação de uma cidade",
                     description:
-                      "Desenvolva a operação BoraZé! em uma cidade, ajude a fortalecer o ecossistema local e participe dos resultados conforme as regras do programa.",
+                      "Existe um modelo para quem quer atuar diretamente no desenvolvimento local da plataforma e construir participação recorrente conforme a operação cresce.",
                   },
                   {
-                    title: "Executivo BoraZé!",
+                    title: "Construa uma carteira recorrente",
                     description:
-                      "Conecte estabelecimentos ao Super App, construa uma carteira de parceiros e participe da expansão conforme as regras vigentes.",
+                      "Existe também uma forma de conectar negócios ao Super App e transformar relacionamento comercial em uma carteira que pode continuar gerando movimentação mês após mês.",
                   },
                 ]}
               />
@@ -296,8 +296,8 @@ export function EventPage() {
                   { title: "A oportunidade no interior", description: "Por que milhares de cidades ainda têm espaço para uma plataforma local." },
                   { title: "Por dentro do Super App", description: "Como consumidores, comércios, entregadores e mototaxistas se conectam." },
                   { title: "De onde vem o dinheiro", description: "A lógica de monetização e as fontes de receita da operação." },
-                  { title: "Modelo Embaixador", description: "Papel, responsabilidades, operação e lógica de recorrência." },
-                  { title: "Modelo Executivo", description: "Prospecção, carteira de parceiros e participação na expansão." },
+                  { title: "O primeiro modelo de participação", description: "Como funciona a atuação local, a construção da operação e a lógica de recorrência." },
+                  { title: "O segundo modelo de participação", description: "Como construir uma carteira de negócios e participar economicamente da expansão." },
                   { title: "Simulações e abertura", description: "Cenários, critérios, condições e próximos passos para quem decidir avançar." },
                 ]}
               />
@@ -313,7 +313,7 @@ export function EventPage() {
                   EVENTO ONLINE BORA ZÉ! • 27 E 28 DE OUTUBRO • 20H
                 </p>
                 <h2 className="mt-4 text-4xl font-bold md:text-6xl">
-                  Conheça por dentro o Super App e as oportunidades de Embaixador e Executivo.
+                  Conheça por dentro o Super App e descubra como participar da economia que ele pode movimentar.
                 </h2>
                 <p className="mt-7 text-sm font-bold uppercase text-brand-white/50">INGRESSO INDIVIDUAL</p>
                 <p className="mt-3 text-7xl font-bold text-primary md:text-8xl">R$ 47</p>
@@ -324,8 +324,8 @@ export function EventPage() {
                   items={[
                     "Evento online",
                     "Apresentação do Super App",
-                    "Modelo Embaixador",
-                    "Modelo Executivo",
+                    "Como participar da expansão",
+                    "Como construir renda recorrente",
                     "Fontes de receita",
                     "Recorrência",
                     "Simulações de cenários",
@@ -335,7 +335,7 @@ export function EventPage() {
                 />
                 <TicketButton className="mt-9 w-full" />
                 <p className="mt-5 text-center text-xs leading-5 text-muted-foreground">
-                  O ingresso dá acesso ao evento. A entrada nos programas Embaixador ou Executivo é opcional e possui condições próprias. Resultados financeiros não são garantidos e dependem, entre outros fatores, de execução, mercado, adesão e movimentação da plataforma.
+                  O ingresso dá acesso ao evento. Durante as duas noites serão apresentados os modelos de participação, suas condições e critérios. Resultados financeiros não são garantidos e dependem, entre outros fatores, de execução, mercado, adesão e movimentação da plataforma.
                 </p>
               </div>
             </div>
@@ -357,8 +357,8 @@ export function EventPage() {
                     a: "O ingresso individual custa R$ 47,00.",
                   },
                   {
-                    q: "O ingresso já me torna Embaixador ou Executivo?",
-                    a: "Não. O ingresso dá acesso ao evento. A entrada em qualquer programa é opcional e depende das condições apresentadas.",
+                    q: "O ingresso já me dá acesso ao modelo de renda?",
+                    a: "O ingresso dá acesso ao evento onde vamos revelar como funcionam os modelos de participação. Depois de conhecer a estrutura, você decide se quer avançar para alguma das oportunidades apresentadas.",
                   },
                   {
                     q: "Quanto é possível ganhar?",

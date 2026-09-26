@@ -5,9 +5,9 @@ import { landingHead } from "@/components/landing-system";
 export const Route = createFileRoute("/evento")({
   head: () =>
     landingHead({
-      title: "Evento Bora Zé — Oportunidades Embaixador e Executivo",
+      title: "Evento Bora Zé — Renda recorrente com o Super App",
       description:
-        "Conheça o modelo Bora Zé, as oportunidades de Embaixador e Executivo e participe do evento de lançamento. Ingresso por R$ 47,00.",
+        "Descubra como participar da movimentação de um Super App criado para o interior e conhecer modelos de renda recorrente. Ingresso por R$ 47,00.",
       canonicalPath: "/evento",
     }),
   component: EventPage,

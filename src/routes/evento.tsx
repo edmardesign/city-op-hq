@@ -5,9 +5,9 @@ import { landingHead } from "@/components/landing-system";
 export const Route = createFileRoute("/evento")({
   head: () =>
     landingHead({
-      title: "Evento Bora Zé — Agentes de IA na prática",
+      title: "Evento Bora Zé — Oportunidades Embaixador e Executivo",
       description:
-        "Aprenda como usar agentes de IA em vendas, atendimento, marketing e operação. Ingresso por R$ 47,00.",
+        "Conheça o modelo Bora Zé, as oportunidades de Embaixador e Executivo e participe do evento de lançamento. Ingresso por R$ 47,00.",
       canonicalPath: "/evento",
     }),
   component: EventPage,

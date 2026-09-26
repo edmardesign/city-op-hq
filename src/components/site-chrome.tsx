@@ -41,6 +41,7 @@ export function SiteFooter() {
     { to: "/comercio" as const, label: "Parceiros" },
     { to: "/mototaxi" as const, label: "Mototáxi" },
     { to: "/embaixador" as const, label: "Embaixador" },
+    { to: "/evento" as const, label: "Evento" },
     { to: "/termos" as const, label: "Termos" },
     { to: "/privacidade" as const, label: "Privacidade" },
   ];

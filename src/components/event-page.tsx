@@ -62,7 +62,7 @@ const learnItems = [
 const program = [
   {
     number: "01",
-    title: "O dinheiro que já circula na sua cidade",
+    title: "NOITE 1 — 27/OUTUBRO: O dinheiro que já circula na sua cidade",
     text:
       "Vamos mostrar o tamanho da economia cotidiana: comida, mercado, farmácia, gás, água, mobilidade e outros serviços que acontecem todos os dias.",
   },
@@ -92,7 +92,7 @@ const program = [
   },
   {
     number: "06",
-    title: "Abertura oficial das oportunidades",
+    title: "NOITE 2 — 28/OUTUBRO: Abertura oficial das oportunidades",
     text:
       "No encontro final, apresentaremos as condições vigentes, critérios, responsabilidades e próximos passos para quem decidir participar.",
   },
@@ -147,6 +147,10 @@ const faq = [
       "Não. Durante o evento apresentaremos duas possibilidades de participação: Embaixador BoraZé e Executivo BoraZé. Os perfis e responsabilidades são diferentes.",
   },
   {
+    q: "Quando acontece o evento?",
+    a: "Serão 2 noites ao vivo, nos dias 27 e 28 de outubro, sempre às 20h.",
+  },
+  {
     q: "Quanto custa participar do evento?",
     a: "O ingresso desta edição custa R$ 47,00 por participante.",
   },
@@ -185,7 +189,7 @@ export function EventPage() {
           </div>
           <div className="relative mx-auto max-w-5xl px-5 text-center md:px-8">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary md:text-sm">
-              EVENTO ONLINE • LANÇAMENTO BORA ZÉ!
+              27 E 28 DE OUTUBRO ÀS 20H • AO VIVO ONLINE
             </p>
             <h1 className="mx-auto mt-6 max-w-5xl text-5xl font-bold leading-[1.02] sm:text-6xl lg:text-7xl">
               Descubra como transformar o crescimento da sua cidade em uma{" "}
@@ -198,7 +202,7 @@ export function EventPage() {
             <div className="mt-9 flex flex-col items-center gap-4">
               <TicketButton className="w-full sm:w-auto" />
               <p className="text-xs text-brand-white/45">
-                Evento online • Ingresso individual • R$ 47,00
+                2 noites ao vivo • 27 e 28 de outubro às 20h • Ingresso R$ 47,00
               </p>
             </div>
           </div>
@@ -228,8 +232,8 @@ export function EventPage() {
             <SectionHeading
               light
               eyebrow="Conteúdo do evento"
-              title="Do movimento da cidade até a abertura oficial das oportunidades."
-              description="Uma sequência de encontros para você entender o mercado, o modelo BoraZé e as duas formas de participar da expansão."
+              title="Em 2 noites, entenda a oportunidade e conheça os caminhos para participar."
+              description="Nos dias 27 e 28 de outubro, às 20h, vamos mostrar o mercado, o modelo BoraZé e as duas formas de participar da expansão."
             />
             <div className="mt-12 grid gap-px overflow-hidden rounded-2xl bg-brand-white/10 md:grid-cols-2">
               {program.map((item) => (
@@ -350,7 +354,7 @@ export function EventPage() {
               <div className="p-6 md:p-10">
                 <div className="grid gap-3 md:grid-cols-2">
                   {[
-                    "Acesso aos encontros online do evento",
+                    "Acesso às 2 noites ao vivo — 27 e 28 de outubro",
                     "Apresentação completa do modelo BoraZé",
                     "Visão sobre mercado e oportunidade local",
                     "Explicação do programa Embaixador",

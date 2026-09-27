@@ -45,7 +45,7 @@ const steps: ExecutiveStep[] = [
     key: "phone",
     label: "Qual é o seu WhatsApp com DDD?",
     helper: "É por ele que enviaremos o aviso de abertura do lançamento.",
-    placeholder: "(75) 99999-9999",
+    placeholder: "(11) 99999-9999",
     type: "tel",
     inputMode: "tel",
     autoComplete: "tel",

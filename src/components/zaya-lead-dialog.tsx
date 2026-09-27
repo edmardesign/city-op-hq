@@ -162,7 +162,7 @@ export function ZayaLeadDialog() {
                   }}
                   type="tel"
                   inputMode="numeric"
-                  placeholder="(75) 99999-9999"
+                  placeholder="(11) 99999-9999"
                   className="h-14 rounded-xl px-4 text-base shadow-none"
                 />
               ) : step === "segment" ? (

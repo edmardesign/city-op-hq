@@ -59,7 +59,7 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
     {
       key: "phone",
       label: "Qual é o seu WhatsApp?",
-      placeholder: "(75) 99999-9999",
+      placeholder: "(11) 99999-9999",
       type: "tel",
       inputMode: "numeric",
       autoComplete: "tel",
@@ -88,7 +88,7 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
     {
       key: "phone",
       label: "Qual é o seu WhatsApp?",
-      placeholder: "(75) 99999-9999",
+      placeholder: "(11) 99999-9999",
       type: "tel",
       inputMode: "tel",
       autoComplete: "tel",
@@ -163,7 +163,7 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
     {
       key: "phone",
       label: "Qual é o seu WhatsApp?",
-      placeholder: "(75) 99999-9999",
+      placeholder: "(11) 99999-9999",
       type: "tel",
       inputMode: "tel",
       autoComplete: "tel",
@@ -192,7 +192,7 @@ const baseSteps: Record<LeadType, LeadStep[]> = {
     {
       key: "phone",
       label: "Qual é o seu WhatsApp?",
-      placeholder: "(75) 99999-9999",
+      placeholder: "(11) 99999-9999",
       type: "tel",
       inputMode: "tel",
       autoComplete: "tel",

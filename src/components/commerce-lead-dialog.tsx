@@ -231,7 +231,7 @@ export function CommerceLeadDialog({ title, description }: CommerceLeadDialogPro
                     type="tel"
                     inputMode="numeric"
                     autoComplete="tel"
-                    placeholder="(75) 99999-9999"
+                    placeholder="(11) 99999-9999"
                     aria-invalid={Boolean(error)}
                     aria-describedby={error ? "commerce-lead-error" : undefined}
                     className="h-14 rounded-xl px-4 text-base shadow-none"

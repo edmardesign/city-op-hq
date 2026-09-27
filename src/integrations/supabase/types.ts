@@ -224,6 +224,57 @@ export type Database = {
         }
         Relationships: []
       }
+      zaya_leads: {
+        Row: {
+          city: string
+          created_at: string
+          deleted_at: string | null
+          establishment: string
+          id: string
+          name: string
+          phone: string
+          segment: string
+          updated_at: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          deleted_at?: string | null
+          establishment: string
+          id?: string
+          name: string
+          phone: string
+          segment: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          deleted_at?: string | null
+          establishment?: string
+          id?: string
+          name?: string
+          phone?: string
+          segment?: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
       executive_launch_leads: {
         Row: {
           campaign: string

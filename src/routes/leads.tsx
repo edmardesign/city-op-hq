@@ -18,6 +18,7 @@ const typeLabels: Record<LeadCenterItem["type"], string> = {
   mototaxi: "Mototáxi/Entregador",
   executivo: "Executivo",
   embaixador: "Embaixador",
+  zaya: "Zaya",
 };
 
 function LeadsPage() {
@@ -193,7 +194,7 @@ function LeadsPage() {
             />
           </div>
           <div className="flex flex-wrap gap-2">
-            {(["todos", "comercio", "mototaxi", "executivo", "embaixador"] as const).map((value) => (
+            {(["todos", "comercio", "mototaxi", "executivo", "embaixador", "zaya"] as const).map((value) => (
               <Button
                 key={value}
                 variant={filter === value ? "default" : "outline"}

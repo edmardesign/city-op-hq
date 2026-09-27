@@ -3,7 +3,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export type LeadCenterItem = {
   id: string;
-  type: "comercio" | "mototaxi" | "executivo" | "embaixador";
+  type: "comercio" | "mototaxi" | "executivo" | "embaixador" | "zaya";
   name: string;
   phone: string;
   email: string;
@@ -32,11 +32,12 @@ export const getLeadCenterData = createServerFn({ method: "GET" })
 
     if (!agent) throw new Error("Forbidden");
 
-    const [commerce, drivers, executives, ambassadors] = await Promise.all([
+    const [commerce, drivers, executives, ambassadors, zaya] = await Promise.all([
       supabaseAdmin.from("commerce_leads").select("*").is("deleted_at", null).order("created_at", { ascending: false }).limit(500),
       supabaseAdmin.from("driver_delivery_leads").select("*").is("deleted_at", null).order("created_at", { ascending: false }).limit(500),
       supabaseAdmin.from("executive_launch_leads").select("*").is("deleted_at", null).order("created_at", { ascending: false }).limit(500),
       supabaseAdmin.from("ambassador_prospects").select("*").is("deleted_at", null).order("created_at", { ascending: false }).limit(500),
+      supabaseAdmin.from("zaya_leads").select("*").is("deleted_at", null).order("created_at", { ascending: false }).limit(500),
     ]);
 
     const rows: LeadCenterItem[] = [
@@ -57,6 +58,10 @@ export const getLeadCenterData = createServerFn({ method: "GET" })
       ...(ambassadors.data ?? []).map((x) => ({
         id: x.id, type: "embaixador" as const, name: x.name, phone: x.phone, email: x.email,
         city: x.city, state: x.state, detail: x.qualification, createdAt: x.created_at, source: x.utm_source,
+      })),
+      ...(zaya.data ?? []).map((x) => ({
+        id: x.id, type: "zaya" as const, name: x.name, phone: x.phone, email: "",
+        city: x.city, state: null, detail: `${x.establishment} • ${x.segment}`, createdAt: x.created_at, source: x.utm_source,
       })),
     ].sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
 

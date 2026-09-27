@@ -6,7 +6,7 @@ import {
   type ParticleTextEffectHandle,
 } from "@/components/ui/particle-text-effect";
 
-const SESSION_KEY = "boraze:intro-seen";
+const SESSION_KEY = "boraze:intro-seen:v2";
 const MAX_DURATION_MS = 7000;
 
 export function BorazeIntro() {

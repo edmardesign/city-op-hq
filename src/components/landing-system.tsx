@@ -18,10 +18,15 @@ export interface LandingMeta {
   title: string;
   description: string;
   canonicalPath: string;
+  image?: string;
 }
 
 export function landingHead(meta: LandingMeta) {
   const canonical = `https://city-op-hq.lovable.app${meta.canonicalPath}`;
+  const socialImage =
+    meta.image ??
+    "https://city-op-hq.lovable.app/__l5e/assets-v1/23d68c5f-8f33-42f9-8931-bfd75d38a52a/app-home-boraze-mobile.webp";
+
   return {
     meta: [
       { title: meta.title },
@@ -30,9 +35,12 @@ export function landingHead(meta: LandingMeta) {
       { property: "og:description", content: meta.description },
       { property: "og:type", content: "website" },
       { property: "og:url", content: canonical },
+      { property: "og:image", content: socialImage },
+      { property: "og:image:alt", content: "BoraZé! — Super App para cidades brasileiras" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: meta.title },
       { name: "twitter:description", content: meta.description },
+      { name: "twitter:image", content: socialImage },
     ],
     links: [{ rel: "canonical", href: canonical }],
   };

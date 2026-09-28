@@ -16,6 +16,7 @@ export const Route = createFileRoute("/simulador")({
 function SimulatorPage() {
   return (
     <main className="min-h-screen bg-brand-black">
+      <h1 className="sr-only">Simulador de faturamento BoraZé! para operação local</h1>
       <AmbassadorSimulator />
     </main>
   );

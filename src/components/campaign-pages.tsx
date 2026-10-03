@@ -349,6 +349,24 @@ export function CommercePage() {
         proof={["Aplicativo local", "Novo canal digital", "Negócios da cidade"]}
         imagePosition="object-center"
       />
+      <section className="border-b border-border bg-brand-surface py-14 md:py-20">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <h2 className="max-w-5xl text-3xl font-bold leading-tight md:text-5xl">
+            Super App para comércio local, restaurantes, delivery e mototáxi
+          </h2>
+          <p className="mt-5 max-w-4xl text-base leading-7 text-muted-foreground md:text-lg">
+            O BoraZé! é uma plataforma voltada à rotina de cidades brasileiras:
+            consumidores encontram estabelecimentos, restaurantes, mercados e serviços,
+            enquanto comerciantes podem receber novos pedidos. A operação também pode
+            conectar entregas e corridas de mototáxi, conforme a disponibilidade em cada município.
+          </p>
+          <nav className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-primary" aria-label="Conheça as modalidades BoraZé!">
+            <a href="/comercio" className="underline underline-offset-4">Cadastro de estabelecimentos</a>
+            <a href="/mototaxi" className="underline underline-offset-4">Mototáxi e entregas</a>
+            <a href="/embaixador" className="underline underline-offset-4">Operação local por cidade</a>
+          </nav>
+        </div>
+      </section>
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading

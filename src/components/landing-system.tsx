@@ -19,6 +19,7 @@ export interface LandingMeta {
   description: string;
   canonicalPath: string;
   image?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 export function landingHead(meta: LandingMeta) {
@@ -43,6 +44,7 @@ export function landingHead(meta: LandingMeta) {
       { name: "twitter:image", content: socialImage },
     ],
     links: [{ rel: "canonical", href: canonical }],
+    ...(meta.structuredData ? { scripts: [{ type: "application/ld+json", children: JSON.stringify(meta.structuredData) }] } : {}),
   };
 }
 

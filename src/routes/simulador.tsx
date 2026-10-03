@@ -5,9 +5,9 @@ import { landingHead } from "@/components/landing-system";
 export const Route = createFileRoute("/simulador")({
   head: () =>
     landingHead({
-      title: "Simulador Bora Zé — Embaixador",
+      title: "Simulador de Operação de Delivery e Mototáxi | BoraZé!",
       description:
-        "Simule um cenário mensal combinando delivery e mototáxi para uma operação Bora Zé.",
+        "Simule cenários ilustrativos de movimentação mensal combinando comércios, pedidos de delivery e corridas de mototáxi.",
       canonicalPath: "/simulador",
     }),
   component: SimulatorPage,

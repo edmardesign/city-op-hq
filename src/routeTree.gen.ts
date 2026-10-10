@@ -9,17 +9,31 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZayaRouteImport } from './routes/zaya'
 import { Route as TermosRouteImport } from './routes/termos'
+import { Route as SimuladorRouteImport } from './routes/simulador'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as MototaxiRouteImport } from './routes/mototaxi'
+import { Route as LeadsRouteImport } from './routes/leads'
 import { Route as ExecutivoRouteImport } from './routes/executivo'
+import { Route as EventoRouteImport } from './routes/evento'
 import { Route as EmbaixadorRouteImport } from './routes/embaixador'
 import { Route as ComercioRouteImport } from './routes/comercio'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ZayaRoute = ZayaRouteImport.update({
+  id: '/zaya',
+  path: '/zaya',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
   path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimuladorRoute = SimuladorRouteImport.update({
+  id: '/simulador',
+  path: '/simulador',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
@@ -32,9 +46,19 @@ const MototaxiRoute = MototaxiRouteImport.update({
   path: '/mototaxi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LeadsRoute = LeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExecutivoRoute = ExecutivoRouteImport.update({
   id: '/executivo',
   path: '/executivo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventoRoute = EventoRouteImport.update({
+  id: '/evento',
+  path: '/evento',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmbaixadorRoute = EmbaixadorRouteImport.update({
@@ -57,29 +81,41 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/comercio': typeof ComercioRoute
   '/embaixador': typeof EmbaixadorRoute
+  '/evento': typeof EventoRoute
   '/executivo': typeof ExecutivoRoute
+  '/leads': typeof LeadsRoute
   '/mototaxi': typeof MototaxiRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/simulador': typeof SimuladorRoute
   '/termos': typeof TermosRoute
+  '/zaya': typeof ZayaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/comercio': typeof ComercioRoute
   '/embaixador': typeof EmbaixadorRoute
+  '/evento': typeof EventoRoute
   '/executivo': typeof ExecutivoRoute
+  '/leads': typeof LeadsRoute
   '/mototaxi': typeof MototaxiRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/simulador': typeof SimuladorRoute
   '/termos': typeof TermosRoute
+  '/zaya': typeof ZayaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/comercio': typeof ComercioRoute
   '/embaixador': typeof EmbaixadorRoute
+  '/evento': typeof EventoRoute
   '/executivo': typeof ExecutivoRoute
+  '/leads': typeof LeadsRoute
   '/mototaxi': typeof MototaxiRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/simulador': typeof SimuladorRoute
   '/termos': typeof TermosRoute
+  '/zaya': typeof ZayaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,47 +123,77 @@ export interface FileRouteTypes {
     | '/'
     | '/comercio'
     | '/embaixador'
+    | '/evento'
     | '/executivo'
+    | '/leads'
     | '/mototaxi'
     | '/privacidade'
+    | '/simulador'
     | '/termos'
+    | '/zaya'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/comercio'
     | '/embaixador'
+    | '/evento'
     | '/executivo'
+    | '/leads'
     | '/mototaxi'
     | '/privacidade'
+    | '/simulador'
     | '/termos'
+    | '/zaya'
   id:
     | '__root__'
     | '/'
     | '/comercio'
     | '/embaixador'
+    | '/evento'
     | '/executivo'
+    | '/leads'
     | '/mototaxi'
     | '/privacidade'
+    | '/simulador'
     | '/termos'
+    | '/zaya'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComercioRoute: typeof ComercioRoute
   EmbaixadorRoute: typeof EmbaixadorRoute
+  EventoRoute: typeof EventoRoute
   ExecutivoRoute: typeof ExecutivoRoute
+  LeadsRoute: typeof LeadsRoute
   MototaxiRoute: typeof MototaxiRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
+  SimuladorRoute: typeof SimuladorRoute
   TermosRoute: typeof TermosRoute
+  ZayaRoute: typeof ZayaRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zaya': {
+      id: '/zaya'
+      path: '/zaya'
+      fullPath: '/zaya'
+      preLoaderRoute: typeof ZayaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/termos': {
       id: '/termos'
       path: '/termos'
       fullPath: '/termos'
       preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulador': {
+      id: '/simulador'
+      path: '/simulador'
+      fullPath: '/simulador'
+      preLoaderRoute: typeof SimuladorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacidade': {
@@ -144,11 +210,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MototaxiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/leads': {
+      id: '/leads'
+      path: '/leads'
+      fullPath: '/leads'
+      preLoaderRoute: typeof LeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/executivo': {
       id: '/executivo'
       path: '/executivo'
       fullPath: '/executivo'
       preLoaderRoute: typeof ExecutivoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evento': {
+      id: '/evento'
+      path: '/evento'
+      fullPath: '/evento'
+      preLoaderRoute: typeof EventoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/embaixador': {
@@ -179,10 +259,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComercioRoute: ComercioRoute,
   EmbaixadorRoute: EmbaixadorRoute,
+  EventoRoute: EventoRoute,
   ExecutivoRoute: ExecutivoRoute,
+  LeadsRoute: LeadsRoute,
   MototaxiRoute: MototaxiRoute,
   PrivacidadeRoute: PrivacidadeRoute,
+  SimuladorRoute: SimuladorRoute,
   TermosRoute: TermosRoute,
+  ZayaRoute: ZayaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

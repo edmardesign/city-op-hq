@@ -41,6 +41,16 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
+      if (url.pathname === "/healthz") {
+        return new Response(JSON.stringify({ ok: true, service: "boraze" }), {
+          status: 200,
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+            "cache-control": "no-store",
+            "x-content-type-options": "nosniff",
+          },
+        });
+      }
       if (url.hostname === "embaixador.boraze.app.br" && url.pathname === "/" && (request.method === "GET" || request.method === "HEAD")) {
         return new Response(null, { status: 302, headers: { location: `/executivo${url.search}` } });
       }

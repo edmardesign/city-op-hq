@@ -1,0 +1,36 @@
+name: Uptime BoraZe
+
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check public endpoints
+        shell: bash
+        run: |
+          set -uo pipefail
+          urls=(
+            "https://city-op-hq.lovable.app/healthz"
+            "https://city-op-hq.lovable.app/"
+            "https://city-op-hq.lovable.app/comercio"
+            "https://city-op-hq.lovable.app/mototaxi"
+            "https://city-op-hq.lovable.app/embaixador"
+            "https://boraze.app.br/"
+            "https://www.boraze.app.br/"
+            "https://parceiros.boraze.app.br/"
+            "https://embaixador.boraze.app.br/"
+          )
+          failed=0
+          for url in "${urls[@]}"; do
+            echo "==== $url ===="
+            if ! curl --fail --silent --show-error --location --max-time 20 --connect-timeout 8               --output /dev/null --write-out "HTTP %{http_code} | IP %{remote_ip} | total %{time_total}s\n" "$url"; then
+              echo "::error::Endpoint failed: $url"
+              failed=1
+            fi
+          done
+          exit "$failed"

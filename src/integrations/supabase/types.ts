@@ -74,33 +74,6 @@ export type Database = {
         }
         Relationships: []
       }
-      lead_agents: {
-        Row: {
-          active: boolean
-          created_at: string
-          email: string
-          id: string
-          name: string | null
-          role: string
-        }
-        Insert: {
-          active?: boolean
-          created_at?: string
-          email: string
-          id?: string
-          name?: string | null
-          role?: string
-        }
-        Update: {
-          active?: boolean
-          created_at?: string
-          email?: string
-          id?: string
-          name?: string | null
-          role?: string
-        }
-        Relationships: []
-      }
       commerce_leads: {
         Row: {
           category: string
@@ -224,57 +197,6 @@ export type Database = {
         }
         Relationships: []
       }
-      zaya_leads: {
-        Row: {
-          city: string
-          created_at: string
-          deleted_at: string | null
-          establishment: string
-          id: string
-          name: string
-          phone: string
-          segment: string
-          updated_at: string
-          utm_campaign: string | null
-          utm_content: string | null
-          utm_medium: string | null
-          utm_source: string | null
-          utm_term: string | null
-        }
-        Insert: {
-          city: string
-          created_at?: string
-          deleted_at?: string | null
-          establishment: string
-          id?: string
-          name: string
-          phone: string
-          segment: string
-          updated_at?: string
-          utm_campaign?: string | null
-          utm_content?: string | null
-          utm_medium?: string | null
-          utm_source?: string | null
-          utm_term?: string | null
-        }
-        Update: {
-          city?: string
-          created_at?: string
-          deleted_at?: string | null
-          establishment?: string
-          id?: string
-          name?: string
-          phone?: string
-          segment?: string
-          updated_at?: string
-          utm_campaign?: string | null
-          utm_content?: string | null
-          utm_medium?: string | null
-          utm_source?: string | null
-          utm_term?: string | null
-        }
-        Relationships: []
-      }
       executive_launch_leads: {
         Row: {
           campaign: string
@@ -329,9 +251,105 @@ export type Database = {
         }
         Relationships: []
       }
+      lead_agents: {
+        Row: {
+          active: boolean
+          created_at: string
+          email: string
+          id: string
+          name: string | null
+          role: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          name?: string | null
+          role?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string | null
+          role?: string
+        }
+        Relationships: []
+      }
+      zaya_leads: {
+        Row: {
+          city: string
+          created_at: string
+          deleted_at: string | null
+          establishment: string
+          id: string
+          name: string
+          phone: string
+          segment: string
+          updated_at: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          deleted_at?: string | null
+          establishment: string
+          id?: string
+          name: string
+          phone: string
+          segment: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          deleted_at?: string | null
+          establishment?: string
+          id?: string
+          name?: string
+          phone?: string
+          segment?: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      all_site_leads: {
+        Row: {
+          campaign: string | null
+          city: string | null
+          created_at: string | null
+          deleted_at: string | null
+          details: string | null
+          email: string | null
+          email_delivery_status: string | null
+          id: string | null
+          name: string | null
+          phone: string | null
+          profile: string | null
+          record_status: string | null
+          source: string | null
+          state: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

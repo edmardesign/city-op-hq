@@ -85,6 +85,7 @@ export function ExecutivePage() {
   return (
     <CampaignShell ctaLabel={EXECUTIVE_CTA} leadConfig={executiveLead} hideNavCta>
       <CampaignHero
+        eyebrow="Lançamento • 20 de outubro"
         title={
           <>
             Fature R$ 5.000,00+ por mês com nosso <span className="text-primary">SUPER APP</span>

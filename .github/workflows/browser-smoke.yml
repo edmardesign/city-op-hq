@@ -1,6 +1,11 @@
 name: Browser Smoke BoraZe
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/browser-smoke.mjs"
+      - ".github/workflows/browser-smoke.yml"
   schedule:
     - cron: "41 9 * * *"
   workflow_dispatch:

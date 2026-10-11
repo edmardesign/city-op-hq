@@ -18,15 +18,17 @@ export interface LandingMeta {
   title: string;
   description: string;
   canonicalPath: string;
+  canonicalBaseUrl?: string;
   image?: string;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 export function landingHead(meta: LandingMeta) {
-  const canonical = `https://city-op-hq.lovable.app${meta.canonicalPath}`;
+  const canonicalBaseUrl = (meta.canonicalBaseUrl ?? "https://boraze.app.br").replace(/\/$/, "");
+  const canonical = `${canonicalBaseUrl}${meta.canonicalPath}`;
   const socialImage =
     meta.image ??
-    "https://city-op-hq.lovable.app/__l5e/assets-v1/23d68c5f-8f33-42f9-8931-bfd75d38a52a/app-home-boraze-mobile.webp";
+    "https://boraze.app.br/__l5e/assets-v1/23d68c5f-8f33-42f9-8931-bfd75d38a52a/app-home-boraze-mobile.webp";
 
   return {
     meta: [

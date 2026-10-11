@@ -9,6 +9,7 @@ export const Route = createFileRoute("/executivo")({
       description:
         "Construa sua oportunidade conectando negócios locais a uma plataforma pronta, sem precisar ser dono de uma loja.",
       canonicalPath: "/executivo",
+      canonicalBaseUrl: "https://embaixador.boraze.app.br",
     }),
   component: ExecutivePage,
 });

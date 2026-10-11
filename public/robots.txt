@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /leads
 
-Sitemap: https://city-op-hq.lovable.app/sitemap.xml
+Sitemap: https://boraze.app.br/sitemap.xml

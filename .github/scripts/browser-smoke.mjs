@@ -6,6 +6,9 @@ const targets = [
   "https://city-op-hq.lovable.app/mototaxi",
   "https://city-op-hq.lovable.app/embaixador",
   "https://embaixador.boraze.app.br/",
+  "https://boraze.app.br/",
+  "https://www.boraze.app.br/",
+  "https://parceiros.boraze.app.br/",
 ];
 const engines = { chromium, firefox, webkit };
 let failed = false;
